@@ -25,3 +25,11 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Explaining the process of creating and using .env files and consts
+
+- Переменные окружения в Vite начинаются с префикса `VITE_`
+- Для переменных окружения используется файл `.env.local` (они загружаются в любых случаях и игнорируются git'ом)
+- Загруженные env переменные также доступны клиентскому исходному коду через `import.meta.env` (например `import.meta.env.VITE_API_URL;`)
+- Файл `env.d.ts` в корне проекта для типизации переменных окружения, это необязательно, но позволит предотвратить часть ошибок, если вы пишете на ts
+- если есть файл типизации (пункт выше), то импорт в ts происходит так `const apiUrl: string = import.meta.env.VITE_API_URL;`
