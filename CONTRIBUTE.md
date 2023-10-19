@@ -149,3 +149,27 @@ To avoid this problem, it's better to make ALL filenames/foldernames are lower c
 > ❗ instead of useMyHook.js, write use-my-hook.js.
 
 Next.js uses this by default, and Angular includes it in its style guide. Kebab-case can save you and your team some headaches.
+
+## &nbsp;
+
+## Explaining the process of creating and using .env files and consts
+
+- Переменные окружения в Vite начинаются с префикса `VITE_`
+- Для переменных окружения используется файл `.env.local` (они загружаются в любых случаях и игнорируются git'ом)
+- Загруженные env переменные также доступны клиентскому исходному коду через `import.meta.env` (например `import.meta.env.VITE_API_URL;`)
+- Файл `env.d.ts` в корне проекта для типизации переменных окружения, это необязательно, но позволит предотвратить часть ошибок, если вы пишете на ts
+- если есть файл типизации (пункт выше), то импорт в ts происходит так `const apiUrl: string = import.meta.env.VITE_API_URL;`
+
+## &nbsp;
+
+## Этапы прекоммита и самого коммита
+
+1.  (`npm run lint`/ `npm run format` / `npm run lint:fix`) по желанию
+2.  (`npm run prepare`) первый запуск
+3.  `git rebase develop` - При выполнении этой команды, Git применяет все коммиты с вашей ветки поверх последнего коммита в ветке `develop`
+    (Важно понимать, что перебазирование изменяет историю коммитов. Поэтому, если вы делаете перебазирование ветки, которая уже была опубликована (например, синхронизирована с удаленным репозиторием), будьте осторожны, так как это может привести к проблемам с другими членами команды, использующими эту ветку.)
+4.  `npm run commit` (выбор в терминале нужных пунктов и названий, дописывание комментариев)
+5.  При необходимости, самостоятельная публикация ветки (если ее еще нет в общем репозитории)
+6.  Создание pull request'а по изменениям и запрос merg'а в ветку develop
+
+## &nbsp;
