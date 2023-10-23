@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
 import React, { ElementType } from 'react';
 
-interface ProtectedRouteProps {
+type ProtectedRouteProps = {
 	element: ElementType;
 	loggedIn: boolean;
-}
+};
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 	element: Component,
