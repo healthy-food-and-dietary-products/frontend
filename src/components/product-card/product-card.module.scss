@@ -1,0 +1,78 @@
+.card {
+	border-radius: 20px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	list-style: none;
+}
+
+.card__link {
+	text-decoration: none;
+}
+
+.card__image {
+	border-radius: 20px;
+	width: 100%;
+	object-fit: cover;
+	max-height: 357px;
+	aspect-ratio: 1.767;
+}
+
+.card__caption {
+	color: #1a1a1a;
+
+	// подключить шрифт
+	// font-family: 'Work Sans';
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 140%;
+	margin: 0;
+	text-align: left;
+	padding-top: 28px;
+}
+
+.card__price {
+	color: #1a1a1a;
+
+	// подключить шрифт
+	// font-family: Ubuntu;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 140%;
+	padding-top: 6px;
+}
+
+.card__weight {
+	color: #1a1a1a;
+
+	// подключить шрифт
+	// font-family: Ubuntu;
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 140%;
+	padding: 6px 0 0 16px;
+}
+
+.card__button-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 28px;
+}
+
+.card__cart-button {
+	border-radius: 8px;
+	background: #eaeaea;
+	padding: 8px 16px;
+	border: none;
+}
+
+.card__like-button {
+	background-image: url('@images/like-icon.svg');
+	width: 24px;
+	height: 24px;
+	object-fit: cover;
+	object-position: center;
+	border: none;
+	background-color: transparent;
+}
