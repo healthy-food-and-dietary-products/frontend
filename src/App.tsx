@@ -6,18 +6,12 @@ import Profile from './pages/profile/profile.tsx';
 import Login from './pages/login/login.tsx';
 import { ProtectedRoute } from './utils/protected-route.tsx';
 import { useAuth } from './hooks/use-auth.ts';
-import ProductCard from './components/product-card';
 
 function App() {
 	const { isLoggedIn } = useAuth();
 
 	return (
 		<Layout>
-			<ul className="card-list">
-				<ProductCard></ProductCard>
-				<ProductCard></ProductCard>
-				<ProductCard></ProductCard>
-			</ul>
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route

@@ -43,8 +43,3 @@
 /* .read-the-docs {
 	color: #888;
 } */
-
-.card-list {
-	display: flex;
-	gap: 20px;
-}
