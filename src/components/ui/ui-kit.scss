@@ -1,0 +1,58 @@
+$error-color: #c03939;
+$tip-color: #2180b6;
+$active-text-color: #1a1a1a;
+$unactive-text-color: #b8b8b8;
+$accent-color-darkgreen: #2b7a0f;
+$accent-color-lightest-green: #c3e4b6;
+$accent-color-bright-green: #59bf35;
+$accent-color-dirty-green: #3d9b1c;
+$footer-background-color: #6c6c6c;
+$light-background-color: #eaeaea;
+$ubuntu-font: 'Ubuntu', sans-serif;
+$work-sans-font: 'WorkSans', sans-serif;
+
+h1 {
+	font-family: $ubuntu-font;
+	color: black;
+	font-size: 36px;
+	font-style: bold;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+h2 {
+	font-family: $ubuntu-font;
+	font-size: 30px;
+	font-style: bold;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+h3 {
+	font-family: $ubuntu-font;
+	font-size: 24px;
+	font-style: bold;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+%text {
+	// font-family: $ubuntu-font;
+	font-style: light;
+	font-weight: 300;
+	line-height: 140%;
+}
+
+.text-s {
+	@extend %text;
+
+	font-family: $ubuntu-font;
+	font-size: 13px;
+}
+
+.text {
+	@extend %text;
+
+	font-family: $work-sans-font;
+	font-size: 20px;
+}
