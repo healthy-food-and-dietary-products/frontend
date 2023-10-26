@@ -11,16 +11,36 @@ $light-background-color: #eaeaea;
 $ubuntu-font: 'Ubuntu', sans-serif;
 $work-sans-font: 'WorkSans', sans-serif;
 
+%zero-padding-margin {
+	padding: 0;
+	margin: 0;
+}
+
+%text {
+	@extend %zero-padding-margin;
+
+	// font-family: $ubuntu-font;
+	font-style: light;
+	font-weight: 300;
+	line-height: 140%;
+	margin: 0;
+	padding: 0;
+}
+
 h1 {
+	@extend %zero-padding-margin;
+
 	font-family: $ubuntu-font;
 	color: black;
 	font-size: 36px;
-	font-style: bold;
+	font-style: normal;
 	font-weight: 700;
 	line-height: 140%;
 }
 
 h2 {
+	@extend %zero-padding-margin;
+
 	font-family: $ubuntu-font;
 	font-size: 30px;
 	font-style: bold;
@@ -29,17 +49,12 @@ h2 {
 }
 
 h3 {
+	@extend %zero-padding-margin;
+
 	font-family: $ubuntu-font;
 	font-size: 24px;
 	font-style: bold;
 	font-weight: 700;
-	line-height: 140%;
-}
-
-%text {
-	// font-family: $ubuntu-font;
-	font-style: light;
-	font-weight: 300;
 	line-height: 140%;
 }
 

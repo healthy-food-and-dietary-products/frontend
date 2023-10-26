@@ -1,0 +1,53 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+h1 {
+	@extend %zero-padding-margin;
+
+	font-family: $ubuntu-font;
+	color: black;
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+h2 {
+	@extend %zero-padding-margin;
+
+	font-family: $ubuntu-font;
+	font-size: 30px;
+	font-style: bold;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+h3 {
+	@extend %zero-padding-margin;
+
+	font-family: $ubuntu-font;
+	font-size: 24px;
+	font-style: bold;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+.text-s {
+	@extend %text;
+
+	font-family: $ubuntu-font;
+	font-size: 13px;
+}
+
+.text {
+	@extend %text;
+
+	font-family: $work-sans-font;
+	font-size: 20px;
+}
+
+.text_type_u {
+	@extend %text;
+
+	font-size: 20px;
+}
