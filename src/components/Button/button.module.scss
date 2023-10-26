@@ -1,0 +1,28 @@
+@use "../../../scss/variables" as *;
+
+.green-button {
+	padding: 0;
+	display: flex;
+	width: 161px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
+	background: $accent-color-dirty-green;
+	border: none;
+	border-radius: 8px;
+
+	color: #FFF;
+	font-family: $ubuntu-font;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+
+	&:hover {
+		background: $accent-color-bright-green;
+	}
+	transition: 0.5s;
+}
+
+.green-button__active {
+	background: $accent-color-darkgreen;
+}
