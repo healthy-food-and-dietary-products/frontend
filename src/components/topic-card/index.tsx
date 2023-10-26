@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
 import cardImage from '@images/pancakes.png';
 import styles from './topic-card.module.scss';
-const TopicCard = () => {
+
+type TopicCardProps = {
+	cardName: string;
+	cardDescription: string;
+	cardDate: string;
+	// добавить в пропсы cardImage когда будет готов массив карточек блога и рецептов
+	// cardImage: string;
+};
+const TopicCard = ({ cardName, cardDescription, cardDate }: TopicCardProps) => {
 	return (
 		<li className={styles.card}>
 			{/* вместо /login подставить нужный роут  */}
@@ -13,11 +21,9 @@ const TopicCard = () => {
 						alt="карточка блога и рецептов"
 					/>
 					<figcaption className={styles['card__text-container']}>
-						<p className={styles.card__date}>29 окт. 2023</p>
-						<h2 className={styles.card__title}>Оладьи без яиц</h2>
-						<p className={styles.card__description}>
-							Простой рецепт для уютного завтрака с семьёй.
-						</p>
+						<p className={styles.card__date}>{cardDate}</p>
+						<h2 className={styles.card__title}>{cardName}</h2>
+						<p className={styles.card__description}>{cardDescription}</p>
 					</figcaption>
 				</figure>
 			</Link>
