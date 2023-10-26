@@ -33,3 +33,12 @@
 	src: url('./Work-Sans/WorkSans-Light.ttf') format('truetype');
 	font-display: swap;
 }
+
+@font-face {
+	/* stylelint-disable-next-line font-family-name-quotes */
+	font-family: 'Arsenal';
+	font-style: normal;
+	src: url('./Arsenal/Arsenal-Bold.ttf');
+	font-weight: 700;
+	font-display: swap;
+}
