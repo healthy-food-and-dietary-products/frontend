@@ -1,0 +1,26 @@
+/* stylelint-disable import-notation */
+@use '../../scss/_variables.scss' as *;
+@use '../../scss/base.scss' as *;
+
+.header {
+	width: 100%;
+	padding: 28px 0;
+	box-shadow: 2px 2px 20px 0 rgb(0 0 0 / 10%);
+}
+
+.header__container {
+	margin: 0 auto;
+	width: calc(100% - 128px * 2);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header__button {
+	all: unset;
+}
+
+.header__title {
+	color: $accent-color-darkgreen;
+	font-size: 34px;
+}

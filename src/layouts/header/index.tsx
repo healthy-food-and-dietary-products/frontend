@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/use-auth.ts';
+// import { useAuth } from '../../hooks/use-auth.ts';
+import Navigation from '../../components/navigation';
+import styles from './header.module.scss';
 
 const Header: React.FC = () => {
 	// Этот блок кода предназначен для реализации переходов между страницами
@@ -12,15 +14,27 @@ const Header: React.FC = () => {
 	// ) : (
 	// 	<button>Профиль</button>
 	// )}
-	const { isLoggedIn } = useAuth();
+	// const { isLoggedIn } = useAuth();
+
 	return (
-		<div>
-			<h2>Header</h2>
-			<Link to="/">Главная</Link>
-			{isLoggedIn ? <Link to="/profile">Профиль</Link> : <button>Профиль</button>}
-			<Link to="/login">Логин</Link>
-		</div>
+		<header className={styles.header}>
+			<div className={styles.header__container}>
+				<Link to={'/'} className="link">
+					<h1 className={styles.header__title}>GoodFood</h1>
+				</Link>
+				<button className="header__button"></button>
+				<Navigation />
+			</div>
+		</header>
 	);
 };
 
 export default Header;
+
+{
+	/* <Link to="/">Главная</Link>;
+{
+	isLoggedIn ? <Link to="/profile">Профиль</Link> : <button>Профиль</button>;
+}
+<Link to="/login">Логин</Link>; */
+}
