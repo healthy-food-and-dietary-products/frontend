@@ -13,6 +13,7 @@ export default defineConfig({
 			'@components': path.resolve(__dirname, './src/components'),
 			'@ui': path.resolve(__dirname, './src/components/ui'),
 			'@contexts': path.resolve(__dirname, './src/contexts'),
+			'@data': path.resolve(__dirname, './src/data'),
 		},
 	},
 	plugins: [react()],
