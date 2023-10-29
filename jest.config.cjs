@@ -10,6 +10,7 @@ module.exports = {
 		'^@hooks/(.*)$': '<rootDir>/$1',
 		'^@utils/(.*)$': '<rootDir>/$1',
 		'^@components/(.*)$': '<rootDir>/$1',
+		'^@components/ui/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
