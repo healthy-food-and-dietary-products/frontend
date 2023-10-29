@@ -8,6 +8,7 @@ export default defineConfig({
 		alias: {
 			'@images': path.resolve(__dirname, './src/assets/images'),
 			'@scss': path.resolve(__dirname, './src/scss'),
+			'@hooks': path.resolve(__dirname, './src/hooks'),
 		},
 	},
 	plugins: [react()],
