@@ -30,6 +30,7 @@
 			"@ui/*": ["src/components/ui/*"],
 			"@contexts/*": ["src/contexts/*"],
 			"@data/*": ["src/data/*"],
+			"@layouts/*": ["src/layouts/*"],
 			"@/*": ["*"]
 		}
 	},

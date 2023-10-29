@@ -13,6 +13,7 @@ module.exports = {
 		'^@components/ui/(.*)$': '<rootDir>/$1',
 		'^@contexts/(.*)$': '<rootDir>/$1',
 		'^@data/(.*)$': '<rootDir>/$1',
+		'^@layouts/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
