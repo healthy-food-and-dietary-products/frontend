@@ -11,6 +11,7 @@ module.exports = {
 		'^@utils/(.*)$': '<rootDir>/$1',
 		'^@components/(.*)$': '<rootDir>/$1',
 		'^@components/ui/(.*)$': '<rootDir>/$1',
+		'^@contexts/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
