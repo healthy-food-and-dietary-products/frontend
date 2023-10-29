@@ -32,6 +32,7 @@
 			"@data/*": ["src/data/*"],
 			"@layouts/*": ["src/layouts/*"],
 			"@services/*": ["src/services/*"],
+			"@pages/*": ["src/pages/*"],
 			"@/*": ["*"]
 		}
 	},
