@@ -7,6 +7,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@images': path.resolve(__dirname, './src/assets/images'),
+			'@scss': path.resolve(__dirname, './src/scss'),
 		},
 	},
 	plugins: [react()],

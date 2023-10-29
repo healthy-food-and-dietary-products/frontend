@@ -23,6 +23,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"paths": {
 			"@images/*": ["src/assets/images/*"],
+			"@scss/*": ["src/scss/*"],
 			"@/*": ["*"]
 		}
 	},

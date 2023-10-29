@@ -6,6 +6,7 @@ module.exports = {
 			'<rootDir>/__mocks__/fileMock.js',
 		'\\.(css|less|scss|sass)$': 'identity-obj-proxy',
 		'^@images/(.*)$': '<rootDir>/$1', // for path aliases to work
+		'^@scss/(.*)$': '<rootDir>/$1', // for path aliases to work
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
