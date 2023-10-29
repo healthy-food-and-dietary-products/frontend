@@ -9,6 +9,7 @@ module.exports = {
 		'^@scss/(.*)$': '<rootDir>/$1',
 		'^@hooks/(.*)$': '<rootDir>/$1',
 		'^@utils/(.*)$': '<rootDir>/$1',
+		'^@components/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',

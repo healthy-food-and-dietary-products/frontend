@@ -10,6 +10,7 @@ export default defineConfig({
 			'@scss': path.resolve(__dirname, './src/scss'),
 			'@hooks': path.resolve(__dirname, './src/hooks'),
 			'@utils': path.resolve(__dirname, './src/utils'),
+			'@components': path.resolve(__dirname, './src/components'),
 		},
 	},
 	plugins: [react()],

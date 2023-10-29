@@ -26,6 +26,7 @@
 			"@scss/*": ["src/scss/*"],
 			"@hooks/*": ["src/hooks/*"],
 			"@utils/*": ["src/utils/*"],
+			"@components/*": ["src/components/*"],
 			"@/*": ["*"]
 		}
 	},
