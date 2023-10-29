@@ -14,6 +14,7 @@ module.exports = {
 		'^@contexts/(.*)$': '<rootDir>/$1',
 		'^@data/(.*)$': '<rootDir>/$1',
 		'^@layouts/(.*)$': '<rootDir>/$1',
+		'^@services/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',

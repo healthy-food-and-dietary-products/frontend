@@ -31,6 +31,7 @@
 			"@contexts/*": ["src/contexts/*"],
 			"@data/*": ["src/data/*"],
 			"@layouts/*": ["src/layouts/*"],
+			"@services/*": ["src/services/*"],
 			"@/*": ["*"]
 		}
 	},
