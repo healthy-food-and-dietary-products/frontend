@@ -25,6 +25,7 @@
 			"@images/*": ["src/assets/images/*"],
 			"@scss/*": ["src/scss/*"],
 			"@hooks/*": ["src/hooks/*"],
+			"@utils/*": ["src/utils/*"],
 			"@/*": ["*"]
 		}
 	},

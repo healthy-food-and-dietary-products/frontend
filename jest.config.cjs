@@ -8,6 +8,7 @@ module.exports = {
 		'^@images/(.*)$': '<rootDir>/$1', // for path aliases to work
 		'^@scss/(.*)$': '<rootDir>/$1',
 		'^@hooks/(.*)$': '<rootDir>/$1',
+		'^@utils/(.*)$': '<rootDir>/$1',
 	},
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest',
