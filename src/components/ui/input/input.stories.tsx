@@ -1,0 +1,26 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import Input from '.';
+
+const meta: Meta<typeof Input> = {
+	component: Input,
+	title: 'Input',
+	tags: ['autodocs'],
+	argTypes: {
+		inputName: {
+			control: { type: 'text' },
+			// control: { type: 'radio' },
+			// options: [1, 2, 3],
+		},
+	},
+};
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+	args: {
+		inputName: 'Email',
+	},
+	render: (args) => <Input {...args} />,
+};
