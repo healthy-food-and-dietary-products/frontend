@@ -1,0 +1,53 @@
+@use '@scss/_variables' as *;
+@use '@scss/_mixins' as *;
+
+.container {
+	font-family: $ubuntu-font;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 140%;
+	max-width: 609px;
+}
+
+.container__name {
+	@extend %zero-padding-margin;
+
+	padding-bottom: 8px;
+	color: $active-text-color;
+}
+
+.container__error {
+	@extend %zero-padding-margin;
+
+	padding-top: 8px;
+	color: $error-color;
+	font-size: 13px;
+}
+
+.inner-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 16px;
+	border: 1px solid $light-background-color;
+	padding: 8px 14px;
+}
+
+.inner-container__input {
+	width: 100%;
+	border: none;
+	outline: none;
+	min-height: 44px;
+}
+
+.inner-container__img-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: 8px;
+}
+
+.inner-container__img {
+	width: 16px;
+	height: 16px;
+}
