@@ -5,22 +5,29 @@ import styles from './input-container.module.scss';
 type InputContainerProps = {
 	children: ReactNode;
 	inputName: string;
+	isError: boolean;
+	errorText?: string;
 };
 
-const InputContainer = ({ children, inputName }: InputContainerProps) => {
+const InputContainer = ({
+	children,
+	inputName,
+	isError,
+	errorText,
+}: InputContainerProps) => {
 	return (
 		<div className={styles.container}>
-			<p className={styles.name}>{inputName}</p>
-			<div className={styles.flex}>
+			<p className={styles.container__name}>{inputName}</p>
+			<div className={styles['inner-container']}>
 				{children}
-				<input className={styles.input} type="text" />
-				<div className={styles['img-wrapper']}>
-					<img className={styles.img} src={alertIcon} alt="icon" />
-				</div>
+				<input className={styles['inner-container__input']} type="text" />
+				{isError && (
+					<div className={styles['inner-container__img-wrapper']}>
+						<img className={styles['inner-container__img']} src={alertIcon} alt="icon" />
+					</div>
+				)}
 			</div>
-			<p className={styles.error}>
-				Указанный почтовый адрес не существует, попробуйте еще раз
-			</p>
+			{isError && <p className={styles.container__error}>{errorText}</p>}
 		</div>
 	);
 };
