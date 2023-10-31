@@ -1,0 +1,33 @@
+@use '@scss/_variables.scss' as *;
+
+.container {
+	display: flex;
+	gap: 6px;
+	padding: 7px 16px;
+	border-radius: 8px;
+	border: 1px solid $accent-color-bright-green;
+	max-width: 231px;
+	box-sizing: border-box;
+	color: $active-text-color;
+	font-family: $ubuntu-font;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 140%;
+}
+
+.container__button {
+	background-image: url('@images/search-icon.svg');
+	border: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.container__input {
+	width: 100%;
+	max-height: 18px;
+	border: none;
+	outline: none;
+}
