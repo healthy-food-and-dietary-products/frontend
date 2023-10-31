@@ -1,0 +1,60 @@
+@use '../../../scss/_variables' as *;
+@use '../../../scss/_mixins' as *;
+
+.slider__ItemContent {
+	position: relative;
+	height: 294px;
+	border-radius: 16px;
+	background: $accent-color-lightest-green;
+}
+
+.slider__content {
+	display: flex;
+	justify-content: flex-end;
+	color: var(--unnamed, #1a1a1a);
+	text-align: center;
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 140%;
+	letter-spacing: 14.4px;
+}
+
+.slider__title {
+	@extend %zero-padding-margin;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-family: $arsenal-font;
+	margin-top: 71px;
+}
+
+.firstLine {
+	max-width: 392px;
+	width: 100%;
+	margin-right: 326px;
+}
+
+.secondLine {
+	max-width: 442px;
+	width: 100%;
+	margin-right: 156px;
+	margin-top: 24px;
+}
+
+.slider__image {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+@media screen and (width <= 1220px) {
+	.firstLine {
+		margin-right: 15vw;
+	}
+
+	.secondLine {
+		margin-right: 12vw;
+	}
+}

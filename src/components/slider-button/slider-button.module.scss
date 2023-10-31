@@ -1,0 +1,17 @@
+@use '../../scss/_mixins' as *;
+
+.button {
+	@extend %zero-padding-margin;
+
+	background: initial;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 1;
+
+	&:hover {
+		opacity: 0.5;
+		transition: opacity 0.5s ease-in-out;
+	}
+}
