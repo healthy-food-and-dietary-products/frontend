@@ -1,0 +1,43 @@
+@use '../../scss/_variables' as *;
+@use '../../scss/_mixins' as *;
+
+.infoCard {
+	max-width: 502px;
+	min-height: 145px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 16px;
+	border: 1px solid var(--unnamed, #cfcfcf);
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.infoCard__content {
+	margin-left: 23px;
+}
+
+.infoCard__title {
+	color: var(--unnamed, #1a1a1a);
+	font-family: $work-sans-font;
+	font-size: clamp(13px, 5vw, 20px);
+	font-style: normal;
+	font-weight: 300;
+	line-height: 140%;
+	max-width: 331px;
+	align-self: stretch;
+}
+
+.infoCard__description {
+	@extend %zero-padding-margin;
+
+	color: var(--unnamed, #1a1a1a);
+	font-family: $work-sans-font;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 140%;
+	max-width: 331px;
+	margin-top: 13px;
+}
