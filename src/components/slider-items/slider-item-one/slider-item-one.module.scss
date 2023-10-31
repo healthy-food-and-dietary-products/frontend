@@ -4,7 +4,8 @@
 .slider__ItemContent {
 	position: relative;
 	height: 294px;
-	border-radius: 16px;
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
 	background: $accent-color-lightest-green;
 }
 
