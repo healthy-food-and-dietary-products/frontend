@@ -1,42 +1,26 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/use-auth.ts';
-
 import styles from './navigation.module.scss';
+import Button from '@components/Button';
 
 const Navigation: React.FC = () => {
-	const { isLoggedIn } = useAuth();
 	return (
 		<nav className={styles.navigation}>
 			<ul className={styles.navigation__list}>
-				<Link className={`${styles.navigation__item} text link`} to={''}>
+				<Button buttonText="Каталог" buttonStyle="header-button"></Button>
+				<Link className={`${styles.navigation__item}  `} to={''}>
 					О нас
 				</Link>
-				<Link className={`link ${styles.navigation__item} text`} to={''}>
+				<Link className={` ${styles.navigation__item}`} to={''}>
 					Доставка
 				</Link>
-				<Link className={`link ${styles.navigation__item} text`} to={''}>
+				<Link className={` ${styles.navigation__item}`} to={''}>
 					Рецепты
 				</Link>
-				<Link className={`link ${styles.navigation__item} text`} to={''}>
+				<Link className={` ${styles.navigation__item}`} to={''}>
 					Контакты
 				</Link>
 			</ul>
-
-			<div className={styles.navigation__icons}>
-				<Link
-					className={`${styles.navigation__icon} ${styles.navigation__icon_search}`}
-					to={''}
-				></Link>
-				<Link
-					className={`${styles.navigation__icon} ${styles.navigation__icon_busket}`}
-					to={''}
-				></Link>
-				{/* логика перехода на профиль, либо регистрацию, здесь потом попап */}
-				<Link
-					className={`${styles.navigation__icon} ${styles.navigation__icon_profile}`}
-					to={isLoggedIn ? '/profile' : ''}
-				></Link>
-			</div>
 		</nav>
 	);
 };

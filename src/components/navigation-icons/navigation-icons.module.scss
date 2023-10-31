@@ -1,0 +1,30 @@
+@use '../../scss/mixins' as *;
+@use '../../scss/base.scss' as *;
+
+.navigation__icons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+
+	:hover {
+		opacity: 0.5;
+		transition: opacity 0.5s ease-in-out;
+	}
+}
+
+.navigation__icon {
+	@extend %header-icon;
+}
+
+.navigation__icon_search {
+	background-image: url('../../assets/images/search_icon.svg');
+}
+
+.navigation__icon_busket {
+	background-image: url('../../assets/images/shopping_busket_icon.svg');
+}
+
+.navigation__icon_profile {
+	background-image: url('../../assets/images/profile_icon.svg');
+}

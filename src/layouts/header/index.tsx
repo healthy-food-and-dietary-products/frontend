@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // import { useAuth } from '../../hooks/use-auth.ts';
 import Navigation from '../../components/navigation';
 import styles from './header.module.scss';
-import Button from '@components/Button';
+import NavigationIcons from '@components/navigation-icons';
 
 const Header: React.FC = () => {
 	// Этот блок кода предназначен для реализации переходов между страницами
@@ -23,8 +23,8 @@ const Header: React.FC = () => {
 				<Link to={'/'} className="link">
 					<h1 className={styles.header__title}>GoodFood</h1>
 				</Link>
-				<Button buttonText="Каталог" buttonStyle="green-button"></Button>
 				<Navigation />
+				<NavigationIcons />
 			</div>
 		</header>
 	);
