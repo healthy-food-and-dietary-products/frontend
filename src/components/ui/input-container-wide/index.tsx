@@ -6,6 +6,7 @@ type InputContainerWideProps = {
 	children: ReactNode;
 	inputName: string;
 	isError: boolean;
+	isAsterisk: boolean;
 	errorText?: string;
 };
 
@@ -14,10 +15,17 @@ const InputContainerWide = ({
 	inputName,
 	isError,
 	errorText,
+	isAsterisk,
 }: InputContainerWideProps) => {
 	return (
 		<div className={styles.container}>
-			<p className={styles.container__name}>{inputName}</p>
+			<p
+				className={`${styles.container__name} ${
+					isAsterisk && styles['container__name_type_asterisk']
+				}`}
+			>
+				{inputName}
+			</p>
 			<div className={styles['inner-container']}>
 				{children}
 				<input className={styles['inner-container__input']} type="text" />

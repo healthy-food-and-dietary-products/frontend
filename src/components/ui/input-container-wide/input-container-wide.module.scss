@@ -14,6 +14,20 @@
 
 	padding-bottom: 8px;
 	color: $active-text-color;
+	position: relative;
+	width: max-content;
+}
+
+.container__name_type_asterisk::after {
+	content: '';
+	background-image: url('@images/asterisk-icon.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 0;
+	right: -11px;
+	width: 5px;
+	height: 5px;
 }
 
 .container__error {
