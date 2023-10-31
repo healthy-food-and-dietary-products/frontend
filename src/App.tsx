@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router';
 import Layout from './layouts/layout/layout.tsx';
-import Home from './pages/home/home.tsx';
+import Home from './pages/home';
 import Profile from './pages/profile/profile.tsx';
 import Login from './pages/login/login.tsx';
 import { ProtectedRoute } from './utils/protected-route.tsx';
