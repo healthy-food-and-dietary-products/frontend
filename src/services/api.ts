@@ -1,3 +1,5 @@
+import { ProducerType } from '@data/types';
+
 class Api {
 	private _baseUrl: string;
 
@@ -32,6 +34,50 @@ class Api {
 	getFavoriteProduct(id: number) {
 		return this._request(`favorite-products/${id}/`, {
 			method: 'GET',
+		});
+	}
+
+	getProducers() {
+		return this._request('producers/', {
+			method: 'GET',
+		});
+	}
+
+	getProducer(id: number) {
+		return this._request(`producers/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	postProducers(producer: ProducerType) {
+		return this._request('producers/', {
+			method: 'POST',
+			body: JSON.stringify({
+				name: producer.name,
+				slug: producer.slug,
+				producer_type: producer.producer_type,
+				description: producer.description,
+				address: producer.address,
+			}),
+		});
+	}
+
+	patchProducer(id: number, producer: ProducerType) {
+		return this._request(`producers/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify({
+				name: producer.name,
+				slug: producer.slug,
+				producer_type: producer.producer_type,
+				description: producer.description,
+				address: producer.address,
+			}),
+		});
+	}
+
+	deleteProducer(id: number) {
+		return this._request(`producers/${id}/`, {
+			method: 'DELETE',
 		});
 	}
 }
