@@ -1,0 +1,33 @@
+@use '@scss/_variables.scss' as *;
+@use '@scss/_mixins' as *;
+
+.topSellingThisWeek {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: #e3ebe0;
+	padding: 88px 0 96px;
+}
+
+.topSellingThisWeek__title {
+	color: #1a1a1a;
+	font-family: $ubuntu-font;
+	font-size: 36px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+.topSellingThisWeek__buttonContainers {
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.topSellingThisWeek__cardsContainer {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 32px;
+}

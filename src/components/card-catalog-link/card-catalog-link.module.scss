@@ -45,9 +45,9 @@
 	gap: 20px;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
-	margin-bottom: 20px;
+	margin-bottom: 13px;
 
-	&:last-of-type() {
+	&:last-of-type {
 		margin-bottom: 0;
 	}
 }
