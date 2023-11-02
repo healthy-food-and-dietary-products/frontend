@@ -1,4 +1,4 @@
-export const BACKEND_URL = 'http://goodfood.acceleratorpracticum.ru/api';
+export const BACKEND_URL = 'https://goodfood.acceleratorpracticum.ru/api';
 
 export const enterEmail = 'Введите свою почту';
 export const enterPhone = 'Введите свой номер телефона';
