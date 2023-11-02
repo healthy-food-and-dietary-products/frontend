@@ -45,6 +45,15 @@
 
 @font-face {
 	/* stylelint-disable-next-line font-family-name-quotes */
+	font-family: 'WorkSans';
+	font-style: bold;
+	font-weight: 700;
+	src: url('./Work-Sans/WorkSans.ttf') format('truetype');
+	font-display: swap;
+}
+
+@font-face {
+	/* stylelint-disable-next-line font-family-name-quotes */
 	font-family: 'Arsenal';
 	font-style: normal;
 	src: url('./Arsenal/Arsenal-Bold.ttf');

@@ -2,7 +2,7 @@
 @use './mixins' as *;
 
 .link {
-	all: unset;
+
 	cursor: pointer;
 
 	:hover {
@@ -60,4 +60,8 @@ h3 {
 	@extend %text;
 
 	font-size: 20px;
+}
+
+ul {
+	list-style-type: none;
 }
