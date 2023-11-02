@@ -1,4 +1,4 @@
-import { ProducerType } from '@data/types';
+import type { ProducerType, ProductType } from '@data/types';
 
 class Api {
 	private _baseUrl: string;
@@ -18,7 +18,7 @@ class Api {
 		const params = {
 			headers: {
 				'Content-Type': 'application/json',
-				// Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+				Authorization: 'Token 34b3fc1d398c10daa1c2b945b7041f5615eecde9',
 			},
 			...options,
 		};
@@ -77,6 +77,51 @@ class Api {
 
 	deleteProducer(id: number) {
 		return this._request(`producers/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	getProducts() {
+		return this._request('products/', {
+			method: 'GET',
+		});
+	}
+
+	postProducts(product: ProductType) {
+		return this._request('products/', {
+			method: 'POST',
+			body: JSON.stringify(product),
+		});
+	}
+
+	getProduct(id: number) {
+		return this._request(`product/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	patchProduct(id: number, { ...data }: ProductType) {
+		return this._request(`products/${id}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ ...data }),
+		});
+	}
+
+	deleteProduct(id: number) {
+		return this._request(`products/${id}`, {
+			method: 'DELETE',
+		});
+	}
+
+	postFavoriteProduct(id: number, { ...data }: ProductType) {
+		return this._request(`products/${id}/favorite/`, {
+			method: 'POST',
+			body: JSON.stringify({ ...data }),
+		});
+	}
+
+	deleteFavoriteProduct(id: number) {
+		return this._request(`products/${id}/favorite/`, {
 			method: 'DELETE',
 		});
 	}
