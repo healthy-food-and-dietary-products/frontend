@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import cardImage from '@images/mango.png';
 import styles from './product-card.module.scss';
@@ -15,7 +16,8 @@ const ProductCard = ({ cardName, price, weight, buttonText }: ProductCardProps) 
 	return (
 		<li className={styles.card}>
 			{/* вместо /login подставить нужный роут  */}
-			<Link className={styles.card__link} to={'/login'}>
+			{/*Предполагается в будущем открывать страницу товара по пути id и категории*/}
+			<Link className={styles.card__link} to={`catalog/category/subcategory/id`}>
 				<img className={styles.card__image} src={cardImage} alt="карточка товара" />
 				<h2 className={styles.card__caption}>{cardName}</h2>
 			</Link>

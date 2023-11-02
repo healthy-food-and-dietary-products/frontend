@@ -1,3 +1,5 @@
+import TomatoesForProductPage from '@images/tomatoes_for_product_page.png';
+
 export const mainPageBlockLinks = [
 	{
 		title: 'Овощи',
@@ -46,3 +48,21 @@ export const products = [
 		buttonText: 'В корзину',
 	},
 ];
+
+export const productApiDataExample = {
+	id: '1',
+	name: 'Помидоры черри Краснодар',
+	description:
+		'Наши томаты вручную собирают самые заботливые фермеры Краснодарского края. При выращивании используется только вода и натруальные удобрения.',
+	category: 'Овощи',
+	producer: 'ООО Агрокомплекс',
+	subcategory: 'Томаты',
+	expiresDate: '21 сутки',
+	amount: 10,
+	price: 100,
+	photo: TomatoesForProductPage,
+	kcal: 15,
+	proteins: 1,
+	fats: 2,
+	carbohydrates: 4,
+};

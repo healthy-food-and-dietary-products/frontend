@@ -49,6 +49,13 @@ h3 {
 	font-size: 13px;
 }
 
+.text-m {
+	@extend %text;
+
+	font-family: $ubuntu-font;
+	font-size: 22px;
+}
+
 .text {
 	@extend %text;
 

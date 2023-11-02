@@ -26,7 +26,21 @@
 }
 
 .green-button__active {
+	padding: 0;
+	display: flex;
+	width: 161px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
 	background: $accent-color-darkgreen;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-family: $ubuntu-font;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	cursor: pointer;
 }
 
 .header-button {
@@ -89,4 +103,81 @@
 .greenish-button__active {
 	color: #fff;
 	background: $dirty-greenish-color;
+}
+
+.green-border-button {
+	@extend %default-button-text;
+
+	display: flex;
+	background-color: white;
+	align-items: center;
+	border: 1px solid $accent-color-bright-green;
+	border-radius: 16px;
+	padding: 16px;
+	max-width: 300px;
+	width: fit-content;
+	height: 40px;
+	cursor: pointer;
+
+	&:not(.green-border-button__active):hover {
+		color: white;
+		background-color: $accent-color-bright-green;
+	}
+
+	transition: 0.5s;
+}
+
+.green-border-button__active {
+	@extend %default-button-text;
+
+	display: flex;
+	color: white;
+	background-color: $accent-color-darkgreen;
+	align-items: center;
+	border: none;
+	border-radius: 16px;
+	padding: 16px;
+	max-width: 300px;
+	width: fit-content;
+	height: 40px;
+	cursor: pointer;
+}
+
+.cart-button {
+	@extend %default-button-text;
+
+	color: white;
+	display: flex;
+	background-color: $accent-color-bright-green;
+	align-items: center;
+	border: none;
+	border-radius: 16px;
+	padding: 16px;
+	max-width: 140px;
+	width: fit-content;
+	height: 40px;
+	cursor: pointer;
+
+	&:not(.green-border-button__active):hover {
+		color: white;
+		background-color: $accent-color-darkgreen;
+	}
+
+	transition: 0.5s;
+}
+
+.cart-button__active {
+	@extend %default-button-text;
+
+	display: flex;
+	color: white;
+	background-color: $accent-color-darkgreen;
+	align-items: center;
+	border: none;
+	border-radius: 16px;
+	padding: 16px;
+	max-width: 300px;
+	width: fit-content;
+	height: 40px;
+	cursor: pointer;
 }

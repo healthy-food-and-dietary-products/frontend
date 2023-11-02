@@ -5,6 +5,7 @@ import Profile from './pages/profile/profile.tsx';
 import Login from './pages/login/login.tsx';
 import { ProtectedRoute } from './utils/protected-route.tsx';
 import { useAuth } from './hooks/use-auth.ts';
+import Product from '@pages/product/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -26,6 +27,7 @@ function App() {
 					path="/profile"
 					element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
 				/>
+				<Route path="/catalog/category/subcategory/id" element={<Product />} />
 				<Route path="/login" element={<Login />} />
 			</Routes>
 		</Layout>
