@@ -1,0 +1,30 @@
+.scroll-to-top-button {
+	width: 40px;
+	height: 40px;
+	margin: 0;
+	outline: none;
+	border: 1px solid #b8b8b8;
+	border-radius: 50%;
+	background-color: #fff;
+	background-image: url('@images/scroll-to-top.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: 0.2s;
+	visibility: hidden;
+	opacity: 0;
+
+	position: fixed;
+	z-index: 3;
+	bottom: 20px;
+	right: calc((100vw - 80%) / 2);
+
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
+}
+
+.scroll-to-top-button_visible {
+	visibility: visible;
+	opacity: 1;
+}
