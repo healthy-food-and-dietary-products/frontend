@@ -21,6 +21,7 @@
 
 .aboutCompany__paragraphBold {
 	@extend %zero-padding-margin;
+
 	font-size: 22px;
 	font-weight: 500;
 	line-height: 140%;
@@ -32,6 +33,7 @@
 
 .aboutCompany__paragraph {
 	@extend %zero-padding-margin;
+
 	font-size: 20px;
 	line-height: 140%;
 }
@@ -70,7 +72,7 @@
 	padding: 0;
 	width: 261px;
 	height: 174px;
-	background-image: url(../../assets/images/healthy-young-woman.jpeg);
+	background-image: url('../../assets/images/healthy-young-woman.jpeg');
 	background-size: cover;
 }
 

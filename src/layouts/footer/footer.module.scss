@@ -4,7 +4,8 @@
 .footer {
 	margin-top: 200px;
 	width: 100%;
-	height: 324px;
+	max-height: 324px;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	background-color: #212333;
@@ -24,6 +25,7 @@
 
 .footer__title {
 	@extend %zero-padding-margin;
+
 	font-family: $work-sans-font;
 	font-size: 40px;
 	font-weight: 700;
@@ -33,6 +35,7 @@
 
 .footer__text {
 	@extend %zero-padding-margin;
+
 	font-family: $ubuntu-font;
 	font-size: 16px;
 	color: white;
@@ -60,7 +63,7 @@
 }
 
 .footer__link:hover {
-	opacity: 50%;
+	opacity: 0.5;
 }
 
 .footer__rightBlock {
