@@ -21,9 +21,9 @@ const TopicCard = ({ cardName, cardDescription, cardDate }: TopicCardProps) => {
 						alt="карточка блога и рецептов"
 					/>
 					<figcaption className={styles['card__text-container']}>
-						<p className={styles.card__date}>{cardDate}</p>
 						<h2 className={styles.card__title}>{cardName}</h2>
 						<p className={styles.card__description}>{cardDescription}</p>
+						<p className={styles.card__date}>{cardDate}</p>
 					</figcaption>
 				</figure>
 			</Link>

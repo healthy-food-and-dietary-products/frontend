@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
 	return (
-		<div className={styles.footer}>
+		<footer className={styles.footer}>
 			<div className={styles.footer__container}>
 				<div className={styles.footer__leftBlock}>
 					<h2 className={styles.footer__title}>GoodFood</h2>
-					<p className={styles.footer__text}>Cервис по доставке здоровой и диетической еды</p>
+					<p className={styles.footer__text}>
+						Cервис по доставке здоровой и диетической еды
+					</p>
 					<p className={styles.footer__text}>&copy; 2023. «GOOD FOOD»</p>
 				</div>
 				<div className={styles.footer__centerBlock}>
@@ -34,15 +36,13 @@ const Footer: React.FC = () => {
 					</ul>
 				</div>
 				<div className={styles.footer__rightBlock}>
-					<p className=
-						{`${styles['footer__text']} ${styles['footer__text_middle']}`}
-					>
+					<p className={`${styles['footer__text']} ${styles['footer__text_middle']}`}>
 						8-800-000-444-333
 					</p>
 					<p className={styles.footer__text}>Круглосуточно ответим на ваши вопросы</p>
 				</div>
 			</div>
-		</div>
+		</footer>
 	);
 };
 
