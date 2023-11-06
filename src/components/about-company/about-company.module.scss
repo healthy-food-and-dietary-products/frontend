@@ -2,7 +2,7 @@
 @use '../../scss/_mixins' as *;
 
 .aboutCompany {
-	margin-top: 120px;
+	margin-top: 65px;
 	width: 80%;
 	font-family: $ubuntu-font;
 }
@@ -39,7 +39,7 @@
 }
 
 .aboutCompany__container {
-	margin-top: 52px;
+	margin-top: 44px;
 	display: flex;
 	column-gap: 28px;
 }
