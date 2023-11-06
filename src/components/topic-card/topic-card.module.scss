@@ -41,6 +41,7 @@
 }
 
 .card__text-container {
+	box-sizing: border-box;
 	z-index: 20;
 	position: absolute;
 	top: 0;
@@ -49,7 +50,6 @@
 	height: 100%;
 	margin: 0;
 	padding: 20px;
-	max-width: 288px;
 	font-family: Ubuntu, Arial, sans-serif;
 	overflow: hidden;
 	text-overflow: ellipsis;
