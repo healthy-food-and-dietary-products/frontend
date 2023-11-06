@@ -29,7 +29,12 @@
 	left: 0;
 	display: block;
 	position: absolute;
-	background: linear-gradient(1deg, #3d3a3a 17.79%, rgb(255 255 255 / 0%) 57.54%);
+	background: linear-gradient(
+		1deg,
+		rgb(9 22 61 / 89%) 17.79%,
+		rgb(22 57 122 / 35%) 57.54%,
+		rgb(255 0 0 / 0%) 75%
+	);
 	margin: 0;
 }
 
