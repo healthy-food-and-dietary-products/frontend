@@ -1,4 +1,9 @@
-import type { ProducerType, ProductType } from '@data/types';
+import type {
+	ProducerType,
+	ProductType,
+	UserCreateType,
+	ActivationType,
+} from '@data/types';
 
 class Api {
 	private _baseUrl: string;
@@ -113,16 +118,35 @@ class Api {
 		});
 	}
 
-	postFavoriteProduct(id: number, { ...data }: ProductType) {
+	postFavoriteProduct(id: number) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'POST',
-			body: JSON.stringify({ ...data }),
+			// body: JSON.stringify({ ...data }),
 		});
 	}
 
 	deleteFavoriteProduct(id: number) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'DELETE',
+		});
+	}
+
+	getUsers() {
+		return this._request('users/', {
+			method: 'GET',
+		});
+	}
+	postUser(user: UserCreateType) {
+		return this._request('users/', {
+			method: 'POST',
+			body: JSON.stringify(user),
+		});
+	}
+
+	postUsersActivation(user: ActivationType) {
+		return this._request('users/activation/', {
+			method: 'POST',
+			body: JSON.stringify(user),
 		});
 	}
 }
