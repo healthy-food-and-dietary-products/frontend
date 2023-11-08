@@ -38,13 +38,13 @@ class Api {
 	}
 
 	/* -------------------------- FavoriteProducts -------------------------- */
-	getFavoriteProducts() {
+	favoriteProductsList() {
 		return this._request('favorite-products/', {
 			method: 'GET',
 		});
 	}
 
-	getFavoriteProduct(id: number) {
+	favoriteProductsRead(id: number) {
 		return this._request(`favorite-products/${id}/`, {
 			method: 'GET',
 		});
