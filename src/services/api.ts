@@ -1,4 +1,3 @@
-import type { ProductType } from '@data/types';
 import type {
 	UserCreate,
 	Activation,
@@ -11,6 +10,9 @@ import type {
 	OrderPostDelete,
 	ShoppingCartPostUpdateDelete,
 	Producer,
+	ProductCreate,
+	ProductUpdate,
+	FavoriteProductCreate,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -85,46 +87,46 @@ class Api {
 	}
 
 	/* ----------------------------- Products ----------------------------- */
-	getProducts() {
+	productsList() {
 		return this._request('products/', {
 			method: 'GET',
 		});
 	}
 
-	postProducts(product: ProductType) {
+	productsCreate(data: ProductCreate) {
 		return this._request('products/', {
 			method: 'POST',
-			body: JSON.stringify(product),
+			body: JSON.stringify(data),
 		});
 	}
 
-	getProduct(id: number) {
+	productsRead(id: number) {
 		return this._request(`product/${id}/`, {
 			method: 'GET',
 		});
 	}
 
-	patchProduct(id: number, { ...data }: ProductType) {
+	productsPartialUpdate(id: number, data: ProductUpdate) {
 		return this._request(`products/${id}`, {
 			method: 'PATCH',
-			body: JSON.stringify({ ...data }),
+			body: JSON.stringify(data),
 		});
 	}
 
-	deleteProduct(id: number) {
+	productsDelete(id: number) {
 		return this._request(`products/${id}`, {
 			method: 'DELETE',
 		});
 	}
 
-	postFavoriteProduct(id: number) {
+	productsFavoriteCreate(id: number, data: FavoriteProductCreate) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'POST',
-			// body: JSON.stringify({ ...data }),
+			body: JSON.stringify(data),
 		});
 	}
 
-	deleteFavoriteProduct(id: number) {
+	productsFavoriteDelete(id: number) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'DELETE',
 		});
