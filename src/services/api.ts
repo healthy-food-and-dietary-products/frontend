@@ -18,6 +18,7 @@ import type {
 	Component,
 	Promotion,
 	Subcategory,
+	Tag,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -378,6 +379,39 @@ class Api {
 		});
 	}
 
+	/* ---------------------------- Subcategories ---------------------------- */
+	subcategoriesList() {
+		return this._request('subcategories/', {
+			method: 'GET',
+		});
+	}
+
+	subcategoriesCreate(data: Subcategory) {
+		return this._request('subcategories/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	subcategoriesRead(id: number) {
+		return this._request(`subcategories/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	subcategoriesPartialUpdate(id: number, data: Subcategory) {
+		return this._request(`subcategories/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	subcategoriesDelete(id: number) {
+		return this._request(`subcategories/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
 	/* ----------------------------- Components ----------------------------- */
 	componentsList() {
 		return this._request('components/', {
@@ -444,35 +478,35 @@ class Api {
 		});
 	}
 
-	/* ---------------------------- Subcategories ---------------------------- */
-	subcategoriesList() {
-		return this._request('subcategories/', {
+	/* -------------------------------- Tags -------------------------------- */
+	tagsList() {
+		return this._request('tags/', {
 			method: 'GET',
 		});
 	}
 
-	subcategoriesCreate(data: Subcategory) {
-		return this._request('subcategories/', {
+	tagsCreate(data: Tag) {
+		return this._request('tags/', {
 			method: 'POST',
 			body: JSON.stringify(data),
 		});
 	}
 
-	subcategoriesRead(id: number) {
-		return this._request(`subcategories/${id}/`, {
+	tagsRead(id: number) {
+		return this._request(`tags/${id}/`, {
 			method: 'GET',
 		});
 	}
 
-	subcategoriesPartialUpdate(id: number, data: Subcategory) {
-		return this._request(`subcategories/${id}/`, {
+	tagsPartialUpdate(id: number, data: Tag) {
+		return this._request(`tags/${id}/`, {
 			method: 'PATCH',
 			body: JSON.stringify(data),
 		});
 	}
 
-	subcategoriesDelete(id: number) {
-		return this._request(`subcategories/${id}/`, {
+	tagsDelete(id: number) {
+		return this._request(`tags/${id}/`, {
 			method: 'DELETE',
 		});
 	}
