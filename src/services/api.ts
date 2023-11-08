@@ -15,6 +15,7 @@ import type {
 	FavoriteProductCreate,
 	TokenCreate,
 	CategoryCreate,
+	Component,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -371,6 +372,39 @@ class Api {
 
 	categoriesDelete(id: number) {
 		return this._request(`categories/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* ----------------------------- Components ----------------------------- */
+	componentsList() {
+		return this._request('components/', {
+			method: 'GET',
+		});
+	}
+
+	componentsCreate(data: Component) {
+		return this._request('components/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	componentsRead(id: number) {
+		return this._request(`components/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	componentsPartialUpdate(id: number, data: Component) {
+		return this._request(`components/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	componentsDelete(id: number) {
+		return this._request(`components/${id}/`, {
 			method: 'DELETE',
 		});
 	}
