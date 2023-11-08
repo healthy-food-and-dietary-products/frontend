@@ -16,6 +16,7 @@ import type {
 	TokenCreate,
 	CategoryCreate,
 	Component,
+	Promotion,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -405,6 +406,39 @@ class Api {
 
 	componentsDelete(id: number) {
 		return this._request(`components/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* ----------------------------- Promotions ----------------------------- */
+	promotionsList() {
+		return this._request('promotions/', {
+			method: 'GET',
+		});
+	}
+
+	promotionsCreate(data: Promotion) {
+		return this._request('promotions/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	promotionsRead(id: number) {
+		return this._request(`promotions/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	promotionsPartialUpdate(id: number, data: Promotion) {
+		return this._request(`promotions/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	promotionsDelete(id: number) {
+		return this._request(`promotions/${id}/`, {
 			method: 'DELETE',
 		});
 	}
