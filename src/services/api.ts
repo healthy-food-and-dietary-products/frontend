@@ -13,6 +13,7 @@ import type {
 	ProductCreate,
 	ProductUpdate,
 	FavoriteProductCreate,
+	TokenCreate,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -40,95 +41,17 @@ class Api {
 		return fetch(`${this._baseUrl}/${endPoint}`, params).then(this._checkResponse);
 	}
 
-	/* -------------------------- FavoriteProducts -------------------------- */
-	favoriteProductsList() {
-		return this._request('favorite-products/', {
-			method: 'GET',
-		});
-	}
-
-	favoriteProductsRead(id: number) {
-		return this._request(`favorite-products/${id}/`, {
-			method: 'GET',
-		});
-	}
-
-	/* ----------------------------- Producers ----------------------------- */
-	producersList() {
-		return this._request('producers/', {
-			method: 'GET',
-		});
-	}
-
-	producersRead(id: number) {
-		return this._request(`producers/${id}/`, {
-			method: 'GET',
-		});
-	}
-
-	producersCreate(data: Producer) {
-		return this._request('producers/', {
+	/* -------------------------------- Token -------------------------------- */
+	tokenLoginCreate(data: TokenCreate) {
+		return this._request('token/login/', {
 			method: 'POST',
 			body: JSON.stringify(data),
 		});
 	}
 
-	producersPartialUpdate(id: number, data: Producer) {
-		return this._request(`producers/${id}/`, {
-			method: 'PATCH',
-			body: JSON.stringify(data),
-		});
-	}
-
-	producersDelete(id: number) {
-		return this._request(`producers/${id}/`, {
-			method: 'DELETE',
-		});
-	}
-
-	/* ----------------------------- Products ----------------------------- */
-	productsList() {
-		return this._request('products/', {
-			method: 'GET',
-		});
-	}
-
-	productsCreate(data: ProductCreate) {
-		return this._request('products/', {
+	tokenLogoutCreate() {
+		return this._request('token/logout/', {
 			method: 'POST',
-			body: JSON.stringify(data),
-		});
-	}
-
-	productsRead(id: number) {
-		return this._request(`product/${id}/`, {
-			method: 'GET',
-		});
-	}
-
-	productsPartialUpdate(id: number, data: ProductUpdate) {
-		return this._request(`products/${id}`, {
-			method: 'PATCH',
-			body: JSON.stringify(data),
-		});
-	}
-
-	productsDelete(id: number) {
-		return this._request(`products/${id}`, {
-			method: 'DELETE',
-		});
-	}
-
-	productsFavoriteCreate(id: number, data: FavoriteProductCreate) {
-		return this._request(`products/${id}/favorite/`, {
-			method: 'POST',
-			body: JSON.stringify(data),
-		});
-	}
-
-	productsFavoriteDelete(id: number) {
-		return this._request(`products/${id}/favorite/`, {
-			method: 'DELETE',
 		});
 	}
 
@@ -322,6 +245,98 @@ class Api {
 
 	usersShoppingCartDelete(userId: string, id: number) {
 		return this._request(`users/${userId}/shopping_cart/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* ----------------------------- Products ----------------------------- */
+	productsList() {
+		return this._request('products/', {
+			method: 'GET',
+		});
+	}
+
+	productsCreate(data: ProductCreate) {
+		return this._request('products/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	productsRead(id: number) {
+		return this._request(`product/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	productsPartialUpdate(id: number, data: ProductUpdate) {
+		return this._request(`products/${id}`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	productsDelete(id: number) {
+		return this._request(`products/${id}`, {
+			method: 'DELETE',
+		});
+	}
+
+	productsFavoriteCreate(id: number, data: FavoriteProductCreate) {
+		return this._request(`products/${id}/favorite/`, {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	productsFavoriteDelete(id: number) {
+		return this._request(`products/${id}/favorite/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* -------------------------- FavoriteProducts -------------------------- */
+	favoriteProductsList() {
+		return this._request('favorite-products/', {
+			method: 'GET',
+		});
+	}
+
+	favoriteProductsRead(id: number) {
+		return this._request(`favorite-products/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	/* ----------------------------- Producers ----------------------------- */
+	producersList() {
+		return this._request('producers/', {
+			method: 'GET',
+		});
+	}
+
+	producersRead(id: number) {
+		return this._request(`producers/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	producersCreate(data: Producer) {
+		return this._request('producers/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	producersPartialUpdate(id: number, data: Producer) {
+		return this._request(`producers/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	producersDelete(id: number) {
+		return this._request(`producers/${id}/`, {
 			method: 'DELETE',
 		});
 	}
