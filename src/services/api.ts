@@ -30,6 +30,7 @@ class Api {
 		return fetch(`${this._baseUrl}/${endPoint}`, params).then(this._checkResponse);
 	}
 
+	/* ----- FavoriteProducts ----- */
 	getFavoriteProducts() {
 		return this._request('favorite-products/', {
 			method: 'GET',
@@ -42,6 +43,7 @@ class Api {
 		});
 	}
 
+	/* ----- Producers ----- */
 	getProducers() {
 		return this._request('producers/', {
 			method: 'GET',
@@ -86,6 +88,7 @@ class Api {
 		});
 	}
 
+	/* ----- Products ----- */
 	getProducts() {
 		return this._request('products/', {
 			method: 'GET',
@@ -131,6 +134,7 @@ class Api {
 		});
 	}
 
+	/* ----- USERS ----- */
 	getUsers() {
 		return this._request('users/', {
 			method: 'GET',
