@@ -14,6 +14,7 @@ import type {
 	ProductUpdate,
 	FavoriteProductCreate,
 	TokenCreate,
+	CategoryCreate,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -337,6 +338,39 @@ class Api {
 
 	producersDelete(id: number) {
 		return this._request(`producers/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* ----------------------------- Categories ----------------------------- */
+	categoriesList() {
+		return this._request('categories/', {
+			method: 'GET',
+		});
+	}
+
+	categoriesCreate(data: CategoryCreate) {
+		return this._request('categories/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	categoriesRead(id: number) {
+		return this._request(`categories/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	categoriesPartialUpdate(id: number, data: CategoryCreate) {
+		return this._request(`categories/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	categoriesDelete(id: number) {
+		return this._request(`categories/${id}/`, {
 			method: 'DELETE',
 		});
 	}
