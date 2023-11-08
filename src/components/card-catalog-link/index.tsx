@@ -3,6 +3,7 @@ import { splitIntoSubArrays } from '../../utils/utils';
 import CardBlockLink from '../card-block-link';
 import ProductCard from '../product-card';
 import styles from './card-catalog-link.module.scss';
+import { Link } from 'react-router-dom';
 
 type CardCatalogLinkProps = {
 	title: string;
@@ -20,7 +21,7 @@ function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
 					styles[`card-catalog-link__title-container_type_${type}`]
 				}`}
 			>
-				<h2 className={styles['card-catalog-link__title']}>{title}</h2>
+				<Link to='/catalog' className={styles.link}><h2 className={styles['card-catalog-link__title']}>{title}</h2></Link>
 				<span className={styles['card-catalog-link__arrow']} />
 			</div>
 			{arrayWithSubArrays.map((subArray, index) => (

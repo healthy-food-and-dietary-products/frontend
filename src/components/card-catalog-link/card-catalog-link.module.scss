@@ -1,3 +1,6 @@
+@use '../../scss/variables' as *;
+@use '../../scss/base.scss' as *;
+
 .card-catalog-link {
 	width: 100%;
 	max-width: 1024px;
@@ -26,6 +29,7 @@
 
 .card-catalog-link__title {
 	margin: 0;
+	color: #1A1A1A;
 }
 
 .card-catalog-link__arrow {

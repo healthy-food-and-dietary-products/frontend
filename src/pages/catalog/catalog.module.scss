@@ -1,0 +1,19 @@
+@use '../../scss/variables' as *;
+@use '../../scss/base.scss' as *;
+
+.catalogBlock {
+	margin: 80px 0 0 0;
+	display: flex;
+	justify-content: center;
+}
+
+.catalog {
+	width: 80%;
+}
+
+.catalog__cardlist {
+	margin: 64px 0 0 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+}
