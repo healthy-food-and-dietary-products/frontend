@@ -17,6 +17,7 @@ import type {
 	CategoryCreate,
 	Component,
 	Promotion,
+	Subcategory,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -439,6 +440,39 @@ class Api {
 
 	promotionsDelete(id: number) {
 		return this._request(`promotions/${id}/`, {
+			method: 'DELETE',
+		});
+	}
+
+	/* ---------------------------- Subcategories ---------------------------- */
+	subcategoriesList() {
+		return this._request('subcategories/', {
+			method: 'GET',
+		});
+	}
+
+	subcategoriesCreate(data: Subcategory) {
+		return this._request('subcategories/', {
+			method: 'POST',
+			body: JSON.stringify(data),
+		});
+	}
+
+	subcategoriesRead(id: number) {
+		return this._request(`subcategories/${id}/`, {
+			method: 'GET',
+		});
+	}
+
+	subcategoriesPartialUpdate(id: number, data: Subcategory) {
+		return this._request(`subcategories/${id}/`, {
+			method: 'PATCH',
+			body: JSON.stringify(data),
+		});
+	}
+
+	subcategoriesDelete(id: number) {
+		return this._request(`subcategories/${id}/`, {
 			method: 'DELETE',
 		});
 	}
