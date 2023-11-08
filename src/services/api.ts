@@ -1,4 +1,4 @@
-import type { ProducerType, ProductType } from '@data/types';
+import type { ProductType } from '@data/types';
 import type {
 	UserCreate,
 	Activation,
@@ -10,6 +10,7 @@ import type {
 	SetUsername,
 	OrderPostDelete,
 	ShoppingCartPostUpdateDelete,
+	Producer,
 } from './generated-api/data-contracts';
 
 class Api {
@@ -51,45 +52,33 @@ class Api {
 	}
 
 	/* ----------------------------- Producers ----------------------------- */
-	getProducers() {
+	producersList() {
 		return this._request('producers/', {
 			method: 'GET',
 		});
 	}
 
-	getProducer(id: number) {
+	producersRead(id: number) {
 		return this._request(`producers/${id}/`, {
 			method: 'GET',
 		});
 	}
 
-	postProducers(producer: ProducerType) {
+	producersCreate(data: Producer) {
 		return this._request('producers/', {
 			method: 'POST',
-			body: JSON.stringify({
-				name: producer.name,
-				slug: producer.slug,
-				producer_type: producer.producer_type,
-				description: producer.description,
-				address: producer.address,
-			}),
+			body: JSON.stringify(data),
 		});
 	}
 
-	patchProducer(id: number, producer: ProducerType) {
+	producersPartialUpdate(id: number, data: Producer) {
 		return this._request(`producers/${id}/`, {
 			method: 'PATCH',
-			body: JSON.stringify({
-				name: producer.name,
-				slug: producer.slug,
-				producer_type: producer.producer_type,
-				description: producer.description,
-				address: producer.address,
-			}),
+			body: JSON.stringify(data),
 		});
 	}
 
-	deleteProducer(id: number) {
+	producersDelete(id: number) {
 		return this._request(`producers/${id}/`, {
 			method: 'DELETE',
 		});
