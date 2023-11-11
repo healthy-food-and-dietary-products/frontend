@@ -21,7 +21,9 @@ function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
 					styles[`card-catalog-link__title-container_type_${type}`]
 				}`}
 			>
-				<Link to='/catalog' className={styles.link}><h2 className={styles['card-catalog-link__title']}>{title}</h2></Link>
+				<Link to="/catalog" className={styles.link}>
+					<h2 className={styles['card-catalog-link__title']}>{title}</h2>
+				</Link>
 				<span className={styles['card-catalog-link__arrow']} />
 			</div>
 			{arrayWithSubArrays.map((subArray, index) => (

@@ -14,12 +14,16 @@ const Catalog: React.FC = () => {
 					<div className={styles.catalog__cardlist}>
 						<CardCatalogLink title="Овощи" type="single-row" array={products} />
 						<CardCatalogLink title="Фрукты" type="single-row" array={products} />
-						<CardCatalogLink title="Молочные продукты" type="single-row" array={products} />
+						<CardCatalogLink
+							title="Молочные продукты"
+							type="single-row"
+							array={products}
+						/>
 					</div>
 				</div>
 			</section>
 		</>
 	);
-}
+};
 
 export default Catalog;
