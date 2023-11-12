@@ -5,11 +5,12 @@ on:
     branches:
 
 jobs:
+
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
-
+    
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -38,7 +39,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             echo ${{ secrets.SSH_HOST_USER_PASSWORD }} | sudo -S docker compose stop
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/good_food_frontend:v.01
