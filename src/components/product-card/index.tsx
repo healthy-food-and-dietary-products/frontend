@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import cardImage from '@images/mango.png';
 import styles from './product-card.module.scss';
