@@ -3,7 +3,7 @@ import Layout from './layouts/layout/layout.tsx';
 import Home from './pages/home';
 import Profile from './pages/profile/profile.tsx';
 import { ProtectedRoute } from './utils/protected-route.tsx';
-import { useAuth } from './hooks/use-auth.ts';
+// import { useAuth } from './hooks/use-auth.ts';
 import Product from '@pages/product/index.tsx';
 import Catalog from '@pages/catalog/index.tsx';
 import { URLS } from '@data/constants.ts';
@@ -19,7 +19,7 @@ import PopupRegistration from '@components/popups/popup-registration';
 // <CardCatalogLink title="Овощи" type="single-row" array={products} />
 
 function App() {
-	const { isLoggedIn } = useAuth();
+	// const { isLoggedIn } = useAuth();
 
 	// useEffect(() => {
 	// 	api.productsList("?category=nuts-dried-fruits")
@@ -40,7 +40,7 @@ function App() {
 					<Route path={URLS.CATALOG} element={<Catalog />} />
 					<Route
 						path={URLS.PROFILE}
-						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
+						element={<ProtectedRoute element={Profile} loggedIn={true} />}
 					/>
 					<Route path="/catalog/:category/:id" element={<Product />} />
 				</Routes>
