@@ -18,7 +18,6 @@ export const passwordNotSafe =
 export const passwordNotMatch = 'Пароль не соотвествует. Проверьте написание';
 
 export const URLS = {
-	LOGIN: '/login',
 	SIGNUP: '/signup',
 	PROFILE: '/profile',
 	CATALOG: '/catalog',
