@@ -8,7 +8,7 @@ import CardCatalogLink from '@components/card-catalog-link';
 import { mainPageBlockLinks } from '../../data/dataExamples.ts';
 import TopSellingThisWeek from '@components/top-selling-this-week';
 import AboutCompany from '@components/about-company/index.tsx';
-import OurBlock from '@components/our-block/our-block.tsx';
+import OurBlock from '@components/our-block';
 
 const Home: React.FC = () => {
 	return (

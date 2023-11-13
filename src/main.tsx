@@ -7,12 +7,15 @@ import './scss/_mixins.scss';
 import './scss/base.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth-context.tsx';
+import { PopupProvider } from '@contexts/popup-context.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProvider>
-				<App />
+				<PopupProvider>
+					<App />
+				</PopupProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	</React.StrictMode>

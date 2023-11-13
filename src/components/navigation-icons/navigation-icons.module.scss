@@ -1,7 +1,7 @@
 @use '../../scss/mixins' as *;
 @use '../../scss/base.scss' as *;
 
-.navigation__icons {
+.navigation__iconsContainer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -15,6 +15,10 @@
 
 .navigation__icon {
 	@extend %header-icon;
+
+	border: none;
+	background-color: white;
+	background-position: center;
 }
 
 .navigation__icon_search {

@@ -1,15 +1,20 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode, useEffect } from 'react';
+import api from '@services/api.ts';
 
 type AuthContextType = {
 	isLoggedIn: boolean;
-	login: () => void;
-	logout: () => void;
+	user: Record<string, unknown>;
+	loading: boolean;
+	updateUsers: (newUserData: Record<string, unknown>) => void;
+	checkAuthentication: () => void;
 };
 
 const AuthContext = createContext<AuthContextType>({
 	isLoggedIn: false,
-	login: () => {},
-	logout: () => {},
+	user: {},
+	loading: true,
+	updateUsers: () => {},
+	checkAuthentication: () => {},
 });
 
 type AuthProviderProps = {
@@ -18,18 +23,34 @@ type AuthProviderProps = {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [user, setUser] = useState({});
+	const [loading, setLoading] = useState(true);
 
-	const login = () => {
-		setIsLoggedIn(true);
+	const checkAuthentication = async () => {
+		try {
+			const user = await api.usersMeRead();
+			setUser(user);
+			setIsLoggedIn(true);
+		} catch (err) {
+			setIsLoggedIn(false);
+		} finally {
+			setLoading(false);
+		}
 	};
 
-	const logout = () => {
-		setIsLoggedIn(false);
+	useEffect(() => {
+		checkAuthentication();
+	}, []);
+
+	const updateUsers = (newUserData: Record<string, unknown>) => {
+		setUser(newUserData);
 	};
 
 	return (
-		<AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-			{children}
+		<AuthContext.Provider
+			value={{ isLoggedIn, user, updateUsers, loading, checkAuthentication }}
+		>
+			{!loading && children}
 		</AuthContext.Provider>
 	);
 };

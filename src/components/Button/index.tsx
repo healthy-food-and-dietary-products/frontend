@@ -5,16 +5,28 @@ type ButtonProps = {
 	buttonStyle: string;
 	classNameActive?: string;
 	onClick?: () => void;
+	disabled?: boolean;
+	classNames?: string;
+	type?: 'button' | 'submit' | 'reset';
 };
 
-const Button = ({ buttonText, buttonStyle, classNameActive, onClick }: ButtonProps) => {
+const Button = ({
+	buttonText,
+	buttonStyle,
+	classNameActive,
+	onClick,
+	disabled,
+	classNames,
+	type,
+}: ButtonProps) => {
 	return (
 		<button
-			type="button"
-			className={`${styles[buttonStyle]}  ${
+			type={type ? type : 'button'}
+			className={`${styles[buttonStyle]} ${
 				classNameActive ? styles[classNameActive] : ''
-			}`}
+			} ${classNames ? classNames : ''}`}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			{buttonText}
 		</button>

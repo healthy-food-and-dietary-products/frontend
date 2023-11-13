@@ -17,7 +17,7 @@ type FormAndValidationHook = {
 };
 
 export function useFormAndValidation(): FormAndValidationHook {
-	const [values, setValues] = useState({});
+	const [values, setValues] = useState<Record<string, unknown>>({});
 	const [errors, setErrors] = useState({});
 	const [isValid, setIsValid] = useState(false);
 
@@ -32,7 +32,7 @@ export function useFormAndValidation(): FormAndValidationHook {
 				...prevErrors,
 				[name]: isValidEmail ? '' : 'Введите корректный email',
 			}));
-		} else if (type === 'password') {
+		} else if (name.endsWith('_password')) {
 			const isValidPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
 				value
 			);
@@ -42,7 +42,22 @@ export function useFormAndValidation(): FormAndValidationHook {
 					? ''
 					: 'Пароль: 8+ символов, заглавная и строчная буквы, цифры.',
 			}));
+		} else if (name.endsWith('_repeatPassword')) {
+			const passwordField = Object.keys(values).find((key) => key.endsWith('_password'));
+			if (passwordField !== undefined) {
+				const isMatch = value === values[passwordField];
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					[name]: isMatch ? '' : 'Пароли не совпадают',
+				}));
+			} else {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					[name]: 'Соответствующее поле пароля не найдено',
+				}));
+			}
 		} else {
+			console.log('a');
 			setErrors({ ...errors, [name]: e.target.validationMessage });
 		}
 

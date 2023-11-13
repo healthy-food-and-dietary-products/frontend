@@ -2,11 +2,15 @@ import React from 'react';
 import styles from './product.module.scss';
 import Button from '@components/Button';
 import { productApiDataExample } from '@data/dataExamples';
+import { useParams } from 'react-router';
 // import { useParams } from 'react-router-dom';
 
 const Product: React.FC = () => {
 	const [isInCart, setIsInCart] = React.useState<boolean>(false);
 	const [isInFavorities, setIsInFavorities] = React.useState<boolean>(false);
+
+	const { id } = useParams();
+	console.log(id);
 	// const { id } = useParams();
 	{
 		/*id получается из ссылки, затем на этой странице происходит запрос к апи за получением информации о товаре */

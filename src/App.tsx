@@ -8,7 +8,8 @@ import { useAuth } from './hooks/use-auth.ts';
 import Product from '@pages/product/index.tsx';
 import Catalog from '@pages/catalog/index.tsx';
 import { URLS } from '@data/constants.ts';
-
+import PopupLogin from '@components/popups/popup-login';
+import PopupRegistration from '@components/popups/popup-registration';
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
 
@@ -22,18 +23,22 @@ function App() {
 	const { isLoggedIn } = useAuth();
 
 	return (
-		<Layout>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path={URLS.CATALOG} element={<Catalog />} />
-				<Route
-					path={URLS.PROFILE}
-					element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
-				/>
-				<Route path="/catalog/category/subcategory/id" element={<Product />} />
-				<Route path={URLS.LOGIN} element={<Login />} />
-			</Routes>
-		</Layout>
+		<div className="app">
+			<Layout>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path={URLS.CATALOG} element={<Catalog />} />
+					<Route
+						path={URLS.PROFILE}
+						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
+					/>
+					<Route path="/catalog/:category/:subcategory/:id" element={<Product />} />
+					<Route path={URLS.LOGIN} element={<Login />} />
+				</Routes>
+			</Layout>
+			<PopupLogin />
+			<PopupRegistration />
+		</div>
 	);
 }
 

@@ -43,3 +43,10 @@
 /* .read-the-docs {
 	color: #888;
 } */
+
+.app {
+	background: white;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}

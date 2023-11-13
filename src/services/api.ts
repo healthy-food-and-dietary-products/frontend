@@ -20,6 +20,8 @@ import type {
 	Subcategory,
 	Tag,
 } from './generated-api/data-contracts';
+import { BACKEND_URL } from '@data/constants.ts';
+import Cookies from 'js-cookie';
 
 class Api {
 	private _baseUrl: string;
@@ -37,10 +39,6 @@ class Api {
 
 	_request(endPoint: string, options = {}) {
 		const params = {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: 'Token 34b3fc1d398c10daa1c2b945b7041f5615eecde9',
-			},
 			...options,
 		};
 		return fetch(`${this._baseUrl}/${endPoint}`, params).then(this._checkResponse);
@@ -50,6 +48,9 @@ class Api {
 	tokenLoginCreate(data: TokenCreate) {
 		return this._request('token/login/', {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(data),
 		});
 	}
@@ -61,14 +62,19 @@ class Api {
 	}
 
 	/* ------------------------------- Users ------------------------------- */
+
 	usersList() {
 		return this._request('users/', {
 			method: 'GET',
 		});
 	}
+
 	usersCreate(data: UserCreate) {
 		return this._request('users/', {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(data),
 		});
 	}
@@ -82,6 +88,10 @@ class Api {
 
 	usersMeRead() {
 		return this._request('users/me/', {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 			method: 'GET',
 		});
 	}
@@ -512,4 +522,6 @@ class Api {
 	}
 }
 
-export default Api;
+const api = new Api(BACKEND_URL);
+
+export default api;

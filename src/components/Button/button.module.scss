@@ -23,6 +23,11 @@
 	}
 
 	transition: 0.5s;
+
+	&:disabled {
+		background-color: black;
+		cursor: not-allowed;
+	}
 }
 
 .green-button__active {
