@@ -1,0 +1,15 @@
+.container {
+	max-width: 1023px;
+	margin: 0 auto;
+}
+
+.wrapper {
+	display: flex;
+	margin-top: 150px;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	gap: 80px;
+}

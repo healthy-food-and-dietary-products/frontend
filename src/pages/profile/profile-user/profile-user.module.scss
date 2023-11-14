@@ -1,0 +1,65 @@
+@use '../../../scss/variables.scss' as *;
+@use '../../../scss/_mixins.scss' as *;
+
+.wrapper {
+	margin-left: 107px;
+	max-width: 420px;
+	width: 100%;
+}
+
+.title {
+	color: $active-text-color;
+	margin-bottom: 50px;
+}
+
+.form {
+	font-family: $ubuntu-font;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.text {
+	@extend %zero-padding-margin;
+}
+
+.text__red {
+	color: $error-color;
+}
+
+.buttons {
+	display: flex;
+	gap: 40px;
+}
+
+.button__safe,
+.button__cancel {
+	padding: 8px 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 16px;
+	font-size: 18px;
+	font-family: $ubuntu-font;
+	line-height: 1.4;
+	cursor: pointer;
+}
+
+.button__safe {
+	color: #fff;
+	background: $form-button-color;
+}
+
+.button__safe:disabled {
+	cursor: default;
+	background: $accent-color-lightest-green;
+	user-select: none;
+	pointer-events: none;
+}
+
+.button__cancel {
+	background: #fff;
+	color: $active-text-color;
+	border: 1px solid $form-button-color;
+}

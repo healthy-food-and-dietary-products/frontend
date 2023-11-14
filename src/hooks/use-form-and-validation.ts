@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
 type FormAndValidationHook = {
-	values: Record<string, unknown>;
-	setValues: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
+	values: Record<string, string | number>;
+	setValues: React.Dispatch<React.SetStateAction<Record<string, string | number>>>;
 	errors: Record<string, unknown>;
 	setErrors: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
 	isValid: boolean;
@@ -16,8 +16,10 @@ type FormAndValidationHook = {
 	) => void;
 };
 
-export function useFormAndValidation(): FormAndValidationHook {
-	const [values, setValues] = useState<Record<string, unknown>>({});
+export function useFormAndValidation(
+	initialValues: Record<string, string | number> = {}
+): FormAndValidationHook {
+	const [values, setValues] = useState<Record<string, string | number>>(initialValues);
 	const [errors, setErrors] = useState({});
 	const [isValid, setIsValid] = useState(false);
 

@@ -26,12 +26,22 @@
 	line-height: 140%;
 }
 
+.spanAfter {
+	color: $error-color;
+	font-family: $ubuntu-font;
+	padding-top: 4px;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%;
+}
+
 .input_type_normal {
 	font-size: 13px;
 	font-weight: 300;
 	line-height: 140%;
 	border-radius: 16px;
-	border: 1px solid $light-background-color;
+	border: 1px solid $footer-background-color;
 	background-repeat: no-repeat;
 	background-position: 96% 50%;
 	background-size: 16px 16px;

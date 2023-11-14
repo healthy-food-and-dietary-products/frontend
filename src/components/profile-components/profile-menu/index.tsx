@@ -5,7 +5,7 @@ import ExitIcon from '@images/profile/exit.svg?react';
 import HeartIcon from '@images/profile/heart.svg?react';
 import MarkerIcon from '@images/profile/marker.svg?react';
 import UserIcon from '@images/profile/user.svg?react';
-import { useAuth } from '@hooks/use-auth';
+// import { useAuth } from '@hooks/use-auth';
 import clsx from 'clsx';
 
 const menuArray = [
@@ -18,10 +18,10 @@ const menuArray = [
 
 export default function ProfileMenu() {
 	const navigate = useNavigate();
-	const { logout } = useAuth();
+	// const { logout } = useAuth();
 
 	const onClick = () => {
-		logout();
+		// logout();
 		navigate('/');
 	};
 	return (
@@ -32,6 +32,7 @@ export default function ProfileMenu() {
 						<NavLink
 							to={path}
 							className={({ isActive }) => clsx(styles.link, isActive && styles.active)}
+							end
 						>
 							<Icon className={styles.link__icon} />
 							<span className={clsx('text_type_u', styles.link__title)}>{title}</span>

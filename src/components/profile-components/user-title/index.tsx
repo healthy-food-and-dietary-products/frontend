@@ -1,8 +1,10 @@
 import styles from './user-title.module.scss';
 import img from '@images/profile/profile_icon_major.svg';
 import clsx from 'clsx';
+import { useAuth } from '@hooks/use-auth';
 
 export default function UserTitle() {
+	const { user } = useAuth();
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		console.log('Download image...');
@@ -17,7 +19,9 @@ export default function UserTitle() {
 				Изменить фото
 				<input id="input" type="file" className={styles.input} onChange={onChange} />
 			</label>
-			<p className={clsx(styles.title, 'text-m')}>UserName</p>
+			<p className={clsx(styles.title, 'text-m')}>
+				{(user.first_name as string) || (user.username as string)}
+			</p>
 		</div>
 	);
 }
