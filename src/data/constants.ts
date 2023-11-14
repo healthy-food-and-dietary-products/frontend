@@ -17,6 +17,8 @@ export const passwordNotSafe =
 	'Пароль небезопасен. Проверьте написание. Он должен содержать цифры, символы, буквы. Длина не менее 8 знаков';
 export const passwordNotMatch = 'Пароль не соотвествует. Проверьте написание';
 
+export const NO_IMAGE = 'https://previews.123rf.com/images/morphart/morphart1910/morphart191022711/132720115-sad-avocado-illustration-vector-on-white-background-.jpg'
+
 export const URLS = {
 	'LOGIN' : '/login',
 	'SIGNUP' : '/signup',

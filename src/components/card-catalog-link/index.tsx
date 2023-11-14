@@ -41,6 +41,7 @@ function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
 									price={item.price}
 									weight={item.weight}
 									buttonText={item.buttonText}
+									cardImage={item.cardImage}
 								/>
 							)}
 						</li>

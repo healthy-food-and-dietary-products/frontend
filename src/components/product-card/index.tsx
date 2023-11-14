@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import cardImage from '@images/mango.png';
+import anyCardImage from '@images/mango.png';
 import styles from './product-card.module.scss';
 
 type ProductCardProps = {
@@ -8,17 +7,16 @@ type ProductCardProps = {
 	price: string;
 	weight: string;
 	buttonText: string;
-	// добавить в пропсы cardImage когда будет готов массив карточек продуктов
-	// cardImage: string;
+	cardImage: string;
 };
 
-const ProductCard = ({ cardName, price, weight, buttonText }: ProductCardProps) => {
+const ProductCard = ({ cardName, price, weight, buttonText, cardImage }: ProductCardProps) => {
 	return (
-		<li className={styles.card}>
+		<div className={styles.card}>
 			{/* вместо /login подставить нужный роут  */}
 			{/*Предполагается в будущем открывать страницу товара по пути id и категории*/}
 			<Link className={styles.card__link} to={`catalog/category/subcategory/id`}>
-				<img className={styles.card__image} src={cardImage} alt="карточка товара" />
+				<img className={styles.card__image} src={cardImage != 'NULL' ? cardImage : anyCardImage} alt="карточка товара" />
 				<h2 className={styles.card__caption}>{cardName}</h2>
 			</Link>
 			<span className={styles.card__price}>{price}</span>
@@ -28,7 +26,7 @@ const ProductCard = ({ cardName, price, weight, buttonText }: ProductCardProps) 
 				<button className={styles['card__cart-button']}>{buttonText}</button>
 				<button className={styles['card__like-button']} />
 			</div>
-		</li>
+		</div>
 	);
 };
 
