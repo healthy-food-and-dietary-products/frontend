@@ -265,8 +265,8 @@ class Api {
 	}
 
 	/* ----------------------------- Products ----------------------------- */
-	productsList() {
-		return this._request('products/', {
+	productsList(slug: string) {
+		return this._request(`products${'/' + slug}`, {
 			method: 'GET',
 		});
 	}
@@ -313,6 +313,10 @@ class Api {
 	/* -------------------------- FavoriteProducts -------------------------- */
 	favoriteProductsList() {
 		return this._request('favorite-products/', {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 			method: 'GET',
 		});
 	}
@@ -358,7 +362,11 @@ class Api {
 
 	/* ----------------------------- Categories ----------------------------- */
 	categoriesList() {
-		return this._request('categories/', {
+		return this._request('categories', {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 			method: 'GET',
 		});
 	}

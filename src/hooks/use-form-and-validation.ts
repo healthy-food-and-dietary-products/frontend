@@ -57,7 +57,6 @@ export function useFormAndValidation(): FormAndValidationHook {
 				}));
 			}
 		} else {
-			console.log('a');
 			setErrors({ ...errors, [name]: e.target.validationMessage });
 		}
 

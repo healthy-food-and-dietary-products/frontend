@@ -15,6 +15,36 @@
 	align-items: center;
 }
 
+.navigation_catalog {
+	@extend %zero-padding-margin;
+
+	display: flex;
+	height: 51px;
+	width: 117px;
+	padding: 8px 16px;
+	justify-content: center;
+	align-items: center;
+	color: #1a1a1a;
+	border-radius: 16px;
+	border: 1px solid var(--primary-700, #2b7a0f);
+	box-sizing: border-box;
+	text-decoration: none;
+	transition: 0.3s;
+
+	/* text */
+	font-family: $ubuntu-font;
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 140%;
+
+	&:hover {
+		background: $accent-color-bright-green;
+		border: none;
+		color: white;
+	}
+}
+
 .navigation__item {
 	color: #1a1a1a;
 	text-align: center;

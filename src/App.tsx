@@ -21,6 +21,17 @@ import PopupRegistration from '@components/popups/popup-registration';
 function App() {
 	const { isLoggedIn } = useAuth();
 
+	// useEffect(() => {
+	// 	api.productsList("?category=nuts-dried-fruits")
+	// 		.then((data) => {
+	// 			console.log(data)
+	// 		})
+	// 	api.categoriesList()
+	// 		.then((data) => {
+	// 			console.log(data)
+	// 		})
+	// }, [])
+
 	return (
 		<div className="app">
 			<Layout>
@@ -31,7 +42,7 @@ function App() {
 						path={URLS.PROFILE}
 						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
 					/>
-					<Route path="/catalog/:category/:subcategory/:id" element={<Product />} />
+					<Route path="/catalog/:category/:id" element={<Product />} />
 				</Routes>
 			</Layout>
 			<PopupLogin />
