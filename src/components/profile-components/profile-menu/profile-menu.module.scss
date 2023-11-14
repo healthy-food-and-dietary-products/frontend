@@ -1,0 +1,82 @@
+@use '../../../scss/variables.scss' as *;
+@use '../../../scss/_mixins.scss' as *;
+
+// Вынести в общие переменные!!
+$primary-300: #59bf35;
+$primary-500: #328c12;
+
+.list {
+	display: flex;
+	flex-direction: column;
+	padding: 0 8px;
+	margin: 0;
+	max-width: 300px;
+}
+
+.link {
+	color: inherit;
+	text-decoration: none;
+	display: flex;
+	gap: 20px;
+	padding: 20px 0;
+	border-bottom: solid 1px $unactive-text-color;
+
+	&.active {
+		border-color: $primary-500;
+	}
+
+	&__title {
+		transition: color 0.2s;
+	}
+
+	&__icon {
+		stroke: $active-text-color;
+		width: 28px;
+		transition: stroke 0.2s;
+
+		.active & {
+			stroke: $primary-500;
+		}
+	}
+
+	.active &__title {
+		color: $primary-500;
+	}
+
+	&:hover:not(.active) &__title {
+		color: $primary-300;
+	}
+
+	&:hover:not(.active) &__icon {
+		stroke: $primary-300;
+	}
+}
+
+.button {
+	@extend %zero-padding-margin;
+
+	background-color: transparent;
+	border: none;
+	display: flex;
+	gap: 20px;
+	cursor: pointer;
+	padding: 20px 0;
+
+	&__title {
+		transition: color 0.2s;
+	}
+
+	&__icon {
+		width: 28px;
+		transition: fill 0.2s;
+		fill: $active-text-color;
+	}
+
+	&:hover &__title {
+		color: $primary-300;
+	}
+
+	&:hover &__icon {
+		fill: $primary-300;
+	}
+}
