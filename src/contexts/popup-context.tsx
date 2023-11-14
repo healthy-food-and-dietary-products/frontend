@@ -14,7 +14,7 @@ const PopupContext = createContext<PopupContextType | undefined>(undefined);
 
 export const PopupProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [popupState, setPopupState] = useState({
-		openPopup: true,
+		openPopup: false,
 		openPopupLogin: false,
 		openPopupRegistration: false,
 	});
