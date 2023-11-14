@@ -49,7 +49,7 @@ function App() {
 						<Route path="addresses" element={<h2>Мои адреса</h2>} />
 						<Route path="favorites" element={<h2>Избранное</h2>} />
 					</Route>
-					<Route path="/catalog/:category/:subcategory/:id" element={<Product />} />
+					<Route path="/catalog/:category/:id" element={<Product />} />
 				</Routes>
 			</Layout>
 			<PopupCheckEmail />
