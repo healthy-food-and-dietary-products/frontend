@@ -365,7 +365,6 @@ class Api {
 		return this._request('categories', {
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Token ${Cookies.get('token')}`,
 			},
 			method: 'GET',
 		});
