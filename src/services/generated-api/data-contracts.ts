@@ -1,3 +1,4 @@
+// /* eslint-disable */
 /* tslint:disable */
 /*
  * ---------------------------------------------------------------
@@ -14,6 +15,11 @@ export interface SubcategoryLight {
 	 * @minLength 1
 	 */
 	subcategory_name: string;
+	/**
+	 * Subcategory slug
+	 * @minLength 1
+	 */
+	subcategory_slug: string;
 }
 
 export interface Category {
@@ -33,6 +39,8 @@ export interface Category {
 	 */
 	slug?: string;
 	subcategories?: SubcategoryLight[];
+	/** Top three products */
+	top_three_products?: string;
 }
 
 export interface CategoryCreate {
@@ -94,6 +102,11 @@ export interface ProducerLight {
 	 * @minLength 1
 	 */
 	producer_name: string;
+	/**
+	 * Producer slug
+	 * @minLength 1
+	 */
+	producer_slug: string;
 }
 
 export interface ProductLight {
@@ -153,6 +166,11 @@ export interface CategoryLight {
 	 * @minLength 1
 	 */
 	category_name: string;
+	/**
+	 * Category slug
+	 * @minLength 1
+	 */
+	category_slug: string;
 }
 
 export interface TagLight {
@@ -161,6 +179,11 @@ export interface TagLight {
 	 * @minLength 1
 	 */
 	tag_name: string;
+	/**
+	 * Tag slug
+	 * @minLength 1
+	 */
+	tag_slug: string;
 }
 
 export interface PromotionLight {
@@ -184,6 +207,11 @@ export interface ComponentLight {
 	 * @minLength 1
 	 */
 	component_name: string;
+	/**
+	 * Component slug
+	 * @minLength 1
+	 */
+	component_slug: string;
 }
 
 export interface Product {
@@ -766,6 +794,8 @@ export interface ShoppingCartProductList {
 	name?: string;
 	/** Measure unit */
 	measure_unit?: string;
+	/** Price */
+	price?: string;
 	/** Final price */
 	final_price?: string;
 	/** Amount */
@@ -811,10 +841,11 @@ export interface OrderList {
 	status?:
 		| 'Ordered'
 		| 'In processing'
-		| 'Completed'
+		| 'Collecting'
 		| 'Gathered'
 		| 'In delivering'
-		| 'Delivered';
+		| 'Delivered'
+		| 'Completed';
 	/** Payment Method */
 	payment_method?: 'Payment at the point of delivery' | 'In getting by cash';
 	/** Is paid */
@@ -838,12 +869,6 @@ export interface OrderList {
 }
 
 export interface OrderPostDelete {
-	/**
-	 * Number
-	 * @minLength 1
-	 * @maxLength 50
-	 */
-	order_number?: string;
 	/** Payment Method */
 	payment_method?: 'Payment at the point of delivery' | 'In getting by cash';
 	/** Delivery Method */
