@@ -54,7 +54,6 @@ const TopSellingThisWeek: React.FC = () => {
 						cardName={product.cardName}
 						price={product.price}
 						weight={product.weight}
-						buttonText={product.buttonText}
 					/>
 				))}
 			</div>

@@ -1,0 +1,55 @@
+@use '../../scss/mixins' as *;
+@use '../../scss/_variables' as *;
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.category {
+	margin: 151px 0 0;
+	display: flex;
+	justify-content: center;
+}
+
+.category__content {
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+.category__content-active {
+	animation: fade-in 0.5s ease-in-out;
+	opacity: 1;
+	transform: translateY(0);
+	width: 80%;
+	display: flex;
+}
+
+.category__sorting {
+	width: 328px;
+	margin-right: 20px;
+	margin-top: 54px;
+}
+
+.category__product-title {
+	color: var(--active, #1a1a1a);
+	font-family: $ubuntu-font;
+	font-size: 30px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 140%;
+}
+
+.product__product-container {
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px; /* Расстояние между колонками */
+}

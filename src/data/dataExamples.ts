@@ -13,17 +13,17 @@ export const mainPageBlockLinks = [
 	},
 	{
 		title: 'Орехи',
-		link: 'nuts',
+		link: 'nuts-dried-fruits',
 		backgroundImage: '/05c2db3efd894fa03b952abf2d5a88ee.jpeg',
 	},
 	{
 		title: 'Молочные продукты',
-		link: 'diary',
+		link: 'dairy',
 		backgroundImage: '/5b5f8ca8a8f4f583ac88b6e80a646e10.jpeg',
 	},
 	{
 		title: 'Мясо и птица',
-		link: 'meat',
+		link: 'meat-and-poultry',
 		backgroundImage: '/4e039f6d2c33797f4fd913bd642549f0.jpeg',
 	},
 ];

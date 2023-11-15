@@ -1,6 +1,14 @@
 .layout {
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	max-width: 1280px;
 	width: 100%;
+	min-height: 100vh;
 	margin: 0 auto;
+}
+
+.layout__main {
+	flex: 1;
+	min-height: 77vh;
 }

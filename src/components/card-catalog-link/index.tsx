@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 
 type CardCatalogLinkProps = {
 	title: string;
+	category?: string;
 	array: Record<string, any>[];
 	type: 'bento-grid' | 'single-row';
 };
 
-function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
+function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps) {
 	const arrayWithSubArrays = splitIntoSubArrays(array, 3);
 
 	return (
@@ -21,7 +22,10 @@ function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
 					styles[`card-catalog-link__title-container_type_${type}`]
 				}`}
 			>
-				<Link to="/catalog" className={styles.link}>
+				<Link
+					to={`${type === 'bento-grid' ? '/catalog' : `/catalog/${category}`}`}
+					className={styles.link}
+				>
 					<h2 className={styles['card-catalog-link__title']}>{title}</h2>
 				</Link>
 				<span className={styles['card-catalog-link__arrow']} />
@@ -39,10 +43,12 @@ function CardCatalogLink({ title, array, type }: CardCatalogLinkProps) {
 							)}
 							{type === 'single-row' && (
 								<ProductCard
-									cardName={item.cardName}
+									cardName={item.name}
 									price={item.price}
-									weight={item.weight}
-									buttonText={item.buttonText}
+									weight={item.amount}
+									cardImage={item.photo}
+									category={category}
+									idCard={item.id}
 								/>
 							)}
 						</li>

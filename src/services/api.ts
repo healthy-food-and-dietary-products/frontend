@@ -279,7 +279,7 @@ class Api {
 	}
 
 	productsRead(id: number) {
-		return this._request(`product/${id}/`, {
+		return this._request(`products/${id}/`, {
 			method: 'GET',
 		});
 	}
@@ -315,7 +315,6 @@ class Api {
 		return this._request('favorite-products/', {
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Token ${Cookies.get('token')}`,
 			},
 			method: 'GET',
 		});

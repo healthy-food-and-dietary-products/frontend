@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css';
@@ -38,12 +38,13 @@ const SliderComponent: React.FC = () => {
 	return (
 		<section className={styles.sliders}>
 			<Swiper
-				modules={[Navigation, Pagination, A11y]}
+				modules={[Autoplay, Navigation, Pagination, A11y]}
 				spaceBetween={50}
 				slidesPerView={1}
 				className={styles.slider}
 				onSlideChange={(swiper) => handleSlideChange(swiper)}
 				onSwiper={onSwiper}
+				autoplay={{ delay: 5000, disableOnInteraction: false }}
 			>
 				<SwiperSlide className={styles.slider__itemSlide}>
 					<SliderItemOne />
