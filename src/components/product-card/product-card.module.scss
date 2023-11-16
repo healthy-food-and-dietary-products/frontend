@@ -1,4 +1,7 @@
+@use '@scss/variables' as *;
+
 .card {
+	flex-shrink: 1;
 	border-radius: 20px;
 	border: 1px solid #ddd;
 	background: #fff;
@@ -25,12 +28,10 @@
 }
 
 .card__caption {
-	color: #1a1a1a;
-
-	// подключить шрифт
-	font-family: 'Work Sans', Arial, sans-serif;
-	font-size: 20px;
-	font-weight: 600;
+	color: $active-text-color;
+	font-family: Ubuntu, Arial, sans-serif;
+	font-size: 22px;
+	font-weight: 500;
 	line-height: 140%;
 	margin: 0;
 	padding: 24px 0 7px;
@@ -40,35 +41,40 @@
 }
 
 .card__price {
-	// подключить шрифт
 	font-family: Ubuntu, Arial, sans-serif;
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 140%;
+	color: $footer-background-color;
 }
 
 .card__weight {
-	// подключить шрифт
 	font-family: Ubuntu, Arial, sans-serif;
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 140%;
 	padding: 0 0 0 16px;
+	color: $footer-background-color;
 }
 
 .card__button-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding-top: 28px;
+	padding-top: 18px;
 }
 
 .card__cart-button {
-	border-radius: 8px;
 	background: #eaeaea;
-	padding: 8px 16px;
+	padding: 8px 32px;
 	border: none;
 	cursor: pointer;
+	color: $active-text-color;
+	font-family: Ubuntu, Arial, sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 140%;
+	border-radius: 16px;
 }
 
 .card__like-button {
