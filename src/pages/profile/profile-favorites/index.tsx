@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 type Product = {
 	name: string;
-	price: number;
+	price: string;
 	amount: string;
 	id: number;
 	photo: string;

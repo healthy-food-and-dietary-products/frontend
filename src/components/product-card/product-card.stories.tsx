@@ -25,7 +25,6 @@ export const Default: Story = {
 		cardName: 'Манго Египет',
 		price: '80 руб.',
 		weight: '1кг',
-		buttonText: 'В корзину',
 	},
 	render: (args) => (
 		<BrowserRouter>

@@ -5,11 +5,10 @@ type ProductCardProps = {
 	cardName: string;
 	price: string;
 	weight: string;
-	buttonText: string;
 	cardImage: string;
 	category?: string;
 	idCard?: number;
-  checkboxControl?: { checked: boolean; onChange: () => void };
+	checkboxControl?: { checked: boolean; onChange: () => void };
 };
 
 const ProductCard = ({

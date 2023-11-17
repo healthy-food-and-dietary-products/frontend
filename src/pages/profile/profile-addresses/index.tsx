@@ -52,7 +52,7 @@ export default function ProfileAddresses() {
 
 	const deleteAddress = (index: number) => {
 		return () => {
-			const filteredAddresses = addresses.filter((addressObj, i) => i !== index);
+			const filteredAddresses = addresses.filter((_, i) => i !== index);
 			console.log(filteredAddresses, 'Delete request...');
 			// setAddresses(filteredAddresses);
 		};
