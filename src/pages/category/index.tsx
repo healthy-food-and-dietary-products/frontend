@@ -14,6 +14,9 @@ type CategoryType = {
 	amount: string;
 	photo: string;
 	top_three_products: Record<string, unknown>[];
+	category: {
+		category_name: string;
+	};
 };
 
 const Category: React.FC = () => {
@@ -33,6 +36,8 @@ const Category: React.FC = () => {
 				setIsLoading(false);
 			});
 	}, [category]);
+
+	console.log(categoryItem);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -55,7 +60,9 @@ const Category: React.FC = () => {
 							<p>↑это картинка заглушка↑</p>
 						</div>
 						<div className={styles['category__product']}>
-							<h1 className={styles['category__product-title']}>Овощи</h1>
+							<h1 className={styles['category__product-title']}>
+								{categoryItem[0].category.category_name}
+							</h1>
 							<ul className={styles['product__product-container']}>
 								{categoryItem.map((item) => (
 									<li key={item.id}>

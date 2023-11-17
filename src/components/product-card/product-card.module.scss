@@ -66,21 +66,29 @@
 
 .card__cart-button {
 	background: #eaeaea;
-	padding: 8px 32px;
+	padding: 11px 32px;
 	border: none;
 	cursor: pointer;
-	color: $active-text-color;
+	color: #1a1a1a;
 	font-family: Ubuntu, Arial, sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	line-height: 140%;
 	border-radius: 16px;
+	max-width: 153px;
+
+	&:hover {
+		color: white;
+		background-color: $accent-color-bright-green;
+	}
+
+	transition: 0.3s;
 }
 
 .card__like-button {
 	background-image: url('@images/like-icon.svg');
-	width: 24px;
-	height: 24px;
+	width: 28px;
+	height: 28px;
 	object-fit: cover;
 	object-position: center;
 	border: none;
