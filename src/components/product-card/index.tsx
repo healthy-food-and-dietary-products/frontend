@@ -2,14 +2,13 @@ import { Link } from 'react-router-dom';
 import styles from './product-card.module.scss';
 
 type ProductCardProps = {
-	cardName?: string;
-	price?: number;
-	weight?: string;
-	cardImage?: string;
+	cardName: string;
+	price: string;
+	weight: string;
+	buttonText: string;
+	cardImage: string;
 	category?: string;
 	idCard?: number;
-	// добавить в пропсы cardImage когда будет готов массив карточек продуктов
-	// cardImage: string;
 };
 
 const ProductCard = ({

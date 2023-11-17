@@ -1,21 +1,70 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '@services/api';
+import type { Product } from '@services/generated-api/data-contracts';
 import Button from '@components/Button';
-import styles from './top-selling-this-week.module.scss';
 import ProductCard from '@components/product-card';
-import { products } from '@data/dataExamples.ts';
-
-type Product = {
-	cardName: string;
-	price: string;
-	weight: string;
-	buttonText: string;
-};
+import styles from './top-selling-this-week.module.scss';
 
 const TopSellingThisWeek: React.FC = () => {
 	const [activeButton, setActiveButton] = useState<number>(1);
+	const [allProducts, setAllProducts] = useState<Product[]>([]);
+	const [topProducts, setTopproducts] = useState<Product[]>([]);
+
+	const findTopThreeProducts = (slugs: string[] = []) => {
+		const topThreeProducts: Product[] = allProducts
+			// фильтровать можно будет по полю tags, когда его добавят
+			.filter((product) => {
+				if (slugs.length === 0) {
+					return true;
+				}
+				return slugs.includes(product.category?.category_slug || '');
+			})
+			.sort((a, b) => {
+				if (b.orders_number !== undefined && a.orders_number !== undefined) {
+					return b.orders_number - a.orders_number;
+				}
+
+				return 0;
+			})
+			.slice(0, 3);
+		setTopproducts(topThreeProducts);
+	};
+
+	useEffect(() => {
+		api.productsList('?limit=100').then((data) => {
+			setAllProducts(data.results);
+			// findTopThreeProducts();
+			const topThreeProducts: Product[] = data.results
+				.sort((a: Product, b: Product) => {
+					if (b.orders_number !== undefined && a.orders_number !== undefined) {
+						return b.orders_number - a.orders_number;
+					}
+
+					return 0;
+				})
+				.slice(0, 3);
+			setTopproducts(topThreeProducts);
+		});
+	}, []);
 
 	const handleButtonClick = (buttonId: number) => {
 		setActiveButton(buttonId);
+
+		if (buttonId === 1) {
+			findTopThreeProducts();
+		}
+		if (buttonId === 2) {
+			const slugs = ['fruits', 'vegetables'];
+			findTopThreeProducts(slugs);
+		}
+		if (buttonId === 3) {
+			const slugs = ['vegetables', 'nuts-dried-fruits', 'cereals-and-pasta', 'fruits'];
+			findTopThreeProducts(slugs);
+		}
+		if (buttonId === 4) {
+			const slugs = ['dairy', 'cereals-and-pasta'];
+			findTopThreeProducts(slugs);
+		}
 	};
 
 	return (
@@ -48,12 +97,19 @@ const TopSellingThisWeek: React.FC = () => {
 				/>
 			</div>
 			<div className={styles.topSellingThisWeek__cardsContainer}>
-				{products.map((product: Product, index: number) => (
+				{topProducts.map((product: Product) => (
 					<ProductCard
-						key={index}
-						cardName={product.cardName}
-						price={product.price}
-						weight={product.weight}
+						key={product.id}
+						cardName={product.name}
+						price={`${product.final_price} руб.`}
+						weight={
+							(product.amount &&
+								product.measure_unit &&
+								product.amount + product.measure_unit) ||
+							''
+						}
+						buttonText={'В корзину'}
+						cardImage={product.photo || ''}
 					/>
 				))}
 			</div>
