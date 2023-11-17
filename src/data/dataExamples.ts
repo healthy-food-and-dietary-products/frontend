@@ -31,18 +31,21 @@ export const mainPageBlockLinks = [
 export const products = [
 	{
 		cardName: 'Помидоры черри',
+		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
 		price: `80 руб.`,
 		weight: `1кг`,
 		buttonText: 'В корзину',
 	},
 	{
 		cardName: 'Огурцы короткоплодные',
+		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
 		price: `100 руб.`,
 		weight: `1кг`,
 		buttonText: 'В корзину',
 	},
 	{
 		cardName: 'Перец болгарский',
+		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
 		price: `120 руб.`,
 		weight: `1кг`,
 		buttonText: 'В корзину',

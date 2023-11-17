@@ -10,7 +10,7 @@ import filter from '@images/Filter.png';
 type CategoryType = {
 	id: number;
 	name: string;
-	price: number;
+	price: string;
 	amount: string;
 	photo: string;
 	top_three_products: Record<string, unknown>[];

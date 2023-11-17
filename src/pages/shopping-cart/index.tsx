@@ -9,7 +9,7 @@ type Product = {
 	cardName: string;
 	price: string;
 	weight: string;
-	buttonText: string;
+	cardImage: string;
 };
 
 const ShoppingCart: React.FC = () => {
@@ -66,10 +66,10 @@ const ShoppingCart: React.FC = () => {
 					{products.map((product: Product, index: number) => (
 						<ProductCard
 							key={index}
+							cardImage={product.cardImage}
 							cardName={product.cardName}
 							price={product.price}
 							weight={product.weight}
-							buttonText={product.buttonText}
 						/>
 					))}
 				</div>

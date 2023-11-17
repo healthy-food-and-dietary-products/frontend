@@ -100,6 +100,7 @@ const TopSellingThisWeek: React.FC = () => {
 				{topProducts.map((product: Product) => (
 					<ProductCard
 						key={product.id}
+						idCard={product.id}
 						cardName={product.name}
 						price={`${product.final_price} руб.`}
 						weight={
@@ -108,7 +109,6 @@ const TopSellingThisWeek: React.FC = () => {
 								product.amount + product.measure_unit) ||
 							''
 						}
-						buttonText={'В корзину'}
 						cardImage={product.photo || ''}
 					/>
 				))}
