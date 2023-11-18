@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import Popup from '@components/popup';
 import { usePopup } from '@hooks/use-popup.ts';
 import Input from '@ui/input';
@@ -7,6 +7,7 @@ import { useFormAndValidation } from '@hooks/use-form-and-validation.ts';
 import api from '@services/api.ts';
 import Cookies from 'js-cookie';
 import { useAuth } from '@hooks/use-auth.ts';
+import { useLocation, useNavigate } from 'react-router';
 
 const PopupLogin: React.FC = () => {
 	const { values, handleChange, validateInputsHandleSubmit, errors, isValid, resetForm } =
@@ -14,6 +15,15 @@ const PopupLogin: React.FC = () => {
 	const { popupState, handleClosePopup, handleOpenPopup } = usePopup();
 	const { checkAuthentication } = useAuth();
 	const [disabledButton, setDisabledButton] = useState(false);
+	const location = useLocation();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		console.log(location.state);
+		if (location.state?.isOpenPopupLogin) {
+			handleOpenPopup('openPopupLogin');
+		}
+	}, [location, handleOpenPopup]);
 
 	function onSubmitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -32,12 +42,15 @@ const PopupLogin: React.FC = () => {
 					email: `${values.login_email}`,
 				})
 				.then((data) => {
-					handleClosePopup('openPopupLogin');
 					Cookies.set('token', data.auth_token, {
 						expires: 14,
 					});
-					checkAuthentication();
+				})
+				.then(() => checkAuthentication())
+				.then(() => {
+					handleClosePopup('openPopupLogin');
 					resetForm();
+					location.state?.prevPath && navigate(location.state?.prevPath);
 				})
 				.catch((err) => {
 					console.log(err);
