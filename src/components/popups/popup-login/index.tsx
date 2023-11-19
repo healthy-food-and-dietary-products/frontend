@@ -7,6 +7,7 @@ import { useFormAndValidation } from '@hooks/use-form-and-validation.ts';
 import api from '@services/api.ts';
 import Cookies from 'js-cookie';
 import { useAuth } from '@hooks/use-auth.ts';
+import { useNavigate } from 'react-router';
 
 const PopupLogin: React.FC = () => {
 	const { values, handleChange, validateInputsHandleSubmit, errors, isValid, resetForm } =
@@ -14,6 +15,7 @@ const PopupLogin: React.FC = () => {
 	const { popupState, handleClosePopup, handleOpenPopup } = usePopup();
 	const { checkAuthentication } = useAuth();
 	const [disabledButton, setDisabledButton] = useState(false);
+	const navigate = useNavigate();
 
 	function onSubmitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -32,12 +34,15 @@ const PopupLogin: React.FC = () => {
 					email: `${values.login_email}`,
 				})
 				.then((data) => {
-					handleClosePopup('openPopupLogin');
 					Cookies.set('token', data.auth_token, {
 						expires: 14,
 					});
-					checkAuthentication();
+				})
+				.then(() => checkAuthentication())
+				.then(() => {
+					handleClosePopup('openPopupLogin');
 					resetForm();
+					navigate('/profile');
 				})
 				.catch((err) => {
 					console.log(err);

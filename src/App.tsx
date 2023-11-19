@@ -3,7 +3,7 @@ import Layout from './layouts/layout/layout.tsx';
 import Home from './pages/home';
 import Profile from './pages/profile/index.tsx';
 import { ProtectedRoute } from './utils/protected-route.tsx';
-// import { useAuth } from './hooks/use-auth.ts';
+import { useAuth } from './hooks/use-auth.ts';
 import Product from '@pages/product/index.tsx';
 import Catalog from '@pages/catalog/index.tsx';
 import { URLS } from '@data/constants.ts';
@@ -17,7 +17,6 @@ import ProfileFavorites from '@pages/profile/profile-favorites/index.tsx';
 // import Checkout from '@pages/checkout/index.tsx';
 import ShoppingCart from '@pages/shopping-cart/index.tsx';
 
-
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
 
@@ -28,7 +27,7 @@ import ShoppingCart from '@pages/shopping-cart/index.tsx';
 // <CardCatalogLink title="Овощи" type="single-row" array={products} />
 
 function App() {
-	// const { isLoggedIn } = useAuth();
+	const { isLoggedIn } = useAuth();
 
 	return (
 		<div className="app">
@@ -41,7 +40,7 @@ function App() {
 					<Route path="/cart" element={<ShoppingCart />} />
 					<Route
 						path={URLS.PROFILE}
-						element={<ProtectedRoute element={Profile} loggedIn={true} />}
+						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
 					>
 						<Route path="user" element={<ProfileUser />} />
 						<Route index element={<h2>Мои заказы</h2>} />
