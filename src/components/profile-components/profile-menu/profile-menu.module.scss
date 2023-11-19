@@ -76,3 +76,42 @@
 		fill: $accent-color-bright-green;
 	}
 }
+
+.popup-logout {
+	padding: 40px 72px;
+
+	&__title {
+		padding: 30px 0;
+	}
+
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+		gap: 40px;
+	}
+
+	&__button-confirm,
+	&__button-cancel {
+		padding: 8px 16px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: none;
+		border-radius: 16px;
+		font-size: 18px;
+		font-family: $ubuntu-font;
+		line-height: 1.4;
+		cursor: pointer;
+	}
+
+	&__button-confirm {
+		color: #fff;
+		background: $form-button-color;
+	}
+
+	&__button-cancel {
+		background: #fff;
+		color: $active-text-color;
+		border: 1px solid $form-button-color;
+	}
+}

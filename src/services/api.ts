@@ -32,6 +32,7 @@ class Api {
 
 	_checkResponse(res: Response) {
 		if (res.ok) {
+			if (res.status === 204) return res;
 			return res.json();
 		}
 		return Promise.reject(new Error(`Ошибка: ${res.statusText}`));
@@ -58,6 +59,9 @@ class Api {
 	tokenLogoutCreate() {
 		return this._request('token/logout/', {
 			method: 'POST',
+			headers: {
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 
@@ -99,6 +103,10 @@ class Api {
 	usersMeUpdate(data: User) {
 		return this._request('users/me/', {
 			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 			body: JSON.stringify(data),
 		});
 	}
@@ -106,6 +114,10 @@ class Api {
 	usersMePartialUpdate(data: User) {
 		return this._request('users/me/', {
 			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 			body: JSON.stringify(data),
 		});
 	}
@@ -198,12 +210,20 @@ class Api {
 	usersAddressesList(userId: string) {
 		return this._request(`users/${userId}/addresses/`, {
 			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 
 	usersAddressesRead(userId: string, id: string) {
 		return this._request(`users/${userId}/addresses/${id}/`, {
 			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 
@@ -270,14 +290,12 @@ class Api {
 
 	/* ----------------------------- Products ----------------------------- */
 	productsList(slug: string) {
-		const token = Cookies.get('token');
-		const headers: Record<string, unknown> = { 'Content-Type': 'application/json' };
-		if (token) {
-			headers.Authorization = `Token ${Cookies.get('token')}`;
-		}
 		return this._request(`products${'/' + slug}`, {
 			method: 'GET',
-			headers,
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 

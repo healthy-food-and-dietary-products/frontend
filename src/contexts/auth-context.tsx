@@ -1,5 +1,6 @@
 import React, { createContext, useState, ReactNode, useEffect } from 'react';
 import api from '@services/api.ts';
+import Cookies from 'js-cookie';
 
 type AuthContextType = {
 	isLoggedIn: boolean;
@@ -7,6 +8,7 @@ type AuthContextType = {
 	loading: boolean;
 	updateUsers: (newUserData: Record<string, unknown>) => void;
 	checkAuthentication: () => Promise<void>;
+	logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -15,6 +17,7 @@ const AuthContext = createContext<AuthContextType>({
 	loading: true,
 	updateUsers: () => {},
 	checkAuthentication: () => Promise.resolve(),
+	logout: () => Promise.resolve(),
 });
 
 type AuthProviderProps = {
@@ -38,6 +41,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	};
 
+	const logout = () => {
+		return api.tokenLogoutCreate().finally(() => {
+			Cookies.remove('token');
+			setIsLoggedIn(false);
+			setUser({});
+		});
+	};
+
 	useEffect(() => {
 		checkAuthentication();
 	}, []);
@@ -48,7 +59,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	return (
 		<AuthContext.Provider
-			value={{ isLoggedIn, user, updateUsers, loading, checkAuthentication }}
+			value={{ isLoggedIn, user, updateUsers, loading, checkAuthentication, logout }}
 		>
 			{!loading && children}
 		</AuthContext.Provider>
