@@ -31,7 +31,13 @@ export default function ProfileUser() {
 		useFormAndValidation(initialValues);
 
 	const isChangeValue = useMemo(
-		() => Object.entries(values).some((entry) => initialValues[entry[0]] !== entry[1]),
+		() =>
+			Object.entries(values).some((entry) => {
+				if (initialValues[entry[0]] === null) {
+					return Boolean(initialValues[entry[0]]) !== Boolean(entry[1]);
+				}
+				return initialValues[entry[0]] !== entry[1];
+			}),
 		[initialValues, values]
 	);
 
@@ -47,7 +53,7 @@ export default function ProfileUser() {
 				first_name: `${values.first_name}`,
 				last_name: `${values.last_name}`,
 				// city: `${values.city}`,
-				birth_date: `${values.birth_date}`,
+				birth_date: values.birth_date === '' ? null : `${values.birth_date}`,
 				phone_number: `${values.phone_number}`,
 			})
 			.then((data) => {

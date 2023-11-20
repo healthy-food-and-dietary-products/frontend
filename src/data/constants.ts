@@ -23,7 +23,7 @@ export const passwordNotValid =
 	'Пароль небезопасен. Проверьте написание. Он должен содержать цифры, символы, буквы. Длина не менее 8 знаков';
 export const passwordNotMatch = 'Пароль не соотвествует. Проверьте написание';
 
-export const birthdayError = 'Введите дату в формате ГОД-МЕСЯЦ-ДЕНЬ (YYYY-MM-DD)';
+export const birthdayError = 'Введите дату в формате день.месяц.год (DD.MM.YYYY)';
 
 export const URLS = {
 	SIGNUP: '/signup',
@@ -54,7 +54,7 @@ export const tests = {
 	},
 	birth_date: {
 		message: birthdayError,
-		regex: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+		regex: /^[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/,
 	},
 	password: {
 		message: passwordNotValid,
