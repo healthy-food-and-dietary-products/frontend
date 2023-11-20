@@ -7,8 +7,8 @@ import ShoppingList from '@components/shopping-list';
 
 type Product = {
 	cardName: string;
-	price: string;
-	weight: string;
+	price: number;
+	weight: number;
 	cardImage: string;
 };
 

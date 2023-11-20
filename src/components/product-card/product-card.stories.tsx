@@ -23,8 +23,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	args: {
 		cardName: 'Манго Египет',
-		price: '80 руб.',
-		weight: '1кг',
+		price: 80,
+		weight: 100,
 	},
 	render: (args) => (
 		<BrowserRouter>

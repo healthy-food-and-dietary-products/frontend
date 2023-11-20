@@ -32,22 +32,22 @@ export const products = [
 	{
 		cardName: 'Помидоры черри',
 		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
-		price: `80 руб.`,
-		weight: `1кг`,
+		price: 100,
+		weight: 1,
 		buttonText: 'В корзину',
 	},
 	{
 		cardName: 'Огурцы короткоплодные',
 		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
-		price: `100 руб.`,
-		weight: `1кг`,
+		price: 200,
+		weight: 2,
 		buttonText: 'В корзину',
 	},
 	{
 		cardName: 'Перец болгарский',
 		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
-		price: `120 руб.`,
-		weight: `1кг`,
+		price: 300,
+		weight: 3,
 		buttonText: 'В корзину',
 	},
 ];

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './product-card.module.scss';
 
@@ -5,14 +6,14 @@ type ProductCardProps = {
 	cardName: string;
 	price: number;
 	final_price?: number;
-	weight: string;
+	weight: number;
 	cardImage: string;
 	category?: string;
 	idCard?: number;
 	checkboxControl?: { checked: boolean; onChange: () => void };
 };
 
-const ProductCard = ({
+const ProductCard: React.FC<ProductCardProps> = ({
 	cardName,
 	price,
 	weight,
@@ -20,7 +21,7 @@ const ProductCard = ({
 	category,
 	idCard,
 	checkboxControl,
-}: ProductCardProps) => {
+}) => {
 	const baseUrl = 'https://goodfood.acceleratorpracticum.ru';
 
 	return (
