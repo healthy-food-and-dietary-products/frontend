@@ -43,11 +43,13 @@
 	font-family: $ubuntu-font;
 	line-height: 1.4;
 	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .button__safe {
 	color: #fff;
 	background: $form-button-color;
+	border: 1px solid transparent;
 }
 
 .button__safe:disabled {

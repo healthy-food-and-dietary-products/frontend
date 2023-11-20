@@ -3,34 +3,42 @@ import styles from './profile-user.module.scss';
 import clsx from 'clsx';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
 import { useAuth } from '@hooks/use-auth';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import api from '@services/api';
-import { usePopup } from '@hooks/use-popup';
+// import { usePopup } from '@hooks/use-popup';
+// import PopupCheckEmail from '@components/popups/popup-check-email';
 
 export default function ProfileUser() {
-	const {
-		user: { email, first_name, last_name, phone_number, username, birth_date, city },
-	} = useAuth();
-	const initialValues = {
-		email,
-		first_name,
-		last_name,
-		phone_number,
-		username,
-		birth_date,
-		city,
-	} as Record<string, string | number>;
+	const { updateUsers, user } = useAuth();
+	const initialValues = useMemo(() => {
+		const { email, first_name, last_name, phone_number, username, birth_date, city } =
+			user;
+		return {
+			email,
+			first_name,
+			last_name,
+			phone_number,
+			username,
+			birth_date,
+			city,
+		} as Record<string, string | number>;
+	}, [user]);
 
-	const { handleOpenPopup } = usePopup();
+	// const { handleOpenPopup } = usePopup();
 	const [disabledButton, setDisabledButton] = useState(false);
 
 	const { values, handleChange, errors, isValid, resetForm } =
 		useFormAndValidation(initialValues);
 
+	const isChangeValue = useMemo(
+		() => Object.entries(values).some((entry) => initialValues[entry[0]] !== entry[1]),
+		[initialValues, values]
+	);
+
 	const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setDisabledButton(true);
-		handleOpenPopup('openPopup');
+		// handleOpenPopup('openPopupCheckEmail');
 
 		api
 			.usersMePartialUpdate({
@@ -39,11 +47,11 @@ export default function ProfileUser() {
 				first_name: `${values.first_name}`,
 				last_name: `${values.last_name}`,
 				// city: `${values.city}`,
-				// birth_date: `${values.birth_date}`,
-				// phone_number: `${values.phone_number}`,
+				birth_date: `${values.birth_date}`,
+				phone_number: `${values.phone_number}`,
 			})
-			.then(() => {
-				resetForm();
+			.then((data) => {
+				updateUsers(data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -137,18 +145,25 @@ export default function ProfileUser() {
 					withErrorSpan={true}
 				/> */}
 				<div className={styles.buttons}>
-					<button className={styles.button__safe} type="submit" disabled={disabledButton}>
+					<button
+						className={styles.button__safe}
+						type="submit"
+						disabled={!isChangeValue || disabledButton || !isValid}
+					>
 						Сохранить
 					</button>
-					<button
-						className={styles.button__cancel}
-						type="button"
-						onClick={() => resetForm(initialValues)}
-					>
-						Отмена
-					</button>
+					{(isChangeValue || disabledButton) && (
+						<button
+							className={styles.button__cancel}
+							type="button"
+							onClick={() => resetForm(initialValues)}
+						>
+							Отмена
+						</button>
+					)}
 				</div>
 			</form>
+			{/* <PopupCheckEmail /> */}
 		</div>
 	);
 }
