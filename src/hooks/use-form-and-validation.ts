@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { tests } from '@data/constants';
 
 type FormAndValidationHook = {
 	values: Record<string, string | number>;
@@ -29,20 +30,14 @@ export function useFormAndValidation(
 		setValues({ ...values, [name]: value });
 
 		if (type === 'email') {
-			const isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
 			setErrors((prevErrors) => ({
 				...prevErrors,
-				[name]: isValidEmail ? '' : 'Введите корректный email',
+				[name]: tests.email.regex.test(value) ? '' : tests.email.message,
 			}));
 		} else if (name.endsWith('_password')) {
-			const isValidPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(
-				value
-			);
 			setErrors((prevErrors) => ({
 				...prevErrors,
-				[name]: isValidPassword
-					? ''
-					: 'Пароль: 8+ символов, заглавная и строчная буквы, цифры.',
+				[name]: tests.password.regex.test(value) ? '' : tests.password.message,
 			}));
 		} else if (name.endsWith('_repeatPassword')) {
 			const passwordField = Object.keys(values).find((key) => key.endsWith('_password'));
@@ -58,6 +53,37 @@ export function useFormAndValidation(
 					[name]: 'Соответствующее поле пароля не найдено',
 				}));
 			}
+		} else if (name.endsWith('first_name')) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]:
+					tests.first_name.regex.test(value) || !value ? '' : tests.first_name.message,
+			}));
+		} else if (name.endsWith('last_name')) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]:
+					tests.last_name.regex.test(value) || !value ? '' : tests.last_name.message,
+			}));
+		} else if (name.endsWith('username')) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]: tests.username.regex.test(value) ? '' : tests.username.message,
+			}));
+		} else if (name.endsWith('phone_number')) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]:
+					tests.phone_number.regex.test(value) || !value
+						? ''
+						: tests.phone_number.message,
+			}));
+		} else if (name.endsWith('birth_date')) {
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				[name]:
+					tests.birth_date.regex.test(value) || !value ? '' : tests.birth_date.message,
+			}));
 		} else {
 			setErrors({ ...errors, [name]: e.target.validationMessage });
 		}

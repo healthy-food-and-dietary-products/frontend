@@ -2,7 +2,7 @@ import React, { createContext, ReactNode, useState } from 'react';
 
 type PopupContextType = {
 	popupState: {
-		openPopup: boolean;
+		openPopupCheckEmail: boolean;
 		openPopupLogin: boolean;
 		openPopupRegistration: boolean;
 		openPopupLogout: boolean;
@@ -17,7 +17,7 @@ const PopupContext = createContext<PopupContextType | undefined>(undefined);
 
 export const PopupProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [popupState, setPopupState] = useState({
-		openPopup: false,
+		openPopupCheckEmail: false,
 		openPopupLogin: false,
 		openPopupRegistration: false,
 		openPopupLogout: false,

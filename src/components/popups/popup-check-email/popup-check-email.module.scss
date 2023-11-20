@@ -1,3 +1,6 @@
+@use '../../../scss/variables.scss' as *;
+@use '../../../scss/_mixins.scss' as *;
+
 .container {
 	width: 100%;
 	max-width: 534px;
@@ -11,4 +14,8 @@
 
 .text {
 	margin-bottom: 54px;
+	font-family: $ubuntu-font;
+	font-size: 20px;
+	line-height: 1.4;
+	color: $active-text-color;
 }

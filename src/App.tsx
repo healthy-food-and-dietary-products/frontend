@@ -10,7 +10,6 @@ import { URLS } from '@data/constants.ts';
 import PopupLogin from '@components/popups/popup-login';
 import PopupRegistration from '@components/popups/popup-registration';
 import ProfileUser from '@pages/profile/profile-user/index.tsx';
-import PopupCheckEmail from '@components/popups/popup-check-email/index.tsx';
 import ProfileAddresses from '@pages/profile/profile-addresses/index.tsx';
 import Category from '@pages/category';
 import ProfileFavorites from '@pages/profile/profile-favorites/index.tsx';
@@ -49,7 +48,6 @@ function App() {
 					</Route>
 				</Routes>
 			</Layout>
-			<PopupCheckEmail />
 			<PopupLogin />
 			<PopupRegistration />
 		</div>
