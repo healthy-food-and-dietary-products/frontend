@@ -1,0 +1,89 @@
+.filterDropDown {
+	width: 328px;
+	height: 48px;
+	border-radius: 16px;
+	border: 1px solid var(--inactive, #CFCFCF);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.filterChooseBox {
+	margin: 0 20px 0 20px;
+	display: flex;
+	justify-content: space-between;
+	cursor: pointer;
+}
+
+.filterChooseText {
+	margin: 0;
+	padding: 0;
+	font-family: Ubuntu, sans-serif;
+	font-size: 20px;
+}
+
+.filterChooseArrow {
+	width: 26px;
+	height: 28px;
+	background: url('@images/vector.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.filterBox {
+	margin: 10px 0 0 0;
+	width: 328px;
+	height: 340px;
+	border-radius: 16px;
+	border: 1px solid var(--inactive, #CFCFCF);
+}
+
+.filterColumn {
+	margin: 24px 0 0 20px;
+	padding: 0;
+	font-family: Ubuntu, sans-serif;
+	font-size: 20px;
+	line-height: 140%;
+}
+
+.filterList {
+margin-bottom: 35px;
+&:hover {
+	cursor: pointer;
+	opacity: 0.7;
+}
+}
+
+.filterList_disabled {
+	color: #CFCFCF;
+}
+
+.filterCheck {
+	display: flex;
+}
+
+.filterCheckInput {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	&:checked + .filterCheckbox{
+		background-image: url('@images/box.svg');
+		background-size: 105%;
+		background-position: center;
+	}
+	&:disabled + .filterCheckbox{
+		box-shadow: 0 0 0 0.1em #e6e6e6;
+		background-color: white;
+	}
+}
+
+.filterCheckbox {
+	margin: 0.2em 20px 0 0;
+	width: 24px;
+	height: 24px;
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: 0 0 0 0.1em #2B7A0F;
+}
