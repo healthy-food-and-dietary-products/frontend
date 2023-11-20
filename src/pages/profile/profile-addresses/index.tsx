@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import styles from './profile-addresses.module.scss';
 import InputAddress from '@components/profile-components/input-address';
 import { useAuth } from '@hooks/use-auth';
-// import api from '@services/api';
+import api from '@services/api';
 import { Address } from '@services/generated-api/data-contracts';
 import clsx from 'clsx';
+import PopupAddressesWarning from '@components/popups/popup-addresses-warning';
+import PopupAddressesDeleteConfirm from '@components/popups/popup-addresses-delete-confirm';
+import { usePopup } from '@hooks/use-popup';
 
 type stateType = Array<{ value: string; initialValue: string; isChanged: boolean }>;
 
@@ -21,13 +24,19 @@ class Value {
 }
 
 export default function ProfileAddresses() {
-	const { user } = useAuth();
+	const { handleOpenPopup } = usePopup();
+
+	const { user, updateUsers } = useAuth();
+	const username = user.username as string;
+	const email = user.email as string;
 	const addresses = user.addresses as Address[];
-	// const [addresses, setAddresses] = useState<Address[]>([]);
 
 	const [values, setValues] = useState<stateType>([new Value('', '')]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [addressesIndex, setAddressesIndex] = useState<number>();
 
-	const isVisibleAddButton = Boolean(values.at(-1)?.initialValue);
+	const isVisibleAddButton =
+		Boolean(values.at(-1)?.initialValue) && !values.at(-1)?.isChanged;
 	const isAnyValueChanged = values.some((valueObj) => valueObj.isChanged);
 
 	useEffect(() => {
@@ -50,39 +59,75 @@ export default function ProfileAddresses() {
 		};
 	};
 
-	const deleteAddress = (index: number) => {
-		return () => {
-			const filteredAddresses = addresses.filter((_, i) => i !== index);
-			console.log(filteredAddresses, 'Delete request...');
-			// setAddresses(filteredAddresses);
-		};
+	const sendRequest = (addresses: Address[]) => {
+		if (!isLoading) {
+			setIsLoading(true);
+			api
+				.usersMePartialUpdate({ addresses, username, email })
+				.then((data) => updateUsers(data))
+				.finally(() => setIsLoading(false));
+		}
 	};
 
-	const changeAddress = (index: number) => {
-		return (newAddress: string) => {
-			const changedAddresses = addresses.map((addressObj, i) => {
-				if (i === index) {
-					return { ...addressObj, address: newAddress };
-				}
-				return addressObj;
-			});
-			console.log(changedAddresses, 'Change request...');
-			// setAddresses(changedAddresses);
-		};
+	const deleteAddress = (index: number) => {
+		const filteredAddresses = addresses.filter((_, i) => i !== index);
+		sendRequest(filteredAddresses);
+		setAddressesIndex(undefined);
+	};
+
+	const cancelDeleteAddress = () => {
+		setAddressesIndex(undefined);
+	};
+
+	const changeAddress = () => {
+		const changedAddresses = addresses.map((addressObj, index) => {
+			if (values[index].isChanged) {
+				return { ...addressObj, address: values[index].value };
+			}
+			return addressObj;
+		});
+		console.log(changedAddresses);
+		sendRequest(changedAddresses);
 	};
 
 	const addAddress = (newAddress: string) => {
-		console.log([...addresses, { address: newAddress }], 'Add request...');
-		// setAddresses([...addresses, { address: newAddress }]);
+		sendRequest([...addresses, { address: newAddress }]);
+	};
+
+	const openConfirmPopup = (index: number) => {
+		setAddressesIndex(index);
+		handleOpenPopup('openPopupAddressesDeleteConfirm');
+	};
+
+	const handleClickChange = (index: number) => {
+		const { value, initialValue } = values[index];
+		return () => {
+			if (value === '') {
+				openConfirmPopup(index);
+			} else if (initialValue === '') {
+				addAddress(value);
+			} else {
+				changeAddress();
+			}
+		};
+	};
+
+	const handleClickClose = (index: number) => {
+		const { initialValue, isChanged } = values[index];
+		return () => {
+			if (isChanged) {
+				onChangeValues(index)(initialValue);
+			} else {
+				openConfirmPopup(index);
+			}
+		};
 	};
 
 	const addInput = () => {
 		if (values.length < 4) {
 			setValues([...values, new Value('', '')]);
 		} else {
-			alert(
-				'Вы добавили максимально допустимое количество адресов. Чтобы добавить новый адрес, удалите один из текущих'
-			);
+			handleOpenPopup('openPopupAddressesWarning');
 		}
 	};
 
@@ -97,8 +142,7 @@ export default function ProfileAddresses() {
 			}
 			return addresses[index];
 		});
-		console.log(changedAddresses, 'Change request...');
-		// setAddresses(changedAddresses);
+		sendRequest(changedAddresses);
 	};
 
 	return (
@@ -109,11 +153,9 @@ export default function ProfileAddresses() {
 					{values.map((address, i) => (
 						<InputAddress
 							key={i}
-							initialValue={address.initialValue}
-							deleteAddress={deleteAddress(i)}
-							changeAddress={changeAddress(i)}
-							addAddress={addAddress}
-							value={address.value}
+							handleClickClose={handleClickClose(i)}
+							handleClickChange={handleClickChange(i)}
+							valueObj={address}
 							onChangeValue={onChangeValues(i)}
 							required
 						/>
@@ -138,6 +180,14 @@ export default function ProfileAddresses() {
 					)}
 				</div>
 			</form>
+			<PopupAddressesWarning />
+			{addressesIndex && (
+				<PopupAddressesDeleteConfirm
+					address={values[addressesIndex].initialValue}
+					deleteAddress={() => deleteAddress(addressesIndex)}
+					cancelDeleteAddress={cancelDeleteAddress}
+				/>
+			)}
 		</div>
 	);
 }

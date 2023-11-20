@@ -6,6 +6,8 @@ type PopupContextType = {
 		openPopupLogin: boolean;
 		openPopupRegistration: boolean;
 		openPopupLogout: boolean;
+		openPopupAddressesWarning: boolean;
+		openPopupAddressesDeleteConfirm: boolean;
 	};
 	handleOpenPopup: (popupName: string) => void;
 	handleClosePopup: (popupName: string) => void;
@@ -19,6 +21,8 @@ export const PopupProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 		openPopupLogin: false,
 		openPopupRegistration: false,
 		openPopupLogout: false,
+		openPopupAddressesWarning: false,
+		openPopupAddressesDeleteConfirm: false,
 	});
 
 	const handleOpenPopup = (popupName: string) => {

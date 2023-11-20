@@ -6,52 +6,26 @@ import editIcon from '@images/profile/edit.svg';
 import clsx from 'clsx';
 
 type InputAddressType = React.InputHTMLAttributes<HTMLInputElement> & {
-	readonly deleteAddress?: () => void;
-	readonly addAddress?: ((newAddress: string) => void) | (() => void);
-	readonly changeAddress?: ((newAddress: string) => void) | (() => void);
-	readonly initialValue?: string;
+	readonly valueObj?: { value: string; initialValue: string; isChanged: boolean };
+	readonly handleClickClose?: () => void;
+	readonly handleClickChange?: () => void;
 	readonly onChangeValue?: ((value: string) => void) | (() => void);
 	readonly value?: string;
 };
 
 export default function InputAddress({
-	initialValue = '',
+	valueObj = { value: '', initialValue: '', isChanged: false },
+	handleClickClose = () => {},
+	handleClickChange = () => {},
 	onChangeValue = () => {},
-	deleteAddress = () => {},
-	changeAddress = () => {},
-	addAddress = () => {},
-	value = '',
 	...props
 }: InputAddressType) {
 	const inputRef = useRef<null | HTMLInputElement>(null);
-
-	const isChanged = value !== initialValue;
+	const { value, initialValue, isChanged } = valueObj;
 	const isButtonHidden = value === '' && initialValue === '';
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		onChangeValue(e.target.value);
-
-	const onClickChange = () => {
-		if (value === '') {
-			const isConfirm = confirm(`Вы хотите удалить адрес ${initialValue}`);
-			isConfirm ? deleteAddress() : onChangeValue(initialValue);
-			return;
-		}
-		if (initialValue === '') {
-			addAddress(value);
-		} else {
-			changeAddress(value);
-		}
-	};
-
-	const onClickClose = () => {
-		if (isChanged) {
-			onChangeValue(initialValue);
-		} else {
-			const isConfirm = confirm(`Вы хотите удалить адрес ${initialValue}`);
-			isConfirm && deleteAddress();
-		}
-	};
 
 	const onClickEdit = () => {
 		inputRef.current && inputRef.current.focus();
@@ -72,7 +46,7 @@ export default function InputAddress({
 				<div className={styles.buttons}>
 					{isChanged ? (
 						<button
-							onClick={() => onClickChange()}
+							onClick={() => handleClickChange()}
 							type="button"
 							className={clsx(styles.button, styles.button__check)}
 						>
@@ -88,7 +62,7 @@ export default function InputAddress({
 						</button>
 					)}
 					<button
-						onClick={() => onClickClose()}
+						onClick={() => handleClickClose()}
 						type="button"
 						className={clsx(styles.button, styles.button__close)}
 					>
