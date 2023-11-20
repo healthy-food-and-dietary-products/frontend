@@ -35,6 +35,7 @@ export const products = [
 		price: 100,
 		weight: 1,
 		buttonText: 'В корзину',
+		measure_unit: 'grams',
 	},
 	{
 		cardName: 'Огурцы короткоплодные',
@@ -42,6 +43,7 @@ export const products = [
 		price: 200,
 		weight: 2,
 		buttonText: 'В корзину',
+		measure_unit: 'grams',
 	},
 	{
 		cardName: 'Перец болгарский',
@@ -49,6 +51,7 @@ export const products = [
 		price: 300,
 		weight: 3,
 		buttonText: 'В корзину',
+		measure_unit: 'grams',
 	},
 ];
 

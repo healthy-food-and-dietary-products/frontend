@@ -5,12 +5,14 @@ import { products } from '@data/dataExamples.ts';
 import Button from '@components/Button';
 import ShoppingList from '@components/shopping-list';
 import Breadcrumbs from '@components/breadcrumbs';
+// import type { Product } from '@services/generated-api/data-contracts';
 
 type Product = {
 	cardName: string;
 	price: number;
 	weight: number;
 	cardImage: string;
+	measure_unit?: string;
 };
 
 const ShoppingCart: React.FC = () => {
@@ -72,6 +74,7 @@ const ShoppingCart: React.FC = () => {
 							cardName={product.cardName}
 							price={product.price}
 							weight={product.weight}
+							measureUnit={product.measure_unit}
 						/>
 					))}
 				</div>

@@ -6,23 +6,24 @@ import { useParams } from 'react-router';
 import Preloader from '@components/preloader';
 import SliderComponent from '@components/slider-component';
 import Breadcrumbs from '@components/breadcrumbs';
+import type { Product } from '@services/generated-api/data-contracts';
 import filter from '@images/Filter.png';
 
-type CategoryType = {
-	id: number;
-	name: string;
-	price: number;
-	amount: number;
-	photo: string;
-	top_three_products: Record<string, unknown>[];
-	category: {
-		category_name: string;
-	};
-};
+// type CategoryType = {
+// 	id: number;
+// 	name: string;
+// 	price: number;
+// 	amount: number;
+// 	photo: string;
+// 	top_three_products: Record<string, unknown>[];
+// 	category: {
+// 		category_name: string;
+// 	};
+// };
 
 const Category: React.FC = () => {
 	const [isLoading, setIsLoading] = useState(true);
-	const [categoryItem, setCategoryItem] = useState<CategoryType[]>([]);
+	const [categoryItem, setCategoryItem] = useState<Product[]>([]);
 
 	const { category } = useParams();
 
@@ -63,7 +64,7 @@ const Category: React.FC = () => {
 						</div>
 						<div className={styles['category__product']}>
 							<h1 className={styles['category__product-title']}>
-								{categoryItem[0].category.category_name}
+								{categoryItem[0]?.category?.category_name}
 							</h1>
 							<ul className={styles['product__product-container']}>
 								{categoryItem.map((item) => (
@@ -71,10 +72,11 @@ const Category: React.FC = () => {
 										<ProductCard
 											cardName={item.name}
 											price={item.price}
-											weight={item.amount}
-											cardImage={item.photo}
+											weight={item.amount || 0}
+											cardImage={item.photo || ''}
 											idCard={item.id}
 											category={category}
+											measureUnit={item.measure_unit}
 										/>
 									</li>
 								))}

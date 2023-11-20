@@ -103,12 +103,8 @@ const TopSellingThisWeek: React.FC = () => {
 						idCard={product.id}
 						cardName={product.name}
 						price={product?.final_price || 0}
-						weight={
-							(product.amount &&
-								product.measure_unit &&
-								product.amount + product.measure_unit) ||
-							''
-						}
+						weight={(product.amount && product?.amount) || 0}
+						measureUnit={product.measure_unit}
 						cardImage={product.photo || ''}
 					/>
 				))}

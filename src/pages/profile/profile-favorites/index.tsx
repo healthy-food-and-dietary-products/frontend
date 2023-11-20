@@ -2,19 +2,20 @@ import { useState, useEffect } from 'react';
 import styles from './profile-favorites.module.scss';
 // import clsx from 'clsx';
 import api from '@services/api';
-import type { CategoryLight } from '@services/generated-api/data-contracts';
+// import type { CategoryLight } from '@services/generated-api/data-contracts';
 import ProductCard from '@components/product-card';
+import type { Product } from '@services/generated-api/data-contracts';
 import { Link } from 'react-router-dom';
 
-type Product = {
-	name: string;
-	price: number;
-	amount: string;
-	id: number;
-	photo: string;
-	category: CategoryLight;
-	isCheckable: boolean;
-} & Record<string, unknown>;
+// type Product = {
+// 	name: string;
+// 	price: number;
+// 	amount: number;
+// 	id: number;
+// 	photo: string;
+// 	category: CategoryLight;
+// 	isCheckable: boolean;
+// } & Record<string, unknown>;
 
 export default function ProfileFavorites() {
 	const [productsLoadingStatus, setProductsLoadingStatus] = useState({
@@ -85,10 +86,11 @@ export default function ProfileFavorites() {
 							<ProductCard
 								cardName={product.name}
 								price={product.price}
-								weight={product.amount}
-								cardImage={product.photo}
+								weight={product.amount || 0}
+								measureUnit={product.measure_unit}
+								cardImage={product.photo || ''}
 								idCard={product.id}
-								category={product.category.category_slug}
+								category={product?.category?.category_slug}
 								checkboxControl={
 									checkboxesValues.length
 										? {

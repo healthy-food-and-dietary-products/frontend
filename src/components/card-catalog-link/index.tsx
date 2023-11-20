@@ -49,6 +49,7 @@ function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps)
 									cardImage={item.photo}
 									category={category}
 									idCard={item.id}
+									measureUnit={item.measure_unit}
 								/>
 							)}
 						</li>
