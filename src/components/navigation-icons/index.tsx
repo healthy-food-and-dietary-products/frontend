@@ -19,7 +19,7 @@ const NavigationIcons: React.FC = () => {
 					/>
 					<Link
 						className={`${styles.navigation__icon} ${styles.navigation__icon_busket}`}
-						to={''}
+						to={'/cart'}
 					></Link>
 					<Link
 						className={`${styles.navigation__icon} ${styles.navigation__icon_profile}`}
