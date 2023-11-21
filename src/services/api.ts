@@ -292,10 +292,6 @@ class Api {
 	productsList(slug: string) {
 		return this._request(`products${'/' + slug}`, {
 			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Token ${Cookies.get('token')}`,
-			},
 		});
 	}
 
