@@ -1,0 +1,36 @@
+@use '../../../scss/variables.scss' as *;
+@use '../../../scss/_mixins.scss' as *;
+
+.status {
+	font-family: $ubuntu-font;
+	font-size: 18px;
+	line-height: 1.4;
+	display: flex;
+	gap: 8px;
+	padding: 8px;
+	border-radius: 16px;
+	align-items: center;
+	justify-content: start;
+	width: fit-content;
+	margin: 0;
+}
+
+.done {
+	border: 1px solid $accent-color-bright-green;
+}
+
+.delivered {
+	border: 1px solid $orange-status;
+}
+
+.canceled {
+	border: 1px solid $error-color;
+}
+
+.ordered {
+	border: 1px solid $tip-color;
+}
+
+.icon {
+	line-height: 0;
+}

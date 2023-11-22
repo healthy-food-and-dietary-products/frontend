@@ -1,0 +1,44 @@
+@use '../../../scss/variables.scss' as *;
+@use '../../../scss/_mixins.scss' as *;
+
+.profile-orders {
+	margin-left: 87px;
+
+	&__title {
+		color: $active-text-color;
+		margin-bottom: 50px;
+		display: flex;
+		justify-content: space-between;
+
+		&-button {
+			background-color: transparent;
+			border: none;
+			font-size: 20px;
+			font-family: $ubuntu-font;
+			cursor: pointer;
+			color: $active-text-color;
+		}
+	}
+
+	&__list {
+		display: grid;
+		grid-auto-rows: 1fr;
+		gap: 40px;
+		margin-bottom: 24px;
+	}
+
+	&__button {
+		padding: 8px 16px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: none;
+		border-radius: 16px;
+		font-size: 18px;
+		font-family: $ubuntu-font;
+		line-height: 1.4;
+		cursor: pointer;
+		color: #fff;
+		background: $form-button-color;
+	}
+}

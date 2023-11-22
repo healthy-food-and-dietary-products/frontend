@@ -15,6 +15,7 @@ import Category from '@pages/category';
 import ProfileFavorites from '@pages/profile/profile-favorites/index.tsx';
 import Checkout from '@pages/checkout/index.tsx';
 import ShoppingCart from '@pages/shopping-cart/index.tsx';
+import ProfileOrders from '@pages/profile/profile-orders/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -43,7 +44,7 @@ function App() {
 						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
 					>
 						<Route path="user" element={<ProfileUser />} />
-						<Route index element={<h2>Мои заказы</h2>} />
+						<Route index element={<ProfileOrders />} />
 						<Route path="addresses" element={<ProfileAddresses />} />
 						<Route path="favorites" element={<ProfileFavorites />} />
 					</Route>

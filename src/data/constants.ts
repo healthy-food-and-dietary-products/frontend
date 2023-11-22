@@ -19,8 +19,7 @@ export const cardError = 'Неверный номер карты';
 export const passwordError = 'Пароль введен неверно, попробуйте еще раз ';
 
 export const emailNotExist = 'Указанный почтовый адрес не существует, попробуйте еще раз';
-export const passwordNotValid =
-	'Пароль небезопасен. Проверьте написание. Он должен содержать цифры, символы, буквы. Длина не менее 8 знаков';
+export const passwordNotValid = 'Пароль: 8+ символов, заглавная и строчная буквы, цифры.';
 export const passwordNotMatch = 'Пароль не соотвествует. Проверьте написание';
 
 export const birthdayError = 'Введите дату в формате день.месяц.год (DD.MM.YYYY)';
@@ -46,7 +45,7 @@ export const tests = {
 	},
 	phone_number: {
 		message: phoneError,
-		regex: /^\+7[0-9]{10}$/,
+		regex: /^\+(\+7|7|8)[0-9]{10}$/,
 	},
 	username: {
 		message: usernameError,
