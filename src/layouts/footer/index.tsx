@@ -11,7 +11,9 @@ const Footer: React.FC = () => {
 					<p className={styles.footer__text}>
 						Cервис по доставке здоровой и диетической еды
 					</p>
-					<p className={`${styles['footer__text']} ${styles['footer__text_desktop']}`}>&copy; 2023. «GOOD FOOD»</p>
+					<p className={`${styles['footer__text']} ${styles['footer__text_desktop']}`}>
+						&copy; 2023. «GOOD FOOD»
+					</p>
 				</div>
 				<div className={styles.footer__centerBlock}>
 					<ul className={styles.footer__text}>
@@ -42,7 +44,9 @@ const Footer: React.FC = () => {
 					<p className={styles.footer__text}>Круглосуточно ответим на ваши вопросы</p>
 				</div>
 			</div>
-			<p className={`${styles['footer__text']} ${styles['footer__text_mobile']}`}>&copy; 2023. «GOOD FOOD»</p>
+			<p className={`${styles['footer__text']} ${styles['footer__text_mobile']}`}>
+				&copy; 2023. «GOOD FOOD»
+			</p>
 		</footer>
 	);
 };

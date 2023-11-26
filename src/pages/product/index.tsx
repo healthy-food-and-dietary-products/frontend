@@ -84,11 +84,13 @@ const Product: React.FC = () => {
 							<div className={styles.product__container}>
 								<h2 className={styles.product__title}>{productItem.name}</h2>
 								<div className={styles.product__details}>
-									<p className={styles.product__text}>
-										Арт. {productItem.id}
-									</p>
+									<p className={styles.product__text}>Арт. {productItem.id}</p>
 									<div className={styles.product__rating}>
-										<img className={styles.product__ratingStar} src={ReviewStar} alt="Иконка для отзывов" />
+										<img
+											className={styles.product__ratingStar}
+											src={ReviewStar}
+											alt="Иконка для отзывов"
+										/>
 										<p className={styles.product__ratingValue}>4.8</p>
 									</div>
 									<p className={styles.product__reviews}>2 отзыва</p>

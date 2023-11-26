@@ -22,9 +22,9 @@
 	flex-direction: column;
 	justify-content: center;
 
-	@media screen and (max-width: 768px) {
-			padding: 0;
-			min-width: 90%;
+	@media screen and (width <= 768px) {
+		padding: 0;
+		min-width: 90%;
 	}
 }
 
@@ -44,9 +44,8 @@
 	flex-direction: row;
 	justify-content: space-between;
 
-	@media screen and (max-width: 768px) {
-			flex-wrap: wrap;
-			flex-direction: column-reverse;
+	@media screen and (width <= 768px) {
+		flex-flow: column-reverse wrap;
 	}
 }
 
@@ -57,17 +56,17 @@
 	flex-direction: column;
 	gap: 28px;
 
-	@media screen and (max-width: 768px) {
-			margin-top: 16px;
-			gap: 20px;
-		}
+	@media screen and (width <= 768px) {
+		margin-top: 16px;
+		gap: 20px;
+	}
 }
 
 .product__title {
 	font-size: 36px;
 
-	@media screen and (max-width: 768px) {
-			font-size: 24px;
+	@media screen and (width <= 768px) {
+		font-size: 24px;
 	}
 }
 
@@ -91,16 +90,16 @@
 	font-size: 20px;
 	margin: 0 0 0 5px;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		font-size: 14px;
 	}
 }
 
 .product__ratingStar {
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		width: 16px;
 		margin-bottom: 2px;
-  }
+	}
 }
 
 .product__reviews {
@@ -108,7 +107,7 @@
 	font-size: 18px;
 	margin: 0;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		font-size: 13px;
 	}
 }
@@ -120,7 +119,7 @@
 }
 
 .product__price {
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		font-size: 18px;
 	}
 }
@@ -131,11 +130,10 @@
 	font-size: 16px;
 	font-weight: 400;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		font-size: 10px;
 	}
 }
-
 
 .product__btns {
 	display: flex;
@@ -161,7 +159,7 @@
 	background-repeat: no-repeat;
 	box-shadow: 2px 2px 20px 0 rgb(0 0 0 / 51%);
 
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		box-shadow: none;
 	}
 }
@@ -191,7 +189,7 @@
 	padding: 16px 12px;
 	text-align: center;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (width <= 768px) {
 		margin-top: 8px;
 		padding: 8px 12px;
 		gap: 9.5px;
@@ -206,4 +204,3 @@
 	padding: 0;
 	background-color: #cfcfcf;
 }
-

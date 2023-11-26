@@ -137,7 +137,7 @@
 
 	transition: 0.5s;
 
-	@media screen and (max-width: 876px) {
+	@media screen and (width <= 876px) {
 		font-size: 13px;
 		max-width: 110px;
 		max-height: 34px;
@@ -184,7 +184,7 @@
 
 	transition: 0.5s;
 
-	@media screen and (max-width: 876px) {
+	@media screen and (width <= 876px) {
 		font-size: 13px;
 		max-width: 94px;
 		max-height: 34px;
