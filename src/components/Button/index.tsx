@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import styles from './button.module.scss';
 
 type ButtonProps = {
@@ -22,9 +23,11 @@ const Button = ({
 	return (
 		<button
 			type={type ? type : 'button'}
-			className={`${styles[buttonStyle]} ${
-				classNameActive ? styles[classNameActive] : ''
-			} ${classNames ? classNames : ''}`}
+			className={clsx(
+				styles[buttonStyle],
+				classNameActive && styles[classNameActive],
+				classNames
+			)}
 			onClick={onClick}
 			disabled={disabled}
 		>
