@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/use-auth.ts';
+import { useAuth } from '@hooks/use-auth.ts';
 import styles from './navigation-icons.module.scss';
 import { usePopup } from '@hooks/use-popup.ts';
 

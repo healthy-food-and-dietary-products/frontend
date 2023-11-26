@@ -1,5 +1,5 @@
-@use '../../scss/variables' as *;
-@use '../../scss/mixins' as *;
+@use '@scss/variables' as *;
+@use '@scss/mixins' as *;
 
 .cart {
 	margin: 0 auto;
@@ -136,19 +136,19 @@
 }
 
 .delivery__icon_flag_unactive {
-	background-image: url('../../assets/images/flag_unactive.svg');
+	background-image: url('@images/flag_unactive.svg');
 }
 
 .delivery__icon_flag {
-	background-image: url('../../assets/images/flag_active.svg');
+	background-image: url('@images/flag_active.svg');
 }
 
 .delivery__icon_truck {
-	background-image: url('../../assets/images/truck_active.svg');
+	background-image: url('@images/truck_active.svg');
 }
 
 .delivery__icon_truck_unactive {
-	background-image: url('../../assets/images/truck_unactive.svg');
+	background-image: url('@images/truck_unactive.svg');
 }
 
 .details__order {

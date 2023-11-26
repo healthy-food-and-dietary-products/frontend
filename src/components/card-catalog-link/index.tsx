@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { splitIntoSubArrays } from '../../utils/utils';
+import { splitIntoSubArrays } from '@utils/utils';
 import CardBlockLink from '../card-block-link';
 import ProductCard from '../product-card';
 import styles from './card-catalog-link.module.scss';

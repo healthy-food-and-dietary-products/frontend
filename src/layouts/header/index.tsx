@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import { useAuth } from '../../hooks/use-auth.ts';
-import Navigation from '../../components/navigation';
+import Navigation from '@components/navigation';
 import styles from './header.module.scss';
 import NavigationIcons from '@components/navigation-icons';
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import SliderComponent from '../../components/slider-component';
+import SliderComponent from '@components/slider-component';
 import styles from './home.module.scss';
 import InfoCard from '@components/info-card';
 import usefulProductsIcon from '@images/useful-products-icon.svg';
 import roundTheClockDelivery from '@images/round-the-clock-delivery.svg';
 import CardCatalogLink from '@components/card-catalog-link';
-import { mainPageBlockLinks } from '../../data/dataExamples.ts';
+import { mainPageBlockLinks } from '@data/dataExamples.ts';
 import TopSellingThisWeek from '@components/top-selling-this-week';
 import AboutCompany from '@components/about-company/index.tsx';
 import OurBlock from '@components/our-block';

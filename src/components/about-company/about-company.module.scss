@@ -1,5 +1,5 @@
-@use '../../scss/_variables' as *;
-@use '../../scss/_mixins' as *;
+@use '@scss/_variables' as *;
+@use '@scss/_mixins' as *;
 
 .aboutCompany {
 	width: 80%;
@@ -71,7 +71,7 @@
 	padding: 0;
 	width: 261px;
 	height: 174px;
-	background-image: url('../../assets/images/healthy-young-woman.jpeg');
+	background-image: url('@images/healthy-young-woman.jpeg');
 	background-size: cover;
 }
 

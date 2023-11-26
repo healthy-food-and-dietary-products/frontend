@@ -1,5 +1,5 @@
-@use '../../scss/mixins' as *;
-@use '../../scss/_variables' as *;
+@use '@scss/mixins' as *;
+@use '@scss/_variables' as *;
 
 .popup {
 	display: none;
@@ -37,7 +37,7 @@
 	height: 24px;
 	flex-shrink: 0;
 	fill: var(--inactive, #b8b8b8);
-	background-image: url('../../assets/images/button-close-popup.svg');
+	background-image: url('@images/button-close-popup.svg');
 	background-position: center;
 	border: none;
 	transition: 0.3s;

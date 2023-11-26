@@ -1,6 +1,6 @@
 /* stylelint-disable import-notation */
-@use '../../scss/_variables.scss' as *;
-@use '../../scss/base.scss' as *;
+@use '@scss/_variables.scss' as *;
+@use '@scss/base.scss' as *;
 
 .header {
 	position: relative;

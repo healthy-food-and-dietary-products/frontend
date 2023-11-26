@@ -1,5 +1,5 @@
-@use '../../scss/mixins' as *;
-@use '../../scss/base.scss' as *;
+@use '@scss/mixins' as *;
+@use '@scss/base.scss' as *;
 
 .navigation__iconsContainer {
 	display: flex;
@@ -22,13 +22,13 @@
 }
 
 .navigation__icon_search {
-	background-image: url('../../assets/images/search_icon.svg');
+	background-image: url('@images/search_icon.svg');
 }
 
 .navigation__icon_busket {
-	background-image: url('../../assets/images/shopping_busket_icon.svg');
+	background-image: url('@images/shopping_busket_icon.svg');
 }
 
 .navigation__icon_profile {
-	background-image: url('../../assets/images/profile_icon.svg');
+	background-image: url('@images/profile_icon.svg');
 }

@@ -1,5 +1,5 @@
-@use '../../scss/mixins' as *;
-@use '../../scss/variables' as *;
+@use '@scss/mixins' as *;
+@use '@scss/variables' as *;
 
 .order {
 	margin: 0 auto;
@@ -153,7 +153,7 @@
 	background-color: #f0f0f0;
 	cursor: pointer;
 	appearance: none;
-	background-image: url('../../assets/images/bottom_arrow.svg');
+	background-image: url('@images/bottom_arrow.svg');
 	background-size: 0.6em;
 	background-position: calc(100% - 1.3em) center;
 	background-repeat: no-repeat;
@@ -212,7 +212,7 @@
 	color: #328c12;
 	cursor: pointer;
 	appearance: none;
-	background-image: url('../../assets/images/bottom_arrow.svg');
+	background-image: url('@images/bottom_arrow.svg');
 	background-size: 12px 10px;
 	background-position: right;
 	background-repeat: no-repeat;
@@ -266,7 +266,7 @@
 
 /* stylelint-disable-next-line selector-attribute-quotes */
 .execution__item input[type='radio']:checked + label::after {
-	background: url('../../assets/images/Radio_button.svg');
+	background: url('@images/Radio_button.svg');
 	background-position: center;
 	background-size: 16px;
 	background-repeat: no-repeat;
