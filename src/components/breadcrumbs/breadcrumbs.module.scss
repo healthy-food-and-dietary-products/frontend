@@ -32,4 +32,14 @@
 	&_type_tall {
 		padding-top: 48px;
 	}
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+		padding: 20px 0 40px;
+
+		&__arrow {
+			width: 8px;
+			height: 8px;
+		}
+	}
 }
