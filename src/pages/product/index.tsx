@@ -84,12 +84,12 @@ const Product: React.FC = () => {
 							<div className={styles.product__container}>
 								<h2 className={styles.product__title}>{productItem.name}</h2>
 								<div className={styles.product__details}>
-									<p className={`text_type_u ${styles.product__text}`}>
+									<p className={styles.product__text}>
 										Арт. {productItem.id}
 									</p>
 									<div className={styles.product__rating}>
-										<img src={ReviewStar} alt="Иконка для отзывов" />
-										<p className={styles.product__ratingValue}>4</p>
+										<img className={styles.product__ratingStar} src={ReviewStar} alt="Иконка для отзывов" />
+										<p className={styles.product__ratingValue}>4.8</p>
 									</div>
 									<p className={styles.product__reviews}>2 отзыва</p>
 								</div>
@@ -149,7 +149,7 @@ const Product: React.FC = () => {
 								</div>
 								<div className={styles.border_vertical}></div>
 								<div className={styles.product__container}>
-									<p className="text-x">калорийность</p>
+									<p className="text-x">ккал-ть</p>
 									<p className="text-x">{productItem.kcal}г</p>
 								</div>
 							</div>

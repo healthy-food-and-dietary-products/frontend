@@ -136,6 +136,13 @@
 	}
 
 	transition: 0.5s;
+
+	@media screen and (max-width: 876px) {
+		font-size: 13px;
+		max-width: 110px;
+		max-height: 34px;
+		border-radius: 12px;
+	}
 }
 
 .green-border-button__active {
@@ -159,7 +166,7 @@
 
 	color: white;
 	display: flex;
-	background-color: $accent-color-bright-green;
+	background-color: $form-button-color;
 	align-items: center;
 	justify-content: center;
 	border: none;
@@ -176,6 +183,13 @@
 	}
 
 	transition: 0.5s;
+
+	@media screen and (max-width: 876px) {
+		font-size: 13px;
+		max-width: 94px;
+		max-height: 34px;
+		border-radius: 12px;
+	}
 }
 
 .cart-button__active {
