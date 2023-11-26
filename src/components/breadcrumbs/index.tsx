@@ -44,13 +44,15 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, isTall }) => {
 		return path;
 	});
 
+	const breadcrumbsArray = ['Главная', ...translatedPathnames.slice(1)];
+
 	return (
 		<div
 			className={clsx(styles.breadcrumbs, {
 				[styles.breadcrumbs_type_tall]: isTall,
 			})}
 		>
-			{['Главная', ...translatedPathnames.slice(1)].map((name, index, arr) => {
+			{breadcrumbsArray.map((name, index, arr) => {
 				const routeTo =
 					index === 0
 						? '/'
