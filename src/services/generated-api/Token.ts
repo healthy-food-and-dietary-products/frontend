@@ -16,7 +16,7 @@ import {
 } from './data-contracts';
 import { ContentType, HttpClient, RequestParams } from './http-client';
 
-export class Token<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
+export class Tokens<SecurityDataType = unknown> extends HttpClient<SecurityDataType> {
 	/**
 	 * @description Allows to obtain a user authentication token
 	 *
