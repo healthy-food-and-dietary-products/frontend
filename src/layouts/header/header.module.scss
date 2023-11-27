@@ -15,6 +15,10 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 0 44px;
+
+	@media screen and (width < 1024px) {
+		margin: 0 20px;
+	}
 }
 
 .header__button {
@@ -27,4 +31,8 @@
 	font-weight: 700;
 	line-height: normal;
 	letter-spacing: -0.68px;
+
+	@media screen and (width < 1024px) {
+		font-size: 28px;
+	}
 }

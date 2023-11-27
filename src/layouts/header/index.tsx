@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '@components/navigation';
 import styles from './header.module.scss';
 import NavigationIcons from '@components/navigation-icons';
+import BurgerMenu from '@components/burger-menu';
 
 const Header: React.FC = () => {
 	// Этот блок кода предназначен для реализации переходов между страницами
@@ -20,6 +21,7 @@ const Header: React.FC = () => {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header__container}>
+				<BurgerMenu />
 				<Link to={'/'} className="link">
 					<h1 className={styles.header__title}>GoodFood</h1>
 				</Link>

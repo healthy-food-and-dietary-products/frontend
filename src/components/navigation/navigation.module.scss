@@ -4,6 +4,10 @@
 .navigation {
 	display: flex;
 	gap: 44px;
+
+	@media screen and (width < 768px) {
+		display: none;
+	}
 }
 
 .navigation__list {
@@ -43,6 +47,12 @@
 		border: none;
 		color: white;
 	}
+
+	@media screen and (width < 1024px) {
+		width: 92px;
+		height: 32px;
+		font-size: 16px;
+	}
 }
 
 .navigation__item {
@@ -58,5 +68,9 @@
 	&:hover {
 		opacity: 0.5;
 		transition: opacity 0.5s ease-in-out;
+	}
+
+	@media screen and (width < 1024px) {
+		font-size: 16px;
 	}
 }

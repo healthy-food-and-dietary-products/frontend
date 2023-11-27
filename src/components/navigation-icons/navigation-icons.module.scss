@@ -10,6 +10,7 @@
 	:hover {
 		opacity: 0.5;
 		transition: opacity 0.5s ease-in-out;
+		cursor: pointer;
 	}
 }
 
@@ -27,8 +28,16 @@
 
 .navigation__icon_busket {
 	background-image: url('@images/shopping_busket_icon.svg');
+
+	@media screen and (width < 768px) {
+		display: none;
+	}
 }
 
 .navigation__icon_profile {
 	background-image: url('@images/profile_icon.svg');
+
+	@media screen and (width < 768px) {
+		display: none;
+	}
 }

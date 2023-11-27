@@ -1,0 +1,27 @@
+@use '@scss/mixins' as *;
+@use '@scss/base.scss' as *;
+
+.burgerContainer {
+	:hover {
+		opacity: 0.5;
+		transition: opacity 0.5s ease-in-out;
+		cursor: pointer;
+	}
+}
+
+.navigation__icon {
+	width: 30px;
+	height: 30px;
+	border: none;
+	background-color: white;
+	background-position: center;
+}
+
+.navigation__icon_burger {
+	background-image: url('@images/burger-menu.svg');
+	background-size: cover;
+
+	@media screen and (width >= 768px) {
+		display: none;
+	}
+}
