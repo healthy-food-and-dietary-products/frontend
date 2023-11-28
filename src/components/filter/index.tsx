@@ -34,7 +34,7 @@ const Filter: React.FC<FilterProps> = ({ sortProducts, changeCheckboxState }) =>
 					<li className={styles.filterList}>
 						<label className={styles.filterCheck}>
 							<input
-								name="sugarFree"
+								name="sugarless"
 								className={styles.filterCheckInput}
 								type="checkbox"
 								onChange={handleCheckboxChange}
@@ -46,7 +46,7 @@ const Filter: React.FC<FilterProps> = ({ sortProducts, changeCheckboxState }) =>
 					<li className={styles.filterList}>
 						<label className={styles.filterCheck}>
 							<input
-								name="glutenFree"
+								name="gluten-free"
 								className={styles.filterCheckInput}
 								type="checkbox"
 								onChange={handleCheckboxChange}
@@ -70,7 +70,7 @@ const Filter: React.FC<FilterProps> = ({ sortProducts, changeCheckboxState }) =>
 					<li className={styles.filterList}>
 						<label className={styles.filterCheck}>
 							<input
-								name="forChildren"
+								name="kids"
 								className={styles.filterCheckInput}
 								type="checkbox"
 								onChange={handleCheckboxChange}

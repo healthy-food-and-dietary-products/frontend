@@ -19,12 +19,14 @@ const Category: React.FC = () => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [categoryName, setCategoryName] = useState('');
 	const [checkboxState, setCheckboxState] = useState<filteredType>({
-		// проверить чтобы названия соответствовали тэгам
 		vegetarian: false,
-		sugarFree: false,
-		glutenFree: false,
+		sugarless: false,
+		'gluten-free': false,
 		'lactose-free': false,
-		forChildren: false,
+		kids: false,
+		// protein: false,
+		// 'lenten-menu': false,
+		// 'low-calorie': false,
 	});
 
 	const { category } = useParams();
@@ -50,20 +52,17 @@ const Category: React.FC = () => {
 		if (e.target.name === 'vegetarian') {
 			setCheckboxState((prev) => ({ ...prev, vegetarian: !prev.vegetarian }));
 		}
-		if (e.target.name === 'sugarFree') {
-			// проверить чтобы название соответствовало тэгу
-			setCheckboxState((prev) => ({ ...prev, sugarFree: !prev.sugarFree }));
+		if (e.target.name === 'sugarless') {
+			setCheckboxState((prev) => ({ ...prev, sugarless: !prev.sugarless }));
 		}
-		if (e.target.name === 'glutenFree') {
-			// проверить чтобы название соответствовало тэгу
-			setCheckboxState((prev) => ({ ...prev, glutenFree: !prev.glutenFree }));
+		if (e.target.name === 'gluten-free') {
+			setCheckboxState((prev) => ({ ...prev, 'gluten-free': !prev['gluten-free'] }));
 		}
 		if (e.target.name === 'lactose-free') {
 			setCheckboxState((prev) => ({ ...prev, 'lactose-free': !prev['lactose-free'] }));
 		}
-		if (e.target.name === 'forChildren') {
-			// проверить чтобы название соответствовало тэгу
-			setCheckboxState((prev) => ({ ...prev, forChildren: !prev.forChildren }));
+		if (e.target.name === 'kids') {
+			setCheckboxState((prev) => ({ ...prev, kids: !prev.kids }));
 		}
 	};
 
