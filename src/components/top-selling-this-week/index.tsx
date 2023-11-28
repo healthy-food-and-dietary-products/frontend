@@ -10,15 +10,8 @@ const TopSellingThisWeek: React.FC = () => {
 	const [allProducts, setAllProducts] = useState<Product[]>([]);
 	const [topProducts, setTopproducts] = useState<Product[]>([]);
 
-	const findTopThreeProducts = (slugs: string[] = []) => {
-		const topThreeProducts: Product[] = allProducts
-			// фильтровать можно будет по полю tags, когда его добавят
-			.filter((product) => {
-				if (slugs.length === 0) {
-					return true;
-				}
-				return slugs.includes(product.category?.category_slug || '');
-			})
+	const sortProducts = (products: Product[]) => {
+		return products
 			.sort((a, b) => {
 				if (b.orders_number !== undefined && a.orders_number !== undefined) {
 					return b.orders_number - a.orders_number;
@@ -27,22 +20,37 @@ const TopSellingThisWeek: React.FC = () => {
 				return 0;
 			})
 			.slice(0, 3);
+	};
+
+	const findTopThreeProducts = (slugs: string[] = []) => {
+		const filteredProducts: Product[] = allProducts.filter((product) => {
+			if (slugs.length === 0) {
+				return true;
+			}
+			return slugs.includes(product.category?.category_slug || '');
+		});
+
+		const topThreeProducts = sortProducts(filteredProducts);
+
+		setTopproducts(topThreeProducts);
+	};
+
+	const findTopThreeProductsWithTags = (tag: string) => {
+		const filteredProducts = allProducts.filter((product) => {
+			return product.tags?.some((prod) => {
+				return prod.tag_slug === tag;
+			});
+		});
+
+		const topThreeProducts = sortProducts(filteredProducts);
+
 		setTopproducts(topThreeProducts);
 	};
 
 	useEffect(() => {
 		api.productsList('?limit=100').then((data) => {
 			setAllProducts(data.results);
-			// findTopThreeProducts();
-			const topThreeProducts: Product[] = data.results
-				.sort((a: Product, b: Product) => {
-					if (b.orders_number !== undefined && a.orders_number !== undefined) {
-						return b.orders_number - a.orders_number;
-					}
-
-					return 0;
-				})
-				.slice(0, 3);
+			const topThreeProducts: Product[] = sortProducts(data.results);
 			setTopproducts(topThreeProducts);
 		});
 	}, []);
@@ -58,12 +66,10 @@ const TopSellingThisWeek: React.FC = () => {
 			findTopThreeProducts(slugs);
 		}
 		if (buttonId === 3) {
-			const slugs = ['vegetables', 'nuts-dried-fruits', 'cereals-and-pasta', 'fruits'];
-			findTopThreeProducts(slugs);
+			findTopThreeProductsWithTags('vegetarian');
 		}
 		if (buttonId === 4) {
-			const slugs = ['dairy', 'cereals-and-pasta'];
-			findTopThreeProducts(slugs);
+			findTopThreeProductsWithTags('lactose-free');
 		}
 	};
 
