@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './product-card.module.scss';
+import { BASE_URL } from '@data/constants.ts';
 
 type ProductCardProps = {
 	cardName: string;
@@ -24,7 +25,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	checkboxControl,
 	measureUnit,
 }) => {
-	const baseUrl = 'https://goodfood.acceleratorpracticum.ru';
+	console.log(measureUnit);
+
+	// Можно вынести в отдельный фал
+	if (measureUnit === 'items') {
+		measureUnit = 'шт';
+	} else if (measureUnit === 'grams') {
+		measureUnit = 'гр';
+		if (weight > 999) {
+			measureUnit = 'кг';
+			weight = weight / 1000;
+		}
+	}
 
 	return (
 		<div className={styles.card}>
@@ -34,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					src={
 						cardImage !== undefined
 							? cardImage.startsWith('/')
-								? `${baseUrl}${cardImage}`
+								? `${BASE_URL}${cardImage}`
 								: cardImage
 							: ''
 					}
@@ -42,8 +54,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				/>
 				<h2 className={styles.card__caption}>{cardName}</h2>
 			</Link>
-			<span className={styles.card__price}>{price} руб.</span>
-			<span className={styles.card__weight}>{`${weight} ${measureUnit}`}</span>
+			<div className={styles.card__params}>
+				<span
+					className={`${styles['card__params-text']} ${styles['card__params-text_price']}`}
+				>
+					{price} руб.
+				</span>
+				<span
+					className={`${styles['card__params-text']} ${styles['card__params-text_weight']}`}
+				>{`${weight} ${measureUnit}`}</span>
+			</div>
+
 			<div className={styles['card__button-container']}>
 				{/* кнопку "В корзину" заменить на кноку из UI-kit */}
 				<button className={styles['card__cart-button']}>В корзину</button>

@@ -11,7 +11,14 @@
 	max-height: 357px;
 	box-sizing: border-box;
 	width: 100%;
-	color: #1a1a1a;
+	color: $active-text-color;
+
+	@media screen and (width < 768px) {
+		width: 50%;
+		max-width: 138px;
+		max-height: 231px;
+		padding: 12px 8px;
+	}
 }
 
 .card__link {
@@ -38,9 +45,24 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media screen and (width < 768px) {
+		padding: 4px 0 0;
+		font-size: 14px;
+		font-weight: 400;
+	}
 }
 
-.card__price {
+.card__params {
+	display: flex;
+
+	@media screen and (width < 768px) {
+		flex-direction: column-reverse;
+		min-height: 62px;
+	}
+}
+
+.card__params-text {
 	font-family: Ubuntu, Arial, sans-serif;
 	font-size: 20px;
 	font-weight: 400;
@@ -48,13 +70,22 @@
 	color: $footer-background-color;
 }
 
-.card__weight {
-	font-family: Ubuntu, Arial, sans-serif;
-	font-size: 20px;
-	font-weight: 400;
-	line-height: 140%;
+.card__params-text_price {
+	@media screen and (width < 768px) {
+		font-size: 15px;
+		font-weight: 700;
+		color: $active-text-color;
+	}
+}
+
+.card__params-text_weight {
 	padding: 0 0 0 16px;
 	color: $footer-background-color;
+
+	@media screen and (width < 768px) {
+		padding: 0;
+		font-size: 12px;
+	}
 }
 
 .card__button-container {
@@ -62,13 +93,16 @@
 	justify-content: space-between;
 	align-items: center;
 	padding-top: 18px;
+
+	@media screen and (width < 768px) {
+		padding-top: 8px;
+	}
 }
 
 .card__cart-button {
 	background: #eaeaea;
 	padding: 11px 32px;
 	border: none;
-	cursor: pointer;
 	color: #1a1a1a;
 	font-family: Ubuntu, Arial, sans-serif;
 	font-size: 18px;
@@ -80,9 +114,16 @@
 	&:hover {
 		color: white;
 		background-color: $accent-color-bright-green;
+		cursor: pointer;
 	}
 
 	transition: 0.3s;
+
+	@media screen and (width < 768px) {
+		padding: 8px 16px;
+		font-size: 13px;
+		border-radius: 12px;
+	}
 }
 
 .card__like-button {
@@ -94,4 +135,10 @@
 	border: none;
 	background-color: transparent;
 	cursor: pointer;
+
+	@media screen and (width < 768px) {
+		width: 16px;
+		height: 16px;
+		background-size: cover;
+	}
 }
