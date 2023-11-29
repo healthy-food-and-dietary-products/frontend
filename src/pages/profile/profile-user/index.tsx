@@ -74,81 +74,87 @@ export default function ProfileUser() {
 				</p>
 				<Input
 					inputNameSpan="Имя"
-					name="first_name"
+					name="profile_firstName"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="first_name-input"
 					type="text"
-					value={values.first_name}
+					value={values.profile_firstName}
 					withErrorSpan={true}
+					required
 				/>
 				<Input
 					inputNameSpan="Фамилия"
-					name="last_name"
+					name="profile_lastName"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="last_name-input"
 					type="text"
-					value={values.last_name}
+					value={values.profile_lastName}
 					withErrorSpan={true}
+					required
 				/>
 				<Input
 					inputNameSpan={`Email* (Почтовый адрес)`}
-					name="email"
+					name="profile_email"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="email-input"
 					type="email"
-					value={values.email}
+					value={values.profile_email}
 					withErrorSpan={true}
 					required
 				/>
 				<Input
 					inputNameSpan={`Номер телефона`}
-					name="phone_number"
+					name="profile_phoneNumber"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="phone_number-input"
 					type="phone"
-					value={values.phone_number}
+					value={values.profile_phoneNumber}
 					withErrorSpan={true}
+					required
 				/>
 				<Input
 					inputNameSpan="Username"
-					name="username"
+					name="profile_username"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
-					id="username-input"
+					id="profile_username-input"
 					type="text"
-					value={values.username}
+					value={values.profile_username}
 					withErrorSpan={true}
+					required
 				/>
 				<Input
 					inputNameSpan="Дата рождения"
-					name="birth_date"
+					name="profile_birthDate"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="birth_date-input"
 					type="text"
-					value={values.birth_date || ''}
+					value={values.profile_birthDate || ''}
 					withErrorSpan={true}
+					required
 				/>
 				{/* <Input
 					inputNameSpan="Город"
-					name="city"
+					name="profile_city"
 					error={errors}
 					onChange={handleChange}
 					isValid={isValid}
 					id="city-input"
 					type="text"
-					value={values.city}
+					value={values.profile_city}
 					withErrorSpan={true}
+					required
 				/> */}
 				<div className={styles.buttons}>
 					<button

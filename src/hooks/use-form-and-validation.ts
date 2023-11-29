@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { tests } from '@data/constants';
+import { validationRules } from '@data/validationRules.ts';
 
 type FormAndValidationHook = {
 	values: Record<string, string | number>;
@@ -25,68 +25,27 @@ export function useFormAndValidation(
 	const [isValid, setIsValid] = useState(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value, type } = e.target;
-
+		const { name, value } = e.target;
 		setValues({ ...values, [name]: value });
 
-		if (type === 'email') {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]: tests.email.regex.test(value) ? '' : tests.email.message,
-			}));
-		} else if (name.endsWith('_password')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]: tests.password.regex.test(value) ? '' : tests.password.message,
-			}));
-		} else if (name.endsWith('_repeatPassword')) {
-			const passwordField = Object.keys(values).find((key) => key.endsWith('_password'));
-			if (passwordField !== undefined) {
-				const isMatch = value === values[passwordField];
-				setErrors((prevErrors) => ({
-					...prevErrors,
-					[name]: isMatch ? '' : 'Пароли не совпадают',
-				}));
-			} else {
-				setErrors((prevErrors) => ({
-					...prevErrors,
-					[name]: 'Соответствующее поле пароля не найдено',
-				}));
-			}
-		} else if (name.endsWith('first_name')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]:
-					tests.first_name.regex.test(value) || !value ? '' : tests.first_name.message,
-			}));
-		} else if (name.endsWith('last_name')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]:
-					tests.last_name.regex.test(value) || !value ? '' : tests.last_name.message,
-			}));
-		} else if (name.endsWith('username')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]: tests.username.regex.test(value) ? '' : tests.username.message,
-			}));
-		} else if (name.endsWith('phone_number')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]:
-					tests.phone_number.regex.test(value) || !value
-						? ''
-						: tests.phone_number.message,
-			}));
-		} else if (name.endsWith('birth_date')) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				[name]:
-					tests.birth_date.regex.test(value) || !value ? '' : tests.birth_date.message,
-			}));
-		} else {
-			setErrors({ ...errors, [name]: e.target.validationMessage });
-		}
+		const fieldName = name.split('_').pop() || name;
+		const validationRule = validationRules[fieldName] || {};
+
+		const stringValues: { [key: string]: string } = {};
+		Object.keys(values).forEach((key) => {
+			stringValues[key] = String(values[key]);
+		});
+
+		const errorMessage = validationRule.validate
+			? validationRule.validate(value, stringValues)
+				? ''
+				: validationRule.message
+			: '';
+
+		setErrors((prevErrors) => ({
+			...prevErrors,
+			[name]: errorMessage,
+		}));
 
 		const form = e.target.closest('form');
 		const formInputs = form ? form.querySelectorAll('input') : [];
@@ -106,6 +65,7 @@ export function useFormAndValidation(
 		switch (type) {
 			case 'text':
 				if (!value || value.trim() === '') {
+					console.log(value);
 					errors[type] = 'Это поле обязательно для заполнения';
 				} else if (value.trim().length < 2 || value.trim().length > 30) {
 					errors[type] = 'Имя должно быть не короче 2 символов и не длиннее 30 символов';

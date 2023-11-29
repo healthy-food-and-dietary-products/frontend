@@ -65,10 +65,10 @@ const PopupRegistration: React.FC = () => {
 			additionalClasses={styles['popupLogin']}
 		>
 			<div className={styles['popupLogin__container']}>
-				<h2 className={styles['popupLogin__title']}>Авторизация</h2>
+				<h2 className={styles['popupLogin__title']}>Регистрация</h2>
 				<form className={styles['popupLogin__form']} noValidate onSubmit={onSubmitLogin}>
 					<Input
-						name="registration_name"
+						name="registration_firstName"
 						id="registration_name-input"
 						type="text"
 						minLength={2}
@@ -79,6 +79,7 @@ const PopupRegistration: React.FC = () => {
 						error={errors}
 						isValid={isValid}
 						inputNameSpan="Имя"
+						required
 					/>
 					<Input
 						name="registration_email"
@@ -92,6 +93,7 @@ const PopupRegistration: React.FC = () => {
 						error={errors}
 						isValid={isValid}
 						inputNameSpan="Email (Почтовый адрес)"
+						required
 					/>
 					<Input
 						name="registration_password"
@@ -105,6 +107,7 @@ const PopupRegistration: React.FC = () => {
 						error={errors}
 						isValid={isValid}
 						inputNameSpan="Пароль"
+						required
 					/>
 					<Input
 						name="registration_repeatPassword"
@@ -118,6 +121,7 @@ const PopupRegistration: React.FC = () => {
 						error={errors}
 						isValid={isValid}
 						inputNameSpan="Пароль повторно"
+						required
 					/>
 					<p className={styles['popupLogin__error-message']}>
 						{(Object.values(errors).find((error) => error) || '') as ReactNode}
@@ -140,7 +144,7 @@ const PopupRegistration: React.FC = () => {
 						onClick={openRegistrationPopup}
 					>
 						{' '}
-						Зарегистрироваться
+						Войти
 					</button>
 				</p>
 			</div>
