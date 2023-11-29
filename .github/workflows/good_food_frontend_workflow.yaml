@@ -5,7 +5,7 @@ on:
     branches:
 
 jobs:
-  check_сodestyle:
+  check_codestyle:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
