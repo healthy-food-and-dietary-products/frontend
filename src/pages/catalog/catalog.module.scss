@@ -21,6 +21,10 @@
 
 .catalog {
 	width: 80%;
+
+	@media screen and (width < 1280px) {
+		width: 90%;
+	}
 }
 
 .title {

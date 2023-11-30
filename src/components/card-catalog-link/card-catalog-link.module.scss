@@ -54,6 +54,22 @@
 	&:last-of-type {
 		margin-bottom: 0;
 	}
+
+	@media screen and (width < 768px) {
+		gap: 4px;
+		grid-template-columns: minmax(138px, 33%) minmax(138px, 33%) minmax(138px, 33%);
+		grid-template-rows: 228px;
+		white-space: nowrap;
+		overflow-x: auto;
+	}
+
+	@media screen and (width >= 768px) and (width < 1280px) {
+		gap: 4px;
+		grid-template-columns: minmax(328px, 33%) minmax(328px, 33%) minmax(328px, 33%);
+		grid-template-rows: 375px;
+		white-space: nowrap;
+		overflow-x: auto;
+	}
 }
 
 .card-catalog-link__list-item {

@@ -14,7 +14,6 @@
 	color: $active-text-color;
 
 	@media screen and (width < 768px) {
-		width: 50%;
 		max-width: 138px;
 		max-height: 231px;
 		padding: 12px 8px;
