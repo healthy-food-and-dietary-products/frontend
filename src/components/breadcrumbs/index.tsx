@@ -18,6 +18,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, isTall }) => {
 		addresses: 'Мои адреса',
 		favorites: 'Избранное',
 		user: 'Пользователь',
+		recipes: 'Рецепты',
 	});
 
 	useEffect(() => {

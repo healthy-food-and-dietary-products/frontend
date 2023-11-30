@@ -15,7 +15,7 @@ const Navigation: React.FC = () => {
 				<Link className={` ${styles.navigation__item}`} to={''}>
 					Доставка
 				</Link>
-				<Link className={` ${styles.navigation__item}`} to={''}>
+				<Link className={` ${styles.navigation__item}`} to={'/recipes'}>
 					Рецепты
 				</Link>
 				<Link className={` ${styles.navigation__item}`} to={''}>

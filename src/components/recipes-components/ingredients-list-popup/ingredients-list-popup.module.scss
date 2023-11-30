@@ -1,0 +1,45 @@
+@use '@scss/variables.scss' as *;
+@use '@scss/_mixins.scss' as *;
+
+.popup-ingredients {
+	font-family: $ubuntu-font;
+	color: $active-text-color;
+	border-radius: 16px;
+	border: 1px solid $footer-background-color;
+	max-width: 280px;
+
+	&__title {
+		margin: 8px 8px 20px;
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 140%;
+	}
+
+	&__list {
+		margin: 0;
+		padding: 16px;
+		background-color: $background-color-input-field;
+		border-radius: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	&__item {
+		display: grid;
+		grid-template-columns: auto max-content;
+		justify-content: space-between;
+		gap: 20px;
+		align-items: center;
+	}
+
+	&__name {
+		font-size: 20px;
+		line-height: 140%;
+	}
+
+	&__weight {
+		font-size: 20px;
+		font-weight: 500;
+	}
+}

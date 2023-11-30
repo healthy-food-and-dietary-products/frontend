@@ -8,6 +8,7 @@
 .popup__open {
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
@@ -19,7 +20,9 @@
 }
 
 .popup__inner {
-	margin-top: 124px;
+	max-width: calc(100% - 40px);
+	max-height: calc(100% - 40px);
+	overflow-y: auto;
 	position: relative;
 	border-radius: 16px;
 	background-color: white;
@@ -27,6 +30,17 @@
 	box-sizing: border-box;
 	box-shadow: 0 0 50px rgb(255 255 255 / 73%);
 	width: fit-content;
+	scrollbar-width: thin;
+	scrollbar-color: $unactive-text-color $accent-color-lightest-green;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $accent-color-lightest-green;
+		border-radius: 16px;
+	}
 }
 
 .popup__button {
