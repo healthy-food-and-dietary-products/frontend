@@ -41,10 +41,8 @@ const ShoppingCart: React.FC = () => {
 			<div className={styles.details}>
 				<div className={styles.products}>
 					<div className={styles.products__title}>
-						<h3>5 товаров</h3>
-						<button className={`${styles.products__btn} text_type_u `}>
-							Очистить корзину
-						</button>
+						<h3 className={styles.products__title_mob}>5 товаров</h3>
+						<button className={styles.products__btn}>Очистить корзину</button>
 					</div>
 					<ShoppingList />
 				</div>
@@ -93,7 +91,7 @@ const ShoppingCart: React.FC = () => {
 				</div>
 			</div>
 			<div className={styles.cart__recomendation}>
-				<h2>Вас также может заинтересовать</h2>
+				<h2 className={styles.cart__title}>Вас также может заинтересовать</h2>
 				<div className={styles.cart__advertisement}>
 					{products.map((product: Product, index: number) => (
 						<ProductCard

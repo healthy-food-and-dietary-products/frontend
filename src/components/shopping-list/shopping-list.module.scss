@@ -5,4 +5,10 @@
 	gap: 40px;
 	justify-content: center;
 	align-items: center;
+
+	@media screen and (width <= 768px) {
+		max-width: 100%;
+		width: 100%;
+		gap: 16px;
+	}
 }

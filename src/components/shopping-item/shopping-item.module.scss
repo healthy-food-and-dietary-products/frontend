@@ -5,6 +5,18 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	font-family: inherit;
+	line-height: 140%;
+	font-style: normal;
+	font-weight: 400;
+
+	@media screen and (width <= 768px) {
+		max-width: 100%;
+		width: 100%;
+		padding: 8px 4px;
+		font-size: 14px;
+		font-weight: 500px;
+	}
 }
 
 .item__image {
@@ -12,6 +24,12 @@
 	object-fit: contain;
 	width: 74px;
 	height: 74px;
+
+	@media screen and (width <= 768px) {
+		width: 45px;
+		height: 45px;
+		border-radius: 4px;
+	}
 }
 
 .item__title {
@@ -28,6 +46,26 @@
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 14px 0;
+
+	@media screen and (width <= 768px) {
+		max-width: 100px;
+		padding: 4px 8px;
+		border-radius: 4px;
+	}
+}
+
+.item__container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media screen and (width <= 768px) {
+		max-width: 100px;
+		flex-direction: column;
+		gap: 4px;
+		justify-content: center;
+		padding: 0;
+	}
 }
 
 .item_btn {
@@ -37,23 +75,54 @@
 	background-size: 24px 24px;
 	width: 24px;
 	height: 24px;
-	background-position: center;
+	background-position: center center;
 	background-repeat: no-repeat;
 
 	:hover {
 		opacity: 0.5;
 		transition: opacity 0.5s ease-in-out;
 	}
+
+	@media screen and (width <= 768px) {
+		width: 12px;
+		height: 12px;
+	}
 }
 
 .item__delete_btn {
 	background: url('@images/delete_button.svg');
+
+	@media screen and (width <= 768px) {
+		display: none;
+		visibility: hidden;
+	}
 }
 
 .item__decrease_btn {
 	background: url('@images/minus_button.svg');
+
+	@media screen and (width <= 768px) {
+		background: url('@images/decrease_btn_small.svg');
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 }
 
 .item__increase_btn {
 	background: url('@images/plus_button.svg');
+
+	@media screen and (width <= 768px) {
+		background: url('@images/plus_btn_small.svg');
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+}
+
+.item__measure {
+	@media screen and (width <= 768px) {
+		font-family: inherit;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 400;
+	}
 }

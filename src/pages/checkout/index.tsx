@@ -24,8 +24,35 @@ const Checkout: React.FC = () => {
 		<section className={styles.order}>
 			<div className={styles.details}>
 				<div className={styles.execution}>
-					<h2>Оформление заказа</h2>
+					<h2 className={styles.execution__title_mob}>Оформление заказа</h2>
 					<form className={`${styles.execution__form} text-m`}>
+						<label className={styles.execution__contacts}>
+							Контактные данные
+							<div className={styles.execution__inputs}>
+								<div className={styles.execution__input_label}>
+									<label htmlFor="name" className={styles.execution__sublabel}>
+										Имя
+									</label>
+									<input
+										type="text"
+										id="name"
+										value={'Иван'}
+										className={`${styles.execution__input} ${styles.execution___input_filled}`}
+									/>
+								</div>
+								<div className={styles.execution__input_label}>
+									<label htmlFor="name" className={styles.execution__sublabel}>
+										Телефон
+									</label>
+									<input
+										type="text"
+										id="phone"
+										value={'+79112223344'}
+										className={`${styles.execution__input} ${styles.execution___input_filled}`}
+									/>
+								</div>
+							</div>
+						</label>
 						<label className={styles.execution__address}>
 							{deliveryType === 'shipment' ? 'Адрес доставки' : 'Адрес пункта самовывоза'}
 							<select className={styles.execution__combobox}>
@@ -38,10 +65,6 @@ const Checkout: React.FC = () => {
 							</select>
 						</label>
 
-						<label className={styles.execution__address}>
-							Комментарий
-							<textarea className={styles.execution__comment} maxLength={200}></textarea>
-						</label>
 						<label className={styles.execution__delivery}>
 							<div className={styles.execution__container}>
 								<p className="text-m">Доставка</p>
@@ -134,6 +157,10 @@ const Checkout: React.FC = () => {
 									<label htmlFor="payment_offline">Картой при получении</label>
 								</div>
 							</div>
+						</label>
+						<label className={styles.execution__address}>
+							Комментарий
+							<textarea className={styles.execution__comment} maxLength={200}></textarea>
 						</label>
 					</form>
 				</div>
