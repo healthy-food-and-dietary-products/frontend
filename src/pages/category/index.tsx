@@ -128,7 +128,7 @@ const Category: React.FC = () => {
 			<SliderComponent />
 			<section>
 				<div className={styles['breadcrumbs-container']}>
-					<Breadcrumbs isTall={true} />
+					<Breadcrumbs />
 				</div>
 				<div className={styles.category}>
 					{isLoading ? (

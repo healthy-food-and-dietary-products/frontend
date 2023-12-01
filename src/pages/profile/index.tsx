@@ -8,7 +8,7 @@ import Breadcrumbs from '@components/breadcrumbs';
 const Profile: React.FC = () => {
 	return (
 		<div className={styles.container}>
-			<Breadcrumbs isTall={true} />
+			<Breadcrumbs />
 			<div className={styles.wrapper}>
 				<div className={styles.menu}>
 					<UserTitle />

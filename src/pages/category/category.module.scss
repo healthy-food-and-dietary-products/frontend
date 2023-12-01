@@ -20,9 +20,13 @@
 }
 
 .category {
-	margin: 0;
+	margin: 54px 0 0;
 	display: flex;
 	justify-content: center;
+
+	@media screen and (width <= 768px) {
+		margin-top: 4px;
+	}
 }
 
 .category__content {
@@ -41,7 +45,18 @@
 .category__sorting {
 	width: 328px;
 	margin-right: 20px;
-	margin-top: 54px;
+
+	@media screen and (width <= 768px) {
+		margin-right: 0;
+		max-width: 280px;
+	}
+}
+
+.category__product {
+	@media screen and (width <= 768px) {
+		margin: auto;
+		padding-top: 11px;
+	}
 }
 
 .category__product-title {

@@ -13,7 +13,6 @@
 }
 
 .product {
-	padding: 50px 0;
 	margin: 0 auto;
 	width: calc(100% - 129px * 2);
 	height: 100%;
@@ -40,12 +39,14 @@
 }
 
 .product__main {
+	padding-top: 52px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 
 	@media screen and (width < 768px) {
 		flex-flow: column-reverse wrap;
+		padding-top: 13px;
 	}
 }
 
