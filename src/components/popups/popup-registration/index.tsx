@@ -17,7 +17,7 @@ const PopupRegistration: React.FC = () => {
 		setDisabledButton(true);
 		const NameErrors = validateInputsHandleSubmit(
 			'text',
-			values.registration_name as string
+			values.registration_username as string
 		);
 		const emailErrors = validateInputsHandleSubmit(
 			'email',
@@ -33,7 +33,7 @@ const PopupRegistration: React.FC = () => {
 			api
 				.usersCreate({
 					email: `${values.registration_email}`,
-					username: `${values.registration_name}`,
+					username: `${values.registration_username}`,
 					password: `${values.registration_password}`,
 				})
 				.then(() => {
@@ -68,17 +68,17 @@ const PopupRegistration: React.FC = () => {
 				<h2 className={styles['popupLogin__title']}>Регистрация</h2>
 				<form className={styles['popupLogin__form']} noValidate onSubmit={onSubmitLogin}>
 					<Input
-						name="registration_firstName"
+						name="registration_username"
 						id="registration_name-input"
 						type="text"
 						minLength={2}
 						maxLength={40}
-						placeholder="Имя пользователся"
+						placeholder="Username пользователся"
 						onChange={handleChange}
-						value={values.registration_name}
+						value={values.registration_username}
 						error={errors}
 						isValid={isValid}
-						inputNameSpan="Имя"
+						inputNameSpan="Username"
 						required
 					/>
 					<Input
