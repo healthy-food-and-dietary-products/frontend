@@ -1,19 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { splitIntoSubArrays } from '@utils/utils';
+/* eslint-disable */
 import CardBlockLink from '../card-block-link';
 import ProductCard from '../product-card';
 import styles from './card-catalog-link.module.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Product } from '@services/generated-api/data-contracts';
+import { useCreateFavorite } from '@hooks/use-create-favorite';
 
 type CardCatalogLinkProps = {
 	title: string;
 	category?: string;
-	array: Record<string, any>[];
+	array: Product[];
 	type: 'bento-grid' | 'single-row';
 };
 
 function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps) {
-	const arrayWithSubArrays = splitIntoSubArrays(array, 3);
+	const [products, setProducts] = useState<Product[]>(array);
+	const { toggleFavorite } = useCreateFavorite();
 
 	return (
 		<div className={styles['card-catalog-link']}>
@@ -30,32 +33,32 @@ function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps)
 				</Link>
 				<span className={styles['card-catalog-link__arrow']} />
 			</div>
-			{arrayWithSubArrays.map((subArray, index) => (
-				<ul className={styles['card-catalog-link__list']} key={index}>
-					{subArray.map((item: Record<string, any>, index: number) => (
-						<li className={styles['card-catalog-link__list-item']} key={index}>
-							{type === 'bento-grid' && (
-								<CardBlockLink
-									title={item.title}
-									link={item.link}
-									backgroundImage={item.backgroundImage}
-								/>
-							)}
-							{type === 'single-row' && (
-								<ProductCard
-									cardName={item.name}
-									price={item.price}
-									weight={item.amount}
-									cardImage={item.photo}
-									category={category}
-									idCard={item.id}
-									measureUnit={item.measure_unit}
-								/>
-							)}
-						</li>
-					))}
-				</ul>
-			))}
+			<ul className={styles['card-catalog-link__list']}>
+				{products.map((item: Record<string, any>, index: number) => (
+					<li className={styles['card-catalog-link__list-item']} key={index}>
+						{type === 'bento-grid' && (
+							<CardBlockLink
+								title={item.title}
+								link={item.link}
+								backgroundImage={item.backgroundImage}
+							/>
+						)}
+						{type === 'single-row' && (
+							<ProductCard
+								cardName={item.name}
+								price={item.price}
+								weight={item.amount}
+								cardImage={item.photo}
+								category={category}
+								idCard={item.id}
+								measureUnit={item.measure_unit}
+								is_favorited={item.is_favorited}
+								onClickLick={toggleFavorite(item.id, products, setProducts)}
+							/>
+						)}
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }

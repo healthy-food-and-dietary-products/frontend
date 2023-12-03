@@ -12,7 +12,6 @@ import type {
 	Producer,
 	ProductCreate,
 	ProductUpdate,
-	FavoriteProductCreate,
 	TokenCreate,
 	CategoryCreate,
 	Component,
@@ -290,8 +289,16 @@ class Api {
 
 	/* ----------------------------- Products ----------------------------- */
 	productsList(slug: string) {
+		const headers: HeadersInit = {
+			'Content-Type': 'application/json',
+		};
+		const token = Cookies.get('token');
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
 		return this._request(`products${'/' + slug}`, {
 			method: 'GET',
+			headers,
 		});
 	}
 
@@ -303,8 +310,16 @@ class Api {
 	}
 
 	productsRead(id: number) {
+		const headers: HeadersInit = {
+			'Content-Type': 'application/json',
+		};
+		const token = Cookies.get('token');
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
 		return this._request(`products/${id}/`, {
 			method: 'GET',
+			headers,
 		});
 	}
 
@@ -321,20 +336,23 @@ class Api {
 		});
 	}
 
-	productsFavoriteCreate(id: number, data: FavoriteProductCreate) {
+	productsFavoriteCreate(id: number) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Token ${Cookies.get('token')}`,
 			},
-			body: JSON.stringify(data),
 		});
 	}
 
 	productsFavoriteDelete(id: number) {
 		return this._request(`products/${id}/favorite/`, {
 			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 
@@ -389,11 +407,16 @@ class Api {
 
 	/* ----------------------------- Categories ----------------------------- */
 	categoriesList() {
+		const headers: HeadersInit = {
+			'Content-Type': 'application/json',
+		};
+		const token = Cookies.get('token');
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
 		return this._request('categories', {
-			headers: {
-				'Content-Type': 'application/json',
-			},
 			method: 'GET',
+			headers,
 		});
 	}
 

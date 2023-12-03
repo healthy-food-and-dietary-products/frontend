@@ -8,6 +8,7 @@ import SliderComponent from '@components/slider-component';
 import Breadcrumbs from '@components/breadcrumbs';
 import type { Product } from '@services/generated-api/data-contracts';
 import Filter from '@components/filter';
+import { useCreateFavorite } from '@hooks/use-create-favorite';
 
 type filteredType = {
 	[key: string]: boolean;
@@ -28,6 +29,7 @@ const Category: React.FC = () => {
 		// 'lenten-menu': false,
 		// 'low-calorie': false,
 	});
+	const { toggleFavorite } = useCreateFavorite();
 
 	const { category } = useParams();
 
@@ -161,6 +163,8 @@ const Category: React.FC = () => {
 														idCard={item.id}
 														category={category}
 														measureUnit={item.measure_unit}
+														is_favorited={item.is_favorited}
+														onClickLick={toggleFavorite(item.id, products, setProducts)}
 													/>
 												</li>
 											))}

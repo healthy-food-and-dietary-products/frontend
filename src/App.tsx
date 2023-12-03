@@ -47,8 +47,8 @@ function App() {
 						path={URLS.PROFILE}
 						element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}
 					>
-						<Route path="user" element={<ProfileUser />} />
-						<Route index element={<ProfileOrders />} />
+						<Route index element={<ProfileUser />} />
+						<Route path="orders" element={<ProfileOrders />} />
 						<Route path="addresses" element={<ProfileAddresses />} />
 						<Route path="favorites" element={<ProfileFavorites />} />
 					</Route>

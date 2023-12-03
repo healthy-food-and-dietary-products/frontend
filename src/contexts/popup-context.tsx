@@ -1,17 +1,19 @@
 import React, { createContext, ReactNode, useState } from 'react';
 
+type PopupState = {
+	openPopupCheckEmail: boolean;
+	openPopupLogin: boolean;
+	openPopupRegistration: boolean;
+	openPopupLogout: boolean;
+	openPopupAddressesWarning: boolean;
+	openPopupAddressesDeleteConfirm: boolean;
+	openPopupRecipe: boolean;
+};
+
 type PopupContextType = {
-	popupState: {
-		openPopupCheckEmail: boolean;
-		openPopupLogin: boolean;
-		openPopupRegistration: boolean;
-		openPopupLogout: boolean;
-		openPopupAddressesWarning: boolean;
-		openPopupAddressesDeleteConfirm: boolean;
-		openPopupRecipe: boolean;
-	};
-	handleOpenPopup: (popupName: string) => void;
-	handleClosePopup: (popupName: string) => void;
+	popupState: PopupState;
+	handleOpenPopup: (popupName: keyof PopupState) => void;
+	handleClosePopup: (popupName: keyof PopupState) => void;
 };
 
 const PopupContext = createContext<PopupContextType | undefined>(undefined);

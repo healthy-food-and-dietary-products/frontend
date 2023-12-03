@@ -6,31 +6,19 @@ import api from '@services/api.ts';
 import Preloader from '@components/preloader';
 import ReviewStar from '@images/review-star.svg';
 import Breadcrumbs from '@components/breadcrumbs';
-
-type ProductItem = {
-	id: number;
-	name: string;
-	amount: number;
-	carbohydrates: number;
-	photo: string;
-	price: number;
-	description: string;
-	producer_name: string;
-	proteins: number;
-	kcal: number;
-	fats: number;
-	producer: {
-		producer_name: string;
-	};
-	category: {
-		category_name: string;
-	};
-};
+import { useCreateFavorite } from '@hooks/use-create-favorite';
+import { Product as ProductType } from '@services/generated-api/data-contracts';
+import { useAuth } from '@hooks/use-auth';
+import { usePopup } from '@hooks/use-popup';
 
 const Product: React.FC = () => {
 	const [isInCart, setIsInCart] = React.useState<boolean>(false);
-	const [isInFavorities, setIsInFavorities] = React.useState<boolean>(false);
-	const [productItem, setProductItem] = React.useState<ProductItem | null>(null);
+	const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+	const [productItem, setProductItem] = React.useState<ProductType | null>(null);
+
+	const { createFavorite, deleteFavorite } = useCreateFavorite();
+	const { isLoggedIn } = useAuth();
+	const { handleOpenPopup } = usePopup();
 
 	const { id } = useParams();
 
@@ -60,12 +48,16 @@ const Product: React.FC = () => {
 	}
 
 	function handleAddToFavorities() {
-		setIsInFavorities(!isInFavorities);
-		if (!isInFavorities) {
-			console.log('убрали из избранного');
-		}
-		console.log('кнопка В избранное нажата!');
-		console.log(isInFavorities);
+		if (isLoaded || !productItem) return;
+		if (!isLoggedIn) return handleOpenPopup('openPopupLogin');
+		setIsLoaded(true);
+		productItem.is_favorited
+			? deleteFavorite(productItem.id)
+					.then(() => setProductItem({ ...productItem, is_favorited: false }))
+					.finally(() => setIsLoaded(false))
+			: createFavorite(productItem.id)
+					.then(() => setProductItem({ ...productItem, is_favorited: true }))
+					.finally(() => setIsLoaded(false));
 	}
 
 	return (
@@ -104,9 +96,11 @@ const Product: React.FC = () => {
 									onClick={handleAddCartClick}
 								/>
 								<Button
-									buttonText={isInFavorities ? 'В избранном' : 'В избранное'}
+									buttonText={productItem.is_favorited ? 'В избранном' : 'В избранное'}
 									buttonStyle={
-										isInFavorities ? 'green-border-button__active' : 'green-border-button'
+										productItem.is_favorited
+											? 'green-border-button__active'
+											: 'green-border-button'
 									}
 									onClick={handleAddToFavorities}
 								/>

@@ -304,7 +304,7 @@ export interface ComponentLight {
 
 export interface Product {
 	/** ID */
-	id?: number;
+	id: number;
 	/**
 	 * Name
 	 * Product name
@@ -401,7 +401,7 @@ export interface Product {
 	 */
 	orders_number?: number;
 	/** Is favorited */
-	is_favorited?: string;
+	is_favorited?: boolean;
 }
 
 export interface ProductCreate {

@@ -5,12 +5,13 @@ import CardCatalogLink from '@components/card-catalog-link';
 import api from '@services/api.ts';
 import Preloader from '@components/preloader';
 import Breadcrumbs from '@components/breadcrumbs';
+import { Product } from '@services/generated-api/data-contracts';
 
 type Catalog = {
 	id: number;
 	name: string;
 	slug: string;
-	top_three_products: Record<string, unknown>[];
+	top_three_products: Product[];
 };
 
 const Catalog: React.FC = () => {
@@ -27,9 +28,7 @@ const Catalog: React.FC = () => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, []);
 
-	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
 

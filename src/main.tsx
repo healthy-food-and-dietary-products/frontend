@@ -8,13 +8,16 @@ import './scss/base.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth-context.tsx';
 import { PopupProvider } from '@contexts/popup-context.tsx';
+import { CreateFavoriteProvider } from '@contexts/create-favorite-context.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProvider>
 				<PopupProvider>
-					<App />
+					<CreateFavoriteProvider>
+						<App />
+					</CreateFavoriteProvider>
 				</PopupProvider>
 			</AuthProvider>
 		</BrowserRouter>

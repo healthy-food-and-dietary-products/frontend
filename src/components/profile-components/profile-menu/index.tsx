@@ -12,8 +12,8 @@ import Popup from '@components/popup';
 import { useState } from 'react';
 
 const menuArray = [
-	{ title: 'Мои заказы', Icon: BagIcon, path: '.' },
-	{ title: 'Личные данные', Icon: UserIcon, path: 'user' },
+	{ title: 'Мои заказы', Icon: BagIcon, path: 'orders' },
+	{ title: 'Личные данные', Icon: UserIcon, path: '.' },
 	{ title: 'Мои адреса', Icon: MarkerIcon, path: 'addresses' },
 	{ title: 'Избранное', Icon: HeartIcon, path: 'favorites' },
 	{ title: 'Выйти из аккаунта', Icon: ExitIcon },

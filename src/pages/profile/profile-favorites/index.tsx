@@ -1,21 +1,9 @@
 import { useState, useEffect } from 'react';
 import styles from './profile-favorites.module.scss';
-// import clsx from 'clsx';
 import api from '@services/api';
-// import type { CategoryLight } from '@services/generated-api/data-contracts';
 import ProductCard from '@components/product-card';
 import type { Product } from '@services/generated-api/data-contracts';
 import { Link } from 'react-router-dom';
-
-// type Product = {
-// 	name: string;
-// 	price: number;
-// 	amount: number;
-// 	id: number;
-// 	photo: string;
-// 	category: CategoryLight;
-// 	isCheckable: boolean;
-// } & Record<string, unknown>;
 
 export default function ProfileFavorites() {
 	const [productsLoadingStatus, setProductsLoadingStatus] = useState({
@@ -37,7 +25,7 @@ export default function ProfileFavorites() {
 			error: '',
 		});
 		api
-			.productsList('?is_favorited&limit=100')
+			.productsList('?is_favorited=1&limit=100')
 			.then((list) => {
 				setProducts(list.results);
 				setProductsLoadingStatus({
@@ -63,13 +51,11 @@ export default function ProfileFavorites() {
 		};
 	};
 
-	const isChooseAll = checkboxesValues.every((el) => el);
+	const isChooseAll = checkboxesValues.every((el) => el) || !products.length;
 
 	const toggleAll = () => {
 		setCheckboxesValue(checkboxesValues.map(() => (isChooseAll ? false : true)));
 	};
-
-	console.log(products);
 
 	return (
 		<div className={styles.wrapper}>
