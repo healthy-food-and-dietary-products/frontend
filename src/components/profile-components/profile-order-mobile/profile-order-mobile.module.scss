@@ -2,7 +2,7 @@
 @use '@scss/_mixins.scss' as *;
 
 .order {
-	display: grid;
+	display: none;
 	border-radius: 16px;
 	border: 1px solid $footer-background-color;
 	font-family: $ubuntu-font;
@@ -13,6 +13,12 @@
 	line-height: 1.4;
 	color: $active-text-color;
 	user-select: text;
+
+	@media screen and (width <= 768px) {
+		display: grid;
+		font-size: 14px;
+		font-weight: 500;
+	}
 }
 
 .order-title {
@@ -27,6 +33,14 @@
 	flex-wrap: wrap;
 	border-bottom: solid 1px $footer-background-color;
 	grid-row: 1;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 140%;
+		padding: 16px 36px;
+		justify-content: center;
+	}
 }
 
 .order-products {
@@ -36,12 +50,20 @@
 	margin: 0;
 	grid-row: 2;
 
+	@media screen and (width <= 768px) {
+		display: none;
+	}
+
 	.details & {
 		grid-row: 3;
 		padding: 16px;
 		display: grid;
 		grid-template-columns: auto minmax(auto, 250px) repeat(2, auto);
 		align-items: center;
+
+		@media screen and (width <= 768px) {
+			display: grid;
+		}
 	}
 }
 
@@ -87,6 +109,8 @@
 }
 
 .order-details {
+	// background-color: rgba(0, 255, 157, 0.24);
+	// outline: 2px dotted red;
 	margin: 0;
 	padding: 0 16px 16px;
 	display: flex;
@@ -115,4 +139,13 @@
 
 .status {
 	align-self: flex-end;
+}
+
+.price {
+	display: none;
+
+	@media screen and (width <= 768px) {
+		display: block;
+		margin: 0;
+	}
 }

@@ -9,7 +9,7 @@
 	white-space: nowrap;
 	overflow-x: auto;
 
-	@media screen and (width < 768px) {
+	@media screen and (width <= 768px) {
 		padding-top: 20px;
 		font-size: 14px;
 		font-weight: 500;

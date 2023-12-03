@@ -4,11 +4,19 @@
 .profile-orders {
 	margin-left: 87px;
 
+	@media screen and (width <= 768px) {
+		margin-left: 0;
+	}
+
 	&__title {
 		color: $active-text-color;
 		margin-bottom: 50px;
 		display: flex;
 		justify-content: space-between;
+
+		@media screen and (width <= 768px) {
+			margin-bottom: 0;
+		}
 
 		&-button {
 			background-color: transparent;
@@ -25,6 +33,10 @@
 		grid-auto-rows: 1fr;
 		gap: 40px;
 		margin-bottom: 24px;
+
+		@media screen and (width <= 768px) {
+			margin-top: 20px;
+		}
 	}
 
 	&__button {

@@ -9,7 +9,7 @@ type Props = {
 	status?: 'Completed' | 'Delivered' | 'Canceled' | 'Ordered';
 };
 
-export default function OrderStatus({ status = 'Completed' }: Props) {
+const OrderStatus = ({ status = 'Completed' }: Props) => {
 	let text, image, style;
 	switch (status) {
 		case 'Completed': {
@@ -40,9 +40,11 @@ export default function OrderStatus({ status = 'Completed' }: Props) {
 	return (
 		<p className={clsx(style, styles.status)}>
 			<span className={styles.icon}>
-				<img src={image} alt={text} />
+				<img className={styles.image} src={image} alt={text} />
 			</span>
 			<span>{text}</span>
 		</p>
 	);
-}
+};
+
+export default OrderStatus;

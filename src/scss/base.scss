@@ -30,6 +30,10 @@ h2 {
 	font-style: normal;
 	font-weight: 700;
 	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 18px;
+	}
 }
 
 h3 {
@@ -40,6 +44,10 @@ h3 {
 	font-style: normal;
 	font-weight: 700;
 	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+	}
 }
 
 .text-xl {

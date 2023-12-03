@@ -39,7 +39,7 @@ export const products = [
 	},
 	{
 		cardName: 'Огурцы короткоплодные',
-		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
+		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/4.jpg',
 		price: 200,
 		weight: 2,
 		buttonText: 'В корзину',
@@ -47,7 +47,7 @@ export const products = [
 	},
 	{
 		cardName: 'Перец болгарский',
-		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/1.jpg',
+		cardImage: 'https://goodfood.acceleratorpracticum.ru/media/images/products/7.jpg',
 		price: 300,
 		weight: 3,
 		buttonText: 'В корзину',
