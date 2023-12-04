@@ -8,7 +8,7 @@ import { Product } from '@services/generated-api/data-contracts';
 type CardCatalogLinkProps = {
 	title: string;
 	category?: string;
-	array: Product[];
+	array: Product[] | { title: string; link: string; backgroundImage: string }[];
 	type: 'bento-grid' | 'single-row';
 };
 
