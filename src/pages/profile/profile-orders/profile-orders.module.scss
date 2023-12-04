@@ -25,6 +25,11 @@
 			font-family: $ubuntu-font;
 			cursor: pointer;
 			color: $active-text-color;
+
+			@media screen and (width <= 768px) {
+				font-size: 15px;
+				font-weight: 700;
+			}
 		}
 	}
 

@@ -8,6 +8,7 @@ import UserIcon from '@images/profile/user.svg?react';
 import { useAuth } from '@hooks/use-auth';
 import clsx from 'clsx';
 import { usePopup } from '@hooks/use-popup';
+import { useProfile } from '@hooks/use-profile';
 import Popup from '@components/popup';
 import { useState } from 'react';
 
@@ -24,6 +25,7 @@ export default function ProfileMenu() {
 	const { logout } = useAuth();
 	const { handleOpenPopup, handleClosePopup, popupState } = usePopup();
 	const [isLoadingExit, setIsLoadingExit] = useState(false);
+	const { setIsProfileMenuOpen } = useProfile();
 
 	const handleExit = () => {
 		setIsLoadingExit(true);
@@ -39,6 +41,7 @@ export default function ProfileMenu() {
 				<li key={title} className={styles.item}>
 					{path ? (
 						<NavLink
+							onClick={() => setIsProfileMenuOpen(false)}
 							to={path}
 							className={({ isActive }) => clsx(styles.link, isActive && styles.active)}
 							end

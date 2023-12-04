@@ -20,12 +20,14 @@
 	display: flex;
 	flex-direction: column;
 	gap: 80px;
-
-	@media screen and (width <= 768px) {
-		display: none;
-	}
 }
 
 .content {
 	flex-grow: 1;
+}
+
+.display {
+	@media screen and (width <= 768px) {
+		display: none;
+	}
 }

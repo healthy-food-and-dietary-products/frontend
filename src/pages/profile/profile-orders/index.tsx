@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useProfile } from '@hooks/use-profile';
 import ProfileOrder from '@components/profile-components/profile-order';
 import ProfileOrderMobile from '@components/profile-components/profile-order-mobile';
 import styles from './profile-orders.module.scss';
@@ -9,6 +10,7 @@ export default function ProfileOrders() {
 	const [isOpenDetails, setIsOpenDetails] = useState<number>();
 	const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 768);
 	const [width, setWidth] = useState(window.innerWidth);
+	const { setIsProfileMenuOpen } = useProfile();
 
 	const onResize = () => {
 		setIsMobileScreen(window.innerWidth <= 768);
@@ -42,6 +44,15 @@ export default function ProfileOrders() {
 						type="button"
 					>
 						Назад к заказам
+					</button>
+				)}
+				{isMobileScreen && (
+					<button
+						onClick={() => setIsProfileMenuOpen(true)}
+						className={styles['profile-orders__title-button']}
+						type="button"
+					>
+						Назад к меню
 					</button>
 				)}
 			</div>

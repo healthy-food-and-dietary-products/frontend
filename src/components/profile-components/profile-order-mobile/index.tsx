@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
+import api from '@services/api.ts';
+import type { Product } from '@services/generated-api/data-contracts';
+import ProductCard from '@components/product-card';
 import styles from './profile-order-mobile.module.scss';
 import OrderStatus from '../order-status';
 import clsx from 'clsx';
-
-import { products } from '@data/dataExamples';
 
 const order_number = 1111;
 const ordering_date = new Date('2023-11-21T04:23:30.372Z');
@@ -22,6 +24,20 @@ const ProfileOrderMobile = ({
 	isShowedProductsDetails = false,
 	showDetails = () => {},
 }: Props) => {
+	// вместо products нужно использовать продукты из заказа пользователя
+	const [products, setProducts] = useState<Product[]>([]);
+
+	useEffect(() => {
+		// вместо products нужно использовать продукты из заказа пользователя
+		api
+			.productsList('')
+			.then((data) => {
+				setProducts(data.results);
+			})
+			.catch((err) => console.log(err))
+			.finally(() => {});
+	}, []);
+
 	return (
 		<button
 			type="button"
@@ -31,56 +47,40 @@ const ProfileOrderMobile = ({
 			<h4 className={styles['order-title']}>
 				<span>{`Заказ № ${order_number} от ${ordering_date.toLocaleDateString()}`}</span>
 			</h4>
-			{isShowedProductsDetails ? (
+			{isShowedProductsDetails && (
 				<div className={styles['order-products']}>
-					{products.map((prod, index) => (
-						<>
-							<div key={index} className={styles['product__image-large']}>
-								<img
-									className={styles.product__image}
-									src={prod.cardImage as string}
-									alt="Продукт"
-								/>
-							</div>
-							<p key={index} className={styles.product__name}>
-								{prod.cardName}
-							</p>
-							<p key={index} className={styles.product__weight}>{`${prod.weight || ''} ${
-								prod.measure_unit || ''
-							}`}</p>
-							<p key={index} className={styles.product__price}>{`${
-								prod.price || ''
-							} руб.`}</p>
-						</>
-					))}
-				</div>
-			) : (
-				<ul className={styles['order-products']}>
-					{products.map((product, index) => (
-						<li className={styles.product} key={product.cardName}>
-							{index < 5 && (
-								<div className={styles['product__image-small']}>
-									<img
-										className={styles.product__image}
-										src={product.cardImage}
-										alt={product.cardName}
-									/>
-								</div>
-							)}
+					{/* вместо products нужно использовать продукты из заказа пользователя */}
+					{products.map((item) => (
+						<li key={item.id}>
+							<ProductCard
+								cardName={item.name}
+								price={item.price}
+								weight={item.amount || 0}
+								cardImage={item.photo || ''}
+								idCard={item.id}
+								measureUnit={item.measure_unit}
+								is_favorited={item.is_favorited}
+							/>
 						</li>
 					))}
-				</ul>
+				</div>
 			)}
 
 			<div className={styles['order-details']}>
 				<div className={styles.info}>
-					<p className={styles.text}>{`Способ оплаты: ${payment_method}`}</p>
-					<p className={styles.text}>{`Способ получения: ${delivery_method}`}</p>
-					<p className={styles.price}>{`${price} руб.`}</p>
+					<p className={styles.text}>
+						<span className={styles['text-span']}>Способ получения:</span>
+						<span className={styles['text-span']}>{delivery_method}</span>
+					</p>
+					<p className={styles.text}>
+						<span className={styles['text-span']}>Способ оплаты:</span>
+						<span className={styles['text-span']}>{payment_method}</span>
+					</p>
 				</div>
-				<div className={styles.status}>
-					<OrderStatus status={status} />
-				</div>
+			</div>
+			<div className={styles.status}>
+				<p className={styles.price}>{`${price} руб.`}</p>
+				<OrderStatus status={status} />
 			</div>
 		</button>
 	);
