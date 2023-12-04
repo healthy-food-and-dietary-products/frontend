@@ -8,13 +8,16 @@ import './scss/base.scss';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth-context.tsx';
 import { PopupProvider } from '@contexts/popup-context.tsx';
+import { ProfileProvider } from '@contexts/profile-context';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProvider>
 				<PopupProvider>
-					<App />
+					<ProfileProvider>
+						<App />
+					</ProfileProvider>
 				</PopupProvider>
 			</AuthProvider>
 		</BrowserRouter>
