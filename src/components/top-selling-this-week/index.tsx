@@ -4,14 +4,11 @@ import type { Product } from '@services/generated-api/data-contracts';
 import Button from '@components/Button';
 import ProductCard from '@components/product-card';
 import styles from './top-selling-this-week.module.scss';
-import { useCreateFavorite } from '@hooks/use-create-favorite';
 
 const TopSellingThisWeek: React.FC = () => {
 	const [activeButton, setActiveButton] = useState<number>(1);
 	const [allProducts, setAllProducts] = useState<Product[]>([]);
 	const [topProducts, setTopproducts] = useState<Product[]>([]);
-
-	const { toggleFavorite } = useCreateFavorite();
 
 	const sortProducts = (products: Product[]) => {
 		return products
@@ -116,7 +113,6 @@ const TopSellingThisWeek: React.FC = () => {
 						weight={(product.amount && product?.amount) || 0}
 						measureUnit={product.measure_unit}
 						cardImage={product.photo || ''}
-						onClickLick={toggleFavorite(product.id, topProducts, setTopproducts)}
 					/>
 				))}
 			</div>

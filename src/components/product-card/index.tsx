@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './product-card.module.scss';
 import { BASE_URL } from '@data/constants.ts';
-import { useCreateFavorite } from '@hooks/use-create-favorite';
 import LikeIcon from '@images/like-icon.svg?react';
 import clsx from 'clsx';
 import { useAuth } from '@hooks/use-auth';
 import { usePopup } from '@hooks/use-popup';
 import CheckIcon from '@images/check.svg?react';
+import api from '@services/api';
 
 type ProductCardProps = {
 	cardName: string;
@@ -19,7 +19,6 @@ type ProductCardProps = {
 	category?: string;
 	idCard: number;
 	is_favorited?: boolean;
-	onClickLick?: () => void;
 	checkboxControl?: { checked: boolean; onChange: () => void };
 };
 
@@ -33,23 +32,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	checkboxControl,
 	measureUnit,
 	is_favorited = false,
-	onClickLick = () => {},
 }) => {
-	const { createFavorite, deleteFavorite } = useCreateFavorite();
 	const { isLoggedIn } = useAuth();
 	const { handleOpenPopup } = usePopup();
 	const [isLoaded, setIsLoaded] = useState(false);
+
+	const [isFavorite, setIsFavorite] = useState(is_favorited);
 
 	const handleLikeButton = () => {
 		if (isLoaded) return;
 		if (!isLoggedIn) return handleOpenPopup('openPopupLogin');
 		setIsLoaded(true);
-		is_favorited
-			? deleteFavorite(idCard)
-					.then(() => onClickLick())
+		isFavorite
+			? api
+					.productsFavoriteDelete(idCard)
+					.then(() => setIsFavorite(false))
 					.finally(() => setIsLoaded(false))
-			: createFavorite(idCard)
-					.then(() => onClickLick())
+			: api
+					.productsFavoriteCreate(idCard)
+					.then(() => setIsFavorite(true))
 					.finally(() => setIsLoaded(false));
 	};
 
@@ -111,10 +112,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					<>
 						<button onClick={handleLikeButton} className={styles['card__like-button']}>
 							<LikeIcon
-								className={clsx(
-									styles['card__like-icon'],
-									is_favorited && styles.favorite
-								)}
+								className={clsx(styles['card__like-icon'], isFavorite && styles.favorite)}
 							/>
 						</button>
 					</>

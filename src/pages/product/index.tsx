@@ -6,7 +6,6 @@ import api from '@services/api.ts';
 import Preloader from '@components/preloader';
 import ReviewStar from '@images/review-star.svg';
 import Breadcrumbs from '@components/breadcrumbs';
-import { useCreateFavorite } from '@hooks/use-create-favorite';
 import { Product as ProductType } from '@services/generated-api/data-contracts';
 import { useAuth } from '@hooks/use-auth';
 import { usePopup } from '@hooks/use-popup';
@@ -16,7 +15,6 @@ const Product: React.FC = () => {
 	const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
 	const [productItem, setProductItem] = React.useState<ProductType | null>(null);
 
-	const { createFavorite, deleteFavorite } = useCreateFavorite();
 	const { isLoggedIn } = useAuth();
 	const { handleOpenPopup } = usePopup();
 
@@ -52,10 +50,12 @@ const Product: React.FC = () => {
 		if (!isLoggedIn) return handleOpenPopup('openPopupLogin');
 		setIsLoaded(true);
 		productItem.is_favorited
-			? deleteFavorite(productItem.id)
+			? api
+					.productsFavoriteDelete(productItem.id)
 					.then(() => setProductItem({ ...productItem, is_favorited: false }))
 					.finally(() => setIsLoaded(false))
-			: createFavorite(productItem.id)
+			: api
+					.productsFavoriteCreate(productItem.id)
 					.then(() => setProductItem({ ...productItem, is_favorited: true }))
 					.finally(() => setIsLoaded(false));
 	}
