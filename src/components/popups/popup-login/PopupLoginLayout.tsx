@@ -77,6 +77,7 @@ const PopupLoginLayout: React.FC<PopupLoginLayoutProps> = (
 					<p className={styles['popupLogin__error-message']}>
 						{(Object.values(errors).find((error) => error) || '') as ReactNode}
 					</p>
+					<p className={styles['popupLogin__forgot']}>Забили пароль?</p>
 					<button
 						className={`${styles['popupLogin__button']} ${
 							!isValid ? `${styles['popupLogin__button_type_error']}` : ''
@@ -88,7 +89,6 @@ const PopupLoginLayout: React.FC<PopupLoginLayoutProps> = (
 					</button>
 				</form>
 				<p className={styles['popupLogin__registration-prompt']}>
-					Нет аккаунта?{' '}
 					<button
 						className={styles['popupLogin__registration-button']}
 						type="button"

@@ -61,4 +61,9 @@
 	&:hover {
 		opacity: 0.7;
 	}
+
+	@media screen and (width < 768px) {
+		width: 20px;
+		height: 20px;
+	}
 }

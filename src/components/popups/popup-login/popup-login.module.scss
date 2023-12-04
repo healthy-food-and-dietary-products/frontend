@@ -6,6 +6,12 @@
 	width: 100%;
 	min-height: 436px;
 	padding: 40px;
+
+	@media screen and (width < 768px) {
+		padding: 20px;
+		margin: 0 35px;
+		min-height: 330px;
+	}
 }
 
 .popupLogin__title {
@@ -21,6 +27,12 @@
 	font-weight: 700;
 	line-height: 140%;
 	margin-bottom: 40px;
+
+	@media screen and (width < 768px) {
+		height: 28px;
+		font-size: 18px;
+		margin-bottom: 16px;
+	}
 }
 
 .popupLogin__form {
@@ -32,7 +44,7 @@
 .popupLogin__error-message {
 	@extend %zero-padding-margin;
 
-	max-height: 50px;
+	max-height: 55px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	color: $error-color;
@@ -40,6 +52,22 @@
 	font-size: 13px;
 	font-weight: 300;
 	line-height: 140%;
+}
+
+.popupLogin__forgot {
+	@extend %zero-padding-margin;
+
+	color: var(--primary-700, #285718);
+	font-family: $ubuntu-font;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%;
+	margin-top: -9px;
+
+	@media screen and (width < 768px) {
+		font-size: 12px;
+	}
 }
 
 .popupLogin__button {
@@ -56,12 +84,17 @@
 	flex-shrink: 0;
 	background: $form-button-color;
 	border: none;
-	border-radius: 16px;
+	border-radius: 12px;
 	user-select: auto;
 	pointer-events: auto;
 	transition: 0.3s;
 	cursor: pointer;
 	opacity: 0.7;
+
+	@media screen and (width < 768px) {
+		height: 34px;
+		font-size: 13px;
+	}
 }
 
 .popupLogin__button_type_error {
@@ -83,6 +116,11 @@
 	line-height: normal;
 	letter-spacing: -0.26px;
 	margin-top: 20px;
+	padding: 0;
+
+	@media screen and (width < 768px) {
+		margin-top: 15px;
+	}
 }
 
 .popupLogin__registration-button {
@@ -97,6 +135,7 @@
 	border: none;
 	transition: 0.3s;
 	cursor: pointer;
+	padding: 0;
 
 	&:hover {
 		opacity: 0.7;

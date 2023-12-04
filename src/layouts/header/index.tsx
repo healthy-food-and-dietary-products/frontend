@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { useAuth } from '../../hooks/use-auth.ts';
 import Navigation from '@components/navigation';
 import styles from './header.module.scss';
 import NavigationIcons from '@components/navigation-icons';
 import BurgerMenu from '@components/burger-menu';
+import NavigationBar from '@components/navigation-bar';
 
 const Header: React.FC = () => {
 	// Этот блок кода предназначен для реализации переходов между страницами
@@ -17,16 +18,26 @@ const Header: React.FC = () => {
 	// 	<button>Профиль</button>
 	// )}
 	// const { isLoggedIn } = useAuth();
+	const [openBurger, setOpenBurger] = useState(false);
+	console.log(openBurger);
+	function ClickOpen() {
+		if (!openBurger) {
+			setOpenBurger(true);
+		} else {
+			setOpenBurger(false);
+		}
+	}
 
 	return (
 		<header className={styles.header}>
 			<div className={styles.header__container}>
-				<BurgerMenu />
+				<BurgerMenu ClickOpen={ClickOpen} />
 				<Link to={'/'} className="link">
 					<h1 className={styles.header__title}>GoodFood</h1>
 				</Link>
 				<Navigation />
 				<NavigationIcons />
+				<NavigationBar isOpen={openBurger} />
 			</div>
 		</header>
 	);

@@ -10,6 +10,11 @@ import { Product as ProductType } from '@services/generated-api/data-contracts';
 import { useAuth } from '@hooks/use-auth';
 import { usePopup } from '@hooks/use-popup';
 
+type ShoppingCartPostUpdateDelete = {
+	id: number;
+	quantity: number;
+};
+
 const Product: React.FC = () => {
 	const [isInCart, setIsInCart] = React.useState<boolean>(false);
 	const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
@@ -37,6 +42,33 @@ const Product: React.FC = () => {
 	}, []);
 
 	function handleAddCartClick() {
+		if (!productItem) {
+			return;
+		}
+
+		const shoppingCartItem: ShoppingCartPostUpdateDelete = {
+			products: [
+				{
+					id: 1,
+					quantity: 1,
+				},
+			],
+		};
+
+		console.log(shoppingCartItem);
+
+		api
+			.usersShoppingCartCreate(shoppingCartItem)
+			.then(() => {
+				api
+					.usersShoppingCartList()
+					.then((data) => console.log(data))
+					.catch()
+					.finally();
+			})
+			.catch(() => {})
+			.finally();
+
 		setIsInCart(!isInCart);
 		if (!isInCart) {
 			console.log('убрали из корзины((((');
@@ -92,7 +124,7 @@ const Product: React.FC = () => {
 							<div className={styles.product__btns}>
 								<Button
 									buttonText={isInCart ? 'В корзине' : 'В корзину'}
-									buttonStyle={isInCart ? 'cart-button__active' : 'cart-button'}
+									buttonStyle={isInCart ? 'green-border-button__active' : 'cart-button'}
 									onClick={handleAddCartClick}
 								/>
 								<Button

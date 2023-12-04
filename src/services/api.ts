@@ -251,15 +251,23 @@ class Api {
 		});
 	}
 
-	usersShoppingCartList(userId: string) {
-		return this._request(`users/${userId}/shopping_cart/`, {
+	usersShoppingCartList() {
+		return this._request(`shopping_cart/`, {
 			method: 'GET',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 	}
-
-	usersShoppingCartCreate(userId: string, data: ShoppingCartPostUpdateDelete) {
-		return this._request(`users/${userId}/shopping_cart/`, {
+	// userId: string
+	usersShoppingCartCreate(data: ShoppingCartPostUpdateDelete) {
+		return this._request(`shopping_cart/`, {
 			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(data),
 		});
 	}

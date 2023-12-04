@@ -24,6 +24,11 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: 140%;
+
+	@media screen and (width < 768px) {
+		font-size: 14px;
+		font-weight: 500;
+	}
 }
 
 .spanAfter {
@@ -48,6 +53,10 @@
 	padding: 10px 14px;
 	height: 48px;
 	box-sizing: border-box;
+
+	@media screen and (width < 768px) {
+		height: 34px;
+	}
 }
 
 .input_type_error {
