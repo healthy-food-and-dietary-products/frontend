@@ -9,10 +9,14 @@ const Navigation: React.FC = () => {
 				<Link className={styles.navigation_catalog} to={'/catalog'}>
 					Каталог
 				</Link>
-				<Link className={`${styles.navigation__item}  `} to={''}>
+				<Link
+					className={`${styles.navigation__item}  `}
+					to="#aboutCompany"
+					reloadDocument
+				>
 					О нас
 				</Link>
-				<Link className={` ${styles.navigation__item}`} to={''}>
+				<Link className={` ${styles.navigation__item}`} to="#delivery" reloadDocument>
 					Доставка
 				</Link>
 				<Link className={` ${styles.navigation__item}`} to={'/recipes'}>

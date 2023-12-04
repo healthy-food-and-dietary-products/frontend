@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 			<section className={styles.home__sliderSection}>
 				<SliderComponent />
 			</section>
-			<section className={styles.home__productsAndDelivery}>
+			<section id="delivery" className={styles.home__productsAndDelivery}>
 				<InfoCard
 					title="Только свежие и полезные продукты"
 					description="Мы отбираем поставщиков и контролируем качество на каждом этапе"
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 			<section className={styles.home__topSellingThisWeek}>
 				<TopSellingThisWeek />
 			</section>
-			<section className={styles.home__aboutCompany}>
+			<section id="aboutCompany" className={styles.home__aboutCompany}>
 				<AboutCompany />
 			</section>
 			<section className={styles.home__ourBlock}>
