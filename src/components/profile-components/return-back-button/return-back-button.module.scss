@@ -1,0 +1,13 @@
+@use '@scss/variables.scss' as *;
+
+.button {
+	@media screen and (width <= 768px) {
+		background-color: transparent;
+		border: none;
+		font-family: $ubuntu-font;
+		cursor: pointer;
+		color: $form-button-color;
+		font-size: 15px;
+		font-weight: 700;
+	}
+}
