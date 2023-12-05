@@ -133,7 +133,7 @@ const PopupRegistration: React.FC = () => {
 						disabled={disabledButton}
 						type="submit"
 					>
-						Войти
+						Зарегистрироваться
 					</button>
 				</form>
 				<p className={styles['popupLogin__registration-prompt']}>
