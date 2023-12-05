@@ -71,7 +71,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				<img
 					className={styles.card__image}
 					src={
-						cardImage !== undefined
+						cardImage !== undefined && cardImage !== null
 							? cardImage.startsWith('/')
 								? `${BASE_URL}${cardImage}`
 								: cardImage

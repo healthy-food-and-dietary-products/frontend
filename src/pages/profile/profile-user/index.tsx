@@ -14,13 +14,13 @@ export default function ProfileUser() {
 		const { email, first_name, last_name, phone_number, username, birth_date, city } =
 			user;
 		return {
-			email,
-			first_name,
-			last_name,
-			phone_number,
-			username,
-			birth_date,
-			city,
+			profile_email: email,
+			profile_firstName: first_name,
+			profile_lastName: last_name,
+			profile_phoneNumber: phone_number,
+			profile_username: username,
+			profile_birthDate: birth_date,
+			profile_city: city,
 		} as Record<string, string | number>;
 	}, [user]);
 
@@ -48,13 +48,14 @@ export default function ProfileUser() {
 
 		api
 			.usersMePartialUpdate({
-				email: `${values.email}`,
-				username: `${values.username}`,
-				first_name: `${values.first_name}`,
-				last_name: `${values.last_name}`,
-				// city: `${values.city}`,
-				birth_date: values.birth_date === '' ? null : `${values.birth_date}`,
-				phone_number: `${values.phone_number}`,
+				email: `${values.profile_email}`,
+				username: `${values.profile_username}`,
+				first_name: `${values.profile_firstName}`,
+				last_name: `${values.profile_lastName}`,
+				// city: `${values.profile_city}`,
+				birth_date:
+					values.profile_birthDate === '' ? null : `${values.profile_birthDate}`,
+				phone_number: `${values.profile_phoneNumber}`,
 			})
 			.then((data) => {
 				updateUsers(data);
