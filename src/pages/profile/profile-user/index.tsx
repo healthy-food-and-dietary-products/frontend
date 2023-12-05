@@ -1,15 +1,18 @@
+import { useState, useMemo } from 'react';
 import Input from '@components/ui/input';
 import styles from './profile-user.module.scss';
 import clsx from 'clsx';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
+import { useProfile } from '@hooks/use-profile';
 import { useAuth } from '@hooks/use-auth';
-import { useState, useMemo } from 'react';
+import ReturnBackButton from '@components/profile-components/return-back-button';
 import api from '@services/api';
 // import { usePopup } from '@hooks/use-popup';
 // import PopupCheckEmail from '@components/popups/popup-check-email';
 
 export default function ProfileUser() {
 	const { updateUsers, user } = useAuth();
+	const { isMobileScreen } = useProfile();
 	const initialValues = useMemo(() => {
 		const { email, first_name, last_name, phone_number, username, birth_date, city } =
 			user;
@@ -68,7 +71,10 @@ export default function ProfileUser() {
 
 	return (
 		<div className={styles.wrapper} style={{ position: 'relative' }}>
-			<h2 className={styles.title}>Личные данные</h2>
+			<div className={styles.title}>
+				<h2 className={styles.title__text}>Личные данные</h2>
+				{isMobileScreen && <ReturnBackButton />}
+			</div>
 			<form className={styles.form} onSubmit={onSubmitForm}>
 				<p className={clsx(styles.text, styles.text__red)}>
 					* Обязательное поле для заполнения

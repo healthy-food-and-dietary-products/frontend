@@ -64,4 +64,8 @@
 	font-size: 24px;
 	font-family: $ubuntu-font;
 	color: $active-text-color;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+	}
 }
