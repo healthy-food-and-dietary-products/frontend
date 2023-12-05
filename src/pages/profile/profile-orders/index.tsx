@@ -3,19 +3,24 @@ import { useProfile } from '@hooks/use-profile';
 import ProfileOrder from '@components/profile-components/profile-order';
 import ProfileOrderMobile from '@components/profile-components/profile-order-mobile';
 import styles from './profile-orders.module.scss';
-
-const ordersArray = [...new Array(4)];
+import api from '@services/api';
+import { OrderList } from '@services/generated-api/data-contracts';
 
 export default function ProfileOrders() {
 	const [isOpenDetails, setIsOpenDetails] = useState<number>();
 	const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth <= 768);
 	const [width, setWidth] = useState(window.innerWidth);
+	const [orders, setOrders] = useState<OrderList[]>([]);
 	const { setIsProfileMenuOpen } = useProfile();
 
 	const onResize = () => {
 		setIsMobileScreen(window.innerWidth <= 768);
 		setWidth(window.innerWidth);
 	};
+
+	useEffect(() => {
+		api.usersOrderList().then((data) => setOrders(data));
+	}, []);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -33,6 +38,7 @@ export default function ProfileOrders() {
 	};
 
 	const hideDetails = () => setIsOpenDetails(undefined);
+
 	return (
 		<div className={styles['profile-orders']}>
 			<div className={styles['profile-orders__title']}>
@@ -57,29 +63,33 @@ export default function ProfileOrders() {
 				)}
 			</div>
 			<div className={styles['profile-orders__list']}>
-				{ordersArray
-					.filter((_, index) =>
-						typeof isOpenDetails === 'number' ? isOpenDetails === index : true
-					)
-					.map((_, index) =>
-						isMobileScreen ? (
-							<ProfileOrderMobile
-								key={index}
-								isShowedProductsDetails={typeof isOpenDetails === 'number'}
-								showDetails={showDetails(index)}
-							/>
-						) : (
-							<ProfileOrder
-								key={index}
-								isShowedProductsDetails={typeof isOpenDetails === 'number'}
-								showDetails={showDetails(index)}
-							/>
+				{orders.length ? (
+					orders
+						.filter((order) => (isOpenDetails ? isOpenDetails === order.id : true))
+						.map((order) =>
+							isMobileScreen ? (
+								<ProfileOrderMobile
+									key={order.id}
+									order={order}
+									isShowedProductsDetails={!!isOpenDetails}
+									showDetails={showDetails(order.id)}
+								/>
+							) : (
+								<ProfileOrder
+									key={order.id}
+									order={order}
+									isShowedProductsDetails={!!isOpenDetails}
+									showDetails={showDetails(order.id)}
+								/>
+							)
 						)
-					)}
+				) : (
+					<p className={styles['text']}>Вы пока ничего не заказывали</p>
+				)}
 			</div>
-			{typeof isOpenDetails !== 'number' && (
+			{/* {typeof isOpenDetails !== 'number' && (
 				<button className={styles['profile-orders__button']}>Загрузить еще</button>
-			)}
+			)} */}
 		</div>
 	);
 }

@@ -1,27 +1,44 @@
 import styles from './profile-order.module.scss';
 import OrderStatus from '../order-status';
 import clsx from 'clsx';
-
-import { products } from '@data/dataExamples';
-
-const order_number = 1111;
-const ordering_date = new Date('2023-11-21T04:23:30.372Z');
-const price = 100;
-
-const payment_method = 'Наличные';
-const delivery_method = 'Курьером';
-
-const status = 'Delivered';
+import { OrderList } from '@services/generated-api/data-contracts';
 
 type Props = {
 	readonly isShowedProductsDetails?: boolean;
 	readonly showDetails?: () => void;
+	readonly order: OrderList;
 };
 
 const ProfileOrder = ({
 	isShowedProductsDetails = false,
 	showDetails = () => {},
+	order,
 }: Props) => {
+	const {
+		order_number,
+		ordering_date,
+		total_price,
+		payment_method,
+		delivery_method,
+		status,
+		products,
+	} = order;
+
+	let payment_method_ru =
+		payment_method === 'Payment at the point of delivery'
+			? 'Банковской картой'
+			: 'Наличные';
+
+	let delivery_method_ru;
+	if (delivery_method === 'Point of delivery') {
+		delivery_method_ru = 'Самовывоз';
+	} else {
+		delivery_method_ru = 'Курьером';
+		payment_method_ru += 'курьеру';
+	}
+
+	const date = ordering_date && new Date(ordering_date).toLocaleDateString();
+
 	return (
 		<>
 			<button
@@ -30,42 +47,38 @@ const ProfileOrder = ({
 				onClick={showDetails}
 			>
 				<h4 className={styles['order-title']}>
-					<span>{`Заказ № ${order_number} от ${ordering_date.toLocaleDateString()}`}</span>
-					<span>{`${price} руб`}</span>
+					<span>{`Заказ № ${order_number} от ${date}`}</span>
+					<span>{`${total_price} руб`}</span>
 				</h4>
 				{isShowedProductsDetails ? (
-					<div className={styles['order-products']}>
-						{products.map((prod, index) => (
-							<>
-								<div key={index} className={styles['product__image-large']}>
+					<ul className={styles['order-products']}>
+						{products.map((product) => (
+							<li className={styles.product} key={product.name}>
+								<div className={styles['product__image-large']}>
 									<img
 										className={styles.product__image}
-										src={prod.cardImage as string}
-										alt="Продукт"
+										src={product.photo}
+										alt={product.name}
 									/>
 								</div>
-								<p key={index} className={styles.product__name}>
-									{prod.cardName}
-								</p>
-								<p key={index} className={styles.product__weight}>{`${
-									prod.weight || ''
-								} ${prod.measure_unit || ''}`}</p>
-								<p key={index} className={styles.product__price}>{`${
-									prod.price || ''
-								} руб.`}</p>
-							</>
+								<p className={styles.product__name}>{product.name}</p>
+								<p className={styles.product__weight}>{`${
+									product.amount * Number(product.quantity)
+								} ${product.measure_unit}`}</p>
+								<p className={styles.product__price}>{`${product.final_price} руб.`}</p>
+							</li>
 						))}
-					</div>
+					</ul>
 				) : (
 					<ul className={styles['order-products']}>
 						{products.map((product, index) => (
-							<li className={styles.product} key={product.cardName}>
+							<li className={styles.product} key={index}>
 								{index < 5 && (
 									<div className={styles['product__image-small']}>
 										<img
 											className={styles.product__image}
-											src={product.cardImage}
-											alt={product.cardName}
+											src={product.photo}
+											alt={product.name}
 										/>
 									</div>
 								)}
@@ -76,8 +89,8 @@ const ProfileOrder = ({
 
 				<div className={styles['order-details']}>
 					<div className={styles.info}>
-						<p className={styles.text}>{`Способ оплаты: ${payment_method}`}</p>
-						<p className={styles.text}>{`Способ получения: ${delivery_method}`}</p>
+						<p className={styles.text}>{`Способ оплаты: ${payment_method_ru}`}</p>
+						<p className={styles.text}>{`Способ получения: ${delivery_method_ru}`}</p>
 					</div>
 					<div className={styles.status}>
 						<OrderStatus status={status} />

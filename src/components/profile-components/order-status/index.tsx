@@ -6,37 +6,46 @@ import deliveredIcon from '@images/profile/car-status.svg';
 import clsx from 'clsx';
 
 type Props = {
-	status?: 'Completed' | 'Delivered' | 'Canceled' | 'Ordered';
+	status?:
+		| 'Ordered'
+		| 'In processing'
+		| 'Collecting'
+		| 'Gathered'
+		| 'In delivering'
+		| 'Delivered'
+		| 'Completed';
+};
+
+const statusObj = {
+	Completed: {
+		text: 'Доставлен',
+		image: doneIcon,
+		style: styles.done,
+	},
+	Delivered: {
+		text: 'Доставляется',
+		image: deliveredIcon,
+		style: styles.delivered,
+	},
+	Canceled: {
+		text: 'Отменен',
+		image: canceledIcon,
+		style: styles.canceled,
+	},
+	Ordered: {
+		text: 'Оплачен',
+		image: orderedIcon,
+		style: styles.ordered,
+	},
+	Gathered: { text: '', image: '', style: '' },
+	'In processing': { text: '', image: '', style: '' },
+	'In delivering': { text: '', image: '', style: '' },
+	Collecting: { text: '', image: '', style: '' },
 };
 
 const OrderStatus = ({ status = 'Completed' }: Props) => {
-	let text, image, style;
-	switch (status) {
-		case 'Completed': {
-			text = 'Доставлен';
-			image = doneIcon;
-			style = styles.done;
-			break;
-		}
-		case 'Delivered': {
-			text = 'Доставляется';
-			image = deliveredIcon;
-			style = styles.delivered;
-			break;
-		}
-		case 'Canceled': {
-			text = 'Отменен';
-			image = canceledIcon;
-			style = styles.canceled;
-			break;
-		}
-		case 'Ordered': {
-			text = 'Оплачен';
-			image = orderedIcon;
-			style = styles.ordered;
-			break;
-		}
-	}
+	const { text, image, style } = statusObj[status];
+
 	return (
 		<p className={clsx(style, styles.status)}>
 			<span className={styles.icon}>

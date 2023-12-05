@@ -113,6 +113,7 @@ const TopSellingThisWeek: React.FC = () => {
 						weight={(product.amount && product?.amount) || 0}
 						measureUnit={product.measure_unit}
 						cardImage={product.photo || ''}
+						category={product.category?.category_slug}
 					/>
 				))}
 			</div>

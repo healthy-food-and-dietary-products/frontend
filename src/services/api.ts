@@ -7,7 +7,6 @@ import type {
 	UsernameResetConfirm,
 	SetPassword,
 	SetUsername,
-	OrderPostDelete,
 	ShoppingCartPostUpdateDelete,
 	Producer,
 	ProductCreate,
@@ -18,6 +17,7 @@ import type {
 	Promotion,
 	Subcategory,
 	Tag,
+	OrderPostAdd,
 } from './generated-api/data-contracts';
 import { BACKEND_URL } from '@data/constants.ts';
 import Cookies from 'js-cookie';
@@ -226,16 +226,29 @@ class Api {
 		});
 	}
 
-	usersOrderList(userId: string) {
-		return this._request(`users/${userId}/order/`, {
+	usersOrderList() {
+		return this._request(`order/`, {
 			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
 		});
 	}
 
-	usersOrderCreate(userId: string, data: OrderPostDelete) {
-		return this._request(`users/${userId}/order/`, {
+	usersOrderCreate(data: OrderPostAdd) {
+		const headers: HeadersInit = {
+			'Content-Type': 'application/json',
+		};
+		const token = Cookies.get('token');
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
+		return this._request(`order/`, {
 			method: 'POST',
+			headers,
 			body: JSON.stringify(data),
+			credentials: 'include',
 		});
 	}
 

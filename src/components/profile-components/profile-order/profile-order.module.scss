@@ -46,6 +46,13 @@
 }
 
 .product {
+	.details & {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: span 4;
+		align-items: center;
+	}
+
 	&__name {
 		justify-self: start;
 		margin: 0;

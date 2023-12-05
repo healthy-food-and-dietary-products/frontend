@@ -940,7 +940,7 @@ export interface SetUsername {
 
 export interface OrderList {
 	/** ID */
-	id?: number;
+	id: number;
 	user?: UserPresent;
 	shopping_cart?: ShoppingCartGet;
 	/** Order number */
@@ -979,6 +979,15 @@ export interface OrderList {
 	comment?: string | null;
 	/** Total price */
 	total_price?: string;
+	products: Array<{
+		amount: number;
+		final_price: number;
+		id: number;
+		measure_unit: string;
+		name: string;
+		quantity: string;
+		photo: string;
+	}>;
 }
 
 export interface OrderPostDelete {
@@ -997,5 +1006,14 @@ export interface OrderPostDelete {
 	/** Comment */
 	comment?: string | null;
 	/** User's address */
-	address?: number | null;
+	add_address?: string;
+}
+
+export interface OrderPostAdd extends OrderPostDelete {
+	user_data: {
+		first_name: string;
+		last_name: string;
+		phone_number: string;
+		email: string;
+	};
 }
