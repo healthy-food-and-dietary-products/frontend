@@ -4,6 +4,12 @@
 	display: flex;
 	flex-direction: column;
 	width: 120px;
+
+	@media screen and (width <= 768px) {
+		width: 75px;
+		align-self: center;
+		text-align: center;
+	}
 }
 
 .img__wrapper {
@@ -21,22 +27,23 @@
 }
 
 .input {
-	opacity: 0;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	z-index: 10;
-	top: 0;
-	left: 0;
+	height: 0;
+	width: 0;
 }
 
 .button {
-	position: relative;
+	cursor: pointer;
 
 	@extend %text;
 
 	font-size: 16px;
 	margin-bottom: 20px;
+
+	@media screen and (width <= 768px) {
+		font-size: 10px;
+		font-weight: 300;
+		margin: 0 0 12px;
+	}
 }
 
 .title {
