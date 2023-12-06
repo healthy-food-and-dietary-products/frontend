@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import styles from './profile-addresses.module.scss';
 import InputAddress from '@components/profile-components/input-address';
 import { useAuth } from '@hooks/use-auth';
+import { useProfile } from '@hooks/use-profile';
 import api from '@services/api';
 import { Address } from '@services/generated-api/data-contracts';
 import clsx from 'clsx';
 import PopupAddressesWarning from '@components/popups/popup-addresses-warning';
 import PopupAddressesDeleteConfirm from '@components/popups/popup-addresses-delete-confirm';
+import ReturnBackButton from '@components/profile-components/return-back-button';
 import { usePopup } from '@hooks/use-popup';
 
 type stateType = Array<{ value: string; initialValue: string; isChanged: boolean }>;
@@ -34,6 +36,7 @@ export default function ProfileAddresses() {
 	const [values, setValues] = useState<stateType>([new Value('', '')]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [addressesIndex, setAddressesIndex] = useState<number>();
+	const { isMobileScreen } = useProfile();
 
 	const isVisibleAddButton =
 		Boolean(values.at(-1)?.initialValue) && !values.at(-1)?.isChanged;
@@ -147,7 +150,10 @@ export default function ProfileAddresses() {
 
 	return (
 		<div className={styles.wrapper}>
-			<h2 className={styles.title}>Мои адреса</h2>
+			<div className={styles.title}>
+				<h2 className={styles.title__text}>Мои адреса</h2>
+				{isMobileScreen && <ReturnBackButton />}
+			</div>
 			<form className={styles.form} onSubmit={onSubmit}>
 				<div className={styles.inputs}>
 					{values.map((address, i) => (

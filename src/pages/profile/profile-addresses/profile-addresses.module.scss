@@ -3,17 +3,38 @@
 
 .wrapper {
 	margin-left: 107px;
+
+	@media screen and (width <= 768px) {
+		margin: auto;
+		max-width: 420px;
+	}
 }
 
 .title {
+	@media screen and (width <= 768px) {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 28px;
+	}
+}
+
+.title__text {
 	color: $active-text-color;
 	margin-bottom: 50px;
+
+	@media screen and (width <= 768px) {
+		margin-bottom: 0;
+	}
 }
 
 .form {
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
+
+	@media screen and (width <= 768px) {
+		gap: 16px;
+	}
 }
 
 .inputs {
@@ -25,10 +46,14 @@
 .buttons {
 	display: flex;
 	gap: 40px;
+
+	@media screen and (width <= 768px) {
+		justify-content: space-between;
+	}
 }
 
 .button {
-	padding: 8px 16px;
+	padding: 8px 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -38,6 +63,10 @@
 	font-family: $ubuntu-font;
 	line-height: 1.4;
 	cursor: pointer;
+
+	@media screen and (width<=768px) {
+		font-size: 13px;
+	}
 }
 
 .button__safe {
