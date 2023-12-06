@@ -3,7 +3,7 @@ import styles from './about-company.module.scss';
 const AboutCompany = () => {
 	return (
 		<div className={styles.aboutCompany}>
-			<div>
+			<div className={styles.aboutCompany__intro}>
 				<h2 className={styles.aboutCompany__title}>Переходи с нами на сторону добра!</h2>
 				<div className={styles.aboutCompany__textBlock}>
 					<p
@@ -21,7 +21,6 @@ const AboutCompany = () => {
 						А если не нашли, то пишите нам.
 					</p>
 				</div>
-				<div></div>
 			</div>
 			<div className={styles.aboutCompany__container}>
 				<div className={styles.aboutCompany__forTwoBlocks}>

@@ -4,10 +4,27 @@
 .aboutCompany {
 	width: 80%;
 	font-family: $ubuntu-font;
+
+	@media screen and (width <= 768px) {
+		width: calc(100% - 20px * 2);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+.aboutCompany__intro {
+	@media screen and (width <= 768px) {
+		max-width: 400px;
+	}
 }
 
 .aboutCompany__title {
 	font-size: 36px;
+
+	@media screen and (width <= 768px) {
+		font-size: 24px;
+	}
 }
 
 .aboutCompany__text_white {
@@ -15,7 +32,7 @@
 }
 
 .aboutCompany__textBlock {
-	width: 600px;
+	max-width: 600px;
 }
 
 .aboutCompany__paragraphBold {
@@ -24,10 +41,18 @@
 	font-size: 22px;
 	font-weight: 500;
 	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 14px;
+	}
 }
 
 .aboutCompany__paragraphPadding {
 	padding: 16px 0;
+
+	@media screen and (width <= 768px) {
+		padding: 8px 0;
+	}
 }
 
 .aboutCompany__paragraph {
@@ -35,12 +60,27 @@
 
 	font-size: 20px;
 	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+	}
 }
 
 .aboutCompany__container {
 	margin-top: 52px;
 	display: flex;
 	column-gap: 28px;
+
+	@media screen and (width <= 1200px) {
+		max-height: max-content;
+	}
+
+	@media screen and (width <= 768px) {
+		box-sizing: border-box;
+		flex-direction: column;
+		gap: 4px;
+		margin-top: 20px;
+	}
 }
 
 .aboutCompany__block {
@@ -49,41 +89,101 @@
 }
 
 .aboutCompany__blockBigMargin {
-	margin-top: 109px;
+	margin-top: 85px;
+
+	@media screen and (width <= 768px) {
+		margin-top: 4px;
+	}
 }
 
 .aboutCompany__blockSmallMargin {
 	margin-top: 29px;
+
+	@media screen and (width <= 768px) {
+		margin-top: 4px;
+	}
 }
 
 .aboutCompany__forTwoBlocks {
-	width: 261px;
+	display: flex;
+	flex-direction: column;
+	max-width: 261px;
+	width: 100%;
+
+	@media screen and (width <= 1200px) {
+		max-height: max-content;
+		height: 100%;
+	}
+
+	@media screen and (width <= 768px) {
+		max-width: 400px;
+		width: 100%;
+		order: 1;
+	}
 }
 
 .aboutCompany__greyBlock {
-	width: 221px;
-	height: 164px;
+	max-width: 221px;
+	max-height: 164px;
 	background-color: $light-background-color;
+
+	@media screen and (width <= 1200px) {
+		max-height: 300px;
+		height: 100%;
+	}
+
+	@media screen and (width <= 768px) {
+		max-width: 400px;
+	}
 }
 
 .aboutCompany__imgBlock {
 	margin-top: 24px;
 	padding: 0;
-	width: 261px;
+	max-width: 261px;
 	height: 174px;
+	width: 100%;
 	background-image: url('@images/healthy-young-woman.jpeg');
 	background-size: cover;
+	background-position: center;
+
+	@media screen and (width <= 1200px) {
+		flex-grow: 1;
+	}
+
+	@media screen and (width <= 768px) {
+		display: none;
+	}
 }
 
 .aboutCompany__greenBlock {
-	width: 360px;
-	height: 362px;
+	max-width: 360px;
+	max-height: 362px;
 	background-color: $accent-color-darkgreen;
+
+	@media screen and (width <= 1200px) {
+		max-height: max-content;
+	}
+
+	@media screen and (width <= 768px) {
+		max-width: 400px;
+		order: 3;
+	}
 }
 
 .aboutCompany__lightGreenBlock {
 	margin-top: 80px;
-	width: 347px;
-	height: 279px;
+	max-width: 347px;
+	max-height: 279px;
 	background-color: $accent-color-lightest-green;
+
+	@media screen and (width <= 1200px) {
+		max-height: max-content;
+	}
+
+	@media screen and (width <= 768px) {
+		max-width: 400px;
+		order: 2;
+		margin: 0;
+	}
 }
