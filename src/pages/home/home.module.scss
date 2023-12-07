@@ -17,9 +17,18 @@
 	margin-top: 122px;
 	display: flex;
 	justify-content: center;
+
+	@media screen and (width <=768px) {
+		margin-top: 60px;
+	}
 }
 
 .home__ourBlock {
-	margin-top: 116px;
-	padding: 0 128px;
+	width: 80%;
+	margin: 116px auto 0;
+
+	@media screen and (width <= 768px) {
+		width: calc(100% - 2 * 20px);
+		margin-top: 60px;
+	}
 }

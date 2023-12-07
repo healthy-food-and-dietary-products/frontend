@@ -10,17 +10,17 @@ const OurBlock: React.FC = () => {
 				<TopicCard
 					cardName="Оладьи без яиц"
 					cardDescription="Простой рецепт для уютного завтрака с семьёй."
-					cardDate="29 окт. 2023"
+					cardDate="30 минут"
 				/>
 				<TopicCard
-					cardName="Оладьи без яиц"
-					cardDescription="Простой рецепт для уютного завтрака с семьёй."
-					cardDate="29 окт. 2023"
+					cardName="Вегетарианский суп"
+					cardDescription="Согревающий суп, как раз для начала осени."
+					cardDate="40 минут"
 				/>
 				<TopicCard
-					cardName="Оладьи без яиц"
-					cardDescription="Простой рецепт для уютного завтрака с семьёй."
-					cardDate="29 окт. 2023"
+					cardName="Паста болоньезе"
+					cardDescription="Итальянская класстка за 30 минут на вашем столе."
+					cardDate="60 минут"
 				/>
 			</div>
 		</div>

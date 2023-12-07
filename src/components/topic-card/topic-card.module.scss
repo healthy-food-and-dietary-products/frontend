@@ -5,6 +5,11 @@
 	max-height: 380px;
 	max-width: 328px;
 	cursor: pointer;
+
+	@media screen and (width <= 768px) {
+		min-width: 138px;
+		max-width: 200px;
+	}
 }
 
 .card__link {
@@ -64,6 +69,10 @@
 	font-family: Ubuntu, Arial, sans-serif;
 	overflow: hidden;
 	text-overflow: ellipsis;
+
+	@media screen and (width <= 768px) {
+		padding: 8px;
+	}
 }
 
 .card__title {
@@ -77,6 +86,13 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	font-style: normal;
+	width: 100%;
+
+	@media screen and (width <= 768px) {
+		white-space: initial;
+		font-size: 15px;
+		font-weight: 700;
+	}
 }
 
 .card__description {
@@ -91,6 +107,10 @@
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;
+
+	@media screen and (width <= 768px) {
+		display: none;
+	}
 }
 
 .card__date {
@@ -103,4 +123,8 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	color: rgb(255 255 255 / 70%);
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+	}
 }
