@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@components/Button';
 import styles from './product-card.module.scss';
 import { BASE_URL } from '@data/constants.ts';
 import LikeIcon from '@images/like-icon.svg?react';
 import clsx from 'clsx';
 import { useAuth } from '@hooks/use-auth';
 import { usePopup } from '@hooks/use-popup';
+import { useCart } from '@hooks/use-cart-context.ts';
 import CheckIcon from '@images/check.svg?react';
 import api from '@services/api';
 
@@ -38,6 +40,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const [isFavorite, setIsFavorite] = useState(is_favorited);
+	const { cartData, updateCart, deleteCart } = useCart();
+	const [isInCart, setIsInCart] = React.useState<boolean>(false);
+
+	useEffect(() => {
+		if (idCard !== undefined) {
+			const isProductInCart = cartData.products.some((product) => product.id === idCard);
+			setIsInCart(isProductInCart);
+		}
+	}, [cartData, idCard]);
 
 	const handleLikeButton = () => {
 		if (isLoaded) return;
@@ -52,6 +63,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 					.productsFavoriteCreate(idCard)
 					.then(() => setIsFavorite(true))
 					.finally(() => setIsLoaded(false));
+	};
+
+	const handleCartButton = () => {
+		if (isInCart) {
+			return deleteCart(idCard);
+		}
+		return updateCart(idCard, 1);
 	};
 
 	// Можно вынести в отдельный фал
@@ -93,8 +111,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 			</div>
 
 			<div className={styles['card__button-container']}>
-				{/* кнопку "В корзину" заменить на кноку из UI-kit */}
-				<button className={styles['card__cart-button']}>В корзину</button>
+				<Button
+					buttonText={isInCart ? 'В корзине' : 'В корзину'}
+					buttonStyle={isInCart ? 'green-border-button' : 'green-border-button__active'}
+					onClick={handleCartButton}
+				/>
 
 				{checkboxControl ? (
 					<label className={styles.label}>

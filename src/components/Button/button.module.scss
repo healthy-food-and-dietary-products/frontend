@@ -143,9 +143,9 @@
 
 	transition: 0.5s;
 
-	@media screen and (width <= 876px) {
+	@media screen and (width <= 768px) {
 		font-size: 13px;
-		max-width: 110px;
+		max-width: 94px;
 		max-height: 34px;
 		border-radius: 12px;
 	}
@@ -168,9 +168,9 @@
 	height: 50px;
 	transition: 0.5s;
 
-	@media screen and (width <= 876px) {
+	@media screen and (width <= 768px) {
 		font-size: 13px;
-		max-width: 110px;
+		max-width: 94px;
 		max-height: 34px;
 		border-radius: 12px;
 	}
@@ -200,7 +200,7 @@
 
 	transition: 0.5s;
 
-	@media screen and (width <= 876px) {
+	@media screen and (width <= 768px) {
 		font-size: 13px;
 		max-width: 94px;
 		max-height: 34px;

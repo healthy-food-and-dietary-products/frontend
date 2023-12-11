@@ -99,32 +99,32 @@
 	}
 }
 
-.card__cart-button {
-	background: #eaeaea;
-	padding: 11px 32px;
-	border: none;
-	color: #1a1a1a;
-	font-family: Ubuntu, Arial, sans-serif;
-	font-size: 18px;
-	font-weight: 400;
-	line-height: 140%;
-	border-radius: 16px;
-	max-width: 153px;
+// .card__cart-button {
+// 	background: #eaeaea;
+// 	padding: 11px 32px;
+// 	border: none;
+// 	color: #1a1a1a;
+// 	font-family: Ubuntu, Arial, sans-serif;
+// 	font-size: 18px;
+// 	font-weight: 400;
+// 	line-height: 140%;
+// 	border-radius: 16px;
+// 	max-width: 153px;
 
-	&:hover {
-		color: white;
-		background-color: $accent-color-bright-green;
-		cursor: pointer;
-	}
+// 	&:hover {
+// 		color: white;
+// 		background-color: $accent-color-bright-green;
+// 		cursor: pointer;
+// 	}
 
-	transition: 0.3s;
+// 	transition: 0.3s;
 
-	@media screen and (width <= 768px) {
-		padding: 8px 16px;
-		font-size: 13px;
-		border-radius: 12px;
-	}
-}
+// 	@media screen and (width <= 768px) {
+// 		padding: 8px 16px;
+// 		font-size: 13px;
+// 		border-radius: 12px;
+// 	}
+// }
 
 .card__like-button {
 	width: 28px;
