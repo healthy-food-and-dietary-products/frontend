@@ -63,7 +63,6 @@
 	width: 241px;
 
 	@media screen and (width <= 570px) {
-		margin-top: -60px;
 		width: 126px;
 	}
 
@@ -139,5 +138,18 @@
 
 	@media screen and (width >= 768px) {
 		display: none;
+	}
+}
+
+// Делаем неактивными для демонстрации приложения
+.footer__list_disabled {
+	text-decoration: none;
+	color: white;
+	cursor: not-allowed;
+	opacity: 0.5;
+	margin-bottom: 16px;
+
+	@media screen and (width <= 1024px) {
+		margin-bottom: 12px;
 	}
 }

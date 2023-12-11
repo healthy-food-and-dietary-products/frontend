@@ -10,6 +10,7 @@ import { usePopup } from '@hooks/use-popup';
 import { useCart } from '@hooks/use-cart-context.ts';
 import CheckIcon from '@images/check.svg?react';
 import api from '@services/api';
+import { toMeasureUnit } from '@utils/utils';
 
 type ProductCardProps = {
 	cardName: string;
@@ -72,16 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		return updateCart(idCard, 1);
 	};
 
-	// Можно вынести в отдельный фал
-	if (measureUnit === 'items') {
-		measureUnit = 'шт';
-	} else if (measureUnit === 'grams') {
-		measureUnit = 'гр';
-		if (weight > 999) {
-			measureUnit = 'кг';
-			weight = weight / 1000;
-		}
-	}
+	const { newMeasureUnit, newWeight } = toMeasureUnit(measureUnit, weight);
 
 	return (
 		<div className={styles.card}>
@@ -107,7 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				</span>
 				<span
 					className={`${styles['card__params-text']} ${styles['card__params-text_weight']}`}
-				>{`${weight} ${measureUnit}`}</span>
+				>{`${newWeight} ${newMeasureUnit}`}</span>
 			</div>
 
 			<div className={styles['card__button-container']}>

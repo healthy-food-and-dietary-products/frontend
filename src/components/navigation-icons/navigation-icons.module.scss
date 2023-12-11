@@ -22,7 +22,9 @@
 	background-position: center;
 }
 
+// Делаем неактивными для демонстрации приложения
 .navigation__icon_search {
+	display: none;
 	background-image: url('@images/search_icon.svg');
 }
 
@@ -36,8 +38,4 @@
 
 .navigation__icon_profile {
 	background-image: url('@images/profile_icon.svg');
-
-	@media screen and (width < 768px) {
-		display: none;
-	}
 }

@@ -17,3 +17,25 @@ export function declOfNum(n: number, titles: [string, string, string]) {
 			: 2
 	];
 }
+
+export function toMeasureUnit(
+	measureUnit: string | undefined | null,
+	weight: number | null
+) {
+	let newMeasureUnit = 'шт';
+	let newWeight = weight;
+
+	if (newWeight != null) {
+		if (measureUnit === 'milliliters') {
+			newMeasureUnit = 'мл';
+		} else if (measureUnit === 'grams') {
+			newMeasureUnit = 'гр';
+			if (newWeight > 999) {
+				newMeasureUnit = 'кг';
+				newWeight = newWeight / 1000;
+			}
+		}
+	}
+
+	return { newMeasureUnit, newWeight };
+}

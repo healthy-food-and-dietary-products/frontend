@@ -5,4 +5,5 @@ export const URLS = {
 	SIGNUP: '/signup',
 	PROFILE: '/profile',
 	CATALOG: '/catalog',
+	AGREEMENT: '/agreement',
 };

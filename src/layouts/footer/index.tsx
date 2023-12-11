@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './footer.module.scss';
 import { Link } from 'react-router-dom';
+import { URLS } from '@data/constants.ts';
 
 const Footer: React.FC = () => {
 	return (
@@ -17,23 +18,15 @@ const Footer: React.FC = () => {
 				</div>
 				<div className={styles.footer__centerBlock}>
 					<ul className={styles.footer__text}>
-						<Link to={'/products'} className={styles.footer__link}>
-							<li className={styles.footer__list}>О нас</li>
-						</Link>
-						<Link to={'/products'} className={styles.footer__link}>
-							<li className={styles.footer__list}>Условия доставки</li>
-						</Link>
-						<Link to={'/products'} className={styles.footer__link}>
-							<li className={styles.footer__list}>Оплата</li>
-						</Link>
-						<Link to={'/products'} className={styles.footer__link}>
+						<li className={styles.footer__list_disabled}>О нас</li>
+						<li className={styles.footer__list_disabled}>Условия доставки</li>
+						<li className={styles.footer__list_disabled}>Оплата</li>
+						<Link to={'/contacts'} className={styles.footer__link}>
 							<li className={styles.footer__list}>Контакты</li>
 						</Link>
-						<Link to={'/products'} className={styles.footer__link}>
-							<li className={styles.footer__list}>Служба поддержки</li>
-						</Link>
-						<Link to={'/products'} className={styles.footer__link}>
-							<li>Пользовательское соглашение</li>
+						<li className={styles.footer__list_disabled}>Служба поддержки</li>
+						<Link to={URLS.AGREEMENT} className={styles.footer__link}>
+							<li>Политика обработки и хранения персональных данных</li>
 						</Link>
 					</ul>
 				</div>

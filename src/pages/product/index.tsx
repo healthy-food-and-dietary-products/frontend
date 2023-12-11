@@ -23,6 +23,15 @@ const Product: React.FC = () => {
 	const { handleOpenPopup } = usePopup();
 	const navigate = useNavigate();
 	const { id } = useParams();
+	//Нужно с бэка получать в будщем:
+	let newMeasureUnit = 'шт';
+	if (productItem != null) {
+		if (productItem.measure_unit === 'milliliters') {
+			newMeasureUnit = 'мл';
+		} else if (productItem.measure_unit === 'grams') {
+			newMeasureUnit = 'гр';
+		}
+	}
 
 	useEffect(() => {
 		if (id !== undefined) {
@@ -113,7 +122,9 @@ const Product: React.FC = () => {
 									<p className={styles.product__reviews}>2 отзыва</p>
 								</div>
 							</div>
-							<h2 className={styles.product__price}>{productItem.price} руб. / кг</h2>
+							<h2 className={styles.product__price}>
+								{productItem.price} руб. / {newMeasureUnit}
+							</h2>
 							<div className={styles.product__btns}>
 								<Button
 									buttonText={isInCart ? 'В корзине' : 'В корзину'}

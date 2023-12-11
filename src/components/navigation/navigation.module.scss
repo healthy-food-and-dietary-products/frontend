@@ -1,5 +1,6 @@
 @use '@scss/_variables.scss' as *;
 @use '@scss/_mixins' as *;
+@use '@scss/base' as *;
 
 .navigation {
 	display: flex;
@@ -69,6 +70,24 @@
 		opacity: 0.5;
 		transition: opacity 0.5s ease-in-out;
 	}
+
+	@media screen and (width < 1024px) {
+		font-size: 16px;
+	}
+}
+
+// Делаем неактивными для демонстрации приложения
+.navigation__item_disabled {
+	margin: 0;
+	padding: 0;
+	color: grey;
+	text-align: center;
+	font-family: $ubuntu-font;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 140%;
+	cursor: not-allowed;
+	text-decoration: none;
 
 	@media screen and (width < 1024px) {
 		font-size: 16px;

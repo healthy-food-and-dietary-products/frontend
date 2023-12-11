@@ -20,6 +20,7 @@ import Recipes from '@pages/recipe/index.tsx';
 import Contacts from '@pages/contacts/index.tsx';
 import NotFound from '@pages/not_found/not-found.tsx';
 import { CartProvider } from '@contexts/cart-context.tsx';
+import Agreement from '@pages/agreement/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -55,6 +56,7 @@ function App() {
 							<Route path="addresses" element={<ProfileAddresses />} />
 							<Route path="favorites" element={<ProfileFavorites />} />
 						</Route>
+						<Route path={URLS.AGREEMENT} element={<Agreement />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Layout>
