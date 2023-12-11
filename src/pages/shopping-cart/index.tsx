@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './shopping-cart.module.scss';
 import ProductCard from '@components/product-card';
-import { products } from '@data/dataExamples.ts';
+import api from '@services/api';
 import ShoppingList from '@components/shopping-list';
 import Breadcrumbs from '@components/breadcrumbs';
 import { useNavigate } from 'react-router-dom';
 import MakingOrderBtn from '@components/making-order-btn';
 import { useCart } from '@hooks/use-cart-context.ts';
 import Preloader from '@components/preloader';
+import { Product } from '@services/generated-api/data-contracts';
 
 const ShoppingCart: React.FC = () => {
 	const { cartData, loading } = useCart();
 	const [activeButton, setActiveButton] = React.useState<string>('shipment');
 	const navigate = useNavigate();
+	const [promotionProducts, setPromotionProducts] = useState<Product[]>([]);
+	const randomNumber = () => Math.floor(Math.random() * 70) + 1;
+
+	useEffect(() => {
+		Promise.all([
+			api.productsRead(randomNumber()),
+			api.productsRead(randomNumber()),
+			api.productsRead(randomNumber()),
+		])
+			.then(([prod1, prod2, prod3]) => setPromotionProducts([prod1, prod2, prod3]))
+			.catch((error) => {
+				console.log(`Ошибка Promise.all: ${error.message}`);
+			});
+	}, []);
 
 	const handleOrderTypeClick = (type: string) => {
 		setActiveButton(type);
@@ -99,14 +114,14 @@ const ShoppingCart: React.FC = () => {
 			<div className={styles.cart__recomendation}>
 				<h2 className={styles.cart__title}>Вас также может заинтересовать</h2>
 				<div className={styles.cart__advertisement}>
-					{products.map((product, index: number) => (
+					{promotionProducts.map((product, index: number) => (
 						<ProductCard
-							idCard={1}
+							idCard={product.id}
 							key={index}
-							cardImage={product.cardImage}
-							cardName={product.cardName}
+							cardImage={product.photo || ''}
+							cardName={product.name}
 							price={product.price}
-							weight={product.weight}
+							weight={product.amount || 0}
 							measureUnit={product.measure_unit}
 						/>
 					))}
