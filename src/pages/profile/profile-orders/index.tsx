@@ -5,7 +5,7 @@ import ReturnBackButton from '@components/profile-components/return-back-button'
 import { useProfile } from '@hooks/use-profile';
 import styles from './profile-orders.module.scss';
 import api from '@services/api';
-import { OrderList } from '@services/generated-api/data-contracts';
+import { OrderList } from '@services/generated-api/data-contracts.ts';
 
 export default function ProfileOrders() {
 	const [isOpenDetails, setIsOpenDetails] = useState<number>();
@@ -23,7 +23,6 @@ export default function ProfileOrders() {
 	};
 
 	const hideDetails = () => setIsOpenDetails(undefined);
-
 	return (
 		<div className={styles['profile-orders']}>
 			<div className={styles['profile-orders__title']}>

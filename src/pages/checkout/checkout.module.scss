@@ -355,6 +355,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
+	width: 100%;
 }
 
 .execution__sublabel {
@@ -464,4 +465,61 @@
 .execution__item input[type='radio']:disabled + label::after {
 	opacity: 0.5;
 	transition: opacity 0.5s ease-in-out;
+}
+
+.orderse {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+
+	@media screen and (width <= 768px) {
+		max-width: 280px;
+	}
+}
+
+.orderse__title {
+	@extend %zero-padding-margin;
+
+	font-family: $work-sans-font;
+	font-size: 11px;
+
+	@media screen and (width <= 768px) {
+		font-size: 10px;
+	}
+}
+
+.orderse__buttonStyle {
+	padding: 0;
+	display: flex;
+	width: 161px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
+	background: $accent-color-dirty-green;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-family: $ubuntu-font;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	cursor: pointer;
+
+	&:hover {
+		background: $accent-color-bright-green;
+	}
+
+	transition: 0.5s;
+
+	&:disabled {
+		background-color: black;
+		cursor: not-allowed;
+	}
+}
+
+.orderse__buttonStyle_error {
+	user-select: none;
+	pointer-events: none;
+	background: #c3e4b6;
 }

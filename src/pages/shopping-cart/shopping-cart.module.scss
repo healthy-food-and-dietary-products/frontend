@@ -92,11 +92,15 @@
 }
 
 .products {
+	width: 100%;
 	display: flex;
 	gap: 48px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	max-width: 676px;
+	max-height: 300px;
+	height: 100%;
 }
 
 .products__title_mob {

@@ -1,12 +1,40 @@
 import styles from './profile-order.module.scss';
 import OrderStatus from '../order-status';
 import clsx from 'clsx';
-import { OrderList } from '@services/generated-api/data-contracts';
+
+type OrderStatusType =
+	| 'Ordered'
+	| 'In processing'
+	| 'Collecting'
+	| 'Gathered'
+	| 'In delivering'
+	| 'Delivered'
+	| 'Completed';
+
+type Product = {
+	amount: number;
+	final_price: number;
+	id: number;
+	measure_unit: string;
+	name: string;
+	quantity: string;
+	photo: string;
+};
+
+type CommonOrder = {
+	order_number?: string;
+	ordering_date?: string;
+	total_price?: string;
+	payment_method?: string;
+	delivery_method?: string;
+	status?: OrderStatusType;
+	products: Array<{ product: Product; quantity: string }> | Product[];
+};
 
 type Props = {
 	readonly isShowedProductsDetails?: boolean;
 	readonly showDetails?: () => void;
-	readonly order: OrderList;
+	readonly order: CommonOrder;
 };
 
 const ProfileOrder = ({
@@ -24,6 +52,7 @@ const ProfileOrder = ({
 		products,
 	} = order;
 
+	console.log(status);
 	let payment_method_ru =
 		payment_method === 'Payment at the point of delivery'
 			? 'Банковской картой'
@@ -38,7 +67,6 @@ const ProfileOrder = ({
 	}
 
 	const date = ordering_date && new Date(ordering_date).toLocaleDateString();
-
 	return (
 		<>
 			<button
@@ -52,38 +80,42 @@ const ProfileOrder = ({
 				</h4>
 				{isShowedProductsDetails ? (
 					<ul className={styles['order-products']}>
-						{products.map((product) => (
-							<li className={styles.product} key={product.name}>
+						{(products as Array<{ product: Product; quantity: string }>).map((item) => (
+							<li className={styles.product} key={item.product.name}>
 								<div className={styles['product__image-large']}>
 									<img
 										className={styles.product__image}
-										src={product.photo}
-										alt={product.name}
+										src={item.product.photo}
+										alt={item.product.name}
 									/>
 								</div>
-								<p className={styles.product__name}>{product.name}</p>
+								<p className={styles.product__name}>{item.product.name}</p>
 								<p className={styles.product__weight}>{`${
-									product.amount * Number(product.quantity)
-								} ${product.measure_unit}`}</p>
-								<p className={styles.product__price}>{`${product.final_price} руб.`}</p>
+									item.product.amount * Number(item.quantity)
+								} ${item.product.measure_unit}`}</p>
+								<p
+									className={styles.product__price}
+								>{`${item.product.final_price} руб.`}</p>
 							</li>
 						))}
 					</ul>
 				) : (
 					<ul className={styles['order-products']}>
-						{products.map((product, index) => (
-							<li className={styles.product} key={index}>
-								{index < 5 && (
-									<div className={styles['product__image-small']}>
-										<img
-											className={styles.product__image}
-											src={product.photo}
-											alt={product.name}
-										/>
-									</div>
-								)}
-							</li>
-						))}
+						{(products as Array<{ product: Product; quantity: string }>).map(
+							(item, index) => (
+								<li className={styles.product} key={index}>
+									{index < 5 && (
+										<div className={styles['product__image-small']}>
+											<img
+												className={styles.product__image}
+												src={item.product.photo}
+												alt={item.product.name}
+											/>
+										</div>
+									)}
+								</li>
+							)
+						)}
 					</ul>
 				)}
 

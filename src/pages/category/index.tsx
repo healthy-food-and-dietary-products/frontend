@@ -8,6 +8,7 @@ import SliderComponent from '@components/slider-component';
 import Breadcrumbs from '@components/breadcrumbs';
 import type { Product } from '@services/generated-api/data-contracts';
 import Filter from '@components/filter';
+import { useNavigate } from 'react-router-dom';
 
 type filteredType = {
 	[key: string]: boolean;
@@ -31,6 +32,7 @@ const Category: React.FC = () => {
 	});
 
 	const { category } = useParams();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -41,10 +43,13 @@ const Category: React.FC = () => {
 				setCategoryName(data.results[0]?.category?.category_name);
 				setCategoryObj(data.results[0]?.category);
 			})
+			.catch(() => {
+				navigate('/упс');
+			})
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [category]);
+	}, [category, navigate]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);

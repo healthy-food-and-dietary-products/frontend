@@ -10,6 +10,7 @@ import { Product as ProductType } from '@services/generated-api/data-contracts';
 import { useAuth } from '@hooks/use-auth';
 import { usePopup } from '@hooks/use-popup';
 import { useCart } from '@hooks/use-cart-context.ts';
+import { useNavigate } from 'react-router-dom';
 
 const Product: React.FC = () => {
 	const { cartData, updateCart, deleteCart } = useCart();
@@ -20,6 +21,7 @@ const Product: React.FC = () => {
 
 	const { isLoggedIn } = useAuth();
 	const { handleOpenPopup } = usePopup();
+	const navigate = useNavigate();
 	const { id } = useParams();
 
 	useEffect(() => {
@@ -28,11 +30,15 @@ const Product: React.FC = () => {
 			api
 				.productsRead(numericId)
 				.then((data) => setProductItem(data))
-				.catch((error) => console.log(error));
+				.catch((error) => {
+					console.log(error);
+					navigate('/упс');
+				});
 		} else {
 			console.log('ID is undefined');
+			navigate('/упс');
 		}
-	}, [id]);
+	}, [id, navigate]);
 
 	useEffect(() => {
 		if (id !== undefined) {

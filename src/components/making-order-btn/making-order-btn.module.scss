@@ -22,3 +22,38 @@
 		font-size: 10px;
 	}
 }
+
+.order__buttonStyle {
+	padding: 0;
+	display: flex;
+	width: 161px;
+	height: 36px;
+	justify-content: center;
+	align-items: center;
+	background: $accent-color-dirty-green;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+	font-family: $ubuntu-font;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	cursor: pointer;
+
+	&:hover {
+		background: $accent-color-bright-green;
+	}
+
+	transition: 0.5s;
+
+	&:disabled {
+		background-color: black;
+		cursor: not-allowed;
+	}
+}
+
+.order__buttonStyle_error {
+	user-select: none;
+	pointer-events: none;
+	background: #c3e4b6;
+}
