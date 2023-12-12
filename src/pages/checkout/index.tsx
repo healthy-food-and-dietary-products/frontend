@@ -363,7 +363,7 @@ const Checkout: React.FC = () => {
 										className={styles.execution__radio}
 										onChange={handlePaymentChange}
 									/>
-									<label htmlFor="payment_cash">Наличными при получении курьера</label>
+									<label htmlFor="payment_cash">Наличными курьеру</label>
 								</div>
 								<hr className={styles.pricelist__divider} />
 								<div className={styles.execution__item}>
@@ -375,7 +375,7 @@ const Checkout: React.FC = () => {
 										className={styles.execution__radio}
 										onChange={handlePaymentChange}
 									/>
-									<label htmlFor="payment_offline">оплата в пункте выдачи</label>
+									<label htmlFor="payment_offline">Оплата в пункте выдачи</label>
 								</div>
 							</div>
 						</label>
