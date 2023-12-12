@@ -21,7 +21,8 @@ const RecipeList: React.FC = () => {
 			.finally(() => {
 				setIsLoading(false);
 			});
-	}, [recipeList]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<section className={styles.recipelist}>
