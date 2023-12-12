@@ -23,7 +23,6 @@ import { CartProvider } from '@contexts/cart-context.tsx';
 import RecipeList from '@pages/recipe-list/index.tsx';
 import Agreement from '@pages/agreement/index.tsx';
 
-
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
 
