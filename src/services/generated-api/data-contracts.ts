@@ -1061,4 +1061,5 @@ export interface OrderPostAdd extends OrderPostDelete {
 		phone_number: string;
 		email: string;
 	};
+	address?: number;
 }

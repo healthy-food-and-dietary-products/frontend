@@ -59,7 +59,7 @@ const Checkout: React.FC = () => {
 			}
 		}
 
-		const formData: OrderPostAdd = {
+		let formData: OrderPostAdd = {
 			user_data: {
 				first_name: values.order_firstName?.toString() || '',
 				last_name: values.order_lastName?.toString() || '',
@@ -76,6 +76,11 @@ const Checkout: React.FC = () => {
 			comment: comment,
 			add_address: selectedAddress || '',
 		};
+
+		if (isLoggedIn && actualDeliveryType === 'By courier') {
+			delete formData.add_address;
+			formData = { ...formData, address: parseInt(selectedAddress, 10) };
+		}
 
 		api
 			.usersOrderCreate(formData)
@@ -263,7 +268,7 @@ const Checkout: React.FC = () => {
 												{userAddresses.map((addr) => (
 													<option
 														key={addr.id}
-														value={addr.address}
+														value={addr.id}
 														className={styles.order__address_option}
 													>
 														{addr.address}
