@@ -93,7 +93,7 @@ const Recipe: React.FC = () => {
 				<Preloader />
 			) : (
 				<div className={styles.recipes__container}>
-					<Breadcrumbs isTall={true} />
+					<Breadcrumbs productName={recipeInfo.name} />
 					<div className={styles.recipes__content}>
 						<div className={clsx(styles.recipes__ingredients, styles.ingredients)}>
 							<h1 className={styles.ingredients__title}>{recipeInfo.name}</h1>
