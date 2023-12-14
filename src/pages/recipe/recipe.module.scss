@@ -80,14 +80,21 @@
 	}
 
 	&__list {
-		margin: 0;
 		padding-left: 30px;
 		font-size: 20px;
 		line-height: 140%;
 	}
 
-	&__item:not(:last-child) {
+	&__item {
 		margin: 0;
 		margin-bottom: 25px;
+	}
+
+	&__item:first-child {
+		font-weight: 500;
+	}
+
+	&__item:last-child {
+		margin: 0;
 	}
 }

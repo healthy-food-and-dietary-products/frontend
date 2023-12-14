@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './recipe.module.scss';
 import Breadcrumbs from '@components/breadcrumbs';
 import IngredientsList from '@components/recipes-components/ingredients-list';
@@ -43,9 +43,10 @@ const Recipe: React.FC = () => {
 	const { id } = useParams();
 	const { handleOpenPopup } = usePopup();
 
-	const [isLoading, setIsLoading] = React.useState(true);
-	const [recipeInfo, setRecipeInfo] = React.useState<ReceipeInfoProps>(Object);
-	const [numeralizeWord, setNumeralizeWord] = React.useState('');
+	const [isLoading, setIsLoading] = useState(true);
+	const [recipeInfo, setRecipeInfo] = useState<ReceipeInfoProps>(Object);
+	const [recipeByLines, setRecipeByLines] = useState<string[]>(['']);
+	const [numeralizeWord, setNumeralizeWord] = useState('');
 
 	useEffect(() => {
 		if (!id) {
@@ -56,6 +57,7 @@ const Recipe: React.FC = () => {
 		const fetchReceiptAndProducts = async () => {
 			const data = await api.getRecipeById(recipeId);
 			setRecipeInfo(data);
+			setRecipeByLines(data.text.split('\n'));
 			setNumeralizeWord(declOfNum(data.cooking_time, ['минута', 'минуты', 'минут']));
 
 			const promises = data.ingredients.map((ingredient: ReceipeIngredientInfoProps) => {
@@ -122,11 +124,15 @@ const Recipe: React.FC = () => {
 								recipe_nutrients={recipeInfo.recipe_nutrients}
 							/>
 						</div>
-						<div className={clsx(styles.recipes__instructions, styles.instructions)}>
-							<p className={styles.instructions__title}>Инструкция приготовления</p>
-							<div className={styles.instructions__list}>
-								<p className={styles.instructions__item}>{recipeInfo.text}</p>
-							</div>
+					</div>
+					<div className={clsx(styles.recipes__instructions, styles.instructions)}>
+						<p className={styles.instructions__title}>Инструкция приготовления</p>
+						<div className={styles.instructions__list}>
+							{recipeByLines.map((line, index) => (
+								<p key={index} className={styles.instructions__item}>
+									{line}
+								</p>
+							))}
 						</div>
 					</div>
 				</div>
