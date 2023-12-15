@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { usePopup } from '@hooks/use-popup.ts';
 import Popup from '@components/popup';
 import styles from '@components/popups/popup-login/popup-login.module.scss';
@@ -11,6 +11,11 @@ const PopupRegistration: React.FC = () => {
 		useFormAndValidation();
 	const { popupState, handleClosePopup, handleOpenPopup } = usePopup();
 	const [disabledButton, setDisabledButton] = useState(false);
+	const [registrationError, setRegistrationError] = useState('');
+
+	useEffect(() => {
+		setRegistrationError('');
+	}, [values]);
 
 	function onSubmitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -42,7 +47,7 @@ const PopupRegistration: React.FC = () => {
 					handleOpenPopup('openPopupLogin');
 				})
 				.catch((err) => {
-					console.log(err);
+					setRegistrationError(err.errors[0].detail);
 				})
 				.finally(() => setDisabledButton(false));
 		} else {
@@ -126,6 +131,7 @@ const PopupRegistration: React.FC = () => {
 					<p className={styles['popupLogin__error-message']}>
 						{(Object.values(errors).find((error) => error) || '') as ReactNode}
 					</p>
+					<p className={styles['popupLogin__server-error']}>{registrationError}</p>
 					<button
 						className={`${styles['popupLogin__button']} ${
 							!isValid ? `${styles['popupLogin__button_type_error']}` : ''

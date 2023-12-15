@@ -15,6 +15,7 @@ type PopupLoginLayoutProps = {
 	isValid: boolean;
 	errors: Record<string, unknown>;
 	disabledButton: boolean;
+	loginError: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const PopupLoginLayout: React.FC<PopupLoginLayoutProps> = (
@@ -30,6 +31,7 @@ const PopupLoginLayout: React.FC<PopupLoginLayoutProps> = (
 		isValid,
 		errors,
 		disabledButton,
+		loginError,
 	} = props;
 
 	async function openRegistrationPopup() {
@@ -77,7 +79,8 @@ const PopupLoginLayout: React.FC<PopupLoginLayoutProps> = (
 					<p className={styles['popupLogin__error-message']}>
 						{(Object.values(errors).find((error) => error) || '') as ReactNode}
 					</p>
-					<p className={styles['popupLogin__forgot']}>Забили пароль?</p>
+					<p className={styles['popupLogin__forgot']}>Забыли пароль?</p>
+					<p className={styles['popupLogin__server-error']}>{loginError}</p>
 					<button
 						className={`${styles['popupLogin__button']} ${
 							!isValid ? `${styles['popupLogin__button_type_error']}` : ''

@@ -25,7 +25,7 @@ const ShoppingCart: React.FC = () => {
 		])
 			.then(([prod1, prod2, prod3]) => setPromotionProducts([prod1, prod2, prod3]))
 			.catch((error) => {
-				console.log(`Ошибка Promise.all: ${error.message}`);
+				console.log('Ошибка Promise.all:', error);
 			});
 	}, []);
 

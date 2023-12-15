@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormAndValidation } from '@hooks/use-form-and-validation.ts';
 import api from '@services/api.ts';
 import Cookies from 'js-cookie';
@@ -14,6 +14,11 @@ const PopupLogin: React.FC = () => {
 	const [disabledButton, setDisabledButton] = useState(false);
 	const navigate = useNavigate();
 	const { popupState, handleClosePopup, handleOpenPopup } = usePopup();
+	const [loginError, setLoginError] = useState('');
+
+	useEffect(() => {
+		setLoginError('');
+	}, [values]);
 
 	function onSubmitLogin(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -43,7 +48,7 @@ const PopupLogin: React.FC = () => {
 					navigate('/profile');
 				})
 				.catch((err) => {
-					console.log(err);
+					setLoginError(err.errors[0].detail);
 				})
 				.finally(() => setDisabledButton(false));
 		} else {
@@ -63,6 +68,7 @@ const PopupLogin: React.FC = () => {
 			values={values}
 			isValid={isValid}
 			errors={errors}
+			loginError={loginError}
 		/>
 	);
 };

@@ -34,7 +34,13 @@ class Api {
 			if (res.status === 204) return res;
 			return res.json();
 		}
-		return Promise.reject(new Error(`Ошибка: ${res.statusText}`));
+
+		const errorFromServer = res.json().then((err) => {
+			err.status = res.status;
+			err.statusText = res.statusText;
+			throw err;
+		});
+		return errorFromServer;
 	}
 
 	_request(endPoint: string, options = {}) {
