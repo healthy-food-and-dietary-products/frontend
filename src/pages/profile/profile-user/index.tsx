@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Input from '@components/ui/input';
 import styles from './profile-user.module.scss';
 import clsx from 'clsx';
@@ -29,9 +29,16 @@ export default function ProfileUser() {
 
 	// const { handleOpenPopup } = usePopup();
 	const [disabledButton, setDisabledButton] = useState(false);
+	const [updateMeError, setUpdateMeError] = useState('');
+	const [updateMeSuccess, setUpdateMeSuccess] = useState('');
 
 	const { values, handleChange, errors, isValid, resetForm } =
 		useFormAndValidation(initialValues);
+
+	useEffect(() => {
+		setUpdateMeError('');
+		setUpdateMeSuccess('');
+	}, [values]);
 
 	const isChangeValue = useMemo(
 		() =>
@@ -62,9 +69,11 @@ export default function ProfileUser() {
 			})
 			.then((data) => {
 				updateUsers(data);
+				setUpdateMeSuccess('Данные успешно обновлены');
 			})
 			.catch((err) => {
 				console.log(err);
+				setUpdateMeError(err.errors[0].detail);
 			})
 			.finally(() => setDisabledButton(false));
 	};
@@ -163,6 +172,14 @@ export default function ProfileUser() {
 					withErrorSpan={true}
 					required
 				/> */}
+				<p
+					className={clsx(styles.result, {
+						[styles.success]: updateMeSuccess,
+						[styles.error]: updateMeError,
+					})}
+				>
+					{updateMeError ? updateMeError : updateMeSuccess}
+				</p>
 				<div className={styles.buttons}>
 					<button
 						className={styles.button__safe}

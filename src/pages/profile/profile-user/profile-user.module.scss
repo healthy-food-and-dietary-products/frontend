@@ -79,3 +79,19 @@
 	color: $active-text-color;
 	border: 1px solid $form-button-color;
 }
+
+.result {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 140%;
+	min-height: 25px;
+	margin: 0;
+}
+
+.error {
+	color: $error-color;
+}
+
+.success {
+	color: $form-button-color;
+}
