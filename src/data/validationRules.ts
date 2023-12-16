@@ -35,7 +35,7 @@ export const validationRules: ValidationRules = {
 	},
 	phoneNumber: {
 		message: phoneError,
-		validate: (value: string) => /^\+(\+7|7|8)[0-9]{10}$/.test(value),
+		validate: (value: string) => /^(\+7|7|8)[0-9]{10}$/.test(value),
 	},
 	username: {
 		message: usernameError,
