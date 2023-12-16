@@ -11,8 +11,8 @@ type FormAndValidationHook = {
 	handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	validateInputsHandleSubmit: (type: string, value: string) => Record<string, string>;
 	resetForm: (
-		newValues?: Record<string, unknown>,
-		newErrors?: Record<string, unknown>,
+		newValues?: Record<string, string | number>,
+		newErrors?: Record<string, string | number>,
 		newIsValid?: boolean
 	) => void;
 };
@@ -98,12 +98,33 @@ export function useFormAndValidation(
 	}, [errors, isValid]);
 
 	const resetForm = useCallback(
-		(newValues = {}, newErrors = {}, newIsValid = false) => {
-			setValues(newValues);
-			setErrors(newErrors);
+		(
+			newValues: Record<string, string | number> = {},
+			newErrors: Record<string, string | number> = {},
+			newIsValid = false
+		) => {
+			if (Object.keys(newValues).length !== 0) {
+				Object.keys(newValues).forEach((key) => {
+					setValues((prev) => ({ ...prev, [key]: newValues[key] }));
+				});
+			} else {
+				Object.keys(values).forEach((key) => {
+					setValues((prev) => ({ ...prev, [key]: '' }));
+				});
+			}
+			if (Object.keys(newErrors).length !== 0) {
+				Object.keys(newErrors).forEach((key) => {
+					setErrors((prev) => ({ ...prev, [key]: newErrors[key] }));
+				});
+			} else {
+				Object.keys(errors).forEach((key) => {
+					setErrors((prev) => ({ ...prev, [key]: '' }));
+				});
+			}
+
 			setIsValid(newIsValid);
 		},
-		[setValues, setErrors, setIsValid]
+		[values, errors]
 	);
 
 	return {
