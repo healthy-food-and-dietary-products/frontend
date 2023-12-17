@@ -114,15 +114,17 @@ const ShoppingCart: React.FC = () => {
 			<div className={styles.cart__recomendation}>
 				<h2 className={styles.cart__title}>Вас также может заинтересовать</h2>
 				<div className={styles.cart__advertisement}>
-					{promotionProducts.map((product, index: number) => (
+					{promotionProducts.map((product) => (
 						<ProductCard
 							idCard={product.id}
-							key={index}
+							key={product.id}
 							cardImage={product.photo || ''}
 							cardName={product.name}
 							price={product.price}
 							weight={product.amount || 0}
 							measureUnit={product.measure_unit}
+							category={product.category?.category_slug}
+							is_favorited={product.is_favorited}
 						/>
 					))}
 				</div>
