@@ -2,12 +2,41 @@ import ProductCard from '@components/product-card';
 import styles from './profile-order-mobile.module.scss';
 import OrderStatus from '../order-status';
 import clsx from 'clsx';
-import { OrderList } from '@services/generated-api/data-contracts';
+// import { OrderList } from '@services/generated-api/data-contracts';
+
+type OrderStatusType =
+	| 'Ordered'
+	| 'In processing'
+	| 'Collecting'
+	| 'Gathered'
+	| 'In delivering'
+	| 'Delivered'
+	| 'Completed';
+
+type Product = {
+	amount: number;
+	final_price: number;
+	id: number;
+	measure_unit: string;
+	name: string;
+	quantity: string;
+	photo: string;
+};
+
+type CommonOrder = {
+	order_number?: string;
+	ordering_date?: string;
+	total_price?: string;
+	payment_method?: string;
+	delivery_method?: string;
+	status?: OrderStatusType;
+	products: Array<{ product: Product; quantity: string }> | Product[];
+};
 
 type Props = {
 	readonly isShowedProductsDetails?: boolean;
 	readonly showDetails?: () => void;
-	readonly order: OrderList;
+	readonly order: CommonOrder;
 };
 
 const ProfileOrderMobile = ({
@@ -51,15 +80,18 @@ const ProfileOrderMobile = ({
 			{isShowedProductsDetails && (
 				<div className={styles['order-products']}>
 					{/* вместо products нужно использовать продукты из заказа пользователя */}
-					{products.map((item) => (
-						<li key={item.id}>
+					{(products as Array<{ product: Product; quantity: string }>).map((item) => (
+						<li key={item.product.id}>
 							<ProductCard
-								cardName={item.name}
-								price={item.final_price}
-								weight={item.amount || 0}
-								cardImage={item.photo || ''}
-								idCard={item.id}
-								measureUnit={item.measure_unit}
+								cardName={item.product.name}
+								price={item.product.final_price}
+								weight={item.product.amount || 0}
+								cardImage={item.product.photo || ''}
+								idCard={item.product.id}
+								measureUnit={item.product.measure_unit}
+								// добавить когда будет готово на бэкенде (должно приходить в order.products)
+								// category={}
+								// is_favorited={}
 							/>
 						</li>
 					))}
