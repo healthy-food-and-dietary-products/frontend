@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import clsx from 'clsx';
 import styles from './breadcrumbs.module.scss';
 
 type BreadcrumbsProps = {
@@ -9,7 +8,6 @@ type BreadcrumbsProps = {
 		category_name: string;
 		category_slug: string;
 	};
-	isTall?: boolean;
 };
 
 type Categories = {
@@ -24,7 +22,7 @@ type Categories = {
 	[key: string]: string;
 };
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, category, isTall }) => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, category }) => {
 	const categories: Categories = {
 		catalog: 'Каталог товаров',
 		profile: 'Личный кабинет',
@@ -52,11 +50,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, category, isTall
 	const breadcrumbsArray = ['Главная', ...translatedPathnames.slice(1)];
 
 	return (
-		<div
-			className={clsx(styles.breadcrumbs, {
-				[styles.breadcrumbs_type_tall]: isTall,
-			})}
-		>
+		<div className={styles.breadcrumbs}>
 			{breadcrumbsArray.map((name, index, arr) => {
 				const routeTo =
 					index === 0

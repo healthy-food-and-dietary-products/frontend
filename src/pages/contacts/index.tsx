@@ -8,7 +8,7 @@ export default function Contacts() {
 		<div className={styles.contacts}>
 			<div className={styles.contacts__container}>
 				<div className={styles.contacts__breadcrumbs}>
-					<Breadcrumbs isTall={true} />
+					<Breadcrumbs />
 				</div>
 				<h1 className={styles.contacts__title}>Контакты</h1>
 				<p className={styles.contacts__where}>Как нас найти</p>
