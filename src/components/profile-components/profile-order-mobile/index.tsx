@@ -21,6 +21,10 @@ type Product = {
 	name: string;
 	quantity: string;
 	photo: string;
+	category: {
+		category_name: string;
+		category_slug: string;
+	};
 };
 
 type CommonOrder = {
@@ -79,7 +83,6 @@ const ProfileOrderMobile = ({
 			</h4>
 			{isShowedProductsDetails && (
 				<div className={styles['order-products']}>
-					{/* вместо products нужно использовать продукты из заказа пользователя */}
 					{(products as Array<{ product: Product; quantity: string }>).map((item) => (
 						<li key={item.product.id}>
 							<ProductCard
@@ -89,9 +92,7 @@ const ProfileOrderMobile = ({
 								cardImage={item.product.photo || ''}
 								idCard={item.product.id}
 								measureUnit={item.product.measure_unit}
-								// добавить когда будет готово на бэкенде (должно приходить в order.products)
-								// category={}
-								// is_favorited={}
+								category={item.product.category.category_slug}
 							/>
 						</li>
 					))}
