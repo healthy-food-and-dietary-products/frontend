@@ -15,15 +15,26 @@ const ShoppingCart: React.FC = () => {
 	const [activeButton, setActiveButton] = React.useState<string>('shipment');
 	const navigate = useNavigate();
 	const [promotionProducts, setPromotionProducts] = useState<Product[]>([]);
-	const randomNumber = () => Math.floor(Math.random() * 70) + 1;
+
+	const randomNumbers = (): number[] => {
+		const unicNumbers = new Set();
+		while (unicNumbers.size < 4) {
+			const randomNumber = Math.floor(Math.random() * 70) + 1;
+			unicNumbers.add(Number(randomNumber));
+		}
+		const result = Array.from(unicNumbers) as number[];
+		return result;
+	};
 
 	useEffect(() => {
 		Promise.all([
-			api.productsRead(randomNumber()),
-			api.productsRead(randomNumber()),
-			api.productsRead(randomNumber()),
+			...randomNumbers().map((id) => {
+				return api.productsRead(id);
+			}),
 		])
-			.then(([prod1, prod2, prod3]) => setPromotionProducts([prod1, prod2, prod3]))
+			.then((products) => {
+				setPromotionProducts(products);
+			})
 			.catch((error) => {
 				console.log('Ошибка Promise.all:', error);
 			});
@@ -125,6 +136,7 @@ const ShoppingCart: React.FC = () => {
 							measureUnit={product.measure_unit}
 							category={product.category?.category_slug}
 							is_favorited={product.is_favorited}
+							addedClassName="addedCardClassName"
 						/>
 					))}
 				</div>

@@ -1,7 +1,6 @@
 @use '@scss/variables' as *;
 
 .card {
-	flex-shrink: 1;
 	border-radius: 20px;
 	border: 1px solid #ddd;
 	background: #fff;
@@ -12,12 +11,21 @@
 	box-sizing: border-box;
 	width: 100%;
 	color: $active-text-color;
+	overflow: hidden;
 
 	@media screen and (width <= 768px) {
 		max-width: 138px;
 		min-width: 138px;
 		max-height: 231px;
 		padding: 12px 8px;
+	}
+}
+
+.addedCardClassName:last-of-type {
+	display: none;
+
+	@media screen and (width <= 768px) {
+		display: block;
 	}
 }
 

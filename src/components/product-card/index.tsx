@@ -23,6 +23,7 @@ type ProductCardProps = {
 	idCard: number;
 	is_favorited?: boolean;
 	checkboxControl?: { checked: boolean; onChange: () => void };
+	addedClassName?: string;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -34,6 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	idCard,
 	checkboxControl,
 	measureUnit,
+	addedClassName = '',
 	is_favorited = false,
 }) => {
 	const { isLoggedIn } = useAuth();
@@ -76,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 	const { newMeasureUnit, newWeight } = toMeasureUnit(measureUnit, weight);
 
 	return (
-		<div className={styles.card}>
+		<div className={`${styles.card} ${addedClassName && styles[addedClassName]}`}>
 			<Link className={styles.card__link} to={`/catalog/${category}/${idCard}`}>
 				<img
 					className={styles.card__image}
