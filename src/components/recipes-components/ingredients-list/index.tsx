@@ -9,7 +9,7 @@ type RecipeIngredientsProps = {
 		name: string;
 		measure_unit: string;
 		quantity: number;
-		photo?: string;
+		ingredient_photo?: string;
 		amount?: number;
 		price?: number;
 	}[];
@@ -40,12 +40,15 @@ const IngredientsList: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 					return (
 						<div key={index} className={clsx(styles.ingredients__item, ingredient)}>
 							<div className={styles.ingredient__image}>
-								<img src={ingredient?.photo as string} alt={ingredient.name as string} />
+								<img
+									src={ingredient?.ingredient_photo as string}
+									alt={ingredient.name as string}
+								/>
 							</div>
 							<p className={styles.ingredient__name}>{ingredient.name}</p>
 							<p
 								className={styles.ingredient__weight}
-							>{`${ingredient?.amount} ${ingredient.measure_unit}`}</p>
+							>{`${ingredient?.quantity} ${ingredient.measure_unit}`}</p>
 						</div>
 					);
 				})}
