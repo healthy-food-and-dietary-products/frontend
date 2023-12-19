@@ -28,6 +28,7 @@ type Product = {
 };
 
 type CommonOrder = {
+	id: number;
 	order_number?: string;
 	ordering_date?: string;
 	total_price?: string;

@@ -5,11 +5,46 @@ import ReturnBackButton from '@components/profile-components/return-back-button'
 import { useProfile } from '@hooks/use-profile';
 import styles from './profile-orders.module.scss';
 import api from '@services/api';
-import { OrderList } from '@services/generated-api/data-contracts.ts';
+// import type { Product } from '@services/generated-api/data-contracts';
+// import { OrderList } from '@services/generated-api/data-contracts.ts';
+
+type OrderStatusType =
+	| 'Ordered'
+	| 'In processing'
+	| 'Collecting'
+	| 'Gathered'
+	| 'In delivering'
+	| 'Delivered'
+	| 'Completed';
+
+type Product = {
+	amount: number;
+	final_price: number;
+	id: number;
+	measure_unit: string;
+	name: string;
+	quantity: string;
+	photo: string;
+	category: {
+		category_name: string;
+		category_slug: string;
+	};
+};
+
+type CommonOrder = {
+	id: number;
+	order_number?: string;
+	ordering_date?: string;
+	total_price?: string;
+	payment_method?: string;
+	delivery_method?: string;
+	status?: OrderStatusType;
+	products: Array<{ product: Product; quantity: string }> | Product[];
+};
 
 export default function ProfileOrders() {
 	const [isOpenDetails, setIsOpenDetails] = useState<number>();
-	const [orders, setOrders] = useState<OrderList[]>([]);
+	const [orders, setOrders] = useState<CommonOrder[]>([]);
 	const { isMobileScreen } = useProfile();
 
 	useEffect(() => {

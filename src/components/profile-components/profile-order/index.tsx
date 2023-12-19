@@ -19,9 +19,14 @@ type Product = {
 	name: string;
 	quantity: string;
 	photo: string;
+	category: {
+		category_name: string;
+		category_slug: string;
+	};
 };
 
 type CommonOrder = {
+	id: number;
 	order_number?: string;
 	ordering_date?: string;
 	total_price?: string;
