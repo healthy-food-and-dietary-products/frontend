@@ -35,7 +35,7 @@ type CartContextType = {
 	cartData: CartDataItem;
 	loading: boolean;
 	loadCartData: () => void;
-	updateCart: (id: number, quantity: number) => void;
+	updateCart: (data: Product[]) => void;
 	deleteCart: (id: number) => void;
 	addItemToCart: (id: number) => void;
 	removeItemFromCart: (id: number) => void;
@@ -81,14 +81,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 			});
 	};
 
-	const updateCart = (idProduct: number, quantityProduct: number) => {
+	const updateCart = (data: Product[]) => {
 		const updatedCartItem: ShoppingCartItem = {
-			products: [
-				{
-					id: idProduct,
-					quantity: quantityProduct,
-				},
-			],
+			products: data,
 		};
 
 		api
@@ -126,7 +121,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 			if (existingProductIndex !== -1) {
 				if (cartData.products[existingProductIndex].quantity < 10) {
 					cartData.products[existingProductIndex].quantity += 1;
-					updateCart(productId, cartData.products[existingProductIndex]?.quantity);
+					updateCart([
+						{
+							id: productId,
+							quantity: cartData.products[existingProductIndex]?.quantity,
+						},
+					]);
 				} else {
 					console.error('Превышено максимальное количество товара в корзине');
 				}
@@ -149,7 +149,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 					existingItem.quantity -= 1;
 				}
 
-				updateCart(productId, existingItem?.quantity || 0);
+				updateCart([{ id: productId, quantity: existingItem?.quantity || 0 }]);
 			}
 		} else {
 			console.log('Корзина обновляется. Пожалуйста, подождите.');

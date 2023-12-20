@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		if (isInCart) {
 			return deleteCart(idCard);
 		}
-		return updateCart(idCard, 1);
+		return updateCart([{ id: idCard, quantity: 1 }]);
 	};
 
 	const { newMeasureUnit, newWeight } = toMeasureUnit(measureUnit, weight);

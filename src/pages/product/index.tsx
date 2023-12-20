@@ -70,7 +70,7 @@ const Product: React.FC = () => {
 			const numericId: number = parseInt(id, 10);
 			setIsInCart(isProductInCart);
 			if (!isProductInCart) {
-				updateCart(numericId, 1);
+				updateCart([{ id: numericId, quantity: 1 }]);
 				setIsInCart(true);
 			} else {
 				deleteCart(numericId);
