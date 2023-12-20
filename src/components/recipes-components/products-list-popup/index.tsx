@@ -69,18 +69,20 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 							<div className={clsx(styles.product__counter, styles.counter)}>
 								<button
 									className={styles.counter__button}
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									// @ts-ignore
-									onClick={() => changeAmount(index)(product.amount_of_pack - 1)}
+									onClick={() =>
+										product.amount_of_pack &&
+										changeAmount(index)(product.amount_of_pack - 1)
+									}
 								>
 									<img src={minusIcon} alt="минус" />
 								</button>
 								<p className={styles.counter__value}>{`${product.amount_of_pack} уп.`}</p>
 								<button
 									className={styles.counter__button}
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									// @ts-ignore
-									onClick={() => changeAmount(index)(product.amount_of_pack + 1)}
+									onClick={() =>
+										product.amount_of_pack &&
+										changeAmount(index)(product.amount_of_pack + 1)
+									}
 								>
 									<img src={plusIcon} alt="плюс" />
 								</button>
