@@ -18,7 +18,7 @@ type ReceipeIngredientInfoProps = {
 	measure_unit: string;
 	quantity: number;
 	ingredient_photo: string;
-	photo?: string;
+	amount_of_pack?: number;
 	amount?: number;
 	price?: number;
 };
@@ -74,10 +74,11 @@ const Recipe: React.FC = () => {
 					if (index === -1) {
 						return;
 					}
-
-					prevReceipeInfo.ingredients[index].photo = product.photo;
 					prevReceipeInfo.ingredients[index].amount = product.amount;
 					prevReceipeInfo.ingredients[index].price = product.price;
+					prevReceipeInfo.ingredients[index].amount_of_pack = Math.ceil(
+						prevReceipeInfo.ingredients[index].quantity / product.amount
+					);
 				});
 
 				return prevReceipeInfo;
