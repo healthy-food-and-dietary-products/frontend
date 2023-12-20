@@ -18,7 +18,7 @@ type ReceipeIngredientInfoProps = {
 	measure_unit: string;
 	quantity: number;
 	ingredient_photo: string;
-	photo?: string;
+	amount_of_pack: number;
 	amount?: number;
 	price?: number;
 };
@@ -56,37 +56,40 @@ const Recipe: React.FC = () => {
 
 		const recipeId: number = parseInt(id, 10);
 		const fetchReceiptAndProducts = async () => {
-			const data = await api.getRecipeById(recipeId);
-			setRecipeInfo(data);
-			setRecipeByLines(data.text.split('\n'));
-			setNumeralizeWord(declOfNum(data.cooking_time, ['минута', 'минуты', 'минут']));
+			const recipe = await api.getRecipeById(recipeId);
+			setRecipeByLines(recipe.text.split('\n'));
+			setNumeralizeWord(declOfNum(recipe.cooking_time, ['минута', 'минуты', 'минут']));
 
-			const promises = data.ingredients.map((ingredient: ReceipeIngredientInfoProps) => {
-				return api.productsRead(ingredient.id);
-			});
+			const promises = recipe.ingredients.map(
+				(ingredient: ReceipeIngredientInfoProps) => {
+					return api.productsRead(ingredient.id);
+				}
+			);
 
 			const newProducts = await Promise.all(promises);
 			const filteredProducts = newProducts.filter((product) => product !== null);
 
-			setRecipeInfo((prevReceipeInfo) => {
+			const addFieldsToRecipe = (prevReceipe: ReceipeInfoProps) => {
 				filteredProducts.map((product) => {
-					const index = prevReceipeInfo.ingredients.findIndex((i) => i.id == product.id);
+					const index = prevReceipe.ingredients.findIndex((i) => i.id == product.id);
 					if (index === -1) {
 						return;
 					}
-
-					prevReceipeInfo.ingredients[index].photo = product.photo;
-					prevReceipeInfo.ingredients[index].amount = product.amount;
-					prevReceipeInfo.ingredients[index].price = product.price;
+					prevReceipe.ingredients[index].amount = product.amount;
+					prevReceipe.ingredients[index].price = product.price;
+					prevReceipe.ingredients[index].amount_of_pack = Math.ceil(
+						prevReceipe.ingredients[index].quantity / product.amount
+					);
 				});
 
-				return prevReceipeInfo;
-			});
+				return prevReceipe;
+			};
+
+			setRecipeInfo(addFieldsToRecipe(recipe));
 		};
 
 		fetchReceiptAndProducts().finally(() => setIsLoading(false));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [id]);
 
 	return (
 		<div className={styles.recipes}>

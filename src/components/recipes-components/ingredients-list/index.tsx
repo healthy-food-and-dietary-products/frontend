@@ -9,7 +9,8 @@ type RecipeIngredientsProps = {
 		name: string;
 		measure_unit: string;
 		quantity: number;
-		ingredient_photo?: string;
+		ingredient_photo: string;
+		amount_of_pack: number;
 		amount?: number;
 		price?: number;
 	}[];
@@ -45,7 +46,9 @@ const IngredientsList: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 									alt={ingredient.name as string}
 								/>
 							</div>
-							<p className={styles.ingredient__name}>{ingredient.name}</p>
+							<p
+								className={styles.ingredient__name}
+							>{`${ingredient.name}, ${ingredient.amount}${ingredient.measure_unit}`}</p>
 							<p
 								className={styles.ingredient__weight}
 							>{`${ingredient?.quantity} ${ingredient.measure_unit}`}</p>

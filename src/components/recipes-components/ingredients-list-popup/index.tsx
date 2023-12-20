@@ -7,8 +7,10 @@ type RecipeIngredientsProps = {
 		name: string;
 		measure_unit: string;
 		quantity: number;
-		photo?: string;
+		ingredient_photo: string;
+		amount_of_pack: number;
 		amount?: number;
+		price?: number;
 	}[];
 };
 

@@ -12,7 +12,7 @@ type RecipeIngredientsProps = {
 		measure_unit: string;
 		quantity: number;
 		ingredient_photo: string;
-		photo?: string;
+		amount_of_pack: number;
 		amount?: number;
 		price?: number;
 	}[];

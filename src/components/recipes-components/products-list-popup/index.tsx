@@ -11,7 +11,8 @@ type ReceipeIngredient = {
 	name: string;
 	measure_unit: string;
 	quantity: number;
-	photo?: string;
+	ingredient_photo: string;
+	amount_of_pack: number;
 	amount?: number;
 	price?: number;
 };
@@ -32,7 +33,7 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 			setProducts(
 				products?.map((product, i) => {
 					if (i === index) {
-						product.amount = Math.min(Math.max(newAmount, 1), 20);
+						product.amount_of_pack = Math.min(Math.max(newAmount, 1), 20);
 					}
 					return product;
 				})
@@ -45,12 +46,7 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 			return;
 		}
 
-		setProducts(
-			ingredients.map((i) => {
-				i.amount = 1;
-				return i;
-			})
-		);
+		setProducts(ingredients);
 	}, [ingredients]);
 
 	return (
@@ -64,33 +60,37 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 							key={product.name}
 						>
 							<div className={styles.product__image}>
-								<img src={product.photo} alt={product.name} />
+								<img src={product.ingredient_photo} alt={product.name} />
 							</div>
-							<p className={styles.product__name}>{product.name}</p>
+							<p
+								className={styles.product__name}
+							>{`${product.name}, ${product.amount}${product.measure_unit}`}</p>
 
 							<div className={clsx(styles.product__counter, styles.counter)}>
 								<button
 									className={styles.counter__button}
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									// @ts-ignore
-									onClick={() => changeAmount(index)(product.amount - 1)}
+									onClick={() =>
+										product.amount_of_pack &&
+										changeAmount(index)(product.amount_of_pack - 1)
+									}
 								>
 									<img src={minusIcon} alt="минус" />
 								</button>
-								<p className={styles.counter__value}>{`${product.amount} уп.`}</p>
+								<p className={styles.counter__value}>{`${product.amount_of_pack} уп.`}</p>
 								<button
 									className={styles.counter__button}
-									// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-									// @ts-ignore
-									onClick={() => changeAmount(index)(product.amount + 1)}
+									onClick={() =>
+										product.amount_of_pack &&
+										changeAmount(index)(product.amount_of_pack + 1)
+									}
 								>
 									<img src={plusIcon} alt="плюс" />
 								</button>
 							</div>
 
-							{product.price && product.amount && (
+							{product.price && product.amount_of_pack && (
 								<p className={styles.product__price}>{`${
-									product.price * product.amount
+									product.price * product.amount_of_pack
 								} руб.`}</p>
 							)}
 							<button
