@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './products-list-popup.module.scss';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useCart } from '@hooks/use-cart-context';
 import closeIcon from '@images/profile/close.svg';
 import plusIcon from '@images/plus_button.svg';
 import minusIcon from '@images/minus_button.svg';
@@ -23,6 +23,7 @@ type RecipeIngredientsProps = {
 
 const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 	const [products, setProducts] = useState<ReceipeIngredient[]>(Array);
+	const { updateCart } = useCart();
 
 	const filterProducts = (index: number) => {
 		setProducts((prev) => prev.filter((_, i) => i !== index));
@@ -39,6 +40,13 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 				})
 			);
 		};
+	};
+
+	const handleAddToCart = () => {
+		const data = products.map((prod) => {
+			return { id: prod.id, quantity: prod.amount_of_pack };
+		});
+		updateCart(data);
 	};
 
 	React.useEffect(() => {
@@ -103,7 +111,9 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 						</li>
 					))}
 				</ul>
-				<button className={styles['products-popup__button']}>Добавить в корзину</button>
+				<button className={styles['products-popup__button']} onClick={handleAddToCart}>
+					Добавить в корзину
+				</button>
 			</div>
 		)
 	);
