@@ -8,6 +8,7 @@ import api from '@services/api.ts';
 import Preloader from '@components/preloader';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
+import { useCart } from '@hooks/use-cart-context';
 import RecipeInfo from '@components/recipes-components/recipe-info';
 import { usePopup } from '@hooks/use-popup';
 import PopupRecipe from '@components/popups/popup-recipe';
@@ -48,6 +49,7 @@ const Recipe: React.FC = () => {
 	const [recipeInfo, setRecipeInfo] = useState<ReceipeInfoProps>(Object);
 	const [recipeByLines, setRecipeByLines] = useState<string[]>(['']);
 	const [numeralizeWord, setNumeralizeWord] = useState('');
+	const { reset } = useCart();
 
 	useEffect(() => {
 		if (!id) {
@@ -91,6 +93,11 @@ const Recipe: React.FC = () => {
 		fetchReceiptAndProducts().finally(() => setIsLoading(false));
 	}, [id]);
 
+	const handleAddToCart = () => {
+		reset();
+		handleOpenPopup('openPopupRecipe');
+	};
+
 	return (
 		<div className={styles.recipes}>
 			{isLoading ? (
@@ -113,7 +120,7 @@ const Recipe: React.FC = () => {
 							<button
 								className={styles.ingredients__button}
 								type="button"
-								onClick={() => handleOpenPopup('openPopupRecipe')}
+								onClick={handleAddToCart}
 							>
 								Добавить все в корзину
 							</button>

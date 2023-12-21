@@ -36,7 +36,18 @@
 		line-height: 1.4;
 		cursor: pointer;
 		color: #fff;
-		background: $form-button-color;
+		background-color: $form-button-color;
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
+	}
+
+	&__button:disabled {
+		background-color: $gray-button;
+		color: $footer-background-color;
+		transition:
+			background-color 0.2s ease-in-out,
+			color 0.2s ease-in-out;
 	}
 }
 
@@ -74,6 +85,25 @@
 	&__delete {
 		background-color: transparent;
 		border: none;
+	}
+
+	&__resultText {
+		color: $error-color;
+		font-size: 13px;
+		font-weight: 300;
+		line-height: 140%;
+		min-height: 30px;
+		margin: 0;
+	}
+
+	&__error {
+		color: $error-color;
+		font-weight: 300;
+	}
+
+	&__success {
+		color: $accent-color-bright-green;
+		font-weight: 400;
 	}
 }
 

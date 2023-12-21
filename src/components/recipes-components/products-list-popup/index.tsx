@@ -23,13 +23,15 @@ type RecipeIngredientsProps = {
 
 const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 	const [products, setProducts] = useState<ReceipeIngredient[]>(Array);
-	const { updateCart } = useCart();
+	const { updateCart, error, reset, successText, cartUpdating } = useCart();
 
 	const filterProducts = (index: number) => {
 		setProducts((prev) => prev.filter((_, i) => i !== index));
 	};
 
 	const changeAmount = (index: number) => {
+		reset();
+
 		return (newAmount: number) => {
 			setProducts(
 				products?.map((product, i) => {
@@ -111,7 +113,20 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 						</li>
 					))}
 				</ul>
-				<button className={styles['products-popup__button']} onClick={handleAddToCart}>
+				<p
+					className={clsx(
+						styles.product__resultText,
+						successText.updateCart && styles.product__success,
+						error.updateCart && styles.product__error
+					)}
+				>
+					{successText.updateCart || error.updateCart}
+				</p>
+				<button
+					className={styles['products-popup__button']}
+					onClick={handleAddToCart}
+					disabled={cartUpdating}
+				>
 					Добавить в корзину
 				</button>
 			</div>

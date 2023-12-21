@@ -34,6 +34,18 @@ type CartDataItem = {
 type CartContextType = {
 	cartData: CartDataItem;
 	loading: boolean;
+	cartUpdating: boolean;
+	error: {
+		loadCartData: string;
+		updateCart: string;
+		deleteCart: string;
+	};
+	successText: {
+		loadCartData: string;
+		updateCart: string;
+		deleteCart: string;
+	};
+	reset: () => void;
 	loadCartData: () => void;
 	updateCart: (data: Product[]) => void;
 	deleteCart: (id: number) => void;
@@ -48,6 +60,18 @@ const CartContext = createContext<CartContextType>({
 		total_price: 0,
 	},
 	loading: true,
+	error: {
+		loadCartData: '',
+		updateCart: '',
+		deleteCart: '',
+	},
+	successText: {
+		loadCartData: '',
+		updateCart: '',
+		deleteCart: '',
+	},
+	cartUpdating: false,
+	reset: () => {},
 	loadCartData: () => {},
 	updateCart: () => {},
 	deleteCart: () => {},
@@ -63,17 +87,31 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 	});
 	const [cartUpdating, setCartUpdating] = useState(false);
 	const [loading, setLoading] = useState(true);
+	const [successText, setSuccessText] = useState({
+		loadCartData: '',
+		updateCart: '',
+		deleteCart: '',
+	});
+	const [error, setError] = useState({
+		loadCartData: '',
+		updateCart: '',
+		deleteCart: '',
+	});
 
 	const loadCartData = () => {
+		setCartUpdating(true);
+		setLoading(true);
+
 		api
 			.usersShoppingCartList()
 			.then((data) => {
 				setCartData(data);
-				setCartUpdating(true);
-				setLoading(true);
 			})
 			.catch((error) => {
 				console.error('Error loading cart data:', error);
+				setError((prev) => {
+					return { ...prev, loadCartData: error.errors[0].detail };
+				});
 			})
 			.finally(() => {
 				setCartUpdating(false);
@@ -82,18 +120,25 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 	};
 
 	const updateCart = (data: Product[]) => {
+		reset();
 		const updatedCartItem: ShoppingCartItem = {
 			products: data,
 		};
+		setCartUpdating(true);
 
 		api
 			.usersShoppingCartCreate(updatedCartItem)
 			.then((data) => {
 				setCartData(data);
-				setCartUpdating(true);
+				setSuccessText((prev) => {
+					return { ...prev, updateCart: 'Продукты успешно добавлены в корзину' };
+				});
 			})
 			.catch((error) => {
 				console.error('Error updating cart:', error);
+				setError((prev) => {
+					return { ...prev, updateCart: error.errors[0].detail };
+				});
 			})
 			.finally(() => {
 				setCartUpdating(false);
@@ -108,6 +153,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 			})
 			.catch((error) => {
 				console.error('Error deleting cart item:', error);
+				setError((prev) => {
+					return { ...prev, deleteCart: error.errors[0].detail };
+				});
 			});
 	};
 
@@ -134,6 +182,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 		} else {
 			console.log('Корзина обновляется. Пожалуйста, подождите.');
 		}
+	};
+
+	const reset = () => {
+		setError((prev) => {
+			return { ...prev, updateCart: '' };
+		});
+		setSuccessText((prev) => {
+			return { ...prev, updateCart: '' };
+		});
 	};
 
 	const removeItemFromCart = (productId: number) => {
@@ -165,6 +222,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 			value={{
 				cartData,
 				loading,
+				error,
+				successText,
+				cartUpdating,
+				reset,
 				loadCartData,
 				updateCart,
 				deleteCart,
