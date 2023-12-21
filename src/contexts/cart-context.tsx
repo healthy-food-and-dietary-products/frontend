@@ -153,9 +153,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 			})
 			.catch((error) => {
 				console.error('Error deleting cart item:', error);
-				setError((prev) => {
-					return { ...prev, deleteCart: error.errors[0].detail };
-				});
+				if (error?.errors) {
+					setError((prev) => {
+						return { ...prev, deleteCart: error.errors[0]?.detail };
+					});
+				}
 			});
 	};
 
