@@ -39,6 +39,7 @@ const NavigationIcons: React.FC = () => {
 					<Link
 						className={`${styles.navigation__icon} ${styles.navigation__icon_busket}`}
 						to={'/cart'}
+						data-content={`${cartData.total_price} руб.`}
 					></Link>
 					<button
 						className={`${styles.navigation__icon} ${styles.navigation__icon_profile}`}
