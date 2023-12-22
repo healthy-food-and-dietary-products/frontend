@@ -1,5 +1,6 @@
 @use '@scss/mixins' as *;
 @use '@scss/base.scss' as *;
+@use '@scss/variables.scss' as *;
 
 .navigation__iconsContainer {
 	display: flex;
@@ -29,10 +30,32 @@
 }
 
 .navigation__icon_busket {
+	position: relative;
 	background-image: url('@images/shopping_busket_icon.svg');
 
 	@media screen and (width < 768px) {
 		display: none;
+	}
+}
+
+.navigation__icon_busket::after {
+	content: attr(data-content);
+	position: absolute;
+	text-wrap: nowrap;
+	left: 50%;
+	top: 27px;
+	transform: translate(-50%);
+	background-color: $green-primary-700;
+	border-radius: 16px;
+	padding: 4px 8px;
+	color: #fff;
+	font-family: $ubuntu-font;
+	font-size: 13px;
+	font-weight: 300;
+	line-height: 140%;
+
+	@media screen and (width < 1024px) {
+		padding: 2px 8px;
 	}
 }
 
