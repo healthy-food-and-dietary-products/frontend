@@ -4,6 +4,7 @@ import api from '@services/api';
 import ProductCard from '@components/product-card';
 import ReturnBackButton from '@components/profile-components/return-back-button';
 import { useProfile } from '@hooks/use-profile';
+import { useCart } from '@hooks/use-cart-context';
 import type { Product } from '@services/generated-api/data-contracts';
 import { Link } from 'react-router-dom';
 
@@ -14,11 +15,17 @@ export default function ProfileFavorites() {
 		error: '',
 	});
 	const [products, setProducts] = useState<Array<Product>>([]);
-	const [checkboxesValues, setCheckboxesValue] = useState<boolean[]>([]);
+	const [checkboxesValues, setCheckboxesValue] = useState<Record<number, boolean>>({});
 	const { isMobileScreen } = useProfile();
+	const { updateCart } = useCart();
 
 	useEffect(() => {
-		products && setCheckboxesValue(products.map(() => false));
+		products &&
+			products.forEach((product) => {
+				setCheckboxesValue((prev) => {
+					return { ...prev, [product.id]: false };
+				});
+			});
 	}, [products]);
 
 	useEffect(() => {
@@ -46,18 +53,40 @@ export default function ProfileFavorites() {
 			});
 	}, []);
 
-	const onCheckButton = (index: number) => {
+	const onCheckButton = (id: number) => {
 		return () => {
-			setCheckboxesValue(
-				checkboxesValues.map((value, i) => (i === index ? !value : value))
-			);
+			setCheckboxesValue((prev) => {
+				return { ...prev, [id]: !prev[id] };
+			});
 		};
 	};
 
-	const isChooseAll = checkboxesValues.every((el) => el) || !products.length;
+	const isChooseAll =
+		Object.values(checkboxesValues).every((el) => el) || !products.length;
 
 	const toggleAll = () => {
-		setCheckboxesValue(checkboxesValues.map(() => (isChooseAll ? false : true)));
+		if (isChooseAll) {
+			Object.keys(checkboxesValues).forEach((key) => {
+				setCheckboxesValue((prev) => {
+					return { ...prev, [key]: false };
+				});
+			});
+		} else {
+			Object.keys(checkboxesValues).forEach((key) => {
+				setCheckboxesValue((prev) => {
+					return { ...prev, [key]: true };
+				});
+			});
+		}
+	};
+
+	const handleAddToCart = () => {
+		const dataToSend = Object.keys(checkboxesValues)
+			.filter((i) => checkboxesValues[i as unknown as keyof typeof checkboxesValues])
+			.map((item) => ({ id: Number(item), quantity: 1 }));
+		updateCart(dataToSend);
+
+		window.scroll(0, 0);
 	};
 
 	return (
@@ -71,7 +100,7 @@ export default function ProfileFavorites() {
 			</div>
 			<ul className={styles.favorites__list}>
 				{!productsLoadingStatus.inProcess && products.length ? (
-					products.map((product, index) => (
+					products.map((product) => (
 						<li className={styles.favorites__item} key={product.id}>
 							<ProductCard
 								cardName={product.name}
@@ -82,10 +111,10 @@ export default function ProfileFavorites() {
 								idCard={product.id}
 								category={product?.category?.category_slug}
 								checkboxControl={
-									checkboxesValues.length
+									Object.keys(checkboxesValues)?.length
 										? {
-												checked: checkboxesValues[index],
-												onChange: onCheckButton(index),
+												checked: checkboxesValues[product.id],
+												onChange: onCheckButton(product.id),
 										  }
 										: undefined
 								}
@@ -102,7 +131,13 @@ export default function ProfileFavorites() {
 					</p>
 				)}
 			</ul>
-			<button className={styles.button}>В корзину</button>
+			<button
+				className={styles.button}
+				onClick={handleAddToCart}
+				disabled={!Object.values(checkboxesValues).some((i) => i)}
+			>
+				В корзину
+			</button>
 		</div>
 	);
 }
