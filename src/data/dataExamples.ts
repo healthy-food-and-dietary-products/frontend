@@ -1,38 +1,5 @@
 import TomatoesForProductPage from '@images/tomatoes_for_product_page.png';
 
-export const mainPageBlockLinks = [
-	{
-		title: 'Овощи',
-		link: 'vegetables-and-herbs',
-		backgroundImage: '/383bea75365411fd84f9c6c47e081cab.jpeg',
-		gridArea: 'a',
-	},
-	{
-		title: 'Фрукты',
-		link: 'fruits',
-		backgroundImage: '/e8ab3ec81c9d3e4cc473a3d6ae86bc5a.jpeg',
-		gridArea: 'b',
-	},
-	{
-		title: 'Орехи',
-		link: 'nuts-dried-fruits',
-		backgroundImage: '/05c2db3efd894fa03b952abf2d5a88ee.jpeg',
-		gridArea: 'c',
-	},
-	{
-		title: 'Молочные продукты',
-		link: 'dairy',
-		backgroundImage: '/5b5f8ca8a8f4f583ac88b6e80a646e10.jpeg',
-		gridArea: 'd',
-	},
-	{
-		title: 'Мясо и птица',
-		link: 'meat-and-poultry',
-		backgroundImage: '/4e039f6d2c33797f4fd913bd642549f0.jpeg',
-		gridArea: 'e',
-	},
-];
-
 export const products = [
 	{
 		cardName: 'Помидоры черри',
