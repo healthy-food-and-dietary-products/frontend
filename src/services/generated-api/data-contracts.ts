@@ -30,6 +30,7 @@ export interface Category {
 	 * @maxLength 100
 	 */
 	name: string;
+	image: string;
 	/**
 	 * Slug
 	 * @format slug
