@@ -1,0 +1,46 @@
+@use '@scss/variables' as *;
+
+.link__title {
+	color: $active-text-color;
+	font-family: $ubuntu-font;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 140%;
+	margin: 0;
+	padding-right: 5px;
+
+	@media screen and (width <= 768px) {
+		font-size: 24px;
+		padding-right: 3px;
+	}
+}
+
+.link__arrow {
+	width: 20px;
+	height: 32px;
+	margin-top: auto;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	stroke: $active-text-color;
+
+	@media screen and (width <= 768px) {
+		width: 18px;
+		height: 28px;
+	}
+}
+
+.link {
+	text-decoration: none;
+	display: flex;
+	max-width: max-content;
+
+	&:hover .link__title,
+	&:hover .link__arrow {
+		stroke: $accent-color-bright-green;
+		color: $accent-color-bright-green;
+		transition:
+			color 0.2s ease-in-out,
+			stroke 0.2s ease-in-out;
+	}
+}
