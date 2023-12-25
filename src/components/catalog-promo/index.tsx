@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ArrowIcon from '@images/chevron-right.svg?react';
 import clsx from 'clsx';
 import { useProfile } from '@hooks/use-profile';
 import api from '@services/api';
@@ -37,6 +38,12 @@ const CatalogPromo = () => {
 	}, []);
 	return (
 		<>
+			<div className={styles.link__container}>
+				<Link to="/catalog/" className={styles.link}>
+					<p className={styles.link__title}>Каталог</p>
+					<ArrowIcon className={styles.link__arrow} />
+				</Link>
+			</div>
 			<ul className={styles.catalogPromo}>
 				{categories.slice(0, numberToShow).map((category) => (
 					<li key={category.id} className={styles.catalogPromo__item}>
