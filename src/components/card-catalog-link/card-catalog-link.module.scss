@@ -19,31 +19,8 @@
 	}
 }
 
-.card-catalog-link__title-container_type_bento-grid {
-	margin-bottom: 28px;
-}
-
 .card-catalog-link__title-container_type_single-row {
 	margin-bottom: 16px;
-}
-
-.card-catalog-link__title {
-	margin: 0;
-	color: #1a1a1a;
-
-	@media screen and (width <= 768px) {
-		font-size: 24px;
-	}
-}
-
-.card-catalog-link__arrow {
-	width: 20px;
-	height: 32px;
-	margin-top: auto;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-image: url('@images/chevron-right.svg');
 }
 
 .card-catalog-link__list-single {

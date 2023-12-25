@@ -1,8 +1,8 @@
 /* eslint-disable */
 import clsx from 'clsx';
 import ProductCard from '../product-card';
+import TitleArrowLink from '@components/title-arrow-link';
 import styles from './card-catalog-link.module.scss';
-import { Link } from 'react-router-dom';
 import { Product } from '@services/generated-api/data-contracts';
 
 type CardCatalogLinkProps = {
@@ -20,10 +20,7 @@ function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps)
 					styles[`card-catalog-link__title-container_type_${type}`]
 				}`}
 			>
-				<Link to={`/catalog/${category}`} className={styles.link}>
-					<h2 className={styles['card-catalog-link__title']}>{title}</h2>
-				</Link>
-				<span className={styles['card-catalog-link__arrow']} />
+				<TitleArrowLink title={title} link={`/catalog/${category}`} type="catalogPage" />
 			</div>
 			<ul
 				className={clsx(

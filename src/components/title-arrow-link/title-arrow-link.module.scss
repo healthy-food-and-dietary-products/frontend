@@ -15,6 +15,12 @@
 	}
 }
 
+.link__title_type_smallFont {
+	@media screen and (width <= 768px) {
+		font-size: 18px;
+	}
+}
+
 .link__arrow {
 	width: 20px;
 	height: 32px;
@@ -27,6 +33,13 @@
 	@media screen and (width <= 768px) {
 		width: 18px;
 		height: 28px;
+	}
+}
+
+.link__arrow_type_small {
+	@media screen and (width <= 768px) {
+		width: 14px;
+		height: 20px;
 	}
 }
 
