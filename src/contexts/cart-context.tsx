@@ -39,16 +39,19 @@ type CartContextType = {
 		loadCartData: string;
 		updateCart: string;
 		deleteCart: string;
+		clearCart: string;
 	};
 	successText: {
 		loadCartData: string;
 		updateCart: string;
 		deleteCart: string;
+		clearCart: string;
 	};
 	reset: () => void;
 	loadCartData: () => void;
 	updateCart: (data: Product[]) => void;
 	deleteCart: (id: number) => void;
+	clearCart: () => void;
 	addItemToCart: (id: number) => void;
 	removeItemFromCart: (id: number) => void;
 };
@@ -64,17 +67,20 @@ const CartContext = createContext<CartContextType>({
 		loadCartData: '',
 		updateCart: '',
 		deleteCart: '',
+		clearCart: '',
 	},
 	successText: {
 		loadCartData: '',
 		updateCart: '',
 		deleteCart: '',
+		clearCart: '',
 	},
 	cartUpdating: false,
 	reset: () => {},
 	loadCartData: () => {},
 	updateCart: () => {},
 	deleteCart: () => {},
+	clearCart: () => {},
 	addItemToCart: () => {},
 	removeItemFromCart: () => {},
 });
@@ -91,11 +97,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 		loadCartData: '',
 		updateCart: '',
 		deleteCart: '',
+		clearCart: '',
 	});
 	const [error, setError] = useState({
 		loadCartData: '',
 		updateCart: '',
 		deleteCart: '',
+		clearCart: '',
 	});
 
 	const loadCartData = () => {
@@ -148,9 +156,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 	const deleteCart = (idProduct: number) => {
 		api
 			.usersShoppingCartDelete(idProduct)
-			.finally(() => {
-				loadCartData();
-			})
 			.catch((error) => {
 				console.error('Error deleting cart item:', error);
 				if (error?.errors) {
@@ -158,6 +163,26 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 						return { ...prev, deleteCart: error.errors[0]?.detail };
 					});
 				}
+			})
+			.finally(() => {
+				loadCartData();
+			});
+	};
+
+	const clearCart = () => {
+		api
+			.usersShoppingCartDeleteAll()
+			.then((data) => {
+				loadCartData();
+				setSuccessText((prev) => {
+					return { ...prev, clearCart: data.message };
+				});
+			})
+			.catch((error) => {
+				setError((prev) => {
+					return { ...prev, clearCart: error.errors };
+				});
+				console.log('Error clearing cart:', error);
 			});
 	};
 
@@ -231,6 +256,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 				loadCartData,
 				updateCart,
 				deleteCart,
+				clearCart,
 				addItemToCart,
 				removeItemFromCart,
 			}}
