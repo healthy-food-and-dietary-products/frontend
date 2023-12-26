@@ -11,7 +11,7 @@ import Preloader from '@components/preloader';
 import { Product } from '@services/generated-api/data-contracts';
 
 const ShoppingCart: React.FC = () => {
-	const { cartData, loading } = useCart();
+	const { cartData, clearCart, loading } = useCart();
 	const [activeButton, setActiveButton] = React.useState<string>('shipment');
 	const navigate = useNavigate();
 	const [promotionProducts, setPromotionProducts] = useState<Product[]>([]);
@@ -54,6 +54,10 @@ const ShoppingCart: React.FC = () => {
 		});
 	};
 
+	const handleClearCart = () => {
+		clearCart();
+	};
+
 	return (
 		<section className={styles.cart}>
 			<Breadcrumbs />
@@ -66,7 +70,13 @@ const ShoppingCart: React.FC = () => {
 							<h3
 								className={styles.products__title_mob}
 							>{`${cartData.count_of_products} товаров`}</h3>
-							<button className={styles.products__btn}>Очистить корзину</button>
+							<button
+								className={styles.products__btn}
+								onClick={handleClearCart}
+								disabled={cartData.products.length === 0}
+							>
+								Очистить корзину
+							</button>
 						</div>
 
 						{cartData.products.length > 0 ? (
@@ -79,7 +89,7 @@ const ShoppingCart: React.FC = () => {
 						<div className={styles.details__sum}>
 							<p className={`text-m`}>Итого</p>
 							<p className={`text-m`}>
-								{cartData.total_price ? `${cartData.total_price.toFixed(2)} руб.` : 'N/A'}
+								{cartData.total_price ? `${cartData.total_price.toFixed(2)} руб.` : '0'}
 							</p>
 						</div>
 						<div className={styles.delivery}>
