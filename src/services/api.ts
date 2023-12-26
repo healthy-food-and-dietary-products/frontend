@@ -270,6 +270,7 @@ class Api {
 		});
 	}
 
+	/* ---------------------------- ShoppingCart ---------------------------- */
 	usersShoppingCartList() {
 		return this._request(`shopping_cart/`, {
 			method: 'GET',
@@ -301,22 +302,32 @@ class Api {
 		});
 	}
 
-	usersShoppingCartRead(userId: string, id: number) {
-		return this._request(`users/${userId}/shopping_cart/${id}/`, {
-			method: 'GET',
+	usersShoppingCartDeleteAll() {
+		return this._request('shopping_cart/remove_all/', {
+			method: 'DELETE',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 		});
 	}
 
-	usersShoppingCartPartialUpdate(
-		userId: string,
-		id: number,
-		data: ShoppingCartPostUpdateDelete
-	) {
-		return this._request(`users/${userId}/shopping_cart/${id}/`, {
-			method: 'PATCH',
-			body: JSON.stringify(data),
-		});
-	}
+	// usersShoppingCartRead(userId: string, id: number) {
+	// 	return this._request(`users/${userId}/shopping_cart/${id}/`, {
+	// 		method: 'GET',
+	// 	});
+	// }
+
+	// usersShoppingCartPartialUpdate(
+	// 	userId: string,
+	// 	id: number,
+	// 	data: ShoppingCartPostUpdateDelete
+	// ) {
+	// 	return this._request(`users/${userId}/shopping_cart/${id}/`, {
+	// 		method: 'PATCH',
+	// 		body: JSON.stringify(data),
+	// 	});
+	// }
 
 	/* ----------------------------- Products ----------------------------- */
 	productsList(slug: string) {
