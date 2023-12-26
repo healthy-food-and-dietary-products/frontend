@@ -1,0 +1,81 @@
+@use '@scss/mixins' as *;
+@use '@scss/variables' as *;
+
+.checkoutSuccess {
+	display: flex;
+	flex-direction: column;
+	font-family: $ubuntu-font;
+}
+
+.checkoutSuccess__order {
+	padding: 108px 128px 100px;
+	max-width: 1024px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	@media screen and (width <= 768px) {
+		padding: 40px 20px;
+	}
+}
+
+.checkoutSuccess__title {
+	align-self: center;
+	padding: 0 0 38px;
+
+	@media screen and (width <= 768px) {
+		align-self: stretch;
+		text-align: left;
+		padding: 0 0 20px;
+		font-size: 24px;
+	}
+}
+
+.checkoutSuccess__paragraph {
+	padding: 0 0 74px;
+	margin: 0;
+	align-self: center;
+	text-align: center;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		padding: 0 0 32px;
+		align-self: stretch;
+		text-align: left;
+		font-size: 14px;
+	}
+}
+
+.checkoutSuccess__advice {
+	padding: 0 0 44px;
+	margin: 0;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		padding: 0 0 16px;
+		font-size: 18px;
+	}
+}
+
+.checkoutSuccess__link {
+	color: var(--hint, #2180b6);
+	text-decoration: none;
+}
+
+.checkoutSuccess__ourBlock {
+	padding: 100px 128px 0;
+	max-width: 1024px;
+
+	@media screen and (width <= 768px) {
+		padding: 40px 20px 0;
+	}
+
+	@media screen and (width <= 550px) {
+		padding-right: 0;
+	}
+}
