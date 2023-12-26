@@ -312,23 +312,6 @@ class Api {
 		});
 	}
 
-	// usersShoppingCartRead(userId: string, id: number) {
-	// 	return this._request(`users/${userId}/shopping_cart/${id}/`, {
-	// 		method: 'GET',
-	// 	});
-	// }
-
-	// usersShoppingCartPartialUpdate(
-	// 	userId: string,
-	// 	id: number,
-	// 	data: ShoppingCartPostUpdateDelete
-	// ) {
-	// 	return this._request(`users/${userId}/shopping_cart/${id}/`, {
-	// 		method: 'PATCH',
-	// 		body: JSON.stringify(data),
-	// 	});
-	// }
-
 	/* ----------------------------- Products ----------------------------- */
 	productsList(slug: string) {
 		const headers: HeadersInit = {

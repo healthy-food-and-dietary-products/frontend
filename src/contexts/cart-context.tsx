@@ -31,22 +31,19 @@ type CartDataItem = {
 	total_price: number;
 };
 
+type ResponseText = {
+	loadCartData: string;
+	updateCart: string;
+	deleteCart: string;
+	clearCart: string;
+};
+
 type CartContextType = {
 	cartData: CartDataItem;
 	loading: boolean;
 	cartUpdating: boolean;
-	error: {
-		loadCartData: string;
-		updateCart: string;
-		deleteCart: string;
-		clearCart: string;
-	};
-	successText: {
-		loadCartData: string;
-		updateCart: string;
-		deleteCart: string;
-		clearCart: string;
-	};
+	error: ResponseText;
+	successText: ResponseText;
 	reset: () => void;
 	loadCartData: () => void;
 	updateCart: (data: Product[]) => void;
@@ -116,7 +113,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 				setCartData(data);
 			})
 			.catch((error) => {
-				console.error('Error loading cart data:', error);
 				setError((prev) => {
 					return { ...prev, loadCartData: error.errors[0].detail };
 				});
@@ -143,7 +139,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 				});
 			})
 			.catch((error) => {
-				console.error('Error updating cart:', error);
 				setError((prev) => {
 					return { ...prev, updateCart: error.errors[0].detail };
 				});
@@ -157,7 +152,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 		api
 			.usersShoppingCartDelete(idProduct)
 			.catch((error) => {
-				console.error('Error deleting cart item:', error);
 				if (error?.errors) {
 					setError((prev) => {
 						return { ...prev, deleteCart: error.errors[0]?.detail };
@@ -172,23 +166,21 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 	const clearCart = () => {
 		api
 			.usersShoppingCartDeleteAll()
-			.then((data) => {
+			.then(({ message }) => {
 				loadCartData();
 				setSuccessText((prev) => {
-					return { ...prev, clearCart: data.message };
+					return { ...prev, clearCart: message };
 				});
 			})
-			.catch((error) => {
+			.catch(({ errors }) => {
 				setError((prev) => {
-					return { ...prev, clearCart: error.errors };
+					return { ...prev, clearCart: errors };
 				});
-				console.log('Error clearing cart:', error);
 			});
 	};
 
 	const addItemToCart = (productId: number) => {
 		if (!cartUpdating) {
-			console.log(cartUpdating);
 			const existingProductIndex = cartData.products.findIndex(
 				(product) => product.id === productId
 			);
