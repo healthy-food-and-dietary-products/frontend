@@ -1,0 +1,72 @@
+@use '@scss/mixins' as *;
+@use '@scss/variables' as *;
+
+.orderStatusTracker {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	font-family: $ubuntu-font;
+	gap: 16px;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 140%;
+
+	@media screen and (width <= 1024px) {
+		font-size: 14px;
+	}
+
+	@media screen and (width <= 768px) {
+		font-size: 14px;
+		flex-direction: column;
+		gap: 8px;
+	}
+}
+
+.orderStatusTracker__item {
+	max-width: 120px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: center;
+	text-align: center;
+
+	@media screen and (width <= 1024px) {
+		max-width: 80px;
+	}
+
+	@media screen and (width <= 768px) {
+		flex-direction: row;
+		gap: 16px;
+		max-width: 100%;
+	}
+}
+
+.orderStatusTracker__icon {
+	width: 80px;
+	aspect-ratio: 1;
+
+	@media screen and (width <= 1024px) {
+		width: 60px;
+	}
+
+	@media screen and (width <= 768px) {
+		width: 40px;
+	}
+}
+
+.orderStatusTracker__status {
+	padding: 0;
+	margin: 0;
+}
+
+.orderStatusTracker__spacer {
+	background: no-repeat center url('/src/assets/images/spacer-min.svg');
+	width: 64px;
+
+	@media screen and (width <= 768px) {
+		background: no-repeat center url('/src/assets/images/vspacer-min.svg');
+		width: 40px;
+		height: 20px;
+	}
+}

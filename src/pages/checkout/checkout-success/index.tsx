@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import styles from './checkout-success.module.scss';
 import OurBlock from '@components/our-block';
 import { Link } from 'react-router-dom';
+import OrderStatusTracker from '@components/order-status-tracker';
 
 const CheckoutSuccess: React.FC = () => {
 	// TODO: Add check for active order and redirect
@@ -24,12 +25,11 @@ const CheckoutSuccess: React.FC = () => {
 					Мы уже приступили к его сборке. <br />
 					За статусом заказа можно следить в{' '}
 					<Link className={styles.checkoutSuccess__link} to="/profile">
-						{' '}
 						личном кабинете
 					</Link>
 					.
 				</p>
-				<div>{/* // TODO: Component "Order Tracker" */}</div>
+				<OrderStatusTracker />
 			</section>
 			<section className={styles.checkoutSuccess__ourBlock}>
 				<p className={styles.checkoutSuccess__advice}>

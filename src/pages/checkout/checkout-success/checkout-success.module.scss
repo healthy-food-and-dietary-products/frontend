@@ -14,18 +14,18 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 
 	@media screen and (width <= 768px) {
+		align-items: stretch;
 		padding: 40px 20px;
 	}
 }
 
 .checkoutSuccess__title {
-	align-self: center;
 	padding: 0 0 38px;
 
 	@media screen and (width <= 768px) {
-		align-self: stretch;
 		text-align: left;
 		padding: 0 0 20px;
 		font-size: 24px;
@@ -35,7 +35,6 @@
 .checkoutSuccess__paragraph {
 	padding: 0 0 74px;
 	margin: 0;
-	align-self: center;
 	text-align: center;
 	font-size: 22px;
 	font-weight: 400;
@@ -43,7 +42,6 @@
 
 	@media screen and (width <= 768px) {
 		padding: 0 0 32px;
-		align-self: stretch;
 		text-align: left;
 		font-size: 14px;
 	}
