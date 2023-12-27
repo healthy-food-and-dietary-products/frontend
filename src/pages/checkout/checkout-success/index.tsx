@@ -1,12 +1,14 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import styles from './checkout-success.module.scss';
-import OurBlock from '@components/our-block';
 import { Link } from 'react-router-dom';
+
+import OurBlock from '@components/our-block';
 import OrderStatusTracker from '@components/order-status-tracker';
 
+import styles from './checkout-success.module.scss';
+
 const CheckoutSuccess: React.FC = () => {
-	const [order, setOrder] = React.useState<string>('');
+	const [order, setOrder] = React.useState('');
 	const location = useLocation();
 	const navigate = useNavigate();
 

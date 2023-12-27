@@ -89,6 +89,7 @@ const Checkout: React.FC = () => {
 				loadCartData();
 			})
 			.catch((error) => {
+				console.log(error);
 				if (error.response && error.response.data && error.response.data.errors) {
 					const errorMessage = error.response.data.errors;
 					alert('Ошибка при создании заказа: ' + errorMessage);
