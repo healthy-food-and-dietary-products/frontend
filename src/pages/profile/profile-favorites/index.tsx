@@ -65,19 +65,9 @@ export default function ProfileFavorites() {
 		Object.values(checkboxesValues).every((el) => el) || !products.length;
 
 	const toggleAll = () => {
-		if (isChooseAll) {
-			Object.keys(checkboxesValues).forEach((key) => {
-				setCheckboxesValue((prev) => {
-					return { ...prev, [key]: false };
-				});
-			});
-		} else {
-			Object.keys(checkboxesValues).forEach((key) => {
-				setCheckboxesValue((prev) => {
-					return { ...prev, [key]: true };
-				});
-			});
-		}
+		Object.keys(checkboxesValues).forEach((key) =>
+			setCheckboxesValue((prev) => ({ ...prev, [key]: isChooseAll ? false : true }))
+		);
 	};
 
 	const handleAddToCart = () => {
