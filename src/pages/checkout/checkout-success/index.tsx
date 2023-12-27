@@ -1,18 +1,21 @@
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import styles from './checkout-success.module.scss';
 import OurBlock from '@components/our-block';
 import { Link } from 'react-router-dom';
 import OrderStatusTracker from '@components/order-status-tracker';
 
 const CheckoutSuccess: React.FC = () => {
-	// TODO: Add check for active order and redirect
 	const [order, setOrder] = React.useState<string>('');
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	React.useEffect(
-		() => location.state?.order && setOrder(location.state.order),
-		[location]
+		() =>
+			location.state?.order
+				? setOrder(location.state.order)
+				: navigate('/', { replace: true }),
+		[location, navigate]
 	);
 
 	return (

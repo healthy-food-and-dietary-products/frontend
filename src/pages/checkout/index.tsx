@@ -84,10 +84,9 @@ const Checkout: React.FC = () => {
 
 		api
 			.usersOrderCreate(formData)
-			.then(() => {
-				navigate('/cart');
+			.then((res) => {
+				navigate('/cart/success', { state: { order: res.order_number } });
 				loadCartData();
-				alert('заказ оформлен');
 			})
 			.catch((error) => {
 				if (error.response && error.response.data && error.response.data.errors) {
