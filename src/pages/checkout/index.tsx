@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './checkout.module.scss';
 import api from '@services/api.ts';
 import Input from '@ui/input';
 import { useFormAndValidation } from '@hooks/use-form-and-validation.ts';
+import { usePopup } from '@hooks/use-popup';
+import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
 import { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
 import { useAuth } from '@hooks/use-auth.ts';
 import { useCart } from '@hooks/use-cart-context.ts';
@@ -16,47 +18,78 @@ type Address = {
 const Checkout: React.FC = () => {
 	const { isLoggedIn, user } = useAuth();
 	const { loadCartData, cartData } = useCart();
+	const { handleOpenPopup, handleClosePopup } = usePopup();
 	const location = useLocation();
-	const recievedType = location.state?.orderType;
+	const receivedType = location.state?.orderType;
+	const deliveryType = receivedType ? receivedType : 'Point of delivery';
 	const { values, handleChange, errors, isValid } = useFormAndValidation();
 	const navigate = useNavigate();
-
-	const [deliveryType, setDeliveryType] = React.useState<string>('shipment');
 	const [selectedPayment, setSelectedPayment] = React.useState<string>('');
 	const [selectedTime, setSelectedTime] = React.useState<string>('');
 	const [selectedAddress, setSelectedAddress] = React.useState<string>('');
-	const [actualDeliveryType, setActualDeliveryType] = React.useState<string>('');
 	const userAddresses = user?.addresses as unknown[] as Address[];
 	const [comment, setComment] = React.useState<string>('');
+	const [popupText, setPopupText] = useState('');
 	const addressesById = {
-		1: 'Ленина, 23, кв. 19',
-		2: 'Улица 2, дом 5',
-		3: 'Другой адрес и т.д.',
+		1: 'Санкт-Петербург Невский проспект 17',
+		2: 'Санкт-Петербург Горохова улица 10',
+		3: 'Санкт-Петербург Невский проспект 89',
+		4: 'Санкт-Петербург Большой Самсониевский 6',
+		5: 'Санкт-Петербург Лесной проспект 56',
+		6: 'Санкт-Петербург Владимирский проспект 1',
+		7: 'Санкт-Петербург Лиговский проспект 170',
+	};
+
+	const openInfoPopup = (text: string) => {
+		setPopupText(text);
+		handleOpenPopup('openPopupCheckoutResponse');
 	};
 
 	const handleSubmitOrder = () => {
-		if (isLoggedIn) {
-			if (
-				!selectedPayment ||
-				!actualDeliveryType ||
-				(actualDeliveryType !== 'shipment' && !selectedAddress?.toString().trim())
-			) {
-				alert('Пожалуйста, заполните все обязательные поля');
+		switch (true) {
+			case isLoggedIn && !user.first_name:
+				openInfoPopup('Пожалуйста, заполните имя в личном кабинете');
 				return;
-			}
-		} else {
-			if (
-				!values.order_firstName?.toString().trim() ||
-				!values.order_lastName?.toString().trim() ||
-				!values.order_phoneNumber?.toString().trim() ||
-				!values.order_email?.toString().trim() ||
-				!selectedPayment ||
-				!actualDeliveryType ||
-				(actualDeliveryType !== 'shipment' && !selectedAddress?.toString().trim())
-			) {
-				alert('Пожалуйста, заполните все обязательные поля');
+			case isLoggedIn && !user.last_name:
+				openInfoPopup('Пожалуйста, заполните фамилию в личном кабинете');
 				return;
-			}
+			case isLoggedIn && !user.phone_number:
+				openInfoPopup('Пожалуйста, заполните номер телефона в личном кабинете');
+				return;
+			case isLoggedIn && !selectedAddress?.toString().trim():
+				openInfoPopup(
+					'Пожалуйста, выберите адрес (добавить адрес можно в личном кабинете)'
+				);
+				return;
+			case isLoggedIn && !selectedPayment:
+				openInfoPopup('Пожалуйста, выберите способ оплаты');
+				return;
+		}
+
+		switch (true) {
+			case !isLoggedIn && !values.order_firstName?.toString().trim():
+				openInfoPopup('Пожалуйста, заполните имя');
+				return;
+			case !isLoggedIn && !values.order_lastName?.toString().trim():
+				openInfoPopup('Пожалуйста, заполните фамилию');
+				return;
+			case !isLoggedIn && !values.order_phoneNumber?.toString().trim():
+				openInfoPopup('Пожалуйста, заполните номер телефона');
+				return;
+			case !isLoggedIn && !values.order_email?.toString().trim():
+				openInfoPopup('Пожалуйста, заполните e-mail');
+				return;
+			case !isLoggedIn &&
+				deliveryType === 'Point of delivery' &&
+				!selectedAddress?.toString().trim():
+				openInfoPopup('Пожалуйста, выберите адрес');
+				return;
+			case !isLoggedIn && !selectedAddress?.toString().trim():
+				openInfoPopup('Пожалуйста, введите адрес');
+				return;
+			case !isLoggedIn && !selectedPayment:
+				openInfoPopup('Пожалуйста, выберите способ оплаты');
+				return;
 		}
 
 		let formData: OrderPostAdd = {
@@ -69,15 +102,18 @@ const Checkout: React.FC = () => {
 			payment_method: selectedPayment as
 				| 'Payment at the point of delivery'
 				| 'In getting by cash',
-			delivery_method: actualDeliveryType as 'Point of delivery' | 'By courier',
+			delivery_method: deliveryType as 'Point of delivery' | 'By courier',
 			delivery_point:
-				actualDeliveryType === 'shipment' ? Number(selectedAddress) || 2 : 2,
+				deliveryType === 'Point of delivery' ? Number(selectedAddress) : null,
 			package: 0,
 			comment: comment,
 			add_address: selectedAddress || '',
 		};
 
-		if (isLoggedIn && actualDeliveryType === 'By courier') {
+		deliveryType === 'By courier' && delete formData.delivery_point;
+		isLoggedIn && delete formData.user_data;
+
+		if (isLoggedIn && deliveryType === 'By courier') {
 			delete formData.add_address;
 			formData = { ...formData, address: parseInt(selectedAddress, 10) };
 		}
@@ -89,12 +125,10 @@ const Checkout: React.FC = () => {
 				loadCartData();
 			})
 			.catch((error) => {
-				console.log(error);
-				if (error.response && error.response.data && error.response.data.errors) {
-					const errorMessage = error.response.data.errors;
-					alert('Ошибка при создании заказа: ' + errorMessage);
+				if (error.errors[0].detail) {
+					openInfoPopup('Ошибка при создании заказа: ' + error.errors[0].detail);
 				} else {
-					alert('Произошла ошибка при создании заказа.');
+					openInfoPopup('Произошла ошибка при создании заказа.');
 				}
 			});
 	};
@@ -116,21 +150,10 @@ const Checkout: React.FC = () => {
 		setSelectedAddress(event.target.value);
 	};
 
-	React.useState(() => {
-		if (!recievedType) {
-			setDeliveryType('shipment');
-		} else {
-			setDeliveryType(recievedType);
-		}
-	});
-
-	useEffect(() => {
-		if (deliveryType === 'shipment') {
-			setActualDeliveryType('By courier');
-		} else {
-			setActualDeliveryType('Point of delivery');
-		}
-	}, [deliveryType]);
+	const handleClose = () => {
+		handleClosePopup('openPopupCheckoutResponse');
+		setPopupText('');
+	};
 
 	return (
 		<section className={styles.order}>
@@ -220,7 +243,7 @@ const Checkout: React.FC = () => {
 						)}
 
 						<label className={styles.execution__address}>
-							{deliveryType !== 'shipment' ? (
+							{deliveryType !== 'By courier' ? (
 								<>
 									Адрес пункта самовывоза
 									{selectedAddress !== null ? (
@@ -363,25 +386,40 @@ const Checkout: React.FC = () => {
 									<input
 										type="radio"
 										name="payment"
-										value="In getting by cash"
-										id="payment_cash"
+										value="Online"
+										id="payment_online"
 										className={styles.execution__radio}
 										onChange={handlePaymentChange}
 									/>
-									<label htmlFor="payment_cash">Наличными курьеру</label>
+									<label htmlFor="payment_online">Оплата онлайн</label>
 								</div>
 								<hr className={styles.pricelist__divider} />
-								<div className={styles.execution__item}>
-									<input
-										type="radio"
-										name="payment"
-										value="Payment at the point of delivery"
-										id="payment_offline"
-										className={styles.execution__radio}
-										onChange={handlePaymentChange}
-									/>
-									<label htmlFor="payment_offline">Оплата в пункте выдачи</label>
-								</div>
+								{deliveryType === 'By courier' && (
+									<div className={styles.execution__item}>
+										<input
+											type="radio"
+											name="payment"
+											value="In getting by cash"
+											id="payment_cash"
+											className={styles.execution__radio}
+											onChange={handlePaymentChange}
+										/>
+										<label htmlFor="payment_cash">Оплата курьеру</label>
+									</div>
+								)}
+								{deliveryType === 'Point of delivery' && (
+									<div className={styles.execution__item}>
+										<input
+											type="radio"
+											name="payment"
+											value="Payment at the point of delivery"
+											id="payment_offline"
+											className={styles.execution__radio}
+											onChange={handlePaymentChange}
+										/>
+										<label htmlFor="payment_offline">Оплата в пункте выдачи</label>
+									</div>
+								)}
 							</div>
 						</label>
 						<label className={styles.execution__address}>
@@ -411,7 +449,7 @@ const Checkout: React.FC = () => {
 							</div>
 							<div className={styles.pricelist__item}>
 								<p className={styles.pricelist__title}>
-									{deliveryType === 'shipment' ? 'Доставка' : 'Самовывоз'}
+									{deliveryType === 'By courier' ? 'Доставка' : 'Самовывоз'}
 								</p>
 								<p className={`text_type_u ${styles.pricelist__price}`}>0 руб.</p>
 							</div>
@@ -443,6 +481,7 @@ const Checkout: React.FC = () => {
 					</div>
 				</div>
 			</div>
+			<PopupCheckoutResponse handleClose={handleClose} text={popupText} />
 		</section>
 	);
 };
