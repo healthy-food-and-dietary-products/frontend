@@ -1056,7 +1056,7 @@ export interface OrderPostDelete {
 }
 
 export interface OrderPostAdd extends OrderPostDelete {
-	user_data: {
+	user_data?: {
 		first_name: string;
 		last_name: string;
 		phone_number: string;
