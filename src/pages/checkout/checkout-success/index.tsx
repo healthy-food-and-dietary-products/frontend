@@ -29,7 +29,7 @@ const CheckoutSuccess: React.FC = () => {
 				<p className={styles.checkoutSuccess__paragraph}>
 					Мы уже приступили к его сборке. <br />
 					За статусом заказа можно следить в{' '}
-					<Link className={styles.checkoutSuccess__link} to="/profile">
+					<Link className={styles.checkoutSuccess__link} to="/profile/orders/">
 						личном кабинете
 					</Link>
 					.
