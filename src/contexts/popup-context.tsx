@@ -8,6 +8,7 @@ type PopupState = {
 	openPopupAddressesWarning: boolean;
 	openPopupAddressesDeleteConfirm: boolean;
 	openPopupRecipe: boolean;
+	openPopupCheckoutResponse: boolean;
 };
 
 type PopupContextType = {
@@ -27,6 +28,7 @@ export const PopupProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 		openPopupAddressesWarning: false,
 		openPopupAddressesDeleteConfirm: false,
 		openPopupRecipe: false,
+		openPopupCheckoutResponse: false,
 	});
 
 	const handleOpenPopup = (popupName: string) => {
