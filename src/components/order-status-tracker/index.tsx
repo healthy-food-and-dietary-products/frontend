@@ -17,8 +17,8 @@ const orderSteps = [
 const OrderStatusTracker: React.FC = () => (
 	<ul className={styles.orderStatusTracker}>
 		{orderSteps.map((step, index) => (
-			<React.Fragment>
-				<li key={index} className={styles.orderStatusTracker__item}>
+			<React.Fragment key={step.text}>
+				<li className={styles.orderStatusTracker__item}>
 					<img
 						src={step.icon}
 						alt={step.text}
