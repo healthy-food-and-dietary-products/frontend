@@ -36,7 +36,7 @@ function CardCatalogLink({ title, array, type, category }: CardCatalogLinkProps)
 						{type === 'single-row' && (
 							<ProductCard
 								cardName={item.name}
-								price={item.price}
+								price={item.final_price}
 								weight={item.amount}
 								cardImage={item.photo}
 								category={category}
