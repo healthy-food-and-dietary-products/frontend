@@ -41,7 +41,7 @@
 .navigation__icon_busket::after {
 	content: attr(data-content);
 	position: absolute;
-	text-wrap: nowrap;
+	white-space: nowrap;
 	left: 50%;
 	top: 27px;
 	transform: translate(-50%);
