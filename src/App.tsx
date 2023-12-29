@@ -23,7 +23,7 @@ import { CartProvider } from '@contexts/cart-context.tsx';
 import RecipeList from '@pages/recipe-list/index.tsx';
 import Agreement from '@pages/agreement/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
-import RatingStars from '@components/ratings-and-reviews-components/rating-stars/index.tsx';
+import ReviewAndRatingPostForm from '@components/ratings-and-reviews-components/review-and-rating-post-form/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -53,7 +53,10 @@ function App() {
 						<Route path="/contacts" element={<Contacts />} />
 						<Route path="/recipes/:id" element={<Recipes />} />
 						{/* // TODO: Clean up after Ratings and Reviews task completed */}
-						<Route path="/test" element={<RatingStars defaultRating={4} />} />
+						<Route
+							path="/test"
+							element={<ReviewAndRatingPostForm defaultReview={null} productId={1} />}
+						/>
 						<Route
 							path={URLS.PROFILE}
 							element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 
 import styles from './rating-stars.module.scss';
 
-const RatingStars: React.FC<{ defaultRating: number }> = ({ defaultRating }) => {
+interface IRatingStars {
+	defaultRating: number;
+}
+
+const RatingStars: React.FC<IRatingStars> = ({ defaultRating }) => {
 	const [rating, setRating] = useState(defaultRating);
 	const [hover, setHover] = useState(0);
 	const starsArray = [1, 2, 3, 4, 5];
@@ -24,8 +28,6 @@ const RatingStars: React.FC<{ defaultRating: number }> = ({ defaultRating }) => 
 						onChange={() => {
 							setRating(el);
 						}}
-						// NOTE: Reset rating on click on the star, corresponding to current rating
-						onClick={() => el === rating && setRating(0)}
 					/>
 					<span
 						className={`${styles.star} ${el <= rating && styles.active} ${
