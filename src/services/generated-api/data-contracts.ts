@@ -1064,3 +1064,24 @@ export interface OrderPostAdd extends OrderPostDelete {
 	};
 	address?: number;
 }
+
+export interface ReviewCreate {
+	/** Score
+	 * @min 1
+	 * @max 5
+	 */
+	score: number;
+
+	/** Text*/
+	text?: string;
+}
+export interface ReviewUpdate {
+	/** Score
+	 * @min 1
+	 * @max 5
+	 */
+	score?: number;
+
+	/** Text*/
+	text?: string;
+}

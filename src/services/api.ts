@@ -18,6 +18,8 @@ import type {
 	Subcategory,
 	Tag,
 	OrderPostAdd,
+	ReviewCreate,
+	ReviewUpdate,
 } from './generated-api/data-contracts';
 import { BACKEND_URL } from '@data/constants.ts';
 import Cookies from 'js-cookie';
@@ -612,6 +614,35 @@ class Api {
 
 	getRecipeById(id: number) {
 		return this._request(`recipes/${id}`, {
+			method: 'GET',
+		});
+	}
+
+	/* ------------------------ Ratings and Reviews -------------------------- */
+	reviewsCreate(productId: number, data: ReviewCreate) {
+		return this._request(`products/${productId}/reviews/`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
+			body: JSON.stringify(data),
+		});
+	}
+
+	reviewsUpdate(productId: number, reviewId: number, data: ReviewUpdate) {
+		return this._request(`products/${productId}/reviews/${reviewId}/`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
+			body: JSON.stringify(data),
+		});
+	}
+
+	reviewsList(productId: number) {
+		return this._request(`products/${productId}/reviews/`, {
 			method: 'GET',
 		});
 	}

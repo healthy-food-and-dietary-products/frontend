@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-
 import styles from './rating-stars.module.scss';
 
 interface IRatingStars {
-	defaultRating: number;
+	rating: number;
+	onChange: (rating: number) => void;
 }
 
-const RatingStars: React.FC<IRatingStars> = ({ defaultRating }) => {
-	const [rating, setRating] = useState(defaultRating);
+const RatingStars: React.FC<IRatingStars> = ({ rating, onChange }) => {
 	const [hover, setHover] = useState(0);
 	const starsArray = [1, 2, 3, 4, 5];
 
@@ -26,7 +25,7 @@ const RatingStars: React.FC<IRatingStars> = ({ defaultRating }) => {
 						checked={el === rating}
 						value={el}
 						onChange={() => {
-							setRating(el);
+							onChange(el);
 						}}
 					/>
 					<span
