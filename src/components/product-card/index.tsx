@@ -10,14 +10,14 @@ import { usePopup } from '@hooks/use-popup';
 import { useCart } from '@hooks/use-cart-context.ts';
 import CheckIcon from '@images/check.svg?react';
 import api from '@services/api';
-import { toMeasureUnit } from '@utils/utils';
+import { translateMeasureUnit } from '@utils/utils';
 
 type ProductCardProps = {
 	cardName: string;
 	price: number;
 	final_price?: number;
 	weight: number;
-	measureUnit?: string;
+	measureUnit: string;
 	cardImage: string;
 	category?: string;
 	idCard: number;
@@ -75,7 +75,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
 		return updateCart([{ id: idCard, quantity: 1 }]);
 	};
 
-	const { newMeasureUnit, newWeight } = toMeasureUnit(measureUnit, weight);
+	const { measureUnit: newMeasureUnit, amount } = translateMeasureUnit(
+		measureUnit,
+		weight
+	);
 
 	return (
 		<div className={`${styles.card} ${addedClassName && styles[addedClassName]}`}>
@@ -101,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 				</span>
 				<span
 					className={`${styles['card__params-text']} ${styles['card__params-text_weight']}`}
-				>{`${newWeight} ${newMeasureUnit}`}</span>
+				>{`${amount + newMeasureUnit}`}</span>
 			</div>
 
 			<div className={styles['card__button-container']}>
