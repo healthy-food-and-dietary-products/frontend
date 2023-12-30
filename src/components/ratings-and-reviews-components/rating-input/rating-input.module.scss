@@ -28,11 +28,14 @@
 	background-position: center;
 	background-size: cover;
 	border: none;
-	cursor: pointer;
 
 	&.active,
 	&.hovered {
 		background-image: url('@images/star-rating-filled.svg');
+	}
+
+	.clickable {
+		cursor: pointer;
 	}
 
 	@media screen and (width <= 768px) {

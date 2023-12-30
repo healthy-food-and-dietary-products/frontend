@@ -1,0 +1,27 @@
+.container {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+
+	@media screen and (width <= 768px) {
+		gap: 4px;
+	}
+}
+
+.star {
+	width: 24px;
+	aspect-ratio: 1;
+	background-image: url('@images/star-rating-outlined.svg');
+	background-position: center;
+	background-size: cover;
+
+	&.active {
+		background-image: url('@images/star-rating-filled.svg');
+	}
+
+	@media screen and (width <= 768px) {
+		width: 12px;
+	}
+}

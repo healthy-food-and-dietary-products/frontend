@@ -1,13 +1,13 @@
 import React, { SyntheticEvent } from 'react';
-import { IReview } from '../types';
+import { Review } from '@services/generated-api/data-contracts';
 import api from '@services/api';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
-import RatingStars from '@components/ratings-and-reviews-components/rating-stars';
+import RatingInput from '@components/ratings-and-reviews-components/rating-input';
 import Button from '@components/Button';
 import styles from './review-and-rating-post-form.module.scss';
 
 const ReviewAndRatingPostForm: React.FC<{
-	defaultReview: IReview | null;
+	defaultReview: Review | null;
 	productId: number;
 }> = ({ defaultReview, productId }) => {
 	const { values, setValues, handleChange } = useFormAndValidation({
@@ -58,7 +58,7 @@ const ReviewAndRatingPostForm: React.FC<{
 			<h3 className={styles.title}>
 				{defaultReview ? `Вы оценили товар ${defaultReview.pub_date}` : 'Оценить товар'}
 			</h3>
-			<RatingStars rating={values.score as number} onChange={handleRatingChange} />
+			<RatingInput rating={values.score as number} onChange={handleRatingChange} />
 			<form className={styles.form} noValidate onSubmit={handleReviewSubmit}>
 				<textarea
 					className={styles.input}

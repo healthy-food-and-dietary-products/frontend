@@ -1066,22 +1066,53 @@ export interface OrderPostAdd extends OrderPostDelete {
 }
 
 export interface ReviewCreate {
-	/** Score
+	/** Rating Score
 	 * @min 1
 	 * @max 5
 	 */
 	score: number;
 
-	/** Text*/
+	/** Review Text */
 	text?: string;
 }
 export interface ReviewUpdate {
-	/** Score
+	/** Rating Score
 	 * @min 1
 	 * @max 5
 	 */
 	score?: number;
 
-	/** Text*/
+	/** ReviewText */
 	text?: string;
+}
+
+export interface Review {
+	/** ID */
+	id: number;
+
+	/** Author
+	 * @pattern ^[\w.@+-]+$
+	 */
+	author: string;
+
+	/** Product */
+	product: string;
+
+	/** Rating Score
+	 * @min 1
+	 * @max 5
+	 */
+	score: number;
+
+	/**
+	 * Publication date
+	 * @format date-time
+	 */
+	pub_date: string;
+
+	/** Was Edited */
+	was_edited: boolean;
+
+	/** Review Text */
+	text: string;
 }

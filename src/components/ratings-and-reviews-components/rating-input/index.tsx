@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import styles from './rating-stars.module.scss';
+import styles from './rating-input.module.scss';
 
-interface IRatingStars {
+interface RatingInput {
 	rating: number;
 	onChange: (rating: number) => void;
 }
 
-const RatingStars: React.FC<IRatingStars> = ({ rating, onChange }) => {
+const RatingInput: React.FC<RatingInput> = ({ rating, onChange }) => {
 	const [hover, setHover] = useState(0);
 	const starsArray = [1, 2, 3, 4, 5];
 
@@ -22,11 +22,9 @@ const RatingStars: React.FC<IRatingStars> = ({ rating, onChange }) => {
 						className={styles.input}
 						type="radio"
 						name="rating"
-						checked={el === rating}
 						value={el}
-						onChange={() => {
-							onChange(el);
-						}}
+						onChange={() => onChange(el)}
+						checked={el === rating}
 					/>
 					<span
 						className={`${styles.star} ${el <= rating && styles.active} ${
@@ -40,4 +38,4 @@ const RatingStars: React.FC<IRatingStars> = ({ rating, onChange }) => {
 	);
 };
 
-export default RatingStars;
+export default RatingInput;
