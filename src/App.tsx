@@ -24,7 +24,8 @@ import RecipeList from '@pages/recipe-list/index.tsx';
 import Agreement from '@pages/agreement/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
 // import ReviewAndRatingPostForm from '@components/ratings-and-reviews-components/review-and-rating-post-form/index.tsx';
-import Review from '@components/ratings-and-reviews-components/review/index.tsx';
+// import Review from '@components/ratings-and-reviews-components/review/index.tsx';
+import RatingsBreakdown from '@components/ratings-and-reviews-components/ratings-breakdown/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -57,17 +58,22 @@ function App() {
 						<Route
 							path="/test"
 							// element={<ReviewAndRatingPostForm defaultReview={null} productId={1} />}
+							// element={
+							// 	<Review
+							// 		review={{
+							// 			id: 10,
+							// 			author: 'kavabunga',
+							// 			product: 'манго',
+							// 			score: 4,
+							// 			pub_date: '2019-08-24T14:15:22Z',
+							// 			was_edited: false,
+							// 			text: 'Очень вкусное манго',
+							// 		}}
+							// 	/>
+							// }
 							element={
-								<Review
-									review={{
-										id: 10,
-										author: 'kavabunga',
-										product: 'манго',
-										score: 4,
-										pub_date: '2019-08-24T14:15:22Z',
-										was_edited: false,
-										text: 'Очень вкусное манго',
-									}}
+								<RatingsBreakdown
+									ratings={[4, 3, 2, 4, 5, 3, 2, 3, 4, 5, 3, 2, 3, 4, 3, 2, 1]}
 								/>
 							}
 						/>

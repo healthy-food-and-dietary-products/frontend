@@ -1,0 +1,107 @@
+@use '@scss/_variables' as *;
+
+.container {
+	font-family: $ubuntu-font;
+	color: $active-text-color;
+	display: flex;
+	flex-direction: column;
+	max-width: 200px;
+
+	@media screen and (width <= 768px) {
+		max-width: 186px;
+	}
+}
+
+.average {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 4px;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+	}
+}
+
+.bigStar {
+	width: 40px;
+	aspect-ratio: 1;
+	background-image: url('@images/star-rating-filled.svg');
+	background-position: center;
+	background-size: cover;
+
+	@media screen and (width <= 768px) {
+		width: 16px;
+	}
+}
+
+.smallStar {
+	width: 24px;
+	aspect-ratio: 1;
+	background-image: url('@images/star-rating-filled.svg');
+	background-position: center;
+	background-size: cover;
+
+	@media screen and (width <= 768px) {
+		width: 16px;
+	}
+}
+
+.title {
+	padding: 0;
+	margin: 0;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+		font-weight: 400;
+	}
+}
+
+.list {
+	padding: 20px 0 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.item {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+}
+
+.mark {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+		font-weight: 700;
+	}
+}
+
+.progress {
+	appearance: none;
+	height: 2px;
+
+	&::-webkit-progress-bar {
+		background-color: #293929;
+	}
+
+	&::-webkit-progress-value {
+		background-color: #f5b63b;
+	}
+}
