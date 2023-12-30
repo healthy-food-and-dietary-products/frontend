@@ -4,8 +4,6 @@ import plural from '../utils/pluralizer';
 import styles from './ratings-breakdown.module.scss';
 
 interface IRatingsBreakdown {
-	// sum: number;
-	// ratings: { [key: number]: number };
 	ratings: number[];
 }
 

@@ -1,0 +1,52 @@
+@use '@scss/_variables' as *;
+@use '@scss/_mixins' as *;
+
+.container {
+	font-family: $ubuntu-font;
+	color: $active-text-color;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.title {
+	padding: 0;
+	margin: 0;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 15px;
+	}
+}
+
+.list {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.button {
+	@extend %default-button-text;
+
+	align-self: start;
+	padding: 10px 20px;
+	background-color: transparent;
+	border: 1px solid $accent-color-darkgreen;
+	border-radius: 16px;
+	transition: 0.3s;
+
+	&:hover {
+		color: white;
+		background-color: $accent-color-bright-green;
+	}
+
+	@media screen and (width <= 768px) {
+		font-size: 13px;
+		padding: 8px 16px;
+		border-radius: 12px;
+	}
+}
