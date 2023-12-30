@@ -13,6 +13,7 @@ import { usePopup } from '@hooks/use-popup';
 import { useCart } from '@hooks/use-cart-context.ts';
 import { useNavigate } from 'react-router-dom';
 import plural from '@components/ratings-and-reviews-components/utils/pluralizer';
+import { translateMeasureUnit } from '@utils/utils';
 
 const Product: React.FC = () => {
 	const { cartData, updateCart, deleteCart } = useCart();
@@ -21,20 +22,22 @@ const Product: React.FC = () => {
 	const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
 	const [productItem, setProductItem] = React.useState<ProductType | null>(null);
 	const [reviewsAmount, setReviewsAmount] = React.useState(0);
+	const [measureObj, setMeasureObj] = React.useState({ amount: 0, measureUnit: '' });
 
 	const { isLoggedIn } = useAuth();
 	const { handleOpenPopup } = usePopup();
 	const navigate = useNavigate();
 	const { id } = useParams();
-	//Нужно с бэка получать в будщем:
-	let newMeasureUnit = 'шт';
-	if (productItem != null) {
-		if (productItem.measure_unit === 'milliliters') {
-			newMeasureUnit = 'мл';
-		} else if (productItem.measure_unit === 'grams') {
-			newMeasureUnit = 'гр';
+
+	useEffect(() => {
+		if (productItem !== null) {
+			const translatedMeasureObj = translateMeasureUnit(
+				productItem.measure_unit,
+				productItem.amount
+			);
+			setMeasureObj(translatedMeasureObj);
 		}
-	}
+	}, [productItem]);
 
 	useEffect(() => {
 		if (id !== undefined) {
@@ -143,7 +146,7 @@ const Product: React.FC = () => {
 									</div>
 								</div>
 								<h2 className={styles.product__price}>
-									{productItem.price} руб. / {newMeasureUnit}
+									{productItem.price} руб. / {measureObj.amount + measureObj.measureUnit}
 								</h2>
 								<div className={styles.product__btns}>
 									<Button
