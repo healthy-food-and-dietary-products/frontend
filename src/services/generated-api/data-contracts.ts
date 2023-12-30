@@ -334,14 +334,14 @@ export interface Product {
 	discontinued?: boolean;
 	producer: ProducerLight;
 	/** Measure unit */
-	measure_unit?: 'grams' | 'milliliters' | 'items';
+	measure_unit: 'grams' | 'milliliters' | 'items';
 	/**
 	 * Amount
 	 * Number of grams, milliliters or items
 	 * @min 0
 	 * @max 32767
 	 */
-	amount?: number;
+	amount: number;
 	/**
 	 * Price
 	 * Price per one product unit
