@@ -55,7 +55,7 @@ function App() {
 						{/* // TODO: Clean up after Ratings and Reviews task completed */}
 						<Route
 							path="/test"
-							element={<RatingsAndReviewsWidget userId={61} productId={1} />}
+							element={<RatingsAndReviewsWidget userId={61} productId={2} />}
 						/>
 						<Route
 							path={URLS.PROFILE}

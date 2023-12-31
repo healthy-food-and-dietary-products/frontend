@@ -1122,3 +1122,9 @@ export interface Review {
 	/** Review Text */
 	text: string;
 }
+
+export interface OrderCheck {
+	product: number;
+	user: number;
+	ordered: boolean;
+}

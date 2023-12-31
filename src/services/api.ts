@@ -383,6 +383,16 @@ class Api {
 		});
 	}
 
+	productsOrderCheck(id: number) {
+		return this._request(`products/${id}/order-user-check/`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Token ${Cookies.get('token')}`,
+			},
+		});
+	}
+
 	/* -------------------------- FavoriteProducts -------------------------- */
 	favoriteProductsList() {
 		return this._request('favorite-products/', {

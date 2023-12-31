@@ -19,6 +19,7 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({
 	const [userReview, setUserReview] = useState<null | Review>(null);
 	const [reviewsWithText, setReviewsWithText] = useState<null | Review[]>(null);
 	const [ratings, setRatings] = useState<null | number[]>(null);
+	const [hasOrderedThis, setHasOrderedThis] = useState(false);
 
 	useEffect(() => {
 		api
@@ -31,7 +32,10 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({
 				setReviews(res[0] ? res : null);
 			})
 			.catch((err) => console.log(err));
-		// TODO: Add request to check if this user can add reviews to this product
+		api
+			.productsOrderCheck(productId)
+			.then((res) => setHasOrderedThis(res.ordered))
+			.catch((err) => console.log(err));
 	}, [productId]);
 
 	useEffect(() => {
@@ -59,32 +63,36 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({
 	};
 
 	return (
-		<section className={styles.section}>
-			<h2 className={styles.title}>Отзывы</h2>
-			<div className={styles.grid}>
-				<div className={styles.form}>
-					<ReviewAndRatingPostForm
-						review={userReview}
-						productId={productId}
-						onAddReview={handleAddReview}
-						onUpdateReview={handleUpdateReview}
-					/>
-				</div>
-				{ratings && (
-					<React.Fragment>
-						{reviewsWithText && (
-							<div className={styles.reviews}>
-								<ReviewsList reviews={reviewsWithText} />
-							</div>
-						)}
-
-						<div className={styles.ratings}>
-							<RatingsBreakdown ratings={ratings} />
+		(hasOrderedThis || reviews) && (
+			<section className={styles.section}>
+				<h2 className={styles.title}>Отзывы</h2>
+				<div className={styles.grid}>
+					{hasOrderedThis && (
+						<div className={styles.form}>
+							<ReviewAndRatingPostForm
+								review={userReview}
+								productId={productId}
+								onAddReview={handleAddReview}
+								onUpdateReview={handleUpdateReview}
+							/>
 						</div>
-					</React.Fragment>
-				)}
-			</div>
-		</section>
+					)}
+					{ratings && (
+						<React.Fragment>
+							{reviewsWithText && (
+								<div className={styles.reviews}>
+									<ReviewsList reviews={reviewsWithText} />
+								</div>
+							)}
+
+							<div className={styles.ratings}>
+								<RatingsBreakdown ratings={ratings} />
+							</div>
+						</React.Fragment>
+					)}
+				</div>
+			</section>
+		)
 	);
 };
 
