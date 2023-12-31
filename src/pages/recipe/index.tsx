@@ -12,6 +12,7 @@ import { useCart } from '@hooks/use-cart-context';
 import RecipeInfo from '@components/recipes-components/recipe-info';
 import { usePopup } from '@hooks/use-popup';
 import PopupRecipe from '@components/popups/popup-recipe';
+import { translateMeasureUnit } from '@utils/utils';
 
 type ReceipeIngredientInfoProps = {
 	amount: number;
@@ -22,6 +23,7 @@ type ReceipeIngredientInfoProps = {
 	name: string;
 	need_to_buy: number;
 	quantity_in_recipe: number;
+	quantity_in_recipe_measure?: string;
 };
 
 type ReceipeInfoProps = {
@@ -62,7 +64,29 @@ const Recipe: React.FC = () => {
 
 		const recipeId: number = parseInt(id, 10);
 		const fetchReceiptAndProducts = async () => {
-			const recipe = await api.getRecipeById(recipeId);
+			const recipe: ReceipeInfoProps = await api.getRecipeById(recipeId);
+
+			recipe.ingredients.map((ingredient, id) => {
+				const ingredientMeasureUnit = ingredient.measure_unit;
+
+				const { measureUnit, amount } = translateMeasureUnit(
+					ingredientMeasureUnit,
+					ingredient.amount
+				);
+
+				const { measureUnit: newMeasureUnit, amount: newAmount } = translateMeasureUnit(
+					ingredientMeasureUnit,
+					ingredient.quantity_in_recipe
+				);
+
+				recipe.ingredients[id].amount = amount;
+				recipe.ingredients[id].measure_unit = measureUnit;
+				recipe.ingredients[id].quantity_in_recipe = newAmount;
+				recipe.ingredients[id].quantity_in_recipe_measure = `${
+					newAmount + newMeasureUnit
+				}`;
+			});
+
 			setRecipeByLines(recipe.text.split('\n'));
 			setNumeralizeWord(declOfNum(recipe.cooking_time, ['минута', 'минуты', 'минут']));
 			setRecipeInfo(recipe);

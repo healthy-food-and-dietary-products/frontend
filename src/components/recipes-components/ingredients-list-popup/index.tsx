@@ -11,6 +11,7 @@ type RecipeIngredientsProps = {
 		name: string;
 		need_to_buy: number;
 		quantity_in_recipe: number;
+		quantity_in_recipe_measure?: string;
 	}[];
 };
 
@@ -25,9 +26,9 @@ const IngredientsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients })
 							<span className={styles['popup-ingredients__name']}>
 								{ingredient?.name}
 							</span>
-							<span
-								className={styles['popup-ingredients__weight']}
-							>{`${ingredient?.quantity_in_recipe} ${ingredient?.measure_unit}`}</span>
+							<span className={styles['popup-ingredients__weight']}>
+								{ingredient.quantity_in_recipe_measure}
+							</span>
 						</li>
 					);
 				})}
