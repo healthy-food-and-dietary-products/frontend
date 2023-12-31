@@ -23,7 +23,6 @@ import { CartProvider } from '@contexts/cart-context.tsx';
 import RecipeList from '@pages/recipe-list/index.tsx';
 import Agreement from '@pages/agreement/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
-import RatingsAndReviewsWidget from '@components/ratings-and-reviews-components/ratings-and-reviews-widget/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -52,11 +51,6 @@ function App() {
 						<Route path="/recipes" element={<RecipeList />} />
 						<Route path="/contacts" element={<Contacts />} />
 						<Route path="/recipes/:id" element={<Recipes />} />
-						{/* // TODO: Clean up after Ratings and Reviews task completed */}
-						<Route
-							path="/test"
-							element={<RatingsAndReviewsWidget userId={61} productId={2} />}
-						/>
 						<Route
 							path={URLS.PROFILE}
 							element={<ProtectedRoute element={Profile} loggedIn={isLoggedIn} />}

@@ -358,6 +358,7 @@ export interface Product {
 	 * @format uri
 	 */
 	photo?: string;
+	rating?: number;
 	components: ComponentLight[];
 	/**
 	 * Kcal

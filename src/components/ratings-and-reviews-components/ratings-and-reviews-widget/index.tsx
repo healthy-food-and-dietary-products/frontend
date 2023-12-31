@@ -8,18 +8,22 @@ import styles from './ratings-and-reviews-widget.module.scss';
 
 interface IRatingsAndReviewsWidget {
 	productId: number;
-	userId: number;
 }
 
-const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({
-	productId,
-	userId,
-}) => {
+const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId }) => {
 	const [reviews, setReviews] = useState<null | Review[]>(null);
 	const [userReview, setUserReview] = useState<null | Review>(null);
 	const [reviewsWithText, setReviewsWithText] = useState<null | Review[]>(null);
 	const [ratings, setRatings] = useState<null | number[]>(null);
 	const [hasOrderedThis, setHasOrderedThis] = useState(false);
+	const [userId, setUserId] = useState<null | number>(null);
+
+	useEffect(() => {
+		api
+			.usersMeRead()
+			.then((res) => setUserId(res.id))
+			.catch((err) => console.log(err));
+	}, []);
 
 	useEffect(() => {
 		api
@@ -64,7 +68,7 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({
 
 	return (
 		(hasOrderedThis || reviews) && (
-			<section className={styles.section}>
+			<section className={styles.section} id="ratings-and-reviews">
 				<h2 className={styles.title}>Отзывы</h2>
 				<div className={styles.grid}>
 					{hasOrderedThis && (

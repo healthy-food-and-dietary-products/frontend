@@ -38,7 +38,6 @@ const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
 				.reviewsUpdate(productId, review.id, { text: values.text as string })
 				.then((res) => onUpdateReview(res))
 				.catch((err) => console.log(err));
-			console.log('submited');
 		}
 	};
 
