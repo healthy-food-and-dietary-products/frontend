@@ -1090,10 +1090,16 @@ export interface Review {
 	/** ID */
 	id: number;
 
-	/** Author
-	 * @pattern ^[\w.@+-]+$
-	 */
-	author: string;
+	/** Author */
+	author: {
+		/** ID of author */
+		id: number;
+
+		/** Name of author
+		 * @pattern ^[\w.@+-]+$
+		 * */
+		username: string;
+	};
 
 	/** Product */
 	product: string;

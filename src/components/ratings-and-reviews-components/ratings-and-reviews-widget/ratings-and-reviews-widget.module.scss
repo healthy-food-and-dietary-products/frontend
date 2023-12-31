@@ -1,0 +1,39 @@
+@use '@scss/_variables' as *;
+
+.section {
+	font-family: $ubuntu-font;
+	color: $active-text-color;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+
+	@media screen and (width <= 768px) {
+		gap: 20px;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 200px;
+	gap: 40px 107px;
+
+	@media screen and (width <= 768px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.form {
+	grid-column: span 2;
+
+	@media screen and (width <= 768px) {
+		grid-column: 1;
+	}
+}
+
+.ratings {
+	padding-right: 40px;
+
+	@media screen and (width <= 768px) {
+		grid-row: 1;
+	}
+}

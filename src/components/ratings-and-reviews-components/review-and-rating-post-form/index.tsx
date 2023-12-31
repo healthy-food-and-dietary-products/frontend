@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useEffect } from 'react';
 import { Review } from '@services/generated-api/data-contracts';
 import api from '@services/api';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
@@ -6,48 +6,60 @@ import RatingInput from '@components/ratings-and-reviews-components/rating-input
 import Button from '@components/Button';
 import styles from './review-and-rating-post-form.module.scss';
 
-const ReviewAndRatingPostForm: React.FC<{
-	defaultReview: Review | null;
+const dateOptions = { day: '2-digit', month: '2-digit', year: '2-digit' };
+
+interface IReviewAndRatingPostForm {
+	review: Review | null;
 	productId: number;
-}> = ({ defaultReview, productId }) => {
+	onAddReview: (review: Review) => void;
+	onUpdateReview: (review: Review) => void;
+}
+
+const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
+	review,
+	productId,
+	onAddReview,
+	onUpdateReview,
+}) => {
 	const { values, setValues, handleChange } = useFormAndValidation({
-		text: defaultReview?.text || '',
-		score: defaultReview?.score || 0,
+		text: review?.text || '',
+		score: review?.score || 0,
 	});
 
-	// useEffect(() => {
-	// 	// NOTE: Temporary output of product ID
-	// 	console.log(productId, defaultReview);
-	// 	defaultReview &&
-	// 		setValues({ text: defaultReview?.text, score: defaultReview?.score });
-	// }, [defaultReview, productId, setValues]);
+	useEffect(() => {
+		review && setValues({ text: review?.text, score: review?.score });
+	}, [review, productId, setValues]);
 
 	const handleReviewSubmit = (e: SyntheticEvent) => {
 		e.preventDefault();
-
-		// TODO: Fix then
-		// TODO: Fix catch
-		if (defaultReview?.score && values.text && values.text !== defaultReview?.text) {
+		// TODO: Add error processing in catch block
+		if (review?.score && values.text && values.text !== review?.text) {
 			api
-				.reviewsUpdate(productId, defaultReview.id, { text: values.text as string })
-				.then((res) => console.log(res))
+				.reviewsUpdate(productId, review.id, { text: values.text as string })
+				.then((res) => onUpdateReview(res))
 				.catch((err) => console.log(err));
 			console.log('submited');
 		}
 	};
 
 	const handleRatingChange = (rating: number) => {
-		// TODO: Fix then
-		// TODO: Fix catch
-		if (!defaultReview || defaultReview?.score !== rating) {
+		// TODO: Add error processing in catch block
+		if (!review || review?.score !== rating) {
 			const apiPromise =
-				defaultReview && defaultReview.score > 0
-					? api.reviewsUpdate(productId, defaultReview.id, {
-							score: rating,
-					  })
-					: api.reviewsCreate(productId, { score: rating });
+				review && review.score > 0
+					? api
+							.reviewsUpdate(productId, review.id, {
+								score: rating,
+							})
+							.then((res) => {
+								onUpdateReview(res);
+								return res;
+							})
+					: api.reviewsCreate(productId, { score: rating }).then((res) => {
+							onAddReview(res);
+							return res;
+					  });
 			apiPromise
-				.then((res) => console.log(res))
 				.then(() => setValues({ ...values, score: rating }))
 				.catch((err) => console.log(err));
 		}
@@ -56,7 +68,12 @@ const ReviewAndRatingPostForm: React.FC<{
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.title}>
-				{defaultReview ? `Вы оценили товар ${defaultReview.pub_date}` : 'Оценить товар'}
+				{review ? 'Вы оценили товар ' : 'Оценить товар'}
+				{review && (
+					<time dateTime={review.pub_date}>
+						{new Date(review.pub_date).toLocaleDateString('ru-RU', dateOptions as never)}
+					</time>
+				)}
 			</h3>
 			<RatingInput rating={values.score as number} onChange={handleRatingChange} />
 			<form className={styles.form} noValidate onSubmit={handleReviewSubmit}>

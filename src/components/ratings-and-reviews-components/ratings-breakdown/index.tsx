@@ -1,5 +1,4 @@
 import React from 'react';
-
 import plural from '../utils/pluralizer';
 import styles from './ratings-breakdown.module.scss';
 

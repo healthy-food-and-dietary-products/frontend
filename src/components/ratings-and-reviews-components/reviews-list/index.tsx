@@ -20,7 +20,7 @@ const ReviewsList: React.FC<IReviewsList> = ({ reviews }) => {
 			</p>
 			<ul className={styles.list}>
 				{reviews.slice(0, itemsShown).map((item) => (
-					<li className={styles.item}>
+					<li className={styles.item} key={item.id}>
 						<Review review={item} />
 					</li>
 				))}

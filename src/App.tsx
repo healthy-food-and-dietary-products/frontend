@@ -23,10 +23,7 @@ import { CartProvider } from '@contexts/cart-context.tsx';
 import RecipeList from '@pages/recipe-list/index.tsx';
 import Agreement from '@pages/agreement/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
-// import ReviewAndRatingPostForm from '@components/ratings-and-reviews-components/review-and-rating-post-form/index.tsx';
-// import Review from '@components/ratings-and-reviews-components/review/index.tsx';
-// import RatingsBreakdown from '@components/ratings-and-reviews-components/ratings-breakdown/index.tsx';
-import ReviewsList from '@components/ratings-and-reviews-components/reviews-list/index.tsx';
+import RatingsAndReviewsWidget from '@components/ratings-and-reviews-components/ratings-and-reviews-widget/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -58,76 +55,7 @@ function App() {
 						{/* // TODO: Clean up after Ratings and Reviews task completed */}
 						<Route
 							path="/test"
-							// element={<ReviewAndRatingPostForm defaultReview={null} productId={1} />}
-							// element={
-							// 	<Review
-							// 		review={{
-							// 			id: 10,
-							// 			author: 'kavabunga',
-							// 			product: 'манго',
-							// 			score: 4,
-							// 			pub_date: '2019-08-24T14:15:22Z',
-							// 			was_edited: false,
-							// 			text: 'Очень вкусное манго',
-							// 		}}
-							// 	/>
-							// }
-							// element={
-							// 	<RatingsBreakdown
-							// 		ratings={[4, 3, 2, 4, 5, 3, 2, 3, 4, 5, 3, 2, 3, 4, 3, 2, 1]}
-							// 	/>
-							// }
-							element={
-								<ReviewsList
-									reviews={[
-										{
-											id: 10,
-											author: 'kavabunga',
-											product: 'манго',
-											score: 4,
-											pub_date: '2019-08-24T14:15:22Z',
-											was_edited: false,
-											text: 'Очень вкусное манго',
-										},
-										{
-											id: 11,
-											author: 'Василий',
-											product: 'манго',
-											score: 4,
-											pub_date: '2019-08-24T14:15:22Z',
-											was_edited: false,
-											text: 'Наконец дождался его появления в магазине. Осталось только теперь продать три квартиры и вместо них купить ЕГО. Хоть и буду с ним ютиться на улице, зато счастью не будет предела!',
-										},
-										{
-											id: 12,
-											author: 'Ирина',
-											product: 'манго',
-											score: 4,
-											pub_date: '2019-08-24T14:15:22Z',
-											was_edited: false,
-											text: 'неплохой фотик до этого фоткал samsung note3 там фокус чуть хуже был, ах да ребята палка селфи гнется от Canon EOS 1D C . я брал стремянку, там хоть на любую ступеньку можно ставить по высоте. Кадр действительно полный нас 6 человек влезло, а вот седьмой только левое ухо в кадре оставил.',
-										},
-										{
-											id: 13,
-											author: 'DarkLord',
-											product: 'манго',
-											score: 4,
-											pub_date: '2019-08-24T14:15:22Z',
-											was_edited: false,
-											text: 'Очень вкусное манго',
-										},
-										{
-											id: 14,
-											author: 'Ирина',
-											product: 'манго',
-											score: 2,
-											pub_date: '2019-08-24T14:15:22Z',
-											was_edited: false,
-											text: 'Ужас',
-										},
-									]}
-								/>
-							}
+							element={<RatingsAndReviewsWidget userId={61} productId={1} />}
 						/>
 						<Route
 							path={URLS.PROFILE}
