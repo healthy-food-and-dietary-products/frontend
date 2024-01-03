@@ -9,7 +9,7 @@ import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
 import { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
 import { useAuth } from '@hooks/use-auth.ts';
 import { useCart } from '@hooks/use-cart-context.ts';
-import { pickupPointAddresses } from '@data/constants';
+import { pickupPointAddresses, URLS } from '@data/constants';
 
 type Address = {
 	id: number;
@@ -124,7 +124,7 @@ const Checkout: React.FC = () => {
 		api
 			.usersOrderCreate(formData)
 			.then((res) => {
-				navigate('/cart/success', { state: { order: res.order_number } });
+				navigate(URLS.CART_SUCCESS, { state: { order: res.order_number } });
 				loadCartData();
 			})
 			.catch((error) => {

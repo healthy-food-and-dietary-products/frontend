@@ -7,6 +7,8 @@ export const URLS = {
 	CATALOG: '/catalog',
 	AGREEMENT: '/agreement',
 	DELIVERY_COND: '/delivery-conditions',
+	CART_SUCCESS: '/cart/success',
+	PROFILE_ORDERS: '/profile/orders/',
 };
 
 export const pickupPointAddresses = {

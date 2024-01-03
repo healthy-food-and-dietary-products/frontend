@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import OurBlock from '@components/our-block';
 import OrderStatusTracker from '@components/order-status-tracker';
+import { URLS } from '@data/constants';
 
 import styles from './checkout-success.module.scss';
 
@@ -29,7 +30,7 @@ const CheckoutSuccess: React.FC = () => {
 				<p className={styles.checkoutSuccess__paragraph}>
 					Мы уже приступили к его сборке. <br />
 					За статусом заказа можно следить в{' '}
-					<Link className={styles.checkoutSuccess__link} to="/profile/orders/">
+					<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS}>
 						личном кабинете
 					</Link>
 					.
