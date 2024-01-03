@@ -9,6 +9,7 @@ import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
 import { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
 import { useAuth } from '@hooks/use-auth.ts';
 import { useCart } from '@hooks/use-cart-context.ts';
+import { pickupPointAddresses } from '@data/constants';
 
 type Address = {
 	id: number;
@@ -30,15 +31,6 @@ const Checkout: React.FC = () => {
 	const userAddresses = user?.addresses as unknown[] as Address[];
 	const [comment, setComment] = React.useState<string>('');
 	const [popupText, setPopupText] = useState('');
-	const addressesById = {
-		1: 'Санкт-Петербург Невский проспект 17',
-		2: 'Санкт-Петербург Горохова улица 10',
-		3: 'Санкт-Петербург Невский проспект 89',
-		4: 'Санкт-Петербург Большой Самсониевский 6',
-		5: 'Санкт-Петербург Лесной проспект 56',
-		6: 'Санкт-Петербург Владимирский проспект 1',
-		7: 'Санкт-Петербург Лиговский проспект 170',
-	};
 
 	const openInfoPopup = (text: string) => {
 		setPopupText(text);
@@ -250,7 +242,7 @@ const Checkout: React.FC = () => {
 											<option value="" className={styles.order__address_option}>
 												Выберите адрес
 											</option>
-											{Object.entries(addressesById).map(([id, address]) => (
+											{Object.entries(pickupPointAddresses).map(([id, address]) => (
 												<option
 													key={id}
 													value={id}
