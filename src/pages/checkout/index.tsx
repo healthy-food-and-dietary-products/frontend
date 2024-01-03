@@ -21,7 +21,7 @@ const Checkout: React.FC = () => {
 	const { handleOpenPopup, handleClosePopup } = usePopup();
 	const location = useLocation();
 	const receivedType = location.state?.orderType;
-	const deliveryType = receivedType ? receivedType : 'Point of delivery';
+	const deliveryType = receivedType || 'Point of delivery';
 	const { values, handleChange, errors, isValid } = useFormAndValidation();
 	const navigate = useNavigate();
 	const [selectedPayment, setSelectedPayment] = React.useState<string>('');
@@ -45,52 +45,47 @@ const Checkout: React.FC = () => {
 		handleOpenPopup('openPopupCheckoutResponse');
 	};
 
-	const handleSubmitOrder = () => {
+	const validateOrderData = () => {
 		switch (true) {
 			case isLoggedIn && !user.first_name:
-				openInfoPopup('Пожалуйста, заполните имя в личном кабинете');
-				return;
+				return openInfoPopup('Пожалуйста, заполните имя в личном кабинете');
 			case isLoggedIn && !user.last_name:
-				openInfoPopup('Пожалуйста, заполните фамилию в личном кабинете');
-				return;
+				return openInfoPopup('Пожалуйста, заполните фамилию в личном кабинете');
 			case isLoggedIn && !user.phone_number:
-				openInfoPopup('Пожалуйста, заполните номер телефона в личном кабинете');
-				return;
+				return openInfoPopup('Пожалуйста, заполните номер телефона в личном кабинете');
+			case isLoggedIn &&
+				deliveryType === 'Point of delivery' &&
+				!selectedAddress?.toString().trim():
+				return openInfoPopup('Пожалуйста, выберите адрес');
 			case isLoggedIn && !selectedAddress?.toString().trim():
-				openInfoPopup(
+				return openInfoPopup(
 					'Пожалуйста, выберите адрес (добавить адрес можно в личном кабинете)'
 				);
-				return;
 			case isLoggedIn && !selectedPayment:
-				openInfoPopup('Пожалуйста, выберите способ оплаты');
-				return;
-		}
-
-		switch (true) {
+				return openInfoPopup('Пожалуйста, выберите способ оплаты');
 			case !isLoggedIn && !values.order_firstName?.toString().trim():
-				openInfoPopup('Пожалуйста, заполните имя');
-				return;
+				return openInfoPopup('Пожалуйста, заполните имя');
 			case !isLoggedIn && !values.order_lastName?.toString().trim():
-				openInfoPopup('Пожалуйста, заполните фамилию');
-				return;
+				return openInfoPopup('Пожалуйста, заполните фамилию');
 			case !isLoggedIn && !values.order_phoneNumber?.toString().trim():
-				openInfoPopup('Пожалуйста, заполните номер телефона');
-				return;
+				return openInfoPopup('Пожалуйста, заполните номер телефона');
 			case !isLoggedIn && !values.order_email?.toString().trim():
-				openInfoPopup('Пожалуйста, заполните e-mail');
-				return;
+				return openInfoPopup('Пожалуйста, заполните e-mail');
 			case !isLoggedIn &&
 				deliveryType === 'Point of delivery' &&
 				!selectedAddress?.toString().trim():
-				openInfoPopup('Пожалуйста, выберите адрес');
-				return;
+				return openInfoPopup('Пожалуйста, выберите адрес');
 			case !isLoggedIn && !selectedAddress?.toString().trim():
-				openInfoPopup('Пожалуйста, введите адрес');
-				return;
+				return openInfoPopup('Пожалуйста, введите адрес');
 			case !isLoggedIn && !selectedPayment:
-				openInfoPopup('Пожалуйста, выберите способ оплаты');
-				return;
+				return openInfoPopup('Пожалуйста, выберите способ оплаты');
+			default:
+				return true;
 		}
+	};
+
+	const handleSubmitOrder = () => {
+		if (!validateOrderData()) return;
 
 		let formData: OrderPostAdd = {
 			user_data: {
