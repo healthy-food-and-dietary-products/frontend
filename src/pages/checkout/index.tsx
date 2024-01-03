@@ -9,7 +9,7 @@ import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
 import { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
 import { useAuth } from '@hooks/use-auth.ts';
 import { useCart } from '@hooks/use-cart-context.ts';
-import { pickupPointAddresses, URLS } from '@data/constants';
+import { pickupPointAddresses, URLS, popupInfoText } from '@data/constants';
 
 type Address = {
 	id: number;
@@ -51,37 +51,35 @@ const Checkout: React.FC = () => {
 	const validateOrderData = () => {
 		switch (true) {
 			case isLoggedIn && !user.first_name:
-				return openInfoPopup('Пожалуйста, заполните имя в личном кабинете');
+				return openInfoPopup(popupInfoText.fillNameAuth);
 			case isLoggedIn && !user.last_name:
-				return openInfoPopup('Пожалуйста, заполните фамилию в личном кабинете');
+				return openInfoPopup(popupInfoText.fillSurnameAuth);
 			case isLoggedIn && !user.phone_number:
-				return openInfoPopup('Пожалуйста, заполните номер телефона в личном кабинете');
+				return openInfoPopup(popupInfoText.fillPhoneAuth);
 			case isLoggedIn &&
 				deliveryType === deliveryTypeEnum.pointOfDelivery &&
 				!selectedAddress?.toString().trim():
-				return openInfoPopup('Пожалуйста, выберите адрес');
+				return openInfoPopup(popupInfoText.chooseAddress);
 			case isLoggedIn && !selectedAddress?.toString().trim():
-				return openInfoPopup(
-					'Пожалуйста, выберите адрес (добавить адрес можно в личном кабинете)'
-				);
+				return openInfoPopup(popupInfoText.chooseOrFillAddress);
 			case isLoggedIn && !selectedPayment:
-				return openInfoPopup('Пожалуйста, выберите способ оплаты');
+				return openInfoPopup(popupInfoText.choosePaymentMethod);
 			case !isLoggedIn && !values.order_firstName?.toString().trim():
-				return openInfoPopup('Пожалуйста, заполните имя');
+				return openInfoPopup(popupInfoText.enterName);
 			case !isLoggedIn && !values.order_lastName?.toString().trim():
-				return openInfoPopup('Пожалуйста, заполните фамилию');
+				return openInfoPopup(popupInfoText.enterSurname);
 			case !isLoggedIn && !values.order_phoneNumber?.toString().trim():
-				return openInfoPopup('Пожалуйста, заполните номер телефона');
+				return openInfoPopup(popupInfoText.enterPhone);
 			case !isLoggedIn && !values.order_email?.toString().trim():
-				return openInfoPopup('Пожалуйста, заполните e-mail');
+				return openInfoPopup(popupInfoText.enterEmail);
 			case !isLoggedIn &&
 				deliveryType === deliveryTypeEnum.pointOfDelivery &&
 				!selectedAddress?.toString().trim():
-				return openInfoPopup('Пожалуйста, выберите адрес');
+				return openInfoPopup(popupInfoText.chooseAddress);
 			case !isLoggedIn && !selectedAddress?.toString().trim():
-				return openInfoPopup('Пожалуйста, введите адрес');
+				return openInfoPopup(popupInfoText.enterAddress);
 			case !isLoggedIn && !selectedPayment:
-				return openInfoPopup('Пожалуйста, выберите способ оплаты');
+				return openInfoPopup(popupInfoText.choosePaymentMethod);
 			default:
 				return true;
 		}
@@ -129,9 +127,9 @@ const Checkout: React.FC = () => {
 			})
 			.catch((error) => {
 				if (error.errors[0].detail) {
-					openInfoPopup('Ошибка при создании заказа: ' + error.errors[0].detail);
+					openInfoPopup(popupInfoText.errorShort + error.errors[0].detail);
 				} else {
-					openInfoPopup('Произошла ошибка при создании заказа.');
+					openInfoPopup(popupInfoText.errorLong);
 				}
 			});
 	};
