@@ -16,13 +16,24 @@ type Address = {
 	address: string;
 };
 
+enum deliveryTypeEnum {
+	pointOfDelivery = 'Point of delivery',
+	byCourier = 'By courier',
+}
+
+enum paymentMethodEnum {
+	pointOfDelivery = 'Payment at the point of delivery',
+	onDelivery = 'In getting by cash',
+	online = 'Online',
+}
+
 const Checkout: React.FC = () => {
 	const { isLoggedIn, user } = useAuth();
 	const { loadCartData, cartData } = useCart();
 	const { handleOpenPopup, handleClosePopup } = usePopup();
 	const location = useLocation();
 	const receivedType = location.state?.orderType;
-	const deliveryType = receivedType || 'Point of delivery';
+	const deliveryType = receivedType || deliveryTypeEnum.pointOfDelivery;
 	const { values, handleChange, errors, isValid } = useFormAndValidation();
 	const navigate = useNavigate();
 	const [selectedPayment, setSelectedPayment] = React.useState<string>('');
@@ -46,7 +57,7 @@ const Checkout: React.FC = () => {
 			case isLoggedIn && !user.phone_number:
 				return openInfoPopup('Пожалуйста, заполните номер телефона в личном кабинете');
 			case isLoggedIn &&
-				deliveryType === 'Point of delivery' &&
+				deliveryType === deliveryTypeEnum.pointOfDelivery &&
 				!selectedAddress?.toString().trim():
 				return openInfoPopup('Пожалуйста, выберите адрес');
 			case isLoggedIn && !selectedAddress?.toString().trim():
@@ -64,7 +75,7 @@ const Checkout: React.FC = () => {
 			case !isLoggedIn && !values.order_email?.toString().trim():
 				return openInfoPopup('Пожалуйста, заполните e-mail');
 			case !isLoggedIn &&
-				deliveryType === 'Point of delivery' &&
+				deliveryType === deliveryTypeEnum.pointOfDelivery &&
 				!selectedAddress?.toString().trim():
 				return openInfoPopup('Пожалуйста, выберите адрес');
 			case !isLoggedIn && !selectedAddress?.toString().trim():
@@ -87,20 +98,25 @@ const Checkout: React.FC = () => {
 				email: values.order_email?.toString() || '',
 			},
 			payment_method: selectedPayment as
-				| 'Payment at the point of delivery'
-				| 'In getting by cash',
-			delivery_method: deliveryType as 'Point of delivery' | 'By courier',
+				| paymentMethodEnum.pointOfDelivery
+				| paymentMethodEnum.onDelivery
+				| paymentMethodEnum.online,
+			delivery_method: deliveryType as
+				| deliveryTypeEnum.pointOfDelivery
+				| deliveryTypeEnum.byCourier,
 			delivery_point:
-				deliveryType === 'Point of delivery' ? Number(selectedAddress) : null,
+				deliveryType === deliveryTypeEnum.pointOfDelivery
+					? Number(selectedAddress)
+					: null,
 			package: 0,
 			comment: comment,
 			add_address: selectedAddress || '',
 		};
 
-		deliveryType === 'By courier' && delete formData.delivery_point;
+		deliveryType === deliveryTypeEnum.byCourier && delete formData.delivery_point;
 		isLoggedIn && delete formData.user_data;
 
-		if (isLoggedIn && deliveryType === 'By courier') {
+		if (isLoggedIn && deliveryType === deliveryTypeEnum.byCourier) {
 			delete formData.add_address;
 			formData = { ...formData, address: parseInt(selectedAddress, 10) };
 		}
@@ -230,7 +246,7 @@ const Checkout: React.FC = () => {
 						)}
 
 						<label className={styles.execution__address}>
-							{deliveryType !== 'By courier' ? (
+							{deliveryType !== deliveryTypeEnum.byCourier ? (
 								<>
 									Адрес пункта самовывоза
 									{selectedAddress !== null ? (
@@ -381,7 +397,7 @@ const Checkout: React.FC = () => {
 									<label htmlFor="payment_online">Оплата онлайн</label>
 								</div>
 								<hr className={styles.pricelist__divider} />
-								{deliveryType === 'By courier' && (
+								{deliveryType === deliveryTypeEnum.byCourier && (
 									<div className={styles.execution__item}>
 										<input
 											type="radio"
@@ -394,7 +410,7 @@ const Checkout: React.FC = () => {
 										<label htmlFor="payment_cash">Оплата курьеру</label>
 									</div>
 								)}
-								{deliveryType === 'Point of delivery' && (
+								{deliveryType === deliveryTypeEnum.pointOfDelivery && (
 									<div className={styles.execution__item}>
 										<input
 											type="radio"
@@ -436,7 +452,7 @@ const Checkout: React.FC = () => {
 							</div>
 							<div className={styles.pricelist__item}>
 								<p className={styles.pricelist__title}>
-									{deliveryType === 'By courier' ? 'Доставка' : 'Самовывоз'}
+									{deliveryType === deliveryTypeEnum.byCourier ? 'Доставка' : 'Самовывоз'}
 								</p>
 								<p className={`text_type_u ${styles.pricelist__price}`}>0 руб.</p>
 							</div>

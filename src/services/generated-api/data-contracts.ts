@@ -1006,7 +1006,7 @@ export interface OrderList {
 		| 'Delivered'
 		| 'Completed';
 	/** Payment Method */
-	payment_method?: 'Payment at the point of delivery' | 'In getting by cash';
+	payment_method?: 'Payment at the point of delivery' | 'In getting by cash' | 'Online';
 	/** Is paid */
 	is_paid?: boolean;
 	/** Delivery Method */
@@ -1038,7 +1038,7 @@ export interface OrderList {
 
 export interface OrderPostDelete {
 	/** Payment Method */
-	payment_method?: 'Payment at the point of delivery' | 'In getting by cash';
+	payment_method?: 'Payment at the point of delivery' | 'In getting by cash' | 'Online';
 	/** Delivery Method */
 	delivery_method?: 'Point of delivery' | 'By courier';
 	/** Delivery Point */
