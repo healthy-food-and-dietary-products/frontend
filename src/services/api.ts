@@ -232,6 +232,7 @@ class Api {
 		});
 	}
 
+	/* ------------------------------- Order ------------------------------- */
 	usersOrderList() {
 		return this._request(`order/`, {
 			method: 'GET',
@@ -255,6 +256,21 @@ class Api {
 			headers,
 			body: JSON.stringify(data),
 			credentials: 'include',
+		});
+	}
+
+	usersOrderPay(id: number) {
+		const headers: HeadersInit = {
+			'Content-Type': 'application/json',
+		};
+		const token = Cookies.get('token');
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
+		return this._request(`order/${id}/pay/`, {
+			method: 'POST',
+			headers,
+			// credentials: 'include',
 		});
 	}
 
