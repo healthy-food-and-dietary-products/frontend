@@ -34,7 +34,7 @@
 }
 
 .checkoutSuccess__textContainer {
-	padding: 40px 0 74px;
+	padding: 5px 0 74px;
 	margin: 0;
 	text-align: center;
 	font-size: 22px;
@@ -42,7 +42,7 @@
 	line-height: 140%;
 
 	@media screen and (width <= 768px) {
-		padding: 20px 0 32px;
+		padding: 0 0 32px;
 		text-align: left;
 		font-size: 14px;
 	}
@@ -80,5 +80,28 @@
 
 	@media screen and (width <= 550px) {
 		padding-right: 0;
+	}
+}
+
+.checkoutSuccess__buttonContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: max-content;
+}
+
+.checkoutSuccess__error {
+	padding-top: 10px;
+	min-height: 25px;
+	text-align: center;
+	color: $error-color;
+	font-size: 13px;
+	font-weight: 300;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+		padding-top: 3px;
+		min-height: 17px;
 	}
 }

@@ -18,7 +18,8 @@ type Order = {
 
 const CheckoutSuccess: React.FC = () => {
 	const [order, setOrder] = React.useState<Order>({ orderNumber: '', orderId: 0 });
-	const [paymentUrl, setPaymentUrl] = useState('');
+	const [paymentError, setPaymentError] = useState('');
+	const [isDisabled, setIsDisabled] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useAuth();
@@ -27,16 +28,19 @@ const CheckoutSuccess: React.FC = () => {
 		location.state?.orderId ? setOrder(location.state) : navigate('/', { replace: true });
 	}, [location, navigate]);
 
-	React.useEffect(() => {
+	const handlePayment = () => {
+		setIsDisabled(true);
 		if (order.orderId !== 0) {
 			api
 				.usersOrderPay(order.orderId)
-				.then(({ checkout_session_url }) => setPaymentUrl(checkout_session_url));
+				.then(({ checkout_session_url }) => {
+					window.location.assign(checkout_session_url);
+				})
+				.catch(({ errors }) => {
+					setPaymentError(errors[0].detail);
+				})
+				.finally(() => setIsDisabled(false));
 		}
-	}, [order.orderId]);
-
-	const handlePayment = () => {
-		if (paymentUrl) return window.location.assign(paymentUrl);
 	};
 
 	return (
@@ -45,11 +49,15 @@ const CheckoutSuccess: React.FC = () => {
 				<h1 className={styles.checkoutSuccess__title}>
 					Заказ №{order.orderNumber} успешно оформлен!
 				</h1>
-				<Button
-					onClick={handlePayment}
-					buttonText="Оплатить онлайн"
-					buttonStyle="green-button"
-				></Button>
+				<div className={styles.checkoutSuccess__buttonContainer}>
+					<Button
+						onClick={handlePayment}
+						buttonText="Оплатить онлайн"
+						buttonStyle="green-button"
+						disabled={isDisabled}
+					></Button>
+					<span className={styles.checkoutSuccess__error}>{paymentError}</span>
+				</div>
 				<div className={styles.checkoutSuccess__textContainer}>
 					<p className={styles.checkoutSuccess__text}>Мы уже приступили к его сборке.</p>
 					{isLoggedIn ? (
