@@ -24,6 +24,7 @@
 
 .checkoutSuccess__title {
 	padding: 0 0 38px;
+	text-align: center;
 
 	@media screen and (width <= 768px) {
 		text-align: left;
@@ -33,7 +34,7 @@
 }
 
 .checkoutSuccess__paragraph {
-	padding: 0 0 74px;
+	padding: 40px 0 74px;
 	margin: 0;
 	text-align: center;
 	font-size: 22px;
@@ -41,7 +42,7 @@
 	line-height: 140%;
 
 	@media screen and (width <= 768px) {
-		padding: 0 0 32px;
+		padding: 20px 0 32px;
 		text-align: left;
 		font-size: 14px;
 	}
