@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@components/Button';
+import Button from '@components/button';
 import styles from './product-card.module.scss';
 import { BASE_URL } from '@data/constants.ts';
 import LikeIcon from '@images/like-icon.svg?react';
