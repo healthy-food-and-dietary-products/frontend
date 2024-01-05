@@ -122,7 +122,9 @@ const Checkout: React.FC = () => {
 		api
 			.usersOrderCreate(formData)
 			.then((res) => {
-				navigate(URLS.CART_SUCCESS, { state: { order: res.order_number } });
+				navigate(URLS.CART_SUCCESS, {
+					state: { orderNumber: res.order_number, orderId: res.id },
+				});
 				loadCartData();
 			})
 			.catch((error) => {
