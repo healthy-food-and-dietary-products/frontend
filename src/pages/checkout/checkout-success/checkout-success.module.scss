@@ -33,7 +33,7 @@
 	}
 }
 
-.checkoutSuccess__paragraph {
+.checkoutSuccess__textContainer {
 	padding: 40px 0 74px;
 	margin: 0;
 	text-align: center;
@@ -46,6 +46,10 @@
 		text-align: left;
 		font-size: 14px;
 	}
+}
+
+.checkoutSuccess__text {
+	margin: 0;
 }
 
 .checkoutSuccess__advice {

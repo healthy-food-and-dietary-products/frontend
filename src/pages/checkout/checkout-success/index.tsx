@@ -8,7 +8,6 @@ import { URLS } from '@data/constants';
 import Button from '@components/button';
 import api from '@services/api';
 import { useAuth } from '@hooks/use-auth';
-import { usePopup } from '@hooks/use-popup';
 
 import styles from './checkout-success.module.scss';
 
@@ -23,7 +22,6 @@ const CheckoutSuccess: React.FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useAuth();
-	const { handleOpenPopup } = usePopup();
 
 	React.useEffect(() => {
 		location.state?.orderId ? setOrder(location.state) : navigate('/', { replace: true });
@@ -52,24 +50,23 @@ const CheckoutSuccess: React.FC = () => {
 					buttonText="Оплатить онлайн"
 					buttonStyle="green-button"
 				></Button>
-				<p className={styles.checkoutSuccess__paragraph}>
-					Мы уже приступили к его сборке. <br />
-					За статусом заказа можно следить в{' '}
+				<div className={styles.checkoutSuccess__textContainer}>
+					<p className={styles.checkoutSuccess__text}>Мы уже приступили к его сборке.</p>
 					{isLoggedIn ? (
-						<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS}>
-							личном кабинете
-						</Link>
+						<>
+							<span className={styles.checkoutSuccess__text}>
+								За статусом заказа можно следить в
+							</span>
+							<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS}>
+								&nbsp;личном кабинете.
+							</Link>
+						</>
 					) : (
-						<Link
-							onClick={() => handleOpenPopup('openPopupLogin')}
-							className={styles.checkoutSuccess__link}
-							to="/profile"
-						>
-							личном кабинете
-						</Link>
+						<p className={styles.checkoutSuccess__text}>
+							История заказов доступна для зарегистрированных пользователей.
+						</p>
 					)}
-					.
-				</p>
+				</div>
 				<OrderStatusTracker />
 			</section>
 			<section className={styles.checkoutSuccess__ourBlock}>
