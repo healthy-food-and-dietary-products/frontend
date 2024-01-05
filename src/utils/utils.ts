@@ -18,30 +18,51 @@ export function declOfNum(n: number, titles: [string, string, string]) {
 	];
 }
 
+type translationsType = {
+	grams: {
+		singular: 'гр';
+		plural: 'кг';
+	};
+	milliliters: {
+		singular: 'мл';
+		plural: 'л';
+	};
+	items: {
+		singular: 'шт';
+		plural: 'шт';
+	};
+};
+
+export const translations: translationsType = {
+	grams: { singular: 'гр', plural: 'кг' },
+	milliliters: { singular: 'мл', plural: 'л' },
+	items: { singular: 'шт', plural: 'шт' },
+};
+
 export const translateMeasureUnit = (measureUnit: string, amount: number) => {
 	const translatedMeasureObj = { measureUnit, amount };
 
 	switch (true) {
 		case !measureUnit || !amount:
-			translatedMeasureObj.measureUnit = 'шт';
+			translatedMeasureObj.measureUnit = translations.items.singular;
 			translatedMeasureObj.amount = 1;
 			return translatedMeasureObj;
 		case amount > 499 && measureUnit === 'grams':
-			translatedMeasureObj.measureUnit = 'кг';
+			translatedMeasureObj.measureUnit = translations.grams.plural;
 			translatedMeasureObj.amount = amount / 1000;
 			return translatedMeasureObj;
 		case amount > 499 && measureUnit === 'milliliters':
-			translatedMeasureObj.measureUnit = 'л';
+			translatedMeasureObj.measureUnit = translations.milliliters.plural;
 			translatedMeasureObj.amount = amount / 1000;
 			return translatedMeasureObj;
 		case measureUnit === 'grams':
-			translatedMeasureObj.measureUnit = 'гр';
+			translatedMeasureObj.measureUnit = translations.grams.singular;
 			return translatedMeasureObj;
 		case measureUnit === 'milliliters':
-			translatedMeasureObj.measureUnit = 'мл';
+			translatedMeasureObj.measureUnit = translations.milliliters.singular;
 			return translatedMeasureObj;
 		case measureUnit === 'items':
-			translatedMeasureObj.measureUnit = 'шт';
+			translatedMeasureObj.measureUnit = translations.items.singular;
 			return translatedMeasureObj;
 		default:
 			return translatedMeasureObj;
