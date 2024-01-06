@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import PaymentButton from '@components/payment-button';
 import OrderStatus from '../order-status';
 import styles from './profile-order.module.scss';
+import { translateMeasureUnit } from '@utils/utils';
 
 type OrderStatusType =
 	| 'Ordered'
@@ -35,7 +36,7 @@ type CommonOrder = {
 	payment_method?: string;
 	delivery_method?: string;
 	status?: OrderStatusType;
-	products: Array<{ product: Product; quantity: string }> | Product[];
+	products: Array<{ product: Product; quantity: number }> | Product[];
 };
 
 type Props = {
@@ -58,6 +59,16 @@ const ProfileOrder = ({
 		status,
 		products,
 	} = order;
+
+	const getAmountWithMeasureUnit = (
+		unitOfMeasure: string,
+		size: number,
+		multiplier: number
+	) => {
+		const totalAmount = size * multiplier;
+		const { measureUnit, amount } = translateMeasureUnit(unitOfMeasure, totalAmount);
+		return `${amount} ${measureUnit}`;
+	};
 
 	let payment_method_ru =
 		payment_method === 'Payment at the point of delivery'
@@ -86,7 +97,7 @@ const ProfileOrder = ({
 				</h4>
 				{isShowedProductsDetails ? (
 					<ul className={styles['order-products']}>
-						{(products as Array<{ product: Product; quantity: string }>).map((item) => (
+						{(products as Array<{ product: Product; quantity: number }>).map((item) => (
 							<li className={styles.product} key={item.product.name}>
 								<div className={styles['product__image-large']}>
 									<img
@@ -96,18 +107,22 @@ const ProfileOrder = ({
 									/>
 								</div>
 								<p className={styles.product__name}>{item.product.name}</p>
-								<p className={styles.product__weight}>{`${
-									item.product.amount * Number(item.quantity)
-								} ${item.product.measure_unit}`}</p>
-								<p
-									className={styles.product__price}
-								>{`${item.product.final_price} руб.`}</p>
+								<p className={styles.product__weight}>
+									{getAmountWithMeasureUnit(
+										item.product.measure_unit,
+										item.product.amount,
+										item.quantity
+									)}
+								</p>
+								<p className={styles.product__price}>{`${
+									item.product.final_price * item.quantity
+								} руб.`}</p>
 							</li>
 						))}
 					</ul>
 				) : (
 					<ul className={styles['order-products']}>
-						{(products as Array<{ product: Product; quantity: string }>).map(
+						{(products as Array<{ product: Product; quantity: number }>).map(
 							(item, index) => (
 								<li className={styles.product} key={index}>
 									{index < 5 && (
