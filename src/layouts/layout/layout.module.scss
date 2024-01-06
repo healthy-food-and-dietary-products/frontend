@@ -11,4 +11,9 @@
 .layout__main {
 	flex: 1;
 	min-height: 77vh;
+	padding-top: 100px;
+
+	@media screen and (width < 1024px) {
+		padding-top: 80px;
+	}
 }
