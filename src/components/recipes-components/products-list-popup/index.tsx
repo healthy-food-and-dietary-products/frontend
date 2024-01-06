@@ -1,25 +1,11 @@
 import React, { useState } from 'react';
-import styles from './products-list-popup.module.scss';
 import clsx from 'clsx';
 import { useCart } from '@hooks/use-cart-context';
+import type { ReceipeIngredient, RecipeIngredientsProps } from '../types';
 import closeIcon from '@images/profile/close.svg';
 import plusIcon from '@images/plus_button.svg';
 import minusIcon from '@images/minus_button.svg';
-
-type ReceipeIngredient = {
-	amount: number;
-	final_price: number;
-	id: number;
-	ingredient_photo: string;
-	measure_unit: string;
-	name: string;
-	need_to_buy: number;
-	quantity_in_recipe: number;
-};
-
-type RecipeIngredientsProps = {
-	ingredients: ReceipeIngredient[];
-};
+import styles from './products-list-popup.module.scss';
 
 const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 	const [products, setProducts] = useState<ReceipeIngredient[]>(Array);

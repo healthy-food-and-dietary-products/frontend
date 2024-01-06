@@ -1,22 +1,10 @@
 import React from 'react';
-import styles from './popup-recipe.module.scss';
 import Popup from '@components/popup';
-import { usePopup } from '@hooks/use-popup';
 import IngredientsListPopup from '@components/recipes-components/ingredients-list-popup';
 import ProductsListPopup from '@components/recipes-components/products-list-popup';
-
-type RecipeIngredientsProps = {
-	ingredients: {
-		amount: number;
-		final_price: number;
-		id: number;
-		ingredient_photo: string;
-		measure_unit: string;
-		name: string;
-		need_to_buy: number;
-		quantity_in_recipe: number;
-	}[];
-};
+import type { RecipeIngredientsProps } from '@components/recipes-components/types';
+import { usePopup } from '@hooks/use-popup';
+import styles from './popup-recipe.module.scss';
 
 const PopupRecipe: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 	const {

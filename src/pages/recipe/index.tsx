@@ -8,39 +8,16 @@ import RecipeInfo from '@components/recipes-components/recipe-info';
 import IngredientsList from '@components/recipes-components/ingredients-list';
 import PopupRecipe from '@components/popups/popup-recipe';
 
+import type {
+	ReceipeIngredient,
+	ReceipeInfoProps,
+} from '@components/recipes-components/types';
 import api from '@services/api.ts';
 import { declOfNum } from '@utils/utils';
 import { translateMeasureUnit } from '@utils/utils';
 import { useCart } from '@hooks/use-cart-context';
 import { usePopup } from '@hooks/use-popup';
 import styles from './recipe.module.scss';
-
-type ReceipeIngredientInfoProps = {
-	amount: number;
-	final_price: number;
-	id: number;
-	ingredient_photo: string;
-	measure_unit: string;
-	name: string;
-	need_to_buy: number;
-	quantity_in_recipe: number;
-	quantity_in_recipe_measure?: string;
-};
-
-type ReceipeInfoProps = {
-	author: number;
-	carbohydrates: number;
-	cooking_time: number;
-	fats: number;
-	id: number;
-	image: string;
-	ingredients: ReceipeIngredientInfoProps[];
-	kcal: number;
-	name: string;
-	proteins: number;
-	text: string;
-	total_ingredients?: number;
-};
 
 const Recipe: React.FC = () => {
 	const { id } = useParams();
@@ -57,7 +34,7 @@ const Recipe: React.FC = () => {
 		carbonhydrates: 0,
 		kcal: 0,
 	});
-	const [ingredients, setIngredients] = useState<ReceipeIngredientInfoProps[]>([
+	const [ingredients, setIngredients] = useState<ReceipeIngredient[]>([
 		{
 			amount: 0,
 			final_price: 0,
@@ -71,7 +48,7 @@ const Recipe: React.FC = () => {
 		},
 	]);
 
-	const updateIngredientMeasureUnits = (ingredients: ReceipeIngredientInfoProps[]) => {
+	const updateIngredientMeasureUnits = (ingredients: ReceipeIngredient[]) => {
 		return ingredients.map((ingredient) => {
 			const ingredientMeasureUnit = ingredient.measure_unit;
 			const { measureUnit, amount } = translateMeasureUnit(

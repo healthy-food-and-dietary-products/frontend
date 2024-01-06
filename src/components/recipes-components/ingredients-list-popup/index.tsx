@@ -1,19 +1,6 @@
 import React from 'react';
+import type { RecipeIngredientsProps } from '../types';
 import styles from './ingredients-list-popup.module.scss';
-
-type RecipeIngredientsProps = {
-	ingredients: {
-		amount: number;
-		final_price: number;
-		id: number;
-		ingredient_photo: string;
-		measure_unit: string;
-		name: string;
-		need_to_buy: number;
-		quantity_in_recipe: number;
-		quantity_in_recipe_measure?: string;
-	}[];
-};
 
 const IngredientsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 	return (
