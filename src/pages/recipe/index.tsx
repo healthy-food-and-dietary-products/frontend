@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import styles from './recipe.module.scss';
-import Breadcrumbs from '@components/breadcrumbs';
-import IngredientsList from '@components/recipes-components/ingredients-list';
-import { declOfNum } from '@utils/utils';
-import clsx from 'clsx';
-import api from '@services/api.ts';
-import Preloader from '@components/preloader';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useCart } from '@hooks/use-cart-context';
+import clsx from 'clsx';
+
+import Breadcrumbs from '@components/breadcrumbs';
+import Preloader from '@components/preloader';
 import RecipeInfo from '@components/recipes-components/recipe-info';
-import { usePopup } from '@hooks/use-popup';
+import IngredientsList from '@components/recipes-components/ingredients-list';
 import PopupRecipe from '@components/popups/popup-recipe';
+
+import api from '@services/api.ts';
+import { declOfNum } from '@utils/utils';
 import { translateMeasureUnit } from '@utils/utils';
+import { useCart } from '@hooks/use-cart-context';
+import { usePopup } from '@hooks/use-popup';
+import styles from './recipe.module.scss';
 
 type ReceipeIngredientInfoProps = {
 	amount: number;
@@ -56,6 +57,56 @@ const Recipe: React.FC = () => {
 		carbonhydrates: 0,
 		kcal: 0,
 	});
+	const [ingredients, setIngredients] = useState<ReceipeIngredientInfoProps[]>([
+		{
+			amount: 0,
+			final_price: 0,
+			id: 0,
+			ingredient_photo: '',
+			measure_unit: '',
+			name: '',
+			need_to_buy: 0,
+			quantity_in_recipe: 0,
+			quantity_in_recipe_measure: '',
+		},
+	]);
+
+	const updateIngredientMeasureUnits = (ingredients: ReceipeIngredientInfoProps[]) => {
+		return ingredients.map((ingredient) => {
+			const ingredientMeasureUnit = ingredient.measure_unit;
+			const { measureUnit, amount } = translateMeasureUnit(
+				ingredientMeasureUnit,
+				ingredient.amount
+			);
+
+			const { measureUnit: newMeasureUnit, amount: newAmount } = translateMeasureUnit(
+				ingredientMeasureUnit,
+				ingredient.quantity_in_recipe
+			);
+			return {
+				...ingredient,
+				amount,
+				measure_unit: measureUnit,
+				quantity_in_recipe: newAmount,
+				quantity_in_recipe_measure: `${newAmount} ${newMeasureUnit}`,
+			};
+		});
+	};
+
+	const getRecipeByLines = (recipeText: string) => {
+		return recipeText.split('\n');
+	};
+	const getNumeralizeWord = (cookingTime: number) => {
+		return declOfNum(cookingTime, ['минута', 'минуты', 'минут']);
+	};
+	const extractRecipeNutrients = (recipe: ReceipeInfoProps) => {
+		return {
+			proteins: recipe.proteins,
+			fats: recipe.fats,
+			carbonhydrates: recipe.carbohydrates,
+			kcal: recipe.kcal,
+		};
+	};
 
 	useEffect(() => {
 		if (!id) {
@@ -63,39 +114,20 @@ const Recipe: React.FC = () => {
 		}
 
 		const recipeId: number = parseInt(id, 10);
+
 		const fetchReceiptAndProducts = async () => {
 			const recipe: ReceipeInfoProps = await api.getRecipeById(recipeId);
 
-			recipe.ingredients.map((ingredient, id) => {
-				const ingredientMeasureUnit = ingredient.measure_unit;
+			const recipeByLines = getRecipeByLines(recipe.text);
+			const numeralizeWord = getNumeralizeWord(recipe.cooking_time);
+			const updatedIngredients = updateIngredientMeasureUnits(recipe.ingredients);
+			const nutrients = extractRecipeNutrients(recipe);
 
-				const { measureUnit, amount } = translateMeasureUnit(
-					ingredientMeasureUnit,
-					ingredient.amount
-				);
-
-				const { measureUnit: newMeasureUnit, amount: newAmount } = translateMeasureUnit(
-					ingredientMeasureUnit,
-					ingredient.quantity_in_recipe
-				);
-
-				recipe.ingredients[id].amount = amount;
-				recipe.ingredients[id].measure_unit = measureUnit;
-				recipe.ingredients[id].quantity_in_recipe = newAmount;
-				recipe.ingredients[id].quantity_in_recipe_measure = `${
-					newAmount + newMeasureUnit
-				}`;
-			});
-
-			setRecipeByLines(recipe.text.split('\n'));
-			setNumeralizeWord(declOfNum(recipe.cooking_time, ['минута', 'минуты', 'минут']));
 			setRecipeInfo(recipe);
-			setRecipeNutrients({
-				proteins: recipe.proteins,
-				fats: recipe.fats,
-				carbonhydrates: recipe.carbohydrates,
-				kcal: recipe.kcal,
-			});
+			setRecipeByLines(recipeByLines);
+			setNumeralizeWord(numeralizeWord);
+			setIngredients(updatedIngredients);
+			setRecipeNutrients(nutrients);
 		};
 
 		fetchReceiptAndProducts().finally(() => setIsLoading(false));
@@ -123,7 +155,7 @@ const Recipe: React.FC = () => {
 								<span>{`${recipeInfo.cooking_time} ${numeralizeWord}`}</span>
 							</p>
 							<div className={styles.ingredients__list}>
-								<IngredientsList ingredients={recipeInfo.ingredients} />
+								<IngredientsList ingredients={ingredients} />
 							</div>
 							<button
 								className={styles.ingredients__button}
@@ -154,7 +186,7 @@ const Recipe: React.FC = () => {
 				</div>
 			)}
 
-			<PopupRecipe ingredients={recipeInfo.ingredients} />
+			<PopupRecipe ingredients={ingredients} />
 		</div>
 	);
 };
