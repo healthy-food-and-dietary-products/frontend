@@ -51,10 +51,6 @@ const Category: React.FC = () => {
 			});
 	}, [category, navigate]);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
-
 	const changeCheckboxState = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.name === 'vegetarian') {
 			setCheckboxState((prev) => ({ ...prev, vegetarian: !prev.vegetarian }));

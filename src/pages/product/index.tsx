@@ -60,10 +60,6 @@ const Product: React.FC = () => {
 		}
 	}, [cartData, id]);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
-
 	const handleAddCartClick = () => {
 		if (isLoaded || !productItem) return;
 		if (id !== undefined) {
