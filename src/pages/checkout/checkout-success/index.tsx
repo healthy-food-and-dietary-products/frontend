@@ -30,17 +30,18 @@ const CheckoutSuccess: React.FC = () => {
 
 	const handlePayment = () => {
 		setIsDisabled(true);
-		if (order.orderId !== 0) {
-			api
-				.usersOrderPay(order.orderId)
-				.then(({ checkout_session_url }) => {
-					window.location.assign(checkout_session_url);
-				})
-				.catch(({ errors }) => {
-					setPaymentError(errors[0].detail);
-				})
-				.finally(() => setIsDisabled(false));
-		}
+
+		if (order.orderId === 0) return;
+
+		api
+			.usersOrderPay(order.orderId)
+			.then(({ checkout_session_url }) => {
+				window.location.assign(checkout_session_url);
+			})
+			.catch(({ errors }) => {
+				setPaymentError(errors[0].detail);
+			})
+			.finally(() => setIsDisabled(false));
 	};
 
 	return (
