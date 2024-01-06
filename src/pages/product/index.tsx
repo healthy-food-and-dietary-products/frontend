@@ -30,13 +30,13 @@ const Product: React.FC = () => {
 	const { id } = useParams();
 
 	useEffect(() => {
-		if (productItem !== null) {
-			const translatedMeasureObj = translateMeasureUnit(
-				productItem.measure_unit,
-				productItem.amount
-			);
-			setMeasureObj(translatedMeasureObj);
-		}
+		if (productItem === null) return;
+
+		const translatedMeasureObj = translateMeasureUnit(
+			productItem.measure_unit,
+			productItem.amount
+		);
+		setMeasureObj(translatedMeasureObj);
 	}, [productItem]);
 
 	useEffect(() => {
