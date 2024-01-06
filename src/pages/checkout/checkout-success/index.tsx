@@ -56,7 +56,7 @@ const CheckoutSuccess: React.FC = () => {
 						buttonText="Оплатить онлайн"
 						buttonStyle="green-button"
 						disabled={isDisabled}
-					></Button>
+					/>
 					<span className={styles.checkoutSuccess__error}>{paymentError}</span>
 				</div>
 				<div className={styles.checkoutSuccess__textContainer}>
@@ -66,9 +66,8 @@ const CheckoutSuccess: React.FC = () => {
 							<span className={styles.checkoutSuccess__text}>
 								За статусом заказа можно следить в
 							</span>
-							<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS}>
-								&nbsp;личном кабинете.
-							</Link>
+							<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS} />
+							&nbsp;личном кабинете.
 						</>
 					) : (
 						<p className={styles.checkoutSuccess__text}>
