@@ -50,9 +50,14 @@ const ShoppingItem: React.FC<ShoppingItemProps> = (props) => {
 			</Link>
 			<div className={styles.item__container}>
 				<div className={`${styles['item__title-container']}`}>
-					<p className={`text_type_u ${styles.item__title}`}>{`${product.name}, ${
-						amount + measureUnit
-					}`}</p>
+					<Link
+						className={styles.item__link}
+						to={`/catalog/${product.category}/${product.id}`}
+					>
+						<p className={`text_type_u ${styles.item__title}`}>{`${product.name}, ${
+							amount + measureUnit
+						}`}</p>
+					</Link>
 				</div>
 				<div className={styles.item__weight}>
 					<button
