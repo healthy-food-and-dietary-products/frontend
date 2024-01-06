@@ -270,7 +270,6 @@ class Api {
 		return this._request(`order/${id}/pay/`, {
 			method: 'POST',
 			headers,
-			// credentials: 'include',
 		});
 	}
 
