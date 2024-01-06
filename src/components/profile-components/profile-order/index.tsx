@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import PaymentButton from '@components/payment-button';
 import OrderStatus from '../order-status';
@@ -99,14 +100,24 @@ const ProfileOrder = ({
 					<ul className={styles['order-products']}>
 						{(products as Array<{ product: Product; quantity: number }>).map((item) => (
 							<li className={styles.product} key={item.product.name}>
-								<div className={styles['product__image-large']}>
-									<img
-										className={styles.product__image}
-										src={item.product.photo}
-										alt={item.product.name}
-									/>
-								</div>
-								<p className={styles.product__name}>{item.product.name}</p>
+								<Link
+									className={styles.product__linkImage}
+									to={`/catalog/${item.product.category.category_slug}/${item.product.id}`}
+								>
+									<div className={styles['product__image-large']}>
+										<img
+											className={styles.product__image}
+											src={item.product.photo}
+											alt={item.product.name}
+										/>
+									</div>
+								</Link>
+								<Link
+									className={styles.product__linkText}
+									to={`/catalog/${item.product.category.category_slug}/${item.product.id}`}
+								>
+									<p className={styles.product__name}>{item.product.name}</p>
+								</Link>
 								<p className={styles.product__weight}>
 									{getAmountWithMeasureUnit(
 										item.product.measure_unit,
