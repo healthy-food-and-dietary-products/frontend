@@ -1,9 +1,8 @@
 import React from 'react';
 import { Review as IReview } from '@services/generated-api/data-contracts';
 import RatingDisplay from '../rating-display';
+import { dateOptions } from '../utils/constants';
 import styles from './review.module.scss';
-
-const dateOptions = { day: '2-digit', month: '2-digit', year: '2-digit' };
 
 const Review: React.FC<{ review: IReview }> = ({ review }) => {
 	return (

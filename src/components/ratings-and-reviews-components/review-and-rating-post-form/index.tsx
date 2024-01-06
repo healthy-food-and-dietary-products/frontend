@@ -4,9 +4,8 @@ import api from '@services/api';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
 import RatingInput from '@components/ratings-and-reviews-components/rating-input';
 import Button from '@components/Button';
+import { dateOptions } from '../utils/constants';
 import styles from './review-and-rating-post-form.module.scss';
-
-const dateOptions = { day: '2-digit', month: '2-digit', year: '2-digit' };
 
 interface IReviewAndRatingPostForm {
 	review: Review | null;

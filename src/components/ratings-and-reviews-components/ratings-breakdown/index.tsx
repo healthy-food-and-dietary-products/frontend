@@ -1,5 +1,6 @@
 import React from 'react';
 import plural from '../utils/pluralizer';
+import { starsArray, ratingsTitleOptions } from '../utils/constants';
 import styles from './ratings-breakdown.module.scss';
 
 interface IRatingsBreakdown {
@@ -7,11 +8,10 @@ interface IRatingsBreakdown {
 }
 
 const RatingsBreakdown: React.FC<IRatingsBreakdown> = ({ ratings }) => {
-	const starsArray = [5, 4, 3, 2, 1];
 	const sum = ratings.reduce((a, b) => a + b, 0);
 	const amount = ratings.length;
 	const average = (sum / amount).toFixed(1);
-	const title = ['оценок', 'оценка', 'оценки'][plural(amount)];
+	const title = ratingsTitleOptions[plural(amount)];
 
 	return (
 		<aside className={styles.container}>
@@ -31,7 +31,7 @@ const RatingsBreakdown: React.FC<IRatingsBreakdown> = ({ ratings }) => {
 						</div>
 						<progress
 							className={styles.progress}
-							value={ratings.filter((el) => el === mark).length || 0}
+							value={ratings.filter((element) => element === mark).length || 0}
 							max={amount}
 						/>
 					</li>

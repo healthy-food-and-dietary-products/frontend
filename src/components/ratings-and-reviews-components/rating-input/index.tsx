@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { starsArray } from '../utils/constants';
 import styles from './rating-input.module.scss';
 
 interface RatingInput {
@@ -8,7 +9,6 @@ interface RatingInput {
 
 const RatingInput: React.FC<RatingInput> = ({ rating, onChange }) => {
 	const [hover, setHover] = useState(0);
-	const starsArray = [1, 2, 3, 4, 5];
 
 	return (
 		<fieldset
@@ -16,21 +16,21 @@ const RatingInput: React.FC<RatingInput> = ({ rating, onChange }) => {
 			// NOTE: Keep hover active while mouse in component
 			onMouseLeave={() => setHover(0)}
 		>
-			{starsArray.map((el) => (
-				<label key={el} className={styles.item}>
+			{starsArray.map((element) => (
+				<label key={element} className={styles.item}>
 					<input
 						className={styles.input}
 						type="radio"
 						name="rating"
-						value={el}
-						onChange={() => onChange(el)}
-						checked={el === rating}
+						value={element}
+						onChange={() => onChange(element)}
+						checked={element === rating}
 					/>
 					<span
-						className={`${styles.star} ${el <= rating && styles.active} ${
-							el <= hover && styles.hovered
+						className={`${styles.star} ${element <= rating && styles.active} ${
+							element <= hover && styles.hovered
 						}`}
-						onMouseEnter={() => setHover(el)}
+						onMouseEnter={() => setHover(element)}
 					/>
 				</label>
 			))}

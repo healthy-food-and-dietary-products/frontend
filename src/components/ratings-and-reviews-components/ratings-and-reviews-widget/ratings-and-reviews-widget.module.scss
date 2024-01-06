@@ -14,8 +14,13 @@
 
 .grid {
 	display: grid;
-	grid-template-columns: 1fr 200px;
+	grid-template-columns: 1fr 240px;
 	gap: 40px 107px;
+
+	@media screen and (width <= 1180px) {
+		grid-template-columns: 1fr 160px;
+		gap: 40px 40px;
+	}
 
 	@media screen and (width <= 768px) {
 		grid-template-columns: 1fr;
@@ -32,6 +37,10 @@
 
 .ratings {
 	padding-right: 40px;
+
+	@media screen and (width <= 1180px) {
+		padding-right: 20px;
+	}
 
 	@media screen and (width <= 768px) {
 		grid-row: 1;

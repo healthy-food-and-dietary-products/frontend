@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Review as IReview } from '@services/generated-api/data-contracts';
-import plural from '../utils/pluralizer';
 import Review from '../review';
+import plural from '../utils/pluralizer';
+import { reviewsTitleOptions } from '../utils/constants';
 import styles from './reviews-list.module.scss';
 
 interface IReviewsList {
@@ -11,7 +12,7 @@ interface IReviewsList {
 const ReviewsList: React.FC<IReviewsList> = ({ reviews }) => {
 	const [itemsShown, setItemsShown] = useState(3);
 	const amount = reviews.length;
-	const title = ['отзывов', 'отзыв', 'отзыва'][plural(amount)];
+	const title = reviewsTitleOptions[plural(amount)];
 
 	return (
 		<div className={styles.container}>
