@@ -29,38 +29,44 @@ const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
 		review && setValues({ text: review?.text, score: review?.score });
 	}, [review, productId, setValues]);
 
+	const handleReviewUpdate = (res: Review) => {
+		onUpdateReview(res);
+		return res;
+	};
+
+	const handleReviewCreate = (res: Review) => {
+		onAddReview(res);
+		return res;
+	};
+
 	const handleReviewSubmit = (e: SyntheticEvent) => {
 		e.preventDefault();
+
 		// TODO: Add error processing in catch block
 		if (review?.score && values.text && values.text !== review?.text) {
 			api
 				.reviewsUpdate(productId, review.id, { text: values.text as string })
-				.then((res) => onUpdateReview(res))
+				.then(handleReviewUpdate)
 				.catch((err) => console.log(err));
 		}
 	};
 
 	const handleRatingChange = (rating: number) => {
+		if (review?.score === rating) return;
+
+		const updateReview =
+			review && review.score > 0
+				? api
+						.reviewsUpdate(productId, review.id, {
+							score: rating,
+						})
+						.then(handleReviewUpdate)
+				: api.reviewsCreate(productId, { score: rating }).then(handleReviewCreate);
+
 		// TODO: Add error processing in catch block
-		if (!review || review?.score !== rating) {
-			const apiPromise =
-				review && review.score > 0
-					? api
-							.reviewsUpdate(productId, review.id, {
-								score: rating,
-							})
-							.then((res) => {
-								onUpdateReview(res);
-								return res;
-							})
-					: api.reviewsCreate(productId, { score: rating }).then((res) => {
-							onAddReview(res);
-							return res;
-					  });
-			apiPromise
-				.then(() => setValues({ ...values, score: rating }))
-				.catch((err) => console.log(err));
-		}
+		updateReview
+			.then(() => setValues({ ...values, score: rating }))
+			.catch((err) => console.log(err));
 	};
 
 	return (

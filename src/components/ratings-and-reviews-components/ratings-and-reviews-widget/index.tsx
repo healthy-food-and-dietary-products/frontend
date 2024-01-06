@@ -43,14 +43,13 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId
 	}, [productId]);
 
 	useEffect(() => {
-		if (reviews) {
-			const filtered = reviews.filter((item: Review) => !!item.text);
-			const ratings = reviews.map((item: Review) => item.score);
-			const userReview = reviews.find((item: Review) => item.author.id === userId);
-			setReviewsWithText(filtered[0] ? filtered : null);
-			setRatings(ratings[0] ? ratings : null);
-			setUserReview(userReview || null);
-		}
+		if (!reviews) return;
+		const filtered = reviews.filter((item: Review) => !!item.text);
+		const ratings = reviews.map((item: Review) => item.score);
+		const userReview = reviews.find((item: Review) => item.author.id === userId);
+		setReviewsWithText(filtered[0] ? filtered : null);
+		setRatings(ratings[0] ? ratings : null);
+		setUserReview(userReview || null);
 	}, [reviews, userId]);
 
 	const handleAddReview = (review: Review) => {
