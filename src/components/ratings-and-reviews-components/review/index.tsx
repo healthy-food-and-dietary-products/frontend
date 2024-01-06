@@ -1,10 +1,12 @@
 import React from 'react';
-import { Review as IReview } from '@services/generated-api/data-contracts';
 import RatingDisplay from '../rating-display';
 import { dateOptions } from '../utils/constants';
+import { IRatingsAndReviews } from '../utils/types';
 import styles from './review.module.scss';
 
-const Review: React.FC<{ review: IReview }> = ({ review }) => {
+interface IReview extends Pick<IRatingsAndReviews, 'review'> {}
+
+const Review: React.FC<IReview> = ({ review }) => {
 	return (
 		<article className={styles.container}>
 			<div className={styles.info}>

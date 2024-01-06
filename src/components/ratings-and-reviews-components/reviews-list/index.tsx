@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import { Review as IReview } from '@services/generated-api/data-contracts';
 import Review from '../review';
 import plural from '../utils/pluralizer';
 import { reviewsTitleOptions } from '../utils/constants';
+import { IRatingsAndReviews } from '../utils/types';
 import styles from './reviews-list.module.scss';
 
-interface IReviewsList {
-	reviews: IReview[];
-}
+interface IReviewsList extends Pick<IRatingsAndReviews, 'reviews'> {}
 
 const ReviewsList: React.FC<IReviewsList> = ({ reviews }) => {
-	const [itemsShown, setItemsShown] = useState(3);
+	const [reviewsShown, setReviewsShown] = useState(3);
 	const amount = reviews.length;
 	const title = reviewsTitleOptions[plural(amount)];
 
@@ -20,14 +18,17 @@ const ReviewsList: React.FC<IReviewsList> = ({ reviews }) => {
 				{amount} {title}
 			</p>
 			<ul className={styles.list}>
-				{reviews.slice(0, itemsShown).map((item) => (
-					<li className={styles.item} key={item.id}>
-						<Review review={item} />
+				{reviews.slice(0, reviewsShown).map((review) => (
+					<li className={styles.item} key={review.id}>
+						<Review review={review} />
 					</li>
 				))}
 			</ul>
-			{itemsShown < amount && (
-				<button className={styles.button} onClick={() => setItemsShown(itemsShown + 3)}>
+			{reviewsShown < amount && (
+				<button
+					className={styles.button}
+					onClick={() => setReviewsShown(reviewsShown + 3)}
+				>
 					Загрузить еще
 				</button>
 			)}

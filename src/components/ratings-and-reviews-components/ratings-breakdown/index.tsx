@@ -1,11 +1,10 @@
 import React from 'react';
 import plural from '../utils/pluralizer';
 import { starsArray, ratingsTitleOptions } from '../utils/constants';
+import { IRatingsAndReviews } from '../utils/types';
 import styles from './ratings-breakdown.module.scss';
 
-interface IRatingsBreakdown {
-	ratings: number[];
-}
+interface IRatingsBreakdown extends Pick<IRatingsAndReviews, 'ratings'> {}
 
 const RatingsBreakdown: React.FC<IRatingsBreakdown> = ({ ratings }) => {
 	const sum = ratings.reduce((a, b) => a + b, 0);

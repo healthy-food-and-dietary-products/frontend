@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { starsArray } from '../utils/constants';
+import { IRatingsAndReviews } from '../utils/types';
 import styles from './rating-input.module.scss';
 
-interface RatingInput {
-	rating: number;
-	onChange: (rating: number) => void;
-}
+interface IRatingInput extends Pick<IRatingsAndReviews, 'rating' | 'onRatingChange'> {}
 
-const RatingInput: React.FC<RatingInput> = ({ rating, onChange }) => {
+const RatingInput: React.FC<IRatingInput> = ({ rating, onRatingChange }) => {
 	const [hover, setHover] = useState(0);
 
 	return (
@@ -16,21 +14,21 @@ const RatingInput: React.FC<RatingInput> = ({ rating, onChange }) => {
 			// NOTE: Keep hover active while mouse in component
 			onMouseLeave={() => setHover(0)}
 		>
-			{starsArray.map((element) => (
-				<label key={element} className={styles.item}>
+			{starsArray.map((mark) => (
+				<label key={mark} className={styles.item}>
 					<input
 						className={styles.input}
 						type="radio"
 						name="rating"
-						value={element}
-						onChange={() => onChange(element)}
-						checked={element === rating}
+						value={mark}
+						onChange={() => onRatingChange(mark)}
+						checked={mark === rating}
 					/>
 					<span
-						className={`${styles.star} ${element <= rating && styles.active} ${
-							element <= hover && styles.hovered
+						className={`${styles.star} ${mark <= rating && styles.active} ${
+							mark <= hover && styles.hovered
 						}`}
-						onMouseEnter={() => setHover(element)}
+						onMouseEnter={() => setHover(mark)}
 					/>
 				</label>
 			))}

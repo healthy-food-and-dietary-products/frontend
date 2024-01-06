@@ -1,17 +1,15 @@
 import React, { SyntheticEvent, useEffect } from 'react';
-import { Review } from '@services/generated-api/data-contracts';
 import api from '@services/api';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
 import RatingInput from '@components/ratings-and-reviews-components/rating-input';
 import Button from '@components/Button';
 import { dateOptions } from '../utils/constants';
+import { IRatingsAndReviews, IReview, TRating, TReviewNullable } from '../utils/types';
 import styles from './review-and-rating-post-form.module.scss';
 
-interface IReviewAndRatingPostForm {
-	review: Review | null;
-	productId: number;
-	onAddReview: (review: Review) => void;
-	onUpdateReview: (review: Review) => void;
+interface IReviewAndRatingPostForm
+	extends Pick<IRatingsAndReviews, 'productId' | 'onAddReview' | 'onUpdateReview'> {
+	review: TReviewNullable;
 }
 
 const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
@@ -29,12 +27,12 @@ const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
 		review && setValues({ text: review?.text, score: review?.score });
 	}, [review, productId, setValues]);
 
-	const handleReviewUpdate = (res: Review) => {
+	const handleReviewUpdate = (res: IReview) => {
 		onUpdateReview(res);
 		return res;
 	};
 
-	const handleReviewCreate = (res: Review) => {
+	const handleReviewCreate = (res: IReview) => {
 		onAddReview(res);
 		return res;
 	};
@@ -45,13 +43,16 @@ const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
 		// TODO: Add error processing in catch block
 		if (review?.score && values.text && values.text !== review?.text) {
 			api
-				.reviewsUpdate(productId, review.id, { text: values.text as string })
+				.reviewsUpdate(productId, review.id, { text: values.text } as Pick<
+					IReview,
+					'text'
+				>)
 				.then(handleReviewUpdate)
 				.catch((err) => console.log(err));
 		}
 	};
 
-	const handleRatingChange = (rating: number) => {
+	const handleRatingChange = (rating: TRating) => {
 		if (review?.score === rating) return;
 
 		const updateReview =
@@ -79,7 +80,7 @@ const ReviewAndRatingPostForm: React.FC<IReviewAndRatingPostForm> = ({
 					</time>
 				)}
 			</h3>
-			<RatingInput rating={values.score as number} onChange={handleRatingChange} />
+			<RatingInput rating={values.score as TRating} onRatingChange={handleRatingChange} />
 			<form className={styles.form} noValidate onSubmit={handleReviewSubmit}>
 				<textarea
 					className={styles.input}

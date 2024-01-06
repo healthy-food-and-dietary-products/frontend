@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import api from '@services/api';
-import { Review } from '@services/generated-api/data-contracts';
 import ReviewAndRatingPostForm from '../review-and-rating-post-form';
 import RatingsBreakdown from '../ratings-breakdown';
 import ReviewsList from '../reviews-list';
+import {
+	IRatingsAndReviews,
+	IReview,
+	TRatingNullable,
+	TRatingsNullable,
+	TReviewNullable,
+	TReviewsNullable,
+} from '../utils/types';
 import styles from './ratings-and-reviews-widget.module.scss';
 
-interface IRatingsAndReviewsWidget {
-	productId: number;
-}
+interface IRatingsAndReviewsWidget extends Pick<IRatingsAndReviews, 'productId'> {}
 
 const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId }) => {
-	const [reviews, setReviews] = useState<null | Review[]>(null);
-	const [userReview, setUserReview] = useState<null | Review>(null);
-	const [reviewsWithText, setReviewsWithText] = useState<null | Review[]>(null);
-	const [ratings, setRatings] = useState<null | number[]>(null);
+	const [reviews, setReviews] = useState<TReviewsNullable>(null);
+	const [userReview, setUserReview] = useState<TReviewNullable>(null);
+	const [reviewsWithText, setReviewsWithText] = useState<TReviewsNullable>(null);
+	const [ratings, setRatings] = useState<TRatingsNullable>(null);
 	const [hasOrderedThis, setHasOrderedThis] = useState(false);
-	const [userId, setUserId] = useState<null | number>(null);
+	const [userId, setUserId] = useState<TRatingNullable>(null);
 
 	useEffect(() => {
 		api
@@ -30,7 +35,7 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId
 			.reviewsList(productId)
 			.then((res) => {
 				res[0] &&
-					res.sort(function (a: Review, b: Review) {
+					res.sort(function (a: IReview, b: IReview) {
 						return Number(new Date(b.pub_date)) - Number(new Date(a.pub_date));
 					});
 				setReviews(res[0] ? res : null);
@@ -44,20 +49,20 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId
 
 	useEffect(() => {
 		if (!reviews) return;
-		const filtered = reviews.filter((item: Review) => !!item.text);
-		const ratings = reviews.map((item: Review) => item.score);
-		const userReview = reviews.find((item: Review) => item.author.id === userId);
+		const filtered = reviews.filter((review: IReview) => !!review.text);
+		const ratings = reviews.map((review: IReview) => review.score);
+		const userReview = reviews.find((review: IReview) => review.author.id === userId);
 		setReviewsWithText(filtered[0] ? filtered : null);
 		setRatings(ratings[0] ? ratings : null);
 		setUserReview(userReview || null);
 	}, [reviews, userId]);
 
-	const handleAddReview = (review: Review) => {
+	const handleAddReview = (review: IReview) => {
 		setUserReview(review);
 		setReviews(reviews ? [review, ...reviews] : [review]);
 	};
 
-	const handleUpdateReview = (review: Review) => {
+	const handleUpdateReview = (review: IReview) => {
 		setUserReview(review);
 		const newReviews = reviews
 			?.slice()
