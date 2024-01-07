@@ -1,8 +1,8 @@
-import ProductCard from '@components/product-card';
-import styles from './profile-order-mobile.module.scss';
-import OrderStatus from '../order-status';
 import clsx from 'clsx';
-// import { OrderList } from '@services/generated-api/data-contracts';
+import ProductCard from '@components/product-card';
+import PaymentButton from '@components/payment-button';
+import OrderStatus from '../order-status';
+import styles from './profile-order-mobile.module.scss';
 
 type OrderStatusType =
 	| 'Ordered'
@@ -29,6 +29,7 @@ type Product = {
 
 type CommonOrder = {
 	id: number;
+	is_paid: boolean;
 	order_number?: string;
 	ordering_date?: string;
 	total_price?: string;
@@ -114,7 +115,11 @@ const ProfileOrderMobile = ({
 			</div>
 			<div className={styles.status}>
 				<p className={styles.price}>{`${total_price} руб.`}</p>
-				<OrderStatus status={status} />
+				{order.is_paid ? (
+					<OrderStatus status={status} />
+				) : (
+					<PaymentButton orderId={order.id} />
+				)}
 			</div>
 		</button>
 	);
