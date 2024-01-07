@@ -9,12 +9,11 @@ type LayoutProps = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-	const location = useLocation();
-	const page = location.pathname;
+	const { pathname } = useLocation();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [page]);
+	}, [pathname]);
 
 	return (
 		<div className={style.layout}>
