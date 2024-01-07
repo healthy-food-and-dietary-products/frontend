@@ -87,8 +87,7 @@ const ProfileOrder = ({
 	const date = ordering_date && new Date(ordering_date).toLocaleDateString();
 	return (
 		<>
-			<button
-				type="button"
+			<div
 				className={clsx(styles.order, isShowedProductsDetails && styles.details)}
 				onClick={showDetails}
 			>
@@ -164,7 +163,7 @@ const ProfileOrder = ({
 						)}
 					</div>
 				</div>
-			</button>
+			</div>
 		</>
 	);
 };
