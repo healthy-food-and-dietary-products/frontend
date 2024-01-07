@@ -1,6 +1,7 @@
-import styles from './profile-order.module.scss';
-import OrderStatus from '../order-status';
 import clsx from 'clsx';
+import PaymentButton from '@components/payment-button';
+import OrderStatus from '../order-status';
+import styles from './profile-order.module.scss';
 
 type OrderStatusType =
 	| 'Ordered'
@@ -27,6 +28,7 @@ type Product = {
 
 type CommonOrder = {
 	id: number;
+	is_paid: boolean;
 	order_number?: string;
 	ordering_date?: string;
 	total_price?: string;
@@ -57,7 +59,6 @@ const ProfileOrder = ({
 		products,
 	} = order;
 
-	console.log(status);
 	let payment_method_ru =
 		payment_method === 'Payment at the point of delivery'
 			? 'Банковской картой'
@@ -130,7 +131,11 @@ const ProfileOrder = ({
 						<p className={styles.text}>{`Способ получения: ${delivery_method_ru}`}</p>
 					</div>
 					<div className={styles.status}>
-						<OrderStatus status={status} />
+						{order.is_paid ? (
+							<OrderStatus status={status} />
+						) : (
+							<PaymentButton orderId={order.id} />
+						)}
 					</div>
 				</div>
 			</button>
