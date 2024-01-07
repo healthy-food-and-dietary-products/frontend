@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import styles from './checkout.module.scss';
-import api from '@services/api.ts';
+
+import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
+import Breadcrumbs from '@components/breadcrumbs';
 import Input from '@ui/input';
+
+import api from '@services/api.ts';
+import { pickupPointAddresses, URLS, popupInfoText } from '@data/constants';
 import { useFormAndValidation } from '@hooks/use-form-and-validation.ts';
 import { usePopup } from '@hooks/use-popup';
-import PopupCheckoutResponse from '@components/popups/popup-checkout-response';
-import { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
 import { useAuth } from '@hooks/use-auth.ts';
 import { useCart } from '@hooks/use-cart-context.ts';
-import { pickupPointAddresses, URLS, popupInfoText } from '@data/constants';
+import type { OrderPostAdd } from '@services/generated-api/data-contracts.ts';
+import styles from './checkout.module.scss';
 
 type Address = {
 	id: number;
@@ -167,6 +170,7 @@ const Checkout: React.FC = () => {
 
 	return (
 		<section className={styles.order}>
+			<Breadcrumbs />
 			<div className={styles.details}>
 				<div className={styles.execution}>
 					<h2 className={styles.execution__title_mob}>Оформление заказа</h2>

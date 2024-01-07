@@ -32,6 +32,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ productName, category }) => {
 		recipes: 'Рецепты',
 		contacts: 'Контакты',
 		orders: 'Мои заказы',
+		order: 'Оформление заказа',
 	};
 
 	if (category) {
