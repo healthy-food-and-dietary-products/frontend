@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './checkout.module.scss';
 import api from '@services/api.ts';
 import Input from '@ui/input';
@@ -42,6 +42,7 @@ const Checkout: React.FC = () => {
 	const userAddresses = user?.addresses as unknown[] as Address[];
 	const [comment, setComment] = React.useState<string>('');
 	const [popupText, setPopupText] = useState('');
+	const [isAgreed, setIsAgreed] = useState(false);
 
 	const openInfoPopup = (text: string) => {
 		setPopupText(text);
@@ -154,6 +155,10 @@ const Checkout: React.FC = () => {
 	const handleClose = () => {
 		handleClosePopup('openPopupCheckoutResponse');
 		setPopupText('');
+	};
+
+	const handleAgreementChange = () => {
+		setIsAgreed(!isAgreed);
 	};
 
 	return (
@@ -332,7 +337,6 @@ const Checkout: React.FC = () => {
 										name="time"
 										value="9.00-12.00"
 										id="time_early-morning"
-										className={styles.execution__radio}
 										onChange={handleTimeChange}
 										checked={selectedTime === '9.00-12.00'}
 									/>
@@ -345,7 +349,6 @@ const Checkout: React.FC = () => {
 										name="time"
 										value="12.00-15.00"
 										id="time_lunch"
-										className={styles.execution__radio}
 										onChange={handleTimeChange}
 										checked={selectedTime === '12.00-15.00'}
 									/>
@@ -358,7 +361,6 @@ const Checkout: React.FC = () => {
 										name="time"
 										value="15.00-18.00"
 										id="time_day"
-										className={styles.execution__radio}
 										onChange={handleTimeChange}
 										checked={selectedTime === '15.00-18.00'}
 									/>
@@ -371,7 +373,6 @@ const Checkout: React.FC = () => {
 										name="time"
 										value="18.00-21.00"
 										id="time_evening"
-										className={styles.execution__radio}
 										onChange={handleTimeChange}
 										checked={selectedTime === '18.00-21.00'}
 									/>
@@ -389,7 +390,6 @@ const Checkout: React.FC = () => {
 										name="payment"
 										value="Online"
 										id="payment_online"
-										className={styles.execution__radio}
 										onChange={handlePaymentChange}
 									/>
 									<label htmlFor="payment_online">Оплата онлайн</label>
@@ -402,7 +402,6 @@ const Checkout: React.FC = () => {
 											name="payment"
 											value="In getting by cash"
 											id="payment_cash"
-											className={styles.execution__radio}
 											onChange={handlePaymentChange}
 										/>
 										<label htmlFor="payment_cash">Оплата курьеру</label>
@@ -415,7 +414,6 @@ const Checkout: React.FC = () => {
 											name="payment"
 											value="Payment at the point of delivery"
 											id="payment_offline"
-											className={styles.execution__radio}
 											onChange={handlePaymentChange}
 										/>
 										<label htmlFor="payment_offline">Оплата в пункте выдачи</label>
@@ -474,11 +472,25 @@ const Checkout: React.FC = () => {
 						>
 							Оформить заказ
 						</button>
-						<p className={`${styles.orderse__title}`}>
-							Нажимая на&nbsp;кнопку &laquo;Оформить заказ&raquo;, вы&nbsp;соглашаетесь
-							с&nbsp;условиями обработки персональных данных, а&nbsp;также
-							с&nbsp;условиями продажи.
-						</p>
+						<div className={styles.execution__item}>
+							<input
+								type="checkbox"
+								name="agreement"
+								value="agreed"
+								id="agreement"
+								onChange={handleAgreementChange}
+							/>
+							<label htmlFor="agreement">
+								<span className={styles.orderse__title}>Я согласен с&nbsp;</span>
+								<Link className={styles.orderse__title} to={URLS.AGREEMENT}>
+									условиями обработки персональных данных
+								</Link>
+								<span className={styles.orderse__title}> и&nbsp;</span>
+								<Link className={styles.orderse__title} to={URLS.DELIVERY_COND}>
+									условиями продажи
+								</Link>
+							</label>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -405,6 +405,7 @@
 }
 
 /* stylelint-disable-next-line selector-attribute-quotes */
+.orderse input[type='checkbox'],
 .execution__form input[type='radio'] {
 	display: none;
 }
@@ -415,6 +416,10 @@
 	position: relative;
 	line-height: 18px;
 	user-select: none;
+}
+
+.orderse .execution__item {
+	padding-left: 30px;
 }
 
 .execution__item label::after {
@@ -435,13 +440,19 @@
 	}
 }
 
+.execution__item label[for='agreement']::after {
+	bottom: 50%;
+	left: 0;
+}
+
 /* stylelint-disable-next-line selector-attribute-quotes */
+.execution__item input[type='checkbox']:checked + label::after,
 .execution__item input[type='radio']:checked + label::after {
 	background: url('@images/Radio_button.svg');
 	background-position: center;
 	background-size: 16px;
 	background-repeat: no-repeat;
-	border: 1px solid #285718;
+	border: 1px solid $green-primary-700;
 	width: 16px;
 	height: 16px;
 
@@ -451,7 +462,7 @@
 		background-size: 10px;
 		/* stylelint-disable-next-line declaration-block-no-shorthand-property-overrides */
 		background: none;
-		background-color: #285718;
+		background-color: $green-primary-700;
 	}
 }
 
@@ -462,6 +473,7 @@
 }
 
 /* stylelint-disable-next-line selector-attribute-quotes */
+.execution__item input[type='checkbox']:disabled + label::after,
 .execution__item input[type='radio']:disabled + label::after {
 	opacity: 0.5;
 	transition: opacity 0.5s ease-in-out;
