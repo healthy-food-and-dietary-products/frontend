@@ -81,6 +81,8 @@ const Checkout: React.FC = () => {
 				return openInfoPopup(popupInfoText.enterAddress);
 			case !isLoggedIn && !selectedPayment:
 				return openInfoPopup(popupInfoText.choosePaymentMethod);
+			case !isAgreed:
+				return openInfoPopup(popupInfoText.selectAgreement);
 			default:
 				return true;
 		}
