@@ -39,8 +39,9 @@ const CheckoutSuccess: React.FC = () => {
 							<span className={styles.checkoutSuccess__text}>
 								За статусом заказа можно следить в
 							</span>
-							<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS} />
-							&nbsp;личном кабинете.
+							<Link className={styles.checkoutSuccess__link} to={URLS.PROFILE_ORDERS}>
+								&nbsp;личном кабинете.
+							</Link>
 						</>
 					) : (
 						<p className={styles.checkoutSuccess__text}>
