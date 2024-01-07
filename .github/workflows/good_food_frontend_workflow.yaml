@@ -32,7 +32,7 @@ jobs:
           npm run lint:styles
           npm run lint:prettier
       - name: send message
-        if: ${{ github.ref != 'refs/heads/develop' || github.ref != 'refs/heads/main' }}
+        if: ${{ github.ref != 'refs/heads/main' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
@@ -49,7 +49,7 @@ jobs:
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Check out the repo
