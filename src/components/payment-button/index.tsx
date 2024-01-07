@@ -5,9 +5,10 @@ import styles from './payment-button.module.scss';
 
 type PaymentButtonProps = {
 	orderId: number;
+	isCheckoutPage?: boolean;
 };
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId }) => {
+const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId, isCheckoutPage }) => {
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [paymentError, setPaymentError] = useState('');
 
@@ -22,13 +23,13 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId }) => {
 				window.location.assign(checkout_session_url);
 			})
 			.catch(({ errors }) => {
-				console.log(errors);
 				setPaymentError(errors[0].detail);
 			})
 			.finally(() => setIsDisabled(false));
 	};
+
 	return (
-		<div>
+		<div className={isCheckoutPage ? styles.buttonContainer : ''}>
 			<Button
 				onClick={handlePayment}
 				buttonText="Оплатить онлайн"

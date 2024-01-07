@@ -19,3 +19,10 @@
 .green-button__type_narrow {
 	max-width: 140px;
 }
+
+.buttonContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: max-content;
+}
