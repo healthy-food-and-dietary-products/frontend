@@ -1,0 +1,17 @@
+@use '@scss/variables' as *;
+
+.errorText {
+	padding-top: 10px;
+	min-height: 25px;
+	text-align: center;
+	color: $error-color;
+	font-size: 13px;
+	font-weight: 300;
+	line-height: 140%;
+
+	@media screen and (width <= 768px) {
+		font-size: 12px;
+		padding-top: 3px;
+		min-height: 17px;
+	}
+}
