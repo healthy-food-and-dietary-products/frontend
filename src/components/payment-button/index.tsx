@@ -34,6 +34,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId }) => {
 				buttonText="Оплатить онлайн"
 				buttonStyle="green-button"
 				disabled={isDisabled}
+				classNames={styles['green-button__type_narrow']}
 			/>
 			<span className={styles.errorText}>{paymentError}</span>
 		</div>
