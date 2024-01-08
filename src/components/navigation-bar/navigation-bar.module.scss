@@ -8,11 +8,15 @@
 	width: 100%;
 	background-color: #fff;
 	padding: 0;
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 	z-index: 150;
 	transition: background-color 0.7s;
+
+	@media screen and (width <= 768px) {
+		display: flex;
+	}
 }
 
 .burger-icon {
