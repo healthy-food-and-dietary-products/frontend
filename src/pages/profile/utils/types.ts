@@ -1,4 +1,4 @@
-type OrderStatusType =
+export type OrderStatusType =
 	| 'Ordered'
 	| 'In processing'
 	| 'Collecting'
@@ -27,8 +27,8 @@ export type CommonOrder = {
 	order_number?: string;
 	ordering_date?: string;
 	total_price?: string;
-	payment_method?: string;
-	delivery_method?: string;
+	payment_method: string;
+	delivery_method: string;
 	status?: OrderStatusType;
 	products: Array<{ product: Product; quantity: number }> | Product[];
 };

@@ -1,19 +1,14 @@
-import styles from './order-status.module.scss';
+import clsx from 'clsx';
 import doneIcon from '@images/profile/home-status.svg';
 import canceledIcon from '@images/profile/cancel-status.svg';
 import orderedIcon from '@images/profile/payment-status.svg';
 import deliveredIcon from '@images/profile/car-status.svg';
-import clsx from 'clsx';
+import checkedIcon from '@images/profile/check-status.svg';
+import { OrderStatusType } from '@pages/profile/utils/types';
+import styles from './order-status.module.scss';
 
 type Props = {
-	status?:
-		| 'Ordered'
-		| 'In processing'
-		| 'Collecting'
-		| 'Gathered'
-		| 'In delivering'
-		| 'Delivered'
-		| 'Completed';
+	status?: OrderStatusType;
 };
 
 const statusObj = {
@@ -34,12 +29,12 @@ const statusObj = {
 	},
 	Ordered: {
 		text: 'Оформлен',
-		image: orderedIcon,
-		style: styles.ordered,
+		image: checkedIcon,
+		style: styles.checked,
 	},
 	Gathered: { text: '', image: '', style: '' },
 	'In processing': { text: '', image: '', style: '' },
-	'In delivering': { text: '', image: '', style: '' },
+	'In delivering': { text: 'Оплачен', image: orderedIcon, style: styles.ordered },
 	Collecting: { text: '', image: '', style: '' },
 };
 

@@ -4,7 +4,7 @@ import ProfileOrder from '@components/profile-components/profile-order';
 import ProfileOrderMobile from '@components/profile-components/profile-order-mobile';
 import ReturnBackButton from '@components/profile-components/return-back-button';
 import { useProfile } from '@hooks/use-profile';
-import type { CommonOrder } from '../types';
+import type { CommonOrder } from '../utils/types';
 import styles from './profile-orders.module.scss';
 
 export default function ProfileOrders() {

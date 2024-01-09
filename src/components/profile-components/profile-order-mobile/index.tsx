@@ -2,7 +2,8 @@ import clsx from 'clsx';
 import ProductCard from '@components/product-card';
 import PaymentButton from '@components/payment-button';
 import OrderStatus from '../order-status';
-import type { CommonOrder, Product } from '@pages/profile/types';
+import type { CommonOrder, Product } from '@pages/profile/utils/types';
+import { getDeliveryMethodRu, getPaymentMethodRu } from '@pages/profile/utils/utils';
 import styles from './profile-order-mobile.module.scss';
 
 type Props = {
@@ -25,19 +26,6 @@ const ProfileOrderMobile = ({
 		status,
 		products,
 	} = order;
-
-	let payment_method_ru =
-		payment_method === 'Payment at the point of delivery'
-			? 'Банковской картой'
-			: 'Наличные';
-
-	let delivery_method_ru;
-	if (delivery_method === 'Point of delivery') {
-		delivery_method_ru = 'Самовывоз';
-	} else {
-		delivery_method_ru = 'Курьером';
-		payment_method_ru += 'курьеру';
-	}
 
 	const date = ordering_date && new Date(ordering_date).toLocaleDateString();
 	return (
@@ -71,18 +59,22 @@ const ProfileOrderMobile = ({
 				<div className={styles.info}>
 					<p className={styles.text}>
 						<span className={styles['text-span']}>Способ получения:</span>
-						<span className={styles['text-span']}>{delivery_method_ru}</span>
+						<span className={styles['text-span']}>
+							{getDeliveryMethodRu(delivery_method)}
+						</span>
 					</p>
 					<p className={styles.text}>
 						<span className={styles['text-span']}>Способ оплаты:</span>
-						<span className={styles['text-span']}>{payment_method_ru}</span>
+						<span className={styles['text-span']}>
+							{getPaymentMethodRu(payment_method)}
+						</span>
 					</p>
 				</div>
 			</div>
 			<div className={styles.status}>
 				<p className={styles.price}>{`${total_price} руб.`}</p>
-				{order.is_paid ? (
-					<OrderStatus status={status} />
+				{order.is_paid || payment_method !== 'Online' ? (
+					<OrderStatus status={order.is_paid ? 'In delivering' : status} />
 				) : (
 					<PaymentButton orderId={order.id} />
 				)}
