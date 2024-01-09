@@ -37,7 +37,7 @@ const Header: React.FC = () => {
 				</Link>
 				<Navigation />
 				<NavigationIcons />
-				<NavigationBar isOpen={openBurger} />
+				<NavigationBar isOpen={openBurger} onClick={ClickOpen} />
 			</div>
 		</header>
 	);

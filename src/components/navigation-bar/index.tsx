@@ -1,36 +1,68 @@
 import React from 'react';
-import styles from './navigation-bar.module.scss';
 import CustomNavLink from '@components/custom-nav-link';
+import { usePopup } from '@hooks/use-popup';
+import { useAuth } from '@hooks/use-auth';
+import styles from './navigation-bar.module.scss';
 
 interface NavigationBarProps {
 	isOpen: boolean;
+	onClick: () => void;
 }
 
-const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen }) => {
+const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
+	const { isLoggedIn } = useAuth();
+	const { handleOpenPopup } = usePopup();
+
+	const handleClick = () => {
+		onClick();
+		handleOpenPopup('openPopupLogin');
+	};
+
 	return (
 		<div
 			className={`${styles['navigation-bar']} ${isOpen ? styles.visible : styles.hidden}`}
 		>
 			<nav className={`${styles['navigation-bar__nav']}`}>
-				<button className={`${styles['navigation-bar__button']}`}>Войти</button>
+				{!isLoggedIn && (
+					<button onClick={handleClick} className={`${styles['navigation-bar__button']}`}>
+						Войти
+					</button>
+				)}
 				<ul className={`${styles['navigation-bar__list']}`}>
 					<CustomNavLink
+						onClick={onClick}
 						to={'/catalog'}
 						className={`${styles['navigation-bar__link']}`}
 						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
 						Каталог
 					</CustomNavLink>
-					<CustomNavLink to={'/'} className={`${styles['navigation-bar__link']}`}>
+					<CustomNavLink
+						onClick={onClick}
+						to={'/'}
+						className={`${styles['navigation-bar__link']}`}
+					>
 						О нас
 					</CustomNavLink>
-					<CustomNavLink to={'/'} className={`${styles['navigation-bar__link']}`}>
+					<CustomNavLink
+						onClick={onClick}
+						to="/#topSelling"
+						className={`${styles['navigation-bar__link']}`}
+					>
 						Товары недели
 					</CustomNavLink>
-					<CustomNavLink to={'/'} className={`${styles['navigation-bar__link']}`}>
+					<CustomNavLink
+						onClick={onClick}
+						to={'/recipes'}
+						className={`${styles['navigation-bar__link']}`}
+					>
 						Рецепты
 					</CustomNavLink>
-					<CustomNavLink to={'/'} className={`${styles['navigation-bar__link']}`}>
+					<CustomNavLink
+						onClick={onClick}
+						to={'/contacts'}
+						className={`${styles['navigation-bar__link']}`}
+					>
 						Контакты
 					</CustomNavLink>
 				</ul>
