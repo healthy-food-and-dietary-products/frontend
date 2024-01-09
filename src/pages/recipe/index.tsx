@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import clsx from 'clsx';
 
 import Breadcrumbs from '@components/breadcrumbs';
@@ -12,6 +12,7 @@ import type {
 	ReceipeIngredient,
 	ReceipeInfoProps,
 } from '@components/recipes-components/types';
+import type { Product } from '@services/generated-api/data-contracts';
 import api from '@services/api.ts';
 import { declOfNum } from '@utils/utils';
 import { translateMeasureUnit } from '@utils/utils';
@@ -21,12 +22,16 @@ import styles from './recipe.module.scss';
 
 const Recipe: React.FC = () => {
 	const { id } = useParams();
-	const { handleOpenPopup } = usePopup();
+	const { handleOpenPopup, handleClosePopup } = usePopup();
 
+	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [recipeInfo, setRecipeInfo] = useState<ReceipeInfoProps>(Object);
 	const [recipeByLines, setRecipeByLines] = useState<string[]>(['']);
 	const [numeralizeWord, setNumeralizeWord] = useState('');
+	const [productsIdAndCategories, setProductsIdAndCategories] = useState<
+		(string | number | undefined)[][]
+	>([[]]);
 	const { reset } = useCart();
 	const [recipeNutrients, setRecipeNutrients] = useState({
 		proteins: 0,
@@ -85,6 +90,32 @@ const Recipe: React.FC = () => {
 		};
 	};
 
+	const fetchProducts = useCallback(async (products: ReceipeIngredient[]) => {
+		const updatedProductsPromises = await products.map((product) => {
+			return api.productsRead(product.id);
+		});
+		const updatedProducts: Product[] = await Promise.all(updatedProductsPromises);
+
+		return updatedProducts.map((product) => {
+			const categoryName = product.category?.category_slug;
+			return [product.id, categoryName];
+		});
+	}, []);
+
+	const handleClick = (
+		id: number,
+		idAndCategories: (string | number | undefined)[][] = productsIdAndCategories
+	) => {
+		for (const idAndCategory of idAndCategories) {
+			if (idAndCategory.includes(id)) {
+				handleClosePopup('openPopupRecipe');
+				const id = idAndCategory[0];
+				const category = idAndCategory[1];
+				return navigate(`/catalog/${category}/${id}`);
+			}
+		}
+	};
+
 	useEffect(() => {
 		if (!id) {
 			return;
@@ -99,7 +130,11 @@ const Recipe: React.FC = () => {
 			const numeralizeWord = getNumeralizeWord(recipe.cooking_time);
 			const updatedIngredients = updateIngredientMeasureUnits(recipe.ingredients);
 			const nutrients = extractRecipeNutrients(recipe);
+			const fetchedProductsIdAndCategories = await fetchProducts(updatedIngredients);
 
+			if (fetchedProductsIdAndCategories !== undefined) {
+				setProductsIdAndCategories(fetchedProductsIdAndCategories);
+			}
 			setRecipeInfo(recipe);
 			setRecipeByLines(recipeByLines);
 			setNumeralizeWord(numeralizeWord);
@@ -108,7 +143,7 @@ const Recipe: React.FC = () => {
 		};
 
 		fetchReceiptAndProducts().finally(() => setIsLoading(false));
-	}, [id]);
+	}, [fetchProducts, id]);
 
 	const handleAddToCart = () => {
 		reset();
@@ -132,7 +167,7 @@ const Recipe: React.FC = () => {
 								<span>{`${recipeInfo.cooking_time} ${numeralizeWord}`}</span>
 							</p>
 							<div className={styles.ingredients__list}>
-								<IngredientsList ingredients={ingredients} />
+								<IngredientsList handleClick={handleClick} ingredients={ingredients} />
 							</div>
 							<button
 								className={styles.ingredients__button}
@@ -163,7 +198,7 @@ const Recipe: React.FC = () => {
 				</div>
 			)}
 
-			<PopupRecipe ingredients={ingredients} />
+			<PopupRecipe handleClick={handleClick} ingredients={ingredients} />
 		</div>
 	);
 };

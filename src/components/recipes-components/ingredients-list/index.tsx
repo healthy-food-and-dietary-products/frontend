@@ -4,7 +4,10 @@ import type { RecipeIngredientsProps } from '../types';
 import { declOfNum } from '@utils/utils';
 import styles from './ingredients-list.module.scss';
 
-const IngredientsList: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
+const IngredientsList: React.FC<RecipeIngredientsProps> = ({
+	ingredients,
+	handleClick,
+}) => {
 	const numOfIngredients = ingredients.length;
 	const numeralizeWord = declOfNum(numOfIngredients, [
 		'ингредиент',
@@ -24,11 +27,13 @@ const IngredientsList: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 							<img
 								src={ingredient?.ingredient_photo as string}
 								alt={ingredient.name as string}
+								onClick={() => handleClick(ingredient.id)}
 							/>
 						</div>
-						<p className={styles.ingredient__name}>{`${ingredient.name}, ${
-							ingredient.amount + ingredient.measure_unit
-						}`}</p>
+						<p
+							onClick={() => handleClick(ingredient.id)}
+							className={styles.ingredient__name}
+						>{`${ingredient.name}, ${ingredient.amount + ingredient.measure_unit}`}</p>
 						<p className={styles.ingredient__weight}>
 							{ingredient.quantity_in_recipe_measure}
 						</p>

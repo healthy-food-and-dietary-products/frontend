@@ -12,6 +12,7 @@ export type ReceipeIngredient = {
 
 export type RecipeIngredientsProps = {
 	ingredients: ReceipeIngredient[];
+	handleClick: (id: number, idAndCategories?: (string | number | undefined)[][]) => void;
 };
 
 export type ReceipeInfoProps = {

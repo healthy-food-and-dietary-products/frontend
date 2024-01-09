@@ -6,7 +6,7 @@ import type { RecipeIngredientsProps } from '@components/recipes-components/type
 import { usePopup } from '@hooks/use-popup';
 import styles from './popup-recipe.module.scss';
 
-const PopupRecipe: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
+const PopupRecipe: React.FC<RecipeIngredientsProps> = ({ ingredients, handleClick }) => {
 	const {
 		popupState: { openPopupRecipe },
 		handleClosePopup,
@@ -21,8 +21,8 @@ const PopupRecipe: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
 					Выберите товары для добавления в корзину
 				</h1>
 				<div className={styles['popup-recipe__content']}>
-					<IngredientsListPopup ingredients={ingredients} />
-					<ProductsListPopup ingredients={ingredients} />
+					<IngredientsListPopup handleClick={handleClick} ingredients={ingredients} />
+					<ProductsListPopup handleClick={handleClick} ingredients={ingredients} />
 				</div>
 			</div>
 		</Popup>

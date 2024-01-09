@@ -7,7 +7,10 @@ import plusIcon from '@images/plus_button.svg';
 import minusIcon from '@images/minus_button.svg';
 import styles from './products-list-popup.module.scss';
 
-const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) => {
+const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
+	ingredients,
+	handleClick,
+}) => {
 	const [products, setProducts] = useState<ReceipeIngredient[]>(Array);
 	const { updateCart, error, reset, successText, cartUpdating } = useCart();
 
@@ -56,10 +59,15 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({ ingredients }) =>
 							key={product.name}
 						>
 							<div className={styles.product__image}>
-								<img src={product.ingredient_photo} alt={product.name} />
+								<img
+									onClick={() => handleClick(product.id)}
+									src={product.ingredient_photo}
+									alt={product.name}
+								/>
 							</div>
 							<p
 								className={styles.product__name}
+								onClick={() => handleClick(product.id)}
 							>{`${product.name}, ${product.amount}${product.measure_unit}`}</p>
 
 							<div className={clsx(styles.product__counter, styles.counter)}>
