@@ -33,7 +33,7 @@ const statusObj = {
 		style: styles.canceled,
 	},
 	Ordered: {
-		text: 'Заказан',
+		text: 'Оформлен',
 		image: orderedIcon,
 		style: styles.ordered,
 	},
