@@ -2,42 +2,8 @@ import clsx from 'clsx';
 import ProductCard from '@components/product-card';
 import PaymentButton from '@components/payment-button';
 import OrderStatus from '../order-status';
+import type { CommonOrder, Product } from '@pages/profile/types';
 import styles from './profile-order-mobile.module.scss';
-
-type OrderStatusType =
-	| 'Ordered'
-	| 'In processing'
-	| 'Collecting'
-	| 'Gathered'
-	| 'In delivering'
-	| 'Delivered'
-	| 'Completed';
-
-type Product = {
-	amount: number;
-	final_price: number;
-	id: number;
-	measure_unit: string;
-	name: string;
-	quantity: string;
-	photo: string;
-	category: {
-		category_name: string;
-		category_slug: string;
-	};
-};
-
-type CommonOrder = {
-	id: number;
-	is_paid: boolean;
-	order_number?: string;
-	ordering_date?: string;
-	total_price?: string;
-	payment_method?: string;
-	delivery_method?: string;
-	status?: OrderStatusType;
-	products: Array<{ product: Product; quantity: string }> | Product[];
-};
 
 type Props = {
 	readonly isShowedProductsDetails?: boolean;
@@ -85,7 +51,7 @@ const ProfileOrderMobile = ({
 			</h4>
 			{isShowedProductsDetails && (
 				<div className={styles['order-products']}>
-					{(products as Array<{ product: Product; quantity: string }>).map((item) => (
+					{(products as Array<{ product: Product; quantity: number }>).map((item) => (
 						<li key={item.product.id}>
 							<ProductCard
 								cardName={item.product.name}

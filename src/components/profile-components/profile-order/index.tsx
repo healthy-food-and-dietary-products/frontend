@@ -2,43 +2,9 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import PaymentButton from '@components/payment-button';
 import OrderStatus from '../order-status';
-import styles from './profile-order.module.scss';
 import { translateMeasureUnit } from '@utils/utils';
-
-type OrderStatusType =
-	| 'Ordered'
-	| 'In processing'
-	| 'Collecting'
-	| 'Gathered'
-	| 'In delivering'
-	| 'Delivered'
-	| 'Completed';
-
-type Product = {
-	amount: number;
-	final_price: number;
-	id: number;
-	measure_unit: string;
-	name: string;
-	quantity: string;
-	photo: string;
-	category: {
-		category_name: string;
-		category_slug: string;
-	};
-};
-
-type CommonOrder = {
-	id: number;
-	is_paid: boolean;
-	order_number?: string;
-	ordering_date?: string;
-	total_price?: string;
-	payment_method?: string;
-	delivery_method?: string;
-	status?: OrderStatusType;
-	products: Array<{ product: Product; quantity: number }> | Product[];
-};
+import type { CommonOrder, Product } from '@pages/profile/types';
+import styles from './profile-order.module.scss';
 
 type Props = {
 	readonly isShowedProductsDetails?: boolean;
