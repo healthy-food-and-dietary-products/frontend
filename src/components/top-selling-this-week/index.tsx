@@ -62,7 +62,7 @@ const TopSellingThisWeek: React.FC = () => {
 			findTopThreeProducts();
 		}
 		if (buttonId === 2) {
-			const slugs = ['fruits', 'vegetables'];
+			const slugs = ['fruits', 'vegetables-and-herbs'];
 			findTopThreeProducts(slugs);
 		}
 		if (buttonId === 3) {
