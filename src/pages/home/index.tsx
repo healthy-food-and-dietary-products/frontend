@@ -8,10 +8,12 @@ import TopSellingThisWeek from '@components/top-selling-this-week';
 import AboutCompany from '@components/about-company/index.tsx';
 import OurBlock from '@components/our-block';
 import CatalogPromo from '@components/catalog-promo';
+import ScrollToAnchorHash from '@components/scroll-to-anchor-hash';
 
 const Home: React.FC = () => {
 	return (
 		<div>
+			<ScrollToAnchorHash />
 			<section className={styles.home__sliderSection}>
 				<SliderComponent />
 			</section>
@@ -32,7 +34,7 @@ const Home: React.FC = () => {
 			<section className={styles.home__catalogSection}>
 				<CatalogPromo />
 			</section>
-			<section className={styles.home__topSellingThisWeek}>
+			<section id="topSelling" className={styles.home__topSellingThisWeek}>
 				<TopSellingThisWeek />
 			</section>
 			<section id="aboutCompany" className={styles.home__aboutCompany}>
