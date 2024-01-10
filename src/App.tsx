@@ -25,6 +25,7 @@ import Agreement from '@pages/agreement/index.tsx';
 import DeliveryConditions from '@pages/delivery-conditions/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
 import PaymentBad from '@pages/payment/payment-bad/index.tsx';
+import PaymentGood from '@pages/payment/payment-good/index.tsx';
 
 // импорт временных массивов для отображения каталогов и продуктов
 // временное решение для верстки, потом удалить
@@ -65,6 +66,7 @@ function App() {
 						<Route path={URLS.AGREEMENT} element={<Agreement />} />
 						<Route path={URLS.DELIVERY_COND} element={<DeliveryConditions />} />
 						<Route path={'payment-bad'} element={<PaymentBad />} />
+						<Route path={'payment-good'} element={<PaymentGood />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Layout>
