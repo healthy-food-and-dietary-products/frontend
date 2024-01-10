@@ -44,7 +44,7 @@ const Category: React.FC = () => {
 				setCategoryObj(data.results[0]?.category);
 			})
 			.catch(() => {
-				navigate('/упс');
+				navigate('/404');
 			})
 			.finally(() => {
 				setIsLoading(false);

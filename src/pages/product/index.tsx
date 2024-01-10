@@ -47,7 +47,7 @@ const Product: React.FC = () => {
 				.then((data) => setProductItem(data))
 				.catch((error) => {
 					console.log(error);
-					navigate('/упс');
+					navigate('/404');
 				});
 			api
 				.reviewsList(Number(id))
@@ -58,7 +58,7 @@ const Product: React.FC = () => {
 				.catch((err) => console.log(err));
 		} else {
 			console.log('ID is undefined');
-			navigate('/упс');
+			navigate('/404');
 		}
 	}, [id, navigate]);
 
