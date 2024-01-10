@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import CustomNavLink from '@components/custom-nav-link';
 import { usePopup } from '@hooks/use-popup';
 import { useAuth } from '@hooks/use-auth';
@@ -12,14 +12,37 @@ interface NavigationBarProps {
 const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 	const { isLoggedIn } = useAuth();
 	const { handleOpenPopup } = usePopup();
+	const burgerRef = useRef<HTMLDivElement>(null);
 
 	const handleClick = () => {
 		onClick();
 		handleOpenPopup('openPopupLogin');
 	};
 
+	const closeBurger = (e: MouseEvent) => {
+		if (isOpen && !burgerRef.current?.contains(e.target as Node)) {
+			onClick();
+		}
+	};
+	const closeBurgerOnEsc = (e: KeyboardEvent) => {
+		console.log(e);
+		if (isOpen && e.key === 'Escape') {
+			onClick();
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('pointerdown', closeBurger);
+		document.addEventListener('keydown', closeBurgerOnEsc);
+		return () => {
+			document.removeEventListener('pointerdown', closeBurger);
+			document.removeEventListener('keydown', closeBurgerOnEsc);
+		};
+	});
+
 	return (
 		<div
+			ref={burgerRef}
 			className={`${styles['navigation-bar']} ${isOpen ? styles.visible : styles.hidden}`}
 		>
 			<nav className={`${styles['navigation-bar__nav']}`}>
