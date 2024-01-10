@@ -6,9 +6,14 @@ import styles from './payment-button.module.scss';
 type PaymentButtonProps = {
 	orderId: number;
 	isCheckoutPage?: boolean;
+	buttonText?: string;
 };
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId, isCheckoutPage }) => {
+const PaymentButton: React.FC<PaymentButtonProps> = ({
+	orderId,
+	isCheckoutPage,
+	buttonText,
+}) => {
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [paymentError, setPaymentError] = useState('');
 
@@ -32,7 +37,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ orderId, isCheckoutPage }
 		<div className={isCheckoutPage ? styles.buttonContainer : ''}>
 			<Button
 				onClick={handlePayment}
-				buttonText="Оплатить онлайн"
+				buttonText={buttonText || 'Оплатить онлайн'}
 				buttonStyle="green-button"
 				disabled={isDisabled}
 				classNames={styles['green-button__type_narrow']}
