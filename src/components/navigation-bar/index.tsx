@@ -39,6 +39,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 					</CustomNavLink>
 					<CustomNavLink
 						onClick={onClick}
+						to={'/cart'}
+						className={`${styles['navigation-bar__link']}`}
+						classNameActive={`${styles['navigation-bar__link_active']}`}
+					>
+						Корзина
+					</CustomNavLink>
+					<CustomNavLink
+						onClick={onClick}
 						to={'/'}
 						className={`${styles['navigation-bar__link']}`}
 						classNameActive={`${styles['navigation-bar__link_active']}`}
