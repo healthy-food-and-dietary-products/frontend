@@ -41,6 +41,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 						onClick={onClick}
 						to={'/'}
 						className={`${styles['navigation-bar__link']}`}
+						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
 						О нас
 					</CustomNavLink>
@@ -48,6 +49,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 						onClick={onClick}
 						to="/#topSelling"
 						className={`${styles['navigation-bar__link']}`}
+						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
 						Товары недели
 					</CustomNavLink>
@@ -55,6 +57,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 						onClick={onClick}
 						to={'/recipes'}
 						className={`${styles['navigation-bar__link']}`}
+						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
 						Рецепты
 					</CustomNavLink>
@@ -62,6 +65,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 						onClick={onClick}
 						to={'/contacts'}
 						className={`${styles['navigation-bar__link']}`}
+						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
 						Контакты
 					</CustomNavLink>
