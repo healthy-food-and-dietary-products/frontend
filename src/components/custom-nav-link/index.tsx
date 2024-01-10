@@ -17,7 +17,8 @@ const CustomNavLink: React.FC<CustomNavLink> = ({
 	onClick,
 }) => {
 	const location = useLocation();
-	const isActive = location.pathname === to;
+	const pathnameWithHash = location.pathname.concat(location.hash);
+	const isActive = pathnameWithHash === to;
 
 	return (
 		<NavLink
