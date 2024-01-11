@@ -1129,3 +1129,7 @@ export interface OrderCheck {
 	user: number;
 	ordered: boolean;
 }
+
+export type Payment = {
+	stripe_session_id: string;
+};

@@ -20,6 +20,7 @@ import type {
 	OrderPostAdd,
 	ReviewCreate,
 	ReviewUpdate,
+	Payment,
 } from './generated-api/data-contracts';
 import { BACKEND_URL } from '@data/constants.ts';
 import Cookies from 'js-cookie';
@@ -669,6 +670,17 @@ class Api {
 	reviewsList(productId: number) {
 		return this._request(`products/${productId}/reviews/`, {
 			method: 'GET',
+		});
+	}
+
+	/* ----------------------------- Payment ------------------------------- */
+	paymentCheck(data: Payment) {
+		return this._request('order/successful_pay/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
 		});
 	}
 }
