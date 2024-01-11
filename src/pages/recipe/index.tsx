@@ -182,13 +182,17 @@ const Recipe: React.FC = () => {
 							</p>
 						</div>
 						<div className={styles.recipes__info}>
-							<RecipeInfo img={recipeInfo.image} recipeNutrients={recipeNutrients} />
+							<RecipeInfo
+								img={recipeInfo.image}
+								recipeNutrients={recipeNutrients}
+								description={recipeByLines[1]}
+							/>
 						</div>
 					</div>
 					<div className={clsx(styles.recipes__instructions, styles.instructions)}>
 						<p className={styles.instructions__title}>Инструкция приготовления</p>
 						<div className={styles.instructions__list}>
-							{recipeByLines.map((line, index) => (
+							{recipeByLines.slice(2).map((line, index) => (
 								<p key={index} className={styles.instructions__item}>
 									{line}
 								</p>

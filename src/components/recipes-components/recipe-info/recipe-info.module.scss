@@ -18,18 +18,19 @@
 		}
 	}
 
-	&__description {
-		margin: 0;
-		font-size: 20px;
-		line-height: 140%;
-		margin-bottom: 20px;
-	}
-
 	&__info {
 		margin: 0;
 		font-size: 22px;
 		font-weight: 500;
 		line-height: 140%;
 		margin-bottom: 8px;
+	}
+
+	&__description {
+		margin: 0;
+		padding-top: 16px;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 140%;
 	}
 }
