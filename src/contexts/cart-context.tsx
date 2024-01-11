@@ -20,9 +20,10 @@ type ProductItem = {
 	photo: string;
 	category: string;
 	quantity: number;
-	created_at: number;
 	final_price: number;
 	total_price: number;
+	amount: number;
+	measure_unit: string;
 };
 
 type CartDataItem = {
