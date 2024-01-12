@@ -48,6 +48,7 @@
 
 .favorites__item {
 	place-self: center;
+	width: 100%;
 
 	@media screen and (width <= 768px) {
 		max-width: 138px;
