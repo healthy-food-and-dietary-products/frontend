@@ -25,7 +25,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 		}
 	};
 	const closeBurgerOnEsc = (e: KeyboardEvent) => {
-		console.log(e);
 		if (isOpen && e.key === 'Escape') {
 			onClick();
 		}
