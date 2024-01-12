@@ -45,7 +45,8 @@ const PaymentResults: React.FC<PaymentResultsProps> = ({ isPaid }) => {
 					{isLoggedIn ? (
 						<p className={styles.info}>
 							Ваш платеж по заказу {paimentInfo.order_number} принят в обработку.
-							Отслеживать его вы можете в<Link to={'/profile'}> личном кабинете</Link>
+							Отслеживать его вы можете в
+							<Link to={'/profile/orders'}> личном кабинете</Link>
 						</p>
 					) : (
 						<p className={styles.info}>
