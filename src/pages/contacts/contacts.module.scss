@@ -12,11 +12,11 @@
 	}
 
 	&__title {
-		margin-bottom: 28px;
+		padding: 52px 0 28px;
 
 		@media screen and (width <= 768px) {
 			font-size: 18px;
-			margin-bottom: 20px;
+			padding: 8px 0 20px;
 		}
 	}
 
