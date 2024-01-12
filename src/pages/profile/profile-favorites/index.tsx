@@ -84,7 +84,7 @@ export default function ProfileFavorites() {
 			<div className={styles.title}>
 				<h2 className={styles.title__text}>Избранное</h2>
 				<button className={styles.title__button} onClick={toggleAll} type="button">
-					{isChooseAll ? 'Удалить все' : 'Выбрать все'}
+					{isChooseAll ? 'Отменить выбор' : 'Выбрать все'}
 				</button>
 				{isMobileScreen && <ReturnBackButton />}
 			</div>
