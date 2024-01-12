@@ -467,7 +467,7 @@ const Checkout: React.FC = () => {
 						<p className={`text_type_u`}>Промокод</p>
 						<form className={styles.summary__sale} noValidate>
 							<input type="text" className={`${styles.summary__input_type_sale}`}></input>
-							<button className={`${styles.summary__btn_type_submit}`}>Ok</button>
+							<button className={`${styles.summary__btn_type_submit}`}>Применить</button>
 						</form>
 					</div>
 					<div className={styles.orderse}>
