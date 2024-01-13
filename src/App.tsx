@@ -25,6 +25,8 @@ import Agreement from '@pages/agreement/index.tsx';
 import DeliveryConditions from '@pages/delivery-conditions/index.tsx';
 import CheckoutSuccess from '@pages/checkout/checkout-success/index.tsx';
 import PaymentResults from '@pages/payment-results/index.tsx';
+import InfoPage from '@pages/info-page/';
+import AboutUs from '@pages/about-us/';
 
 function App() {
 	const { isLoggedIn } = useAuth();
@@ -55,6 +57,10 @@ function App() {
 						</Route>
 						<Route path={URLS.AGREEMENT} element={<Agreement />} />
 						<Route path={URLS.DELIVERY_COND} element={<DeliveryConditions />} />
+						<Route path={URLS.DELIVERY} element={<InfoPage />} />
+						<Route path={URLS.ABOUT_US} element={<AboutUs />} />
+						<Route path={URLS.SUPPORT} element={<InfoPage />} />
+						<Route path={URLS.PAYMENT} element={<InfoPage />} />
 						<Route
 							path={'payment-is-processing'}
 							element={<PaymentResults isPaid={true} />}

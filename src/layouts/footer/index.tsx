@@ -18,15 +18,21 @@ const Footer: React.FC = () => {
 				</div>
 				<div className={styles.footer__centerBlock}>
 					<ul className={styles.footer__text}>
-						<li className={styles.footer__list_disabled}>О нас</li>
+						<Link to={URLS.ABOUT_US} className={styles.footer__link}>
+							<li className={styles.footer__list}>О нас</li>
+						</Link>
 						<Link to={URLS.DELIVERY_COND} className={styles.footer__link}>
 							<li className={styles.footer__list}>Условия доставки</li>
 						</Link>
-						<li className={styles.footer__list_disabled}>Оплата</li>
+						<Link to={URLS.PAYMENT} className={styles.footer__link}>
+							<li className={styles.footer__list}>Оплата</li>
+						</Link>
 						<Link to={'/contacts'} className={styles.footer__link}>
 							<li className={styles.footer__list}>Контакты</li>
 						</Link>
-						<li className={styles.footer__list_disabled}>Служба поддержки</li>
+						<Link to={URLS.SUPPORT} className={styles.footer__link}>
+							<li className={styles.footer__list}>Служба поддержки</li>
+						</Link>
 						<Link to={URLS.AGREEMENT} className={styles.footer__link}>
 							<li>Политика обработки и хранения персональных данных</li>
 						</Link>

@@ -7,6 +7,10 @@ export const URLS = {
 	CATALOG: '/catalog',
 	AGREEMENT: '/agreement',
 	DELIVERY_COND: '/delivery-conditions',
+	DELIVERY: '/delivery',
+	ABOUT_US: '/about-us',
+	PAYMENT: '/payment',
+	SUPPORT: '/support',
 	CART_SUCCESS: '/cart/success',
 	PROFILE_ORDERS: '/profile/orders/',
 };
