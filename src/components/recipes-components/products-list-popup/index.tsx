@@ -6,6 +6,7 @@ import closeIcon from '@images/profile/close.svg';
 import plusIcon from '@images/plus_button.svg';
 import minusIcon from '@images/minus_button.svg';
 import styles from './products-list-popup.module.scss';
+import { useResize } from '@hooks/use-resize';
 
 const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
 	ingredients,
@@ -13,7 +14,7 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
 }) => {
 	const [products, setProducts] = useState<ReceipeIngredient[]>(Array);
 	const { updateCart, error, reset, successText, cartUpdating } = useCart();
-
+	const { width } = useResize();
 	const filterProducts = (index: number) => {
 		setProducts((prev) => prev.filter((_, i) => i !== index));
 	};
@@ -65,29 +66,31 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
 									alt={product.name}
 								/>
 							</div>
-							<p
-								className={styles.product__name}
-								onClick={() => handleClick(product.id)}
-							>{`${product.name}, ${product.amount}${product.measure_unit}`}</p>
+							<div className={styles.popup__container}>
+								<p
+									className={styles.product__name}
+									onClick={() => handleClick(product.id)}
+								>{`${product.name}`}</p>
 
-							<div className={clsx(styles.product__counter, styles.counter)}>
-								<button
-									className={styles.counter__button}
-									onClick={() =>
-										product.need_to_buy && changeAmount(index)(product.need_to_buy - 1)
-									}
-								>
-									<img src={minusIcon} alt="минус" />
-								</button>
-								<p className={styles.counter__value}>{product.need_to_buy}</p>
-								<button
-									className={styles.counter__button}
-									onClick={() =>
-										product.need_to_buy && changeAmount(index)(product.need_to_buy + 1)
-									}
-								>
-									<img src={plusIcon} alt="плюс" />
-								</button>
+								<div className={clsx(styles.product__counter, styles.counter)}>
+									<button
+										className={styles.counter__button}
+										onClick={() =>
+											product.need_to_buy && changeAmount(index)(product.need_to_buy - 1)
+										}
+									>
+										<img src={minusIcon} alt="минус" />
+									</button>
+									<p className={styles.counter__value}>{product.need_to_buy}</p>
+									<button
+										className={styles.counter__button}
+										onClick={() =>
+											product.need_to_buy && changeAmount(index)(product.need_to_buy + 1)
+										}
+									>
+										<img src={plusIcon} alt="плюс" />
+									</button>
+								</div>
 							</div>
 
 							{product.final_price && product.need_to_buy && (
@@ -95,13 +98,15 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
 									product.final_price * product.need_to_buy
 								} руб.`}</p>
 							)}
-							<button
-								onClick={() => filterProducts(index)}
-								className={styles.product__delete}
-								type="button"
-							>
-								<img src={closeIcon} alt="удалить" />
-							</button>
+							{width >= 768 && (
+								<button
+									onClick={() => filterProducts(index)}
+									className={styles.product__delete}
+									type="button"
+								>
+									<img src={closeIcon} alt="удалить" />
+								</button>
+							)}
 						</li>
 					))}
 				</ul>

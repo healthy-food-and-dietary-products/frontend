@@ -18,10 +18,21 @@
 		border: 1px solid $unactive-text-color;
 		row-gap: 40px;
 		margin-bottom: 20px;
+
+		@media screen and (width <= 768px) {
+			width: calc(100% - 8px);
+			padding: 8px 4px;
+			row-gap: 16px;
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
 	&__item {
 		grid-column: span 5;
+
+		@media screen and (width <= 768px) {
+			justify-items: center;
+		}
 	}
 
 	&__button {
@@ -76,12 +87,22 @@
 		line-height: 140%;
 		margin: 0;
 		cursor: pointer;
+
+		@media screen and (width <= 768px) {
+			font-size: 14px;
+			font-weight: 500;
+		}
 	}
 
 	&__price {
 		font-size: 20px;
 		font-weight: 500;
 		margin: 0;
+
+		@media screen and (width <= 768px) {
+			font-size: 15px;
+			font-weight: 700;
+		}
 	}
 
 	&__delete {
@@ -119,6 +140,13 @@
 	font-size: 20px;
 	align-items: center;
 
+	@media screen and (width <= 768px) {
+		gap: 8px;
+		font-size: 12px;
+		font-weight: 400;
+		padding: 4px 8px;
+	}
+
 	&__value {
 		margin: 0;
 	}
@@ -130,4 +158,10 @@
 		line-height: 0;
 		padding: 0;
 	}
+}
+
+.popup__container {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }

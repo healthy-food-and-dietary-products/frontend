@@ -35,3 +35,22 @@
 		}
 	}
 }
+
+@media screen and (width <= 768px) {
+	.energy-value {
+		width: calc(100% - 16px);
+		max-width: 100%;
+		padding: 4px 8px;
+		font-size: 14px;
+		font-weight: 500;
+		margin-bottom: 28px;
+	}
+
+	.energy-value__item {
+		max-width: calc(100% / 4 - 8px * 3);
+		width: 100%;
+		align-self: center;
+		margin: 0 auto;
+		font-size: 14px;
+	}
+}

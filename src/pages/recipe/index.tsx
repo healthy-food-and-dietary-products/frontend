@@ -7,6 +7,7 @@ import Preloader from '@components/preloader';
 import RecipeInfo from '@components/recipes-components/recipe-info';
 import IngredientsList from '@components/recipes-components/ingredients-list';
 import PopupRecipe from '@components/popups/popup-recipe';
+import { useResize } from '@hooks/use-resize';
 
 import type {
 	ReceipeIngredient,
@@ -23,7 +24,7 @@ import styles from './recipe.module.scss';
 const Recipe: React.FC = () => {
 	const { id } = useParams();
 	const { handleOpenPopup, handleClosePopup } = usePopup();
-
+	const { width } = useResize();
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(true);
 	const [recipeInfo, setRecipeInfo] = useState<ReceipeInfoProps>(Object);
@@ -159,8 +160,12 @@ const Recipe: React.FC = () => {
 					<Breadcrumbs productName={recipeInfo.name} />
 					<div className={styles.recipes__content}>
 						<div className={clsx(styles.recipes__ingredients, styles.ingredients)}>
-							<h1 className={styles.ingredients__title}>{recipeInfo.name}</h1>
-							<p className={styles.ingredients__text}>
+							<h1
+								className={`${styles.ingredients__title} ${styles.ingredients__title_s}`}
+							>
+								{recipeInfo.name}
+							</h1>
+							<p className={`${styles.ingredients__text} ${styles.ingredients__text_s}`}>
 								<span className={styles['ingredients__text_black']}>
 									Время приготовления
 								</span>{' '}
@@ -174,7 +179,7 @@ const Recipe: React.FC = () => {
 								type="button"
 								onClick={handleAddToCart}
 							>
-								Добавить все в корзину
+								Добавить в корзину
 							</button>
 							<p className={styles['ingredients__text_small']}>
 								* Продукты добавляются в корзину в минимальной фасовке, которая доступна
@@ -182,6 +187,17 @@ const Recipe: React.FC = () => {
 							</p>
 						</div>
 						<div className={styles.recipes__info}>
+							{width <= 768 && (
+								<div className={styles.recipes__title}>
+									<h1 className={styles.ingredients__title}>{recipeInfo.name}</h1>
+									<p className={styles.ingredients__text}>
+										<span className={styles['ingredients__text_black']}>
+											Время приготовления
+										</span>{' '}
+										<span>{`${recipeInfo.cooking_time} ${numeralizeWord}`}</span>
+									</p>
+								</div>
+							)}
 							<RecipeInfo
 								img={recipeInfo.image}
 								recipeNutrients={recipeNutrients}
@@ -190,7 +206,7 @@ const Recipe: React.FC = () => {
 						</div>
 					</div>
 					<div className={clsx(styles.recipes__instructions, styles.instructions)}>
-						<p className={styles.instructions__title}>Инструкция приготовления</p>
+						<p className={styles.instructions__title}>Инструкция по приготовлению</p>
 						<div className={styles.instructions__list}>
 							{recipeByLines.slice(2).map((line, index) => (
 								<p key={index} className={styles.instructions__item}>
