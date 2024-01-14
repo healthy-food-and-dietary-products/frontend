@@ -73,7 +73,9 @@ const RatingsAndReviewsWidget: React.FC<IRatingsAndReviewsWidget> = ({ productId
 	return (
 		(hasOrderedThis || reviews) && (
 			<section className={styles.section} id="ratings-and-reviews">
-				<h2 className={styles.title}>Отзывы</h2>
+				<h2 className={styles.title}>
+					{reviewsWithText ? 'Отзывы' : 'У этого товара еще нет отзывов'}
+				</h2>
 				<div className={styles.grid}>
 					{hasOrderedThis && (
 						<div className={styles.form}>
