@@ -1,0 +1,200 @@
+@use '@scss/_variables.scss' as *;
+
+.breadcrumbs-container {
+	display: flex;
+	width: 80%;
+	margin: auto;
+
+	@media screen and (width <= 768px) {
+		margin-left: 20px;
+		width: 95%;
+	}
+}
+
+.aboutUs {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	@media screen and (width <= 768px) {
+		margin-left: 20px;
+		width: 95%;
+	}
+}
+
+.aboutUs_title {
+	margin: 50px 0 0;
+
+	@media screen and (width <= 1100px) {
+		font-size: 30px;
+	}
+
+	@media screen and (width <= 940px) {
+		font-size: 24px;
+	}
+}
+
+.aboutUs_subtitle {
+	margin-top: 40px;
+	width: 600px;
+	text-align: center;
+	font-size: 30px;
+
+	@media screen and (width <= 1100px) {
+		width: 480px;
+		font-size: 24px;
+	}
+
+	@media screen and (width <= 940px) {
+		width: 360px;
+		font-size: 18px;
+	}
+
+	@media screen and (width <= 768px) {
+		width: 100%;
+		text-align: left;
+	}
+}
+
+.aboutUs_box {
+	margin-top: 84px;
+	width: 82%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2%;
+
+	@media screen and (width <1220px) {
+		gap: 0;
+	}
+
+	@media screen and (width <= 768px) {
+		margin-left: -20px;
+		width: 85%;
+		align-items: center;
+	}
+}
+
+.aboutUs_twoItems {
+	padding-top: 40px;
+	width: 24%;
+	max-width: 240px;
+	height: 709px;
+	display: flex;
+	flex-direction: column;
+	gap: 225px;
+
+	@media screen and (width <1280px) {
+		width: 25%;
+		max-width: 230px;
+	}
+
+	@media screen and (width <=1024px) {
+		max-width: 180px;
+	}
+
+	@media screen and (width <768px) {
+		padding-top: 52px;
+		width: 100%;
+		max-width: 100%;
+		height: 290px;
+		align-items: center;
+		gap: 52px;
+	}
+}
+
+.aboutUs_oneItem {
+	width: 50%;
+	height: 709px;
+	background-image: url('@images/about-bag.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+
+	@media screen and (width <= 768px) {
+		width: 100%;
+		height: 396px;
+		order: -1;
+		background-position: center;
+	}
+}
+
+.aboutUs_item {
+	width: 240px;
+	height: 218px;
+	font-family: $ubuntu-font;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	text-align: center;
+
+	@media screen and (width <1110px) {
+		width: 100%;
+		height: 145px;
+		gap: 8px;
+	}
+
+	@media screen and (width <768px) {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+.aboutUs_itemImg {
+	width: 100%;
+	height: 80px;
+
+	@media screen and (width <1000px) {
+		height: 65px;
+	}
+
+	@media screen and (width <768px) {
+		height: 50px;
+	}
+}
+
+.aboutUs_itemImgBowl {
+	width: 100%;
+	height: 60px;
+
+	@media screen and (width <1000px) {
+		height: 50px;
+	}
+
+	@media screen and (width <768px) {
+		height: 42px;
+	}
+}
+
+.aboutUs_itemTitle {
+	margin: 0;
+	padding: 0;
+	width: 160px;
+	font-size: 22px;
+
+	@media screen and (width <768px) {
+		font-size: 14px;
+	}
+}
+
+.aboutUs_itemText {
+	margin: 0;
+	padding: 0;
+
+	@media screen and (width <1110px) {
+		width: 160px;
+	}
+
+	@media screen and (width <768px) {
+		font-size: 12px;
+	}
+}
+
+.home__aboutCompany {
+	margin-top: 122px;
+	display: flex;
+	justify-content: center;
+
+	@media screen and (width <=768px) {
+		margin-top: 60px;
+	}
+}
