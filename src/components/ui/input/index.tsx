@@ -9,7 +9,7 @@ type InputProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input: React.FC<InputProps> = (props: InputProps) => {
-	const { inputNameSpan, error, isValid, withErrorSpan, ...inputProps } = props;
+	const { inputNameSpan, error, isValid, withErrorSpan, value, ...inputProps } = props;
 	const hasError = error && error[inputProps.name || ''];
 
 	return (
@@ -19,7 +19,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
 				className={`${styles.input_type_normal} ${
 					hasError && !isValid ? `${styles.input_type_error}` : ''
 				}`}
-				value={inputProps.value !== undefined ? String(inputProps.value) : ''}
+				value={value ? String(value) : ''}
 				{...inputProps}
 			/>
 			{withErrorSpan && <span className={styles.spanAfter}>{hasError as string}</span>}
