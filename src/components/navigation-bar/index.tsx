@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import CustomNavLink from '@components/custom-nav-link';
 import { usePopup } from '@hooks/use-popup';
 import { useAuth } from '@hooks/use-auth';
+import { URLS } from '@data/constants';
 import styles from './navigation-bar.module.scss';
 
 interface NavigationBarProps {
@@ -69,7 +70,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isOpen, onClick }) => {
 					</CustomNavLink>
 					<CustomNavLink
 						onClick={onClick}
-						to={'/'}
+						to={URLS.ABOUT_US}
 						className={`${styles['navigation-bar__link']}`}
 						classNameActive={`${styles['navigation-bar__link_active']}`}
 					>
