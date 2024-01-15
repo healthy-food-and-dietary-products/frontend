@@ -65,7 +65,6 @@ export function useFormAndValidation(
 		switch (type) {
 			case 'text':
 				if (!value || value.trim() === '') {
-					console.log(value);
 					errors[type] = 'Это поле обязательно для заполнения';
 				} else if (value.trim().length < 2 || value.trim().length > 30) {
 					errors[type] = 'Имя должно быть не короче 2 символов и не длиннее 30 символов';

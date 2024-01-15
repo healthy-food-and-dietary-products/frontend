@@ -16,12 +16,10 @@ const RecipeList: React.FC = () => {
 			.recipesList()
 			.then((data) => {
 				setRecipeList(data);
-				console.log(recipeList);
 			})
 			.finally(() => {
 				setIsLoading(false);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

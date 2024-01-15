@@ -72,7 +72,6 @@ export default function ProfileUser() {
 				setUpdateMeSuccess('Данные успешно обновлены');
 			})
 			.catch((err) => {
-				console.log(err);
 				setUpdateMeError(err.errors[0].detail);
 			})
 			.finally(() => setDisabledButton(false));

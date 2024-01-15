@@ -89,7 +89,6 @@ export default function ProfileAddresses() {
 			}
 			return addressObj;
 		});
-		console.log(changedAddresses);
 		sendRequest(changedAddresses);
 	};
 
