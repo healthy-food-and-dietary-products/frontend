@@ -63,8 +63,9 @@ export default function ProfileUser() {
 				first_name: `${values.profile_firstName}`,
 				last_name: `${values.profile_lastName}`,
 				// city: `${values.profile_city}`,
-				birth_date:
-					values.profile_birthDate === '' ? null : `${values.profile_birthDate}`,
+				...(values.profile_birthDate !== null && {
+					birth_date: `${values.profile_birthDate}`,
+				}),
 				phone_number: `${values.profile_phoneNumber}`,
 			})
 			.then((data) => {
@@ -97,7 +98,6 @@ export default function ProfileUser() {
 					type="text"
 					value={values.profile_firstName}
 					withErrorSpan={true}
-					required
 				/>
 				<Input
 					inputNameSpan="Фамилия"
@@ -109,7 +109,6 @@ export default function ProfileUser() {
 					type="text"
 					value={values.profile_lastName}
 					withErrorSpan={true}
-					required
 				/>
 				<Input
 					inputNameSpan={`Email* (Почтовый адрес)`}
@@ -133,7 +132,6 @@ export default function ProfileUser() {
 					type="phone"
 					value={values.profile_phoneNumber}
 					withErrorSpan={true}
-					required
 				/>
 				<Input
 					inputNameSpan="Username"
@@ -157,7 +155,6 @@ export default function ProfileUser() {
 					type="text"
 					value={values.profile_birthDate || ''}
 					withErrorSpan={true}
-					required
 				/>
 				{/* <Input
 					inputNameSpan="Город"
