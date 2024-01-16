@@ -27,11 +27,11 @@
 	}
 }
 
-.topSellingThisWeek__buttonContainers {
+.topSellingThisWeek__buttonContainer {
 	margin: 0;
 	padding: 16px 0;
 	display: flex;
-	flex-wrap: wrap;
+	overflow-x: scroll;
 	justify-content: center;
 	gap: 16px;
 

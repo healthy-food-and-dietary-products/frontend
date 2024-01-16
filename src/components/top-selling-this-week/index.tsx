@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '@services/api';
 import type { Product } from '@services/generated-api/data-contracts';
-import Button from '@components/Button';
+import Button from '@components/button';
 import ProductCard from '@components/product-card';
 import styles from './top-selling-this-week.module.scss';
 
@@ -77,7 +77,7 @@ const TopSellingThisWeek: React.FC = () => {
 		<div className={styles.topSellingThisWeek}>
 			<h2 className={styles.topSellingThisWeek__title}>Лидеры продаж этой недели</h2>
 			<div className={styles.topSellingThisWeek__scrollContainer}>
-				<ul className={styles.topSellingThisWeek__buttonContainers}>
+				<ul className={styles.topSellingThisWeek__buttonContainer}>
 					<li>
 						<Button
 							buttonText="Все категории"
