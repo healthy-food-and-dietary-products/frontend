@@ -33,7 +33,7 @@ const IngredientsList: React.FC<RecipeIngredientsProps> = ({
 						<p
 							onClick={() => handleClick(ingredient.id)}
 							className={styles.ingredient__name}
-						>{`${ingredient.name}, ${ingredient.amount + ingredient.measure_unit}`}</p>
+						>{`${ingredient.name}`}</p>
 						<p className={styles.ingredient__weight}>
 							{ingredient.quantity_in_recipe_measure}
 						</p>

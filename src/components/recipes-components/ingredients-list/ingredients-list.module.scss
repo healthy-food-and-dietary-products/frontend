@@ -7,7 +7,7 @@
 	font-family: $ubuntu-font;
 	color: $active-text-color;
 
-	@media screen and (width <= 768px) {
+	@media screen and (width <= 1024px) {
 		max-width: 100%;
 		width: 100%;
 	}
@@ -39,7 +39,7 @@
 		grid-column: span 3;
 		padding: 8px 0;
 
-		@media screen and (width <= 768px) {
+		@media screen and (width <= 1024px) {
 			// width: 100%;
 			display: flex;
 			justify-content: space-between;
@@ -48,7 +48,7 @@
 }
 
 .ingredient {
-	@media screen and (width <= 768px) {
+	@media screen and (width <= 1024px) {
 		width: 100%;
 	}
 
@@ -99,9 +99,12 @@
 	}
 }
 
-@media screen and (width <= 768px) {
+@media screen and (width <= 1024px) {
 	.ingredients__list {
+		display: flex;
+		flex-direction: column;
 		gap: 16px;
-		margin: 8px;
+		padding: 8px;
+		margin: 0;
 	}
 }

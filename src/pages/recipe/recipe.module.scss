@@ -5,16 +5,22 @@
 	font-family: $ubuntu-font;
 	color: $active-text-color;
 	width: calc(100% - 20px * 2);
+	margin: 0 auto;
 
 	@media screen and (width <= 768px) {
-		max-width: calc(100% - 20px * 2);
+		max-width: 100%;
 		width: 100%;
 		margin: 0 auto;
 	}
 
 	&__container {
-		max-width: calc(1024px - 40px * 2);
+		max-width: calc(1024px - 20px * 2);
 		margin: 0 auto;
+
+		@media screen and (width <= 1024px) {
+			width: calc(100% - 20px * 2);
+			margin: 0 auto;
+		}
 
 		@media screen and (width <= 768px) {
 			width: calc(100% - 20px * 2);
@@ -31,6 +37,11 @@
 		display: grid;
 		grid-template-columns: 500px auto;
 		column-gap: 107px;
+
+		@media screen and (width <= 1024px) {
+			column-gap: 15px;
+			grid-template-columns: 2fr 1fr;
+		}
 
 		@media screen and (width <= 768px) {
 			width: 100%;

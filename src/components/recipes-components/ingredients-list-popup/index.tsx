@@ -17,7 +17,7 @@ const IngredientsListPopup: React.FC<RecipeIngredientsProps> = ({
 								onClick={() => handleClick(ingredient.id)}
 								className={styles['popup-ingredients__name']}
 							>
-								{ingredient?.name}
+								{`${ingredient?.name}`}
 							</span>
 							<span className={styles['popup-ingredients__weight']}>
 								{ingredient.quantity_in_recipe_measure}

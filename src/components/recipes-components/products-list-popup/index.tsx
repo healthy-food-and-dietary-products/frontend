@@ -70,7 +70,7 @@ const ProductsListPopup: React.FC<RecipeIngredientsProps> = ({
 								<p
 									className={styles.product__name}
 									onClick={() => handleClick(product.id)}
-								>{`${product.name}`}</p>
+								>{`${product.name}, ${product.amount + product.measure_unit}`}</p>
 
 								<div className={clsx(styles.product__counter, styles.counter)}>
 									<button
