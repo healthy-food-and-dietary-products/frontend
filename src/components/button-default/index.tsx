@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import styles from './button.module.scss';
 
-export type ButtonProps = {
+export type ButtonDefaultProps = {
 	buttonText: string;
 	buttonStyle:
 		| 'green-border-button'
@@ -15,7 +15,7 @@ export type ButtonProps = {
 	type?: 'button' | 'submit' | 'reset';
 };
 
-const Button = ({
+const ButtonDefault = ({
 	buttonText,
 	buttonStyle,
 	classNameActive,
@@ -23,7 +23,7 @@ const Button = ({
 	disabled,
 	classNames,
 	type,
-}: ButtonProps) => {
+}: ButtonDefaultProps) => {
 	return (
 		<button
 			type={type ? type : 'button'}
@@ -40,4 +40,4 @@ const Button = ({
 	);
 };
 
-export default Button;
+export default ButtonDefault;

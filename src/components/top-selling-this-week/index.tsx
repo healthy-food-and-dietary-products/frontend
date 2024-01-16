@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '@services/api';
 import type { Product } from '@services/generated-api/data-contracts';
-import Button from '@components/button';
+import Button from '@components/button-default';
 import ProductCard from '@components/product-card';
 import styles from './top-selling-this-week.module.scss';
 

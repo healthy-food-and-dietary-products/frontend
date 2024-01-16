@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './making-order-btn.module.scss';
-import Button from '@components/button';
-import type { ButtonProps } from '@components/button';
+import Button from '@components/button-default';
+import type { ButtonDefaultProps } from '@components/button-default';
 
-interface MakingOrderBtnProps extends Pick<ButtonProps, 'disabled' | 'onClick'> {}
+interface MakingOrderBtnProps extends Pick<ButtonDefaultProps, 'disabled' | 'onClick'> {}
 
 const MakingOrderBtn: React.FC<MakingOrderBtnProps> = ({ onClick, disabled }) => {
 	return (

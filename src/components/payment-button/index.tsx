@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '@services/api';
-import Button from '@components/button';
+import Button from '@components/button-default';
 import styles from './payment-button.module.scss';
 
 type PaymentButtonProps = {

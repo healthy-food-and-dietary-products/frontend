@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useEffect } from 'react';
 import api from '@services/api';
 import { useFormAndValidation } from '@hooks/use-form-and-validation';
 import RatingInput from '@components/ratings-and-reviews-components/rating-input';
-import Button from '@components/button';
+import Button from '@components/button-default';
 import { dateOptions } from '../utils/constants';
 import { IRatingsAndReviews, IReview, TRating, TReviewNullable } from '../utils/types';
 import styles from './review-and-rating-post-form.module.scss';
