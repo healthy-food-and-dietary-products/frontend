@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './product.module.scss';
-import Button from '@components/Button';
+import Button from '@components/button';
 import { useParams } from 'react-router';
 import api from '@services/api.ts';
 import Preloader from '@components/preloader';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './making-order-btn.module.scss';
-import Button from '@components/Button';
-import type { ButtonProps } from '@components/Button';
+import Button from '@components/button';
+import type { ButtonProps } from '@components/button';
 
 interface MakingOrderBtnProps extends Pick<ButtonProps, 'disabled' | 'onClick'> {}
 
