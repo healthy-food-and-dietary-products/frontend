@@ -30,6 +30,8 @@ type CartDataItem = {
 	count_of_products: number;
 	products: ProductItem[];
 	total_price: number;
+	coupon_code?: string;
+	discount_amount?: number;
 };
 
 type ResponseText = {

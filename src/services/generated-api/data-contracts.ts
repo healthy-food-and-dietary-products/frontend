@@ -1137,3 +1137,20 @@ export type Payment = {
 export interface Coupon {
 	code: string;
 }
+
+export type Promo = {
+	code: string;
+	conditions: string;
+	discount: number;
+	discount_amount: number;
+	end_time: null;
+	id: number;
+	image: null;
+	is_active: boolean;
+	is_constant: boolean;
+	name: string;
+	new_total_price: number;
+	promotion_type: string;
+	slug: string;
+	start_time: string;
+};

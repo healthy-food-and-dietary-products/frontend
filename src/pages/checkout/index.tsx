@@ -30,23 +30,6 @@ enum paymentMethodEnum {
 	online = 'Online',
 }
 
-type Promo = {
-	code: string;
-	conditions: string;
-	discount: number;
-	discount_amount: number;
-	end_time: null;
-	id: number;
-	image: null;
-	is_active: boolean;
-	is_constant: boolean;
-	name: string;
-	new_total_price: number;
-	promotion_type: string;
-	slug: string;
-	start_time: string;
-};
-
 const Checkout: React.FC = () => {
 	const { isLoggedIn, user } = useAuth();
 	const { loadCartData, cartData } = useCart();
@@ -65,23 +48,6 @@ const Checkout: React.FC = () => {
 	const [isAgreed, setIsAgreed] = useState(false);
 	const [promocodeError, setPromocodeError] = useState('');
 	const [inputPromoValue, setInputPromoValue] = useState('');
-	const discountInitial = {
-		code: '',
-		conditions: '',
-		discount: 0,
-		discount_amount: 0,
-		end_time: null,
-		id: 0,
-		image: null,
-		is_active: false,
-		is_constant: false,
-		name: '',
-		new_total_price: 0,
-		promotion_type: '',
-		slug: '',
-		start_time: '',
-	};
-	const [discount, setDiscount] = useState<Promo>(discountInitial);
 
 	const openInfoPopup = (text: string) => {
 		setPopupText(text);
@@ -181,13 +147,13 @@ const Checkout: React.FC = () => {
 	const handleDiscount = (e: React.MouseEvent<HTMLButtonElement>) => {
 		api
 			.usersShoppingCartCouponApply({ code: inputPromoValue })
-			.then((data) => {
-				setDiscount(data);
+			.then(() => {
 				setPromocodeError('');
+				loadCartData();
 			})
 			.catch((error) => {
-				setDiscount(discountInitial);
 				setPromocodeError(error.errors[0].detail);
+				loadCartData();
 			});
 		e.preventDefault();
 	};
@@ -501,11 +467,9 @@ const Checkout: React.FC = () => {
 						<div className={styles.pricelist}>
 							<div className={styles.pricelist__item}>
 								<p className={`text_type_u ${styles.summary__title}`}>Товары</p>
-								<p className={`text_type_u ${styles.pricelist__price}`}>{`${
-									discount && discount.discount !== 0
-										? discount.new_total_price
-										: cartData.total_price
-								} руб.`}</p>
+								<p
+									className={`text_type_u ${styles.pricelist__price}`}
+								>{`${cartData.total_price} руб.`}</p>
 							</div>
 							<div className={styles.pricelist__item}>
 								<p className={`text_type_u ${styles.summary__title}`}>Упаковка</p>
@@ -520,7 +484,7 @@ const Checkout: React.FC = () => {
 							<div className={styles.pricelist__item}>
 								<p className={`text_type_u ${styles.summary__title}`}>Скидка</p>
 								<p className={`text_type_u ${styles.pricelist__price}`}>
-									{discount ? discount.discount_amount : 0} руб.
+									{cartData.coupon_code ? cartData.discount_amount : 0} руб.
 								</p>
 							</div>
 							<hr className={styles.pricelist__divider} />
