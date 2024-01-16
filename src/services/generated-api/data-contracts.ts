@@ -1133,3 +1133,7 @@ export interface OrderCheck {
 export type Payment = {
 	stripe_session_id: string;
 };
+
+export interface Coupon {
+	code: string;
+}

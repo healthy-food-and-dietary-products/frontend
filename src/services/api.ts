@@ -21,6 +21,7 @@ import type {
 	ReviewCreate,
 	ReviewUpdate,
 	Payment,
+	Coupon,
 } from './generated-api/data-contracts';
 import { BACKEND_URL } from '@data/constants.ts';
 import Cookies from 'js-cookie';
@@ -327,6 +328,17 @@ class Api {
 			headers: {
 				'Content-Type': 'application/json',
 			},
+		});
+	}
+
+	usersShoppingCartCouponApply(data: Coupon) {
+		return this._request(`shopping_cart/coupon_apply/`, {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
 		});
 	}
 
