@@ -7,6 +7,7 @@
 	max-height: 294px;
 
 	@media screen and (width <= 768px) {
+		display: none;
 		padding-top: 20px;
 	}
 
