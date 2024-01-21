@@ -1,8 +1,8 @@
 # GoodFood
 
-![Status in progress](https://badgen.net/badge/status/in%20progress/yellow) ![good_food_frontend workflow](https://github.com/healthy-food-and-dietary-products/frontend/actions/workflows/good_food_frontend_workflow.yaml/badge.svg) ![](https://badgen.net/static/React/18/gray) ![](https://badgen.net/static/React%20Router/6/gray) ![](https://badgen.net/static/Vite/4/gray)
+![Static Badge](https://img.shields.io/badge/status-in_progress-yellow) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/healthy-food-and-dietary-products/frontend/good_food_frontend_workflow.yaml?logo=github) ![Static Badge](https://img.shields.io/badge/TypeScript-gray?logo=TypeScript) ![Static Badge](https://img.shields.io/badge/React-gray?logo=React) ![Static Badge](https://img.shields.io/badge/SASS-gray?logo=SASS)
 
-![screencast](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTV5cDhleXQ0eDl4MTcxYXBzdWVmemV4ajR0b3J6YWY4YnNkaHNhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7hYj9hn0IngL6XATdL/giphy.gif)
+![Screen cast](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTV5cDhleXQ0eDl4MTcxYXBzdWVmemV4ajR0b3J6YWY4YnNkaHNhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7hYj9hn0IngL6XATdL/giphy.gif)
 
 Платформа для продажи и доставки здоровой пищи и диетических продуктов онлайн. React-приложение на TypeScript. Демо проекта доступно здесь: [goodfood.acceleratorpracticum.ru](https://goodfood.acceleratorpracticum.ru)
 
