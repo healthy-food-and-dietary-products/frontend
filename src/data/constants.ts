@@ -1,5 +1,5 @@
-export const BACKEND_URL = 'https://goodfood.acceleratorpracticum.ru/api';
-export const BASE_URL = 'https://goodfood.acceleratorpracticum.ru';
+export const BACKEND_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const URLS = {
 	SIGNUP: '/signup',
