@@ -60,6 +60,17 @@ npm ci
 npm run dev
 ```
 
+### Env
+
+Адреса приложения и API необходимо указать в файле **.env** в корне проекта.
+
+#### Пример .env файла
+
+```text
+VITE_BASE_URL=http://localhost:3000
+VITE_API_URL=http://localhost:3000/api
+```
+
 Подробная информация по работе с проектом в файле `CONTRIBUTE.MD`
 
 ## Ссылки
