@@ -3,6 +3,7 @@ import styles from './shopping-item.module.scss';
 import { Link } from 'react-router-dom';
 import { useCart } from '@hooks/use-cart-context.ts';
 import { translateMeasureUnit } from '@utils/utils';
+import { BASE_URL } from '@data/constants';
 
 type ShoppingItemProps = {
 	product: {
@@ -44,7 +45,7 @@ const ShoppingItem: React.FC<ShoppingItemProps> = (props) => {
 			<Link to={`/catalog/${product.category}/${product.id}`}>
 				<img
 					className={styles.item__image}
-					src={`https://goodfood.acceleratorpracticum.ru/media/${product.photo}`}
+					src={`${BASE_URL}/media/${product.photo}`}
 					alt={product.name}
 				/>
 			</Link>
