@@ -68,6 +68,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/good_food_frontend:v.01
+          build-args: |
+            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
 
   deploy:
     runs-on: ubuntu-latest
