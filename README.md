@@ -4,7 +4,7 @@
 
 ![Screen cast](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTV5cDhleXQ0eDl4MTcxYXBzdWVmemV4ajR0b3J6YWY4YnNkaHNhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7hYj9hn0IngL6XATdL/giphy.gif)
 
-Платформа для продажи и доставки здоровой пищи и диетических продуктов онлайн. React-приложение на TypeScript. Демо проекта доступно здесь: [goodfood.acceleratorpracticum.ru](https://goodfood.acceleratorpracticum.ru)
+Платформа для продажи и доставки здоровой пищи и диетических продуктов онлайн. React-приложение на TypeScript. Демо проекта доступно здесь: [https://goodfood.sytes.net](https://goodfood.sytes.net)
 
 ## Цель
 
